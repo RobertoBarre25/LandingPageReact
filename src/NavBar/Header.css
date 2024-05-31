@@ -7,6 +7,7 @@
   width: 100%;
   transition: background-color 0.8s ease, height 0.8s ease;
   height: 60px; /* Altura inicial */
+  background-color: transparent; /* Ajuste inicial */
 }
 
 .navbar {
@@ -19,6 +20,7 @@
 
 .logo {
   font-size: 1.5rem; /* Tamaño de la fuente del logo */
+  color: #fff;
 }
 
 .navbar ul {
