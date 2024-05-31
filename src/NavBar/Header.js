@@ -23,7 +23,7 @@ function Header() {
   return (
     <header className={`header ${scrollPosition > 20 ? 'header-scroll' : ''}`}>
       <nav className="navbar">
-        <div className="logo">Logo</div>
+        <div className="logo">Grupo Alternativas y Soluciones</div>
         <ul>
           <li><a href="#home">Home</a></li>
           <li><a href="#about">About</a></li>
