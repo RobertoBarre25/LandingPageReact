@@ -1,0 +1,42 @@
+.imagenPrincipal{
+    position: relative;
+    top: -2%;
+    height: 1000px !important;
+    width: 100%;
+    z-index: -1;
+}
+
+.bodyPrincipal{
+    background-color: transparent;
+    height: 330vh;
+}
+
+.primerTexto{
+background-color: transparent;
+position: relative;
+top: -15%;
+left: 55%;
+width: 750px;
+height: 200px;
+backdrop-filter: blur(1px);
+border-radius: 10px;
+}
+
+.primerTitulo{
+    background-color: transparent;
+    color: rgba(255, 255, 255, 0.758);
+    font-size: 50px;
+    position: relative;
+    left: 0%;
+    width: 750px;
+    font-family: sans-serif;
+}
+
+.textoSecundario{
+    color: rgba(255, 255, 255, 0.758);
+    font-size: 25px;
+    width: 700px;
+    position: relative;
+    left: 0%;
+    font-family: sans-serif;
+}

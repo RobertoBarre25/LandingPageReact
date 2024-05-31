@@ -3,11 +3,13 @@
 .header {
   position: fixed;
   top: 0;
+  backdrop-filter: blur(5px);
   left: 0;
   width: 100%;
   transition: background-color 0.8s ease, height 0.8s ease;
   height: 60px; /* Altura inicial */
-  background-color: transparent; /* Ajuste inicial */
+  background-color: rgba(0, 0, 0, 0.063); /* Ajuste inicial */
+  z-index: 10;
 }
 
 .navbar {
@@ -15,12 +17,12 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
-  height: 100%;
+  
 }
 
 .logo {
   font-size: 1.5rem; /* Tamaño de la fuente del logo */
-  color: #fff;
+  color: #ffffff;
 }
 
 .navbar ul {
@@ -34,20 +36,21 @@
 
 .navbar ul li a {
   text-decoration: none;
-  color: #000;
+  color: #ffffff;
   font-weight: bold;
   transition: color 0.3s ease;
 }
 
 .header-scroll {
-  background-color: rgba(0, 0, 0, 0.7);
-  height: 40px; /* Altura cuando se desplaza */
+  background-color: rgba(4, 46, 185, 0.917);
+   height: 60px; /* Altura cuando se desplaza */
 }
 
 .header-scroll .logo {
-  font-size: 1.2rem; /* Tamaño de la fuente del logo cuando se desplaza */
+  font-size: 1.2rem;
+  color: #ffffff; /* Tamaño de la fuente del logo cuando se desplaza */
 }
 
 .header-scroll .navbar ul li a {
-  color: #fff;
+  color: #ffffff;
 }
