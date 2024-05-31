@@ -21,7 +21,7 @@ function Header() {
   }, []);
 
   return (
-    <header className={scrollPosition > 20 ? 'header-scroll' : ''}>
+    <header className={`header ${scrollPosition > 20 ? 'header-scroll' : ''}`}>
       <nav className="navbar">
         <div className="logo">Logo</div>
         <ul>
