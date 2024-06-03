@@ -5,12 +5,14 @@ import Header from './NavBar/Header';
 import Footer from './footer/footer';
 import Body from './body/body';
 
+
 function App() {
   return (
     <div className="App">
       <Header />
       <Body />
       <Footer />
+     
     </div>
   );
 }
