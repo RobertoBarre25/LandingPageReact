@@ -3,7 +3,7 @@
     top: -2%;
     height: 985px !important;
     width: 100%;
-    z-index: -1;
+    z-index: 1;
 }
 
 .bodyPrincipal{
