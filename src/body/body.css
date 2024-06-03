@@ -14,29 +14,33 @@
 .primerTexto{
 background-color: transparent;
 position: relative;
-top: -15%;
+top: -25%;
 left: 55%;
-width: 750px;
-height: 200px;
+width: 400px;
+height: 100px;
 backdrop-filter: blur(1px);
 border-radius: 10px;
 }
 
-.primerTitulo{
+.primerTitulo {
     background-color: transparent;
     color: rgba(255, 255, 255, 0.758);
-    font-size: 50px;
+    font-size: 40px;
     position: relative;
     left: 0%;
-    width: 750px;
+    width: 300px;
     font-family: sans-serif;
+    white-space: nowrap; 
+    text-overflow: ellipsis; 
 }
 
-.textoSecundario{
+
+.textoSecundario {
     color: rgba(255, 255, 255, 0.758);
     font-size: 25px;
-    width: 700px;
     position: relative;
-    left: 0%;
     font-family: sans-serif;
+    white-space:normal; 
+    overflow: hidden; 
 }
+
