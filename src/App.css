@@ -27,6 +27,18 @@
   color: #61dafb;
 }
 
+.bodyPrincipal {
+  margin-bottom: 20px;
+}
+
+.card-container {
+  margin-top: 20px; /* Ajusta este valor para subir las tarjetas */
+}
+
+.card {
+  margin-bottom: 20px;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
