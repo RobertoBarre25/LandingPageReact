@@ -1,7 +1,7 @@
 .imagenPrincipal{
     position: relative;
     top: -2%;
-    height: 1000px !important;
+    height: 1030px !important;
     width: 100%;
     z-index: 1;
 }
@@ -15,11 +15,12 @@
 background-color: transparent;
 position: relative;
 top: -13%;
-left: 55%;
+left: 60%;
 width: 400px;
 height: 100px;
 backdrop-filter: blur(1px);
 border-radius: 10px;
+z-index: 1;
 }
 
 .primerTitulo {
@@ -42,5 +43,6 @@ border-radius: 10px;
     font-family: sans-serif;
     white-space:normal; 
     overflow: hidden; 
+    left: 100px;
 }
 
