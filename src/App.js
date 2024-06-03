@@ -1,20 +1,24 @@
 // App.js
-import React from 'react';
+import React, { useState } from 'react';
+
 import './App.css';
 import Header from './NavBar/Header';
 import Footer from './footer/footer';
 import Body from './body/body';
+import ContactForm from './ContactForm/ContactForm';
 
 
-function App() {
+const App = () => {
+  const [view, setView] = useState('home');
+
   return (
     <div className="App">
-      <Header />
-      <Body />
+      <Header setView={setView} />
+      {view === 'home' && <Body />}
+      {view === 'contact' && <ContactForm setView={setView} />}
       <Footer />
-     
     </div>
   );
-}
+};
 
 export default App;

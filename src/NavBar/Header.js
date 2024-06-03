@@ -1,20 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import './Header.css';
 
-function Header() {
+function Header({ setView }) {
   const [scrollPosition, setScrollPosition] = useState(0);
 
-  // Función para actualizar la posición de desplazamiento
   const handleScroll = () => {
     const position = window.scrollY;
     setScrollPosition(position);
   };
 
-  // Escuchar el evento de desplazamiento
   useEffect(() => {
     window.addEventListener('scroll', handleScroll, { passive: true });
 
-    // Eliminar el event listener cuando el componente se desmonta
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
@@ -25,10 +22,10 @@ function Header() {
       <nav className="navbar">
         <div className="logo">Grupo Alternativas y Soluciones</div>
         <ul>
-          <li><a href="#home">Home</a></li>
+          <li><a href="#" onClick={() => setView('home')}>Home</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#services">Services</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="#" onClick={() => setView('contact')}>Contact</a></li>
         </ul>
       </nav>
     </header>
