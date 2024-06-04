@@ -1,5 +1,8 @@
+
+
 import React from 'react';
 import './cards.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const cardsData = [
     {
@@ -9,7 +12,7 @@ const cardsData = [
         buttonText: 'Obtener Informacion'
     },
     {
-        imgSrc: 'https://i.pinimg.com/736x/e5/02/c7/e502c75e893f17a8f02c955ad236da44.jpg',
+        imgSrc: 'https://i.pinimg.com/564x/52/01/a3/5201a341a82883d4880ceab7723516d1.jpg',
         title: 'Gestion de vulnerabilidades',
         description: 'Protege tu negocio identificando y mitigando amenazas antes de que se conviertan en problemas',
         buttonText: 'Obtener Informacion'
@@ -102,20 +105,23 @@ const cardsData = [
     }
 
 ];
-
 const Cards = () => {
     return (
-        <div className="cardsSer-container">
-            {cardsData.map((card, index) => (
-                <div className="cardsSer-card" key={index}>
-                    <img src={card.imgSrc} alt={card.title} className="cardsSer-card-img" />
-                    <div className="cardsSer-card-content">
-                        <h3>{card.title}</h3>
-                        <p>{card.description}</p>
-                        <button>{card.buttonText}</button>
+        <div className="container my-4">
+            <div className="row">
+                {cardsData.map((card, index) => (
+                    <div className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4" key={index}>
+                        <div className="card h-100">
+                            <img src={card.imgSrc} alt={card.title} className="card-img-top" />
+                            <div className="card-body text-center">
+                                <h5 className="card-title">{card.title}</h5>
+                                <p className="card-text">{card.description}</p>
+                                <button className="btn btn-primary">{card.buttonText}</button>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            ))}
+                ))}
+            </div>
         </div>
     );
 }

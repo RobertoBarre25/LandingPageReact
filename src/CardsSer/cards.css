@@ -1,50 +1,44 @@
-.cardsSer-container {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    margin: 20px;
-}
-
-.cardsSer-card {
+.card {
     background-color: #ffffff;
     border: 1px solid #ffffff;
     border-radius: 8px;
     overflow: hidden;
-    width: 200px;
-    margin: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.cardsSer-card:hover {
+.card:hover {
     transform: scale(1.05);
 }
 
-.cardsSer-card-img {
+.card-img-top {
     width: 100%;
     height: 150px;
     object-fit: cover;
 }
 
-.cardsSer-card-content {
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
     padding: 15px;
     text-align: center;
 }
 
-.cardsSer-card-content h3 {
+.card-title {
     font-size: 1.2em;
     margin: 10px 0;
 }
 
-.cardsSer-card-content p {
+.card-text {
     font-size: 0.9em;
     color: #3a3a3a;
     margin: 10px 0;
 }
 
-
-
-.cardsSer-card-content button {
+.btn-primary {
+    margin-top: auto;
     padding: 10px 15px;
     background-color: #007bff;
     color: white;
@@ -54,67 +48,6 @@
     transition: background-color 0.3s;
 }
 
-.cardsSer-card-content button:hover {
+.btn-primary:hover {
     background-color: #0056b3;
 }
-
-.wrapper{
-
-    width: 90%;
-    margin: 0 auto;
-    max-width: 80rem;
-}
-    
-    .cols{
-    
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-     -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    
-    }
-    
-    .front .inner span{
-    color:rgba(255,255,255,0.);
-    font-family: 'Montserrat';
-    font-weight: 300;
-    
-    }
-
-    .front .inner p{
-
-        font-size: 2rem;
-        
-        margin-bottom: 2rem;
-        
-        position: relative;
-        
-        
-        }
-        
-        .front .inner :after{
-        
-        content: '';
-        
-        width: 4rem;
-        
-        height: 2px;
-        
-        position: absolute;
-        
-        background: #C6D4DF;
-        
-        display: block;
-        
-        left: 0;
-        
-        right: 0;
-        
-        margin: 0 auto;
-        
-        bottom: -.75rem;
-        }
