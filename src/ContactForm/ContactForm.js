@@ -1,16 +1,15 @@
-// src/ContactForm/ContactForm.js
 import React from 'react';
-import Header from '../NavBar/Header'; // Ajusta la ruta de importación del componente Header
+import Header from '../NavBar/Header'; // Importa el componente Header
 import './ContactForm.css';
 
 const ContactForm = ({ setView }) => {
   return (
     <div className="contact-form-container">
-      <Header /> {/* Incluye el componente Header dentro del formulario */}
+      <Header />
       <form className="contact-form">
-        <h2>Contact Us</h2>
+        <h2>Solicitar Informacion del servicio</h2>
         <div className="form-group">
-          <label htmlFor="name">Name</label>
+          <label htmlFor="name">Nombre</label>
           <input type="text" id="name" name="name" required />
         </div>
         <div className="form-group">
@@ -18,7 +17,7 @@ const ContactForm = ({ setView }) => {
           <input type="email" id="email" name="email" required />
         </div>
         <div className="form-group">
-          <label htmlFor="message">Message</label>
+          <label htmlFor="message">Servicio Interesado</label>
           <textarea id="message" name="message" rows="5" required></textarea>
         </div>
         <button type="submit">Send</button>
@@ -26,6 +25,11 @@ const ContactForm = ({ setView }) => {
           Back to Home
         </button>
       </form>
+      <img
+        className="background-image"
+        src="https://hinforcom.com/wp-content/uploads/2023/07/Guia-sobre-antenas-de-cobertura-movil-scaled.jpg"
+        alt="Antenas de cobertura móvil"
+      />
     </div>
   );
 };
