@@ -42,6 +42,8 @@
     margin: 10px 0;
 }
 
+
+
 .cardsSer-card-content button {
     padding: 10px 15px;
     background-color: #007bff;
@@ -55,3 +57,64 @@
 .cardsSer-card-content button:hover {
     background-color: #0056b3;
 }
+
+.wrapper{
+
+    width: 90%;
+    margin: 0 auto;
+    max-width: 80rem;
+}
+    
+    .cols{
+    
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+     -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    
+    }
+    
+    .front .inner span{
+    color:rgba(255,255,255,0.);
+    font-family: 'Montserrat';
+    font-weight: 300;
+    
+    }
+
+    .front .inner p{
+
+        font-size: 2rem;
+        
+        margin-bottom: 2rem;
+        
+        position: relative;
+        
+        
+        }
+        
+        .front .inner :after{
+        
+        content: '';
+        
+        width: 4rem;
+        
+        height: 2px;
+        
+        position: absolute;
+        
+        background: #C6D4DF;
+        
+        display: block;
+        
+        left: 0;
+        
+        right: 0;
+        
+        margin: 0 auto;
+        
+        bottom: -.75rem;
+        }

@@ -28,83 +28,72 @@ const cardsData = [
     },
     {
         imgSrc: 'https://i.pinimg.com/564x/b6/33/c7/b633c7676750cd6bdb233be0e942e22b.jpg',
-        title: 'Proteccion de correo electronico',
-        description: 'Defiende tu bandeja de entrada contra amenazas y fraudes con seguridad avanzada',
+        title: 'WAF',
+        description: 'Proteja sus aplicaciones web de exploits y ataques con nuestro servicio administrado de Web Application Firewall en la nube.',
         buttonText: 'Obtener Informacion'
     }
     ,
     {
         imgSrc: 'https://i.pinimg.com/564x/b6/33/c7/b633c7676750cd6bdb233be0e942e22b.jpg',
-        title: 'Proteccion de correo electronico',
-        description: 'Defiende tu bandeja de entrada contra amenazas y fraudes con seguridad avanzada',
+        title: 'AntiDDoS',
+        description: 'Absorba ataques DDoS de gran escala con nuestro servicio en la nube de prevención y mitigación de denegación de servicio distribuido.',
         buttonText: 'Obtener Informacion'
     },
     {
         imgSrc: 'https://i.pinimg.com/564x/b6/33/c7/b633c7676750cd6bdb233be0e942e22b.jpg',
-        title: 'Proteccion de correo electronico',
-        description: 'Defiende tu bandeja de entrada contra amenazas y fraudes con seguridad avanzada',
+        title: 'IAMaaS',
+        description: 'Gestione el ciclo de vida digital de usuarios con nuestro servicio administrado de gestión de identidades y accesos basado en la nube.',
         buttonText: 'Obtener Informacion'
     },
     {
         imgSrc: 'https://i.pinimg.com/564x/b6/33/c7/b633c7676750cd6bdb233be0e942e22b.jpg',
-        title: 'Proteccion de correo electronico',
-        description: 'Defiende tu bandeja de entrada contra amenazas y fraudes con seguridad avanzada',
+        title: 'Ciberseguro',
+        description: 'Transfiera el riesgo financiero de un ciberataque con nuestras pólizas asequibles de ciberseguros diseñadas para pymes.',
         buttonText: 'Obtener Informacion'
     },
     {
         imgSrc: 'https://i.pinimg.com/564x/b6/33/c7/b633c7676750cd6bdb233be0e942e22b.jpg',
-        title: 'Proteccion de correo electronico',
-        description: 'Defiende tu bandeja de entrada contra amenazas y fraudes con seguridad avanzada',
+        title: 'Cumplimiento Plus',
+        description: 'Demuestre el cumplimiento de estándares como ISO 27001, HIPAA, PCI DSS y más a través de nuestra plataforma integral para evaluación y gestión remota de compliance.',
         buttonText: 'Obtener Informacion'
     },
     {
         imgSrc: 'https://i.pinimg.com/564x/b6/33/c7/b633c7676750cd6bdb233be0e942e22b.jpg',
-        title: 'Proteccion de correo electronico',
-        description: 'Defiende tu bandeja de entrada contra amenazas y fraudes con seguridad avanzada',
+        title: 'BackupCloud',
+        description: 'Proteja sus datos críticos automatizadamente con copias de seguridad en la nube administradas, incrementales y encriptadas. Recupere su información ante desastres.',
         buttonText: 'Obtener Informacion'
     },
     {
         imgSrc: 'https://i.pinimg.com/564x/b6/33/c7/b633c7676750cd6bdb233be0e942e22b.jpg',
-        title: 'Proteccion de correo electronico',
-        description: 'Defiende tu bandeja de entrada contra amenazas y fraudes con seguridad avanzada',
+        title: 'EPPaaS',
+        description: 'Asegure todos sus dispositivos de endpoints contra amenazas con nuestro servicio administrado de protección de endpoints en la nube.',
         buttonText: 'Obtener Informacion'
     },
     {
         imgSrc: 'https://i.pinimg.com/564x/b6/33/c7/b633c7676750cd6bdb233be0e942e22b.jpg',
-        title: 'Proteccion de correo electronico',
-        description: 'Defiende tu bandeja de entrada contra amenazas y fraudes con seguridad avanzada',
+        title: 'FWaaS',
+        description: 'Proteja su red y aplicaciones con firewalls empresariales completamente administrados a través de nuestro servicio en la nube.',
         buttonText: 'Obtener Informacion'
     },
     {
         imgSrc: 'https://i.pinimg.com/564x/b6/33/c7/b633c7676750cd6bdb233be0e942e22b.jpg',
-        title: 'Proteccion de correo electronico',
-        description: 'Defiende tu bandeja de entrada contra amenazas y fraudes con seguridad avanzada',
+        title: 'DaaS',
+        description: 'Administre usuarios y grupos de forma centralizada en la nube mediante nuestro servicio de directorio activo administrado.',
         buttonText: 'Obtener Informacion'
     },
     {
         imgSrc: 'https://i.pinimg.com/564x/b6/33/c7/b633c7676750cd6bdb233be0e942e22b.jpg',
-        title: 'Proteccion de correo electronico',
-        description: 'Defiende tu bandeja de entrada contra amenazas y fraudes con seguridad avanzada',
+        title: 'CASB',
+        description: 'Visibilice, proteja y gobierne el uso de aplicaciones SaaS en su empresa mediante nuestro servicio administrado de CASB.',
         buttonText: 'Obtener Informacion'
     },
     {
         imgSrc: 'https://i.pinimg.com/564x/b6/33/c7/b633c7676750cd6bdb233be0e942e22b.jpg',
-        title: 'Proteccion de correo electronico',
-        description: 'Defiende tu bandeja de entrada contra amenazas y fraudes con seguridad avanzada',
+        title: 'MSPPlus',
+        description: 'Deje la ciberseguridad de su organización en manos de expertos a través de nuestro servicio integral administrado de monitoreo, detección, respuesta y consultoría.',
         buttonText: 'Obtener Informacion'
     },
-    {
-        imgSrc: 'https://i.pinimg.com/564x/b6/33/c7/b633c7676750cd6bdb233be0e942e22b.jpg',
-        title: 'Proteccion de correo electronico',
-        description: 'Defiende tu bandeja de entrada contra amenazas y fraudes con seguridad avanzada',
-        buttonText: 'Obtener Informacion'
-    },
-    {
-        imgSrc: 'https://i.pinimg.com/564x/b6/33/c7/b633c7676750cd6bdb233be0e942e22b.jpg',
-        title: 'Proteccion de correo electronico',
-        description: 'Defiende tu bandeja de entrada contra amenazas y fraudes con seguridad avanzada',
-        buttonText: 'Obtener Informacion'
-    },
+    
     {
         imgSrc: 'https://i.pinimg.com/564x/b6/33/c7/b633c7676750cd6bdb233be0e942e22b.jpg',
         title: 'Proteccion de correo electronico',
