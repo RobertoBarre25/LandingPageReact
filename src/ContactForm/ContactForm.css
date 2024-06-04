@@ -10,7 +10,7 @@
 }
 
 .contact-form {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7)); /* Degradado blanco semitransparente */
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.1)); /* Degradado blanco semitransparente */
   padding: 1.5rem; /* Reducir el espacio de relleno */
   border-radius: 10px; /* Bordes redondeados */
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Sombra más suave */
