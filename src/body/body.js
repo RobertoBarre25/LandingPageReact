@@ -3,7 +3,6 @@ import './body.css';
 import HorizontalCard from '../CardShadow/HorizontalCard';
 import Carousel from '../Carousel/carousel'; // Asegúrate de importar el Carousel correctamente
 import Cards from '../CardsSer/cards'; // Importa el componente Cards
-import Footer from '../../src/footer/footer';
 
 
 const images = [
@@ -27,7 +26,7 @@ const Body = () => {
             En Grupo Alternativas y Soluciones te ofrecemos un servicio profesional."
         />
       <Cards />
-      <Footer />
+
     </div>
   );
 };
