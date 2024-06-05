@@ -21,9 +21,8 @@ const Body = () => {
       </div>
       <HorizontalCard
           imageSrc="https://fundacioncarlosslim.org/wp-content/uploads/2016/11/redes-de-datos.jpg"
-          title="Redes de Datos"
-          description="¿Quieres saber sobre los servicios de Redes de Datos?
-            En Grupo Alternativas y Soluciones te ofrecemos un servicio profesional."
+          title="Soluciones de redes de voz y datos de vanguardia para su empresa"
+          description="En Grupo Alternativas, ofrecemos soluciones de redes de voz y datos a medida, diseñadas para optimizar la comunicación y la productividad de su negocio. Nuestros expertos implementan las tecnologías más avanzadas, asegurando una conectividad confiable y segura"
         />
       <Cards />
 
