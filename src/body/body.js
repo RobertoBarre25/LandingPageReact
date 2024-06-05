@@ -15,10 +15,12 @@ const Body = () => {
     <div className="bodyPrincipal">
       <div className="carouselContainer">
         <Carousel images={images} /> {/* Integra el Carousel aquí */}
-        <div className="carouselText">
-          <h1 className="primerTitulo">¿Nececitas una red de datos?</h1>
-          <p className='textoSecundario'>Manténgase actualizado con las últimas tendencias y novedades en redes de voz y datos a través de nuestro blog.</p>
-          <button className="botonServicios">Nuestros Servicios</button>
+        <div className="carouselTextFondo">
+          <div className="carouselText">
+            <h1 className="primerTitulo">¿Nececitas una red de datos y ciberseguridad?</h1>
+            <p className='textoSecundario'>Manténgase actualizado con las últimas tendencias y novedades en redes de voz y datos a través de nuestro blog.</p>
+            <button className="botonServicios">Nuestros Servicios</button>
+          </div>
         </div>
       </div>
       <HorizontalCard
