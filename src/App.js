@@ -5,6 +5,7 @@ import Body from './body/body';
 import Cards from './CardsSer/cards'; // Importa tu componente Cards
 import InfoPage from './InfoPage/InfoPage'; // Importa el componente InfoPage
 import ContactForm from './ContactForm/ContactForm';
+import Footer from './footer/footer';
 
 const App = () => {
   return (
@@ -17,9 +18,12 @@ const App = () => {
           <Route path="/info" element={<InfoPage />} />
           <Route path="/contact" element={<ContactForm />} />
         </Routes>
+        <Footer />
       </div>
 
     </Router>
+
+    
   );
 };
 
