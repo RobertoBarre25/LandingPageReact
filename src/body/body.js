@@ -3,6 +3,8 @@ import './body.css';
 import HorizontalCard from '../CardShadow/HorizontalCard';
 import Carousel from '../Carousel/carousel'; // Asegúrate de importar el Carousel correctamente
 import Cards from '../CardsSer/cards'; // Importa el componente Cards
+import Footer from '../../src/footer/footer';
+
 
 const images = [
     'https://cdn-cemnc.nitrocdn.com/VpRCNzZxvcuRoMlvVcXWGPvNRVQJdDtQ/assets/images/optimized/rev-1959f9d/www.networkcablingservices.com/wp-content/uploads/2021/08/Next-Generation-Data-Centers-Everything-You-Need-to-Know.jpeg',
@@ -25,6 +27,7 @@ const Body = () => {
             En Grupo Alternativas y Soluciones te ofrecemos un servicio profesional."
         />
       <Cards />
+      <Footer />
     </div>
   );
 };
