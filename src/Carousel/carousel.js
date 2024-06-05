@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './carousel.css';
+//import './carousel.css';
 
 function Carousel({ images }) {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -19,16 +19,16 @@ function Carousel({ images }) {
     };
 
     return (
-        <div className="carousel relative w-full overflow-hidden">
+        <div className="relative w-full h-[990px] overflow-hidden">
             {images.map((image, index) => (
                 <img
                     key={index}
                     src={image}
                     alt="carousel"
-                    className={`carousel-image absolute w-full h-full transition-transform duration-700 ease-in-out ${index === currentIndex ? 'translate-x-0' : index === prevIndex ? '-translate-x-full' : 'translate-x-full'}`}
+                    className={`carousel-image absolute  w-full h-full transition-transform duration-700 ease-in-out ${index === currentIndex ? 'translate-x-0' : index === prevIndex ? '-translate-x-full' : 'translate-x-full'}`}
                 />
             ))}
-            <div className="carousel-indicators absolute bottom-4 rigth-10 w-full text-center">
+            <div className="carousel-indicators absolute flex justify-end space-x-2 bottom-4 right-4">
                 {images.map((_, index) => (
                     <span
                         key={index}
