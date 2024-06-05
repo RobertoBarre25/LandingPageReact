@@ -1,41 +1,53 @@
-
-.bodyPrincipal{
-    background-color: transparent;
-    height: 330vh;
-}
-
-.primerTexto{
-background-color: transparent;
-position: relative;
-top: -13%;
-left: 60%;
-width: 400px;
-height: 100px;
-backdrop-filter: blur(1px);
-border-radius: 10px;
-z-index: 1;
-}
-
-.primerTitulo {
-    background-color: transparent;
-    color: rgba(255, 255, 255, 0.758);
-    font-size: 35px;
+.bodyPrincipal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .carouselContainer {
     position: relative;
-    left: 0%;
-    width: 300px;
-    font-family: sans-serif;
-    white-space: nowrap; 
-    text-overflow: ellipsis; 
-}
-
-
-.textoSecundario {
-    color: rgba(255, 255, 255, 0.758);
-    font-size: 25px;
-    position: relative;
-    font-family: sans-serif;
-    white-space:normal; 
-    overflow: hidden; 
-    left: 100px;
-}
-
+    width: 100%;
+    height: auto; /* Adjust according to your needs */
+  }
+  
+  .carouselText {
+    position: absolute;
+    top: 50%;
+    left: 10%; /* Adjust to move text to the left side */
+    transform: translateY(-50%);
+    text-align: left; /* Align text to the left */
+    color: white; /* Ensure the text is readable */
+    
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%; /* Make the text block wider */
+  }
+  
+  .primerTitulo {
+    font-size: 4.2rem; /* Increase font size */
+    width: 50%; /* Adjust width as needed */
+    font-weight: 900; 
+  }
+  
+  .textoSecundario {
+    font-size: 1.8rem; /* Increase font size */
+    margin: 30px 0;
+    width: 100%; /* Adjust width as needed */
+     
+  }
+  
+  
+  .botonServicios {
+    background-color: #4234ff;
+    color: white;
+    border: none;
+    padding: 18px 30px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .botonServicios:hover {
+    background-color: #0056b3;
+  }
+  
