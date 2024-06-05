@@ -36,7 +36,8 @@
 }
 
 .card-container {
-  margin-top: 20px; /* Ajusta este valor para subir las tarjetas */
+  margin-top: 20px;
+  /* Ajusta este valor para subir las tarjetas */
 }
 
 .card {
@@ -47,6 +48,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

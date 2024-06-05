@@ -8,8 +8,8 @@
 
 .card {
     background-color: #ffffff;
-    border: 1px solid #ffffff;
-    border-radius: 8px;
+    border-bottom: 3px solid #001fcf;
+    border-radius: 3px;
     overflow: hidden;
     transition: transform 0.2s;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
