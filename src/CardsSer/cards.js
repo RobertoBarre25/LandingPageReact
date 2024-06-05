@@ -1,6 +1,7 @@
 import React from 'react';
 import './cards.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useNavigate } from 'react-router-dom'; // Importa useNavigate
 
 const cardsData = [
     {
@@ -102,25 +103,24 @@ const cardsData = [
         buttonText: 'Obtener Informacion'
     }
 
-];const Cards = () => {
+];
+const Cards = () => {
+    const navigate = useNavigate(); // Utiliza useNavigate para la navegación
+  
     return (
-        <div className="container my-4">
-            <div className="row">
-                {cardsData.map((card, index) => (
-                    <div className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4" key={index}>
-                        <div className="custom-card card h-100"> {/* Se añade la clase 'custom-card' */}
-                            <img src={card.imgSrc} alt={card.title} className="card-img-top" />
-                            <div className="card-body text-center">
-                                <h5 className="card-title">{card.title}</h5>
-                                <p className="card-text">{card.description}</p>
-                                <button className="btn btn-primary">{card.buttonText}</button>
-                            </div>
-                        </div>
-                    </div>
-                ))}
+      <div className="cards-container">
+        {cardsData.map((card, index) => (
+          <div key={index} className="card">
+            <img src={card.imgSrc} alt={card.title} className="card-img-top" />
+            <div className="card-body">
+              <h3 className="card-title">{card.title}</h3>
+              <p className="card-text">{card.description}</p>
+              <button className="btn btn-primary" onClick={() => navigate('/info')}>{card.buttonText}</button>
             </div>
-        </div>
+          </div>
+        ))}
+      </div>
     );
-}
+};
 
 export default Cards;

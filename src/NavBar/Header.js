@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 function Header({ setView }) {
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -24,32 +25,36 @@ function Header({ setView }) {
           <li>
             <button
               onClick={() => setView('home')}
-              className="text-white top-(-10) font-bold transition-colors duration-300 hover:bg-blue-700 focus:outline-none bg-transparent p-3 m-3"
+              className="text-white font-bold transition-colors duration-300 hover:bg-blue-700 focus:outline-none bg-transparent p-3 m-3"
             >
-              Home
-            </button>
-          </li>
-          <li>
-          <button
-              onClick={() => setView('home')}
-              className="text-white font-bold transition-colors duration-300 hover:bg-blue-700 focus:outline-none bg-transparent p-3 m-3">
-              Home
-            </button>
-          </li>
-          <li>
-          <button
-              onClick={() => setView('home')}
-              className="text-white font-bold transition-colors duration-300 hover:bg-blue-700 focus:outline-none bg-transparent p-3 m-3">
               Home
             </button>
           </li>
           <li>
             <button
-              onClick={() => setView('contact')}
+              onClick={() => setView('home')}
               className="text-white font-bold transition-colors duration-300 hover:bg-blue-700 focus:outline-none bg-transparent p-3 m-3"
             >
-              Contact
+              Home
             </button>
+          </li>
+          <li>
+            <button
+              onClick={() => setView('home')}
+              className="text-white font-bold transition-colors duration-300 hover:bg-blue-700 focus:outline-none bg-transparent p-3 m-3"
+            >
+              Home
+            </button>
+          </li>
+          <li>
+            <div style={{ marginTop: '2.07rem' }}> {/* Contenedor con margen superior */}
+              <Link to="/contact"
+                className="text-white font-bold transition-colors duration-300 hover:bg-blue-700 focus:outline-none bg-transparent p-3 m-3"
+                style={{ textDecoration: 'none', fontSize: '17.6px' }}
+              >
+                Contact
+              </Link>
+            </div>
           </li>
         </ul>
       </nav>
