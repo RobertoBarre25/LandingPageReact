@@ -4,7 +4,6 @@ import HorizontalCard from '../CardShadow/HorizontalCard';
 import Carousel from '../Carousel/carousel'; // Asegúrate de importar el Carousel correctamente
 import Cards from '../CardsSer/cards'; // Importa el componente Cards
 
-
 const images = [
     'https://cdn-cemnc.nitrocdn.com/VpRCNzZxvcuRoMlvVcXWGPvNRVQJdDtQ/assets/images/optimized/rev-1959f9d/www.networkcablingservices.com/wp-content/uploads/2021/08/Next-Generation-Data-Centers-Everything-You-Need-to-Know.jpeg',
     'https://engineering.fb.com/wp-content/uploads/2018/05/data-center-shot.jpg',
@@ -14,18 +13,20 @@ const images = [
 const Body = () => {
   return (
     <div className="bodyPrincipal">
-      <Carousel images={images} /> {/* Integra el Carousel aquí */}
-      <div className="primerTexto">
-        <h1 className="primerTitulo">¿Necesitas una Red de Datos?</h1>
-        <p className='textoSecundario'>En Grupo Alternativas y Soluciones te ofrecemos un servicio profesional</p>
+      <div className="carouselContainer">
+        <Carousel images={images} /> {/* Integra el Carousel aquí */}
+        <div className="carouselText">
+          <h1 className="primerTitulo">Tecnología y Datos con sentido humano</h1>
+          <p className='textoSecundario'>Soluciones Inteligentes en Seguridad Digital y Telecomunicaciones</p>
+          <button className="botonServicios">Nuestros Servicios</button>
+        </div>
       </div>
       <HorizontalCard
           imageSrc="https://fundacioncarlosslim.org/wp-content/uploads/2016/11/redes-de-datos.jpg"
           title="Soluciones de redes de voz y datos de vanguardia para su empresa"
           description="En Grupo Alternativas, ofrecemos soluciones de redes de voz y datos a medida, diseñadas para optimizar la comunicación y la productividad de su negocio. Nuestros expertos implementan las tecnologías más avanzadas, asegurando una conectividad confiable y segura"
-        />
+      />
       <Cards />
-
     </div>
   );
 };
