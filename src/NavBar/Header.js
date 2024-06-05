@@ -17,7 +17,7 @@ function Header({ setView }) {
   }, []);
 
   return (
-    <header className={`fixed top-0 left-0 w-full z-10 transition-all duration-800 ease-in-out ${scrollPosition > 20 ? 'bg-blue-800/90 h-20' : 'bg-transparent h-20'}`}>
+    <header className={`fixed top-0 left-0 w-full z-10 transition-all duration-800 ease-in-out ${scrollPosition > 20 ? 'bg-blue-800 h-20' : 'bg-transparent h-20'}`}>
       <nav className="flex justify-between items-center px-5 h-full">
         <div className="text-white text-xl md:text-2xl">Grupo Alternativas y Soluciones</div>
         <ul className="flex space-x-5 list-none">
