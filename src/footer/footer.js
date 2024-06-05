@@ -27,7 +27,7 @@ const Footer = () => {
               <a href="https://www.facebook.com/GrupoAlternativasSolucione" target="_blank" rel="noopener noreferrer" className="mx-2">
                 <img src="https://images.ctfassets.net/x7j9qwvpvr5s/ZWRckIEnlpmIyRjTWROL8/d9cf76987e3b376aaa8ecd81159c8de1/fb-icon.svg" alt="Facebook" />
               </a>
-              <a href=": https://x.com/ga_SOLUCIONE" target="_blank" rel="noopener noreferrer" className="mx-2">
+              <a href="https://x.com/ga_SOLUCIONE" target="_blank" rel="noopener noreferrer" className="mx-2">
                 <img src="https://images.ctfassets.net/x7j9qwvpvr5s/4f48hkC0Lm5qMRHrOT8WwV/63c89f535e32ec23ec3b5dc94ad3de64/twitter-icon.svg" alt="Twitter" />
               </a>
               <a href="https://www.instagram.com/alternativas_solucione?igsh=MTUzeWs4aHV6d2Iwbg==" target="_blank" rel="noopener noreferrer" className="mx-2">
