@@ -16,8 +16,8 @@ const Body = () => {
       <div className="carouselContainer">
         <Carousel images={images} /> {/* Integra el Carousel aquí */}
         <div className="carouselText">
-          <h1 className="primerTitulo">Tecnología y Datos con sentido humano</h1>
-          <p className='textoSecundario'>Soluciones Inteligentes en Seguridad Digital y Telecomunicaciones</p>
+          <h1 className="primerTitulo">¿Nececitas una red de datos?</h1>
+          <p className='textoSecundario'>Manténgase actualizado con las últimas tendencias y novedades en redes de voz y datos a través de nuestro blog.</p>
           <button className="botonServicios">Nuestros Servicios</button>
         </div>
       </div>
