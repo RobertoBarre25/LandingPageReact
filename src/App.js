@@ -7,8 +7,6 @@ import Cards from './CardsSer/cards'; // Importa tu componente Cards
 import InfoPage from './InfoPage/InfoPage'; // Importa el componente InfoPage
 import ContactForm from './ContactForm/ContactForm';
 
-
-
 const App = () => {
   return (
     <Router>
@@ -20,11 +18,10 @@ const App = () => {
           <Route path="/info" element={<InfoPage />} />
           <Route path="/contact" element={<ContactForm />} />
         </Routes>
-        <Footer />
       </div>
+      <Footer />
     </Router>
   );
 };
-
 
 export default App;
