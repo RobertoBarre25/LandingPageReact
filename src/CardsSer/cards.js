@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import './cards.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -104,14 +102,13 @@ const cardsData = [
         buttonText: 'Obtener Informacion'
     }
 
-];
-const Cards = () => {
+];const Cards = () => {
     return (
         <div className="container my-4">
             <div className="row">
                 {cardsData.map((card, index) => (
                     <div className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4" key={index}>
-                        <div className="card h-100">
+                        <div className="custom-card card h-100"> {/* Se añade la clase 'custom-card' */}
                             <img src={card.imgSrc} alt={card.title} className="card-img-top" />
                             <div className="card-body text-center">
                                 <h5 className="card-title">{card.title}</h5>

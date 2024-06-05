@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import './Header.css';
 
 function Header({ setView }) {
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -18,14 +17,40 @@ function Header({ setView }) {
   }, []);
 
   return (
-    <header className={`header ${scrollPosition > 20 ? 'header-scroll' : ''}`}>
-      <nav className="navbar">
-        <div className="logo">Grupo Alternativas y Soluciones</div>
-        <ul>
-          <li><a href="#" onClick={() => setView('home')}>Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#" onClick={() => setView('contact')}>Contact</a></li>
+    <header className={`fixed top-0 left-0 w-full z-10 transition-all duration-800 ease-in-out ${scrollPosition > 20 ? 'bg-blue-800/90 h-20' : 'bg-transparent h-20'}`}>
+      <nav className="flex justify-between items-center px-5 h-full">
+        <div className="text-white text-xl md:text-2xl">Grupo Alternativas y Soluciones</div>
+        <ul className="flex space-x-5 list-none">
+          <li>
+            <button
+              onClick={() => setView('home')}
+              className="text-white top-(-10) font-bold transition-colors duration-300 hover:bg-blue-700 focus:outline-none bg-transparent p-3 m-3"
+            >
+              Home
+            </button>
+          </li>
+          <li>
+          <button
+              onClick={() => setView('home')}
+              className="text-white font-bold transition-colors duration-300 hover:bg-blue-700 focus:outline-none bg-transparent p-3 m-3">
+              Home
+            </button>
+          </li>
+          <li>
+          <button
+              onClick={() => setView('home')}
+              className="text-white font-bold transition-colors duration-300 hover:bg-blue-700 focus:outline-none bg-transparent p-3 m-3">
+              Home
+            </button>
+          </li>
+          <li>
+            <button
+              onClick={() => setView('contact')}
+              className="text-white font-bold transition-colors duration-300 hover:bg-blue-700 focus:outline-none bg-transparent p-3 m-3"
+            >
+              Contact
+            </button>
+          </li>
         </ul>
       </nav>
     </header>
