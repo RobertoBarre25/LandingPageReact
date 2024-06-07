@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'; // Importa useNavigate
 
 const cardsData = [
     {
-        imgSrc: 'https://img.freepik.com/free-vector/gradient-technology-api-illustration_23-2149358045.jpg?t=st=1717604505~exp=1717608105~hmac=65fbe0080458f595e4c0501843fb905d1479781875ff763d3b6fec22faa88238&w=740',
+        imgSrc: 'https://i.pinimg.com/564x/fd/a2/65/fda265907b5aa6bb2d4a7b3a990137d8.jpg',
         title: 'Antivirus en la nube',
         description: '¿Quieres proteger aplicaciones, infraestructura y datos en entornos de nube?',
         buttonText: 'Obtener Informacion'
