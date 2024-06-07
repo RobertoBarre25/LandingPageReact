@@ -1,63 +1,95 @@
 .cards-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Mostrar 2 tarjetas por fila */
 }
 
 .card {
-    background-color: #ffffff;
-    border-bottom: 3px solid #001fcf;
-    border-radius: 3px;
     overflow: hidden;
-    transition: transform 0.2s;
+    border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 300px; /* Ajusta el tamaño de las tarjetas */
-    margin: 10px;
-}
-
-.card:hover {
-    transform: scale(1.05);
-}
-
-.card-img-top {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-}
-
-.card-body {
+    height: 500px; /* Altura fija para las tarjetas */
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-    padding: 15px;
-    text-align: center;
+    position: relative; /* Añadido para el título */
 }
 
 .card-title {
-    font-size: 1.2em;
-    margin: 10px 0;
+    font-size: 1.9rem;
+    margin-bottom: 10px;
+    text-align: center;
+    position: absolute; /* Añadido para el título */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    color: rgb(255, 255, 255);
+    pointer-events: none; /* Asegura que el título no interfiera con el hover */
+}
+
+.card-image-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    flex: 1; /* Ocupar todo el espacio disponible en la tarjeta */
+}
+
+.card-img {
+    display: block;
+    width: 100%; /* Ajusta el ancho al 100% del contenedor */
+    height: auto; /* Mantén la proporción original */
+    object-fit: cover; /* Ajusta el tamaño de la imagen sin distorsionar */
+    transition: transform 0.3s ease;
+}
+
+.card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo del overlay transparente */
+    color: white;
+    padding: 20px;
+    opacity: 0; /* Inicialmente oculto */
+    transition: opacity 0.3s ease;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column; /* Alineación vertical de los elementos */
+    justify-content: center;
+    align-items: center;
+    z-index: 2; /* Asegura que esté por encima de la imagen */
+}
+
+.card-image-container:hover .card-overlay {
+    opacity: 1; /* Mostrar el overlay al pasar el cursor */
 }
 
 .card-text {
-    font-size: 0.9em;
-    color: #3a3a3a;
-    margin: 10px 0;
+    text-align: center;
 }
 
-.btn-primary {
-    margin-top: auto;
-    padding: 10px 15px;
-    background-color: #007bff;
+.card-description {
+    font-size: 1rem;
+    margin-bottom: 15px;
+}
+
+.btn {
+    background-color: #007bff; /* Color del botón */
     color: white;
+    padding: 10px 20px;
     border: none;
-    border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease;
+    text-transform: uppercase;
+    border-radius: 4px;
 }
 
-.btn-primary:hover {
-    background-color: #0056b3;
+.btn:hover {
+    background-color: #0056b3; /* Color del botón al pasar el cursor */
+}
+
+@media (max-width: 768px) {
+    .cards-container {
+        grid-template-columns: 1fr; /* Cambia a una columna en dispositivos móviles */
+    }
 }
