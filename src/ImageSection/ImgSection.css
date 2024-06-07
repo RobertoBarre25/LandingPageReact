@@ -1,0 +1,51 @@
+.image-container {
+    margin: 50px; 
+  }
+  
+  .image-section {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .image-item {
+    position: relative;
+    width: 33.33%; 
+    height: 250px; 
+    overflow: hidden; 
+  }
+  
+  
+  .image-item {
+    position: relative;
+    width: 510px; 
+    height: 250px; 
+    overflow: hidden; 
+  }
+  
+  .overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0.7;
+    transition: .5s ease;
+    
+  }
+  
+  .image-item:hover .overlay {
+    opacity: 0.9;
+  }
+  
+  .text {
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  

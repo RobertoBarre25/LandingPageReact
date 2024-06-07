@@ -5,6 +5,7 @@ import Carousel from '../Carousel/carousel';
 import Cards from '../CardsSer/cards';
 import { FaAngleDown } from 'react-icons/fa'; // Importa el ícono de flecha hacia abajo
 import { animateScroll as scroll } from 'react-scroll'; // Importa la función de scroll suave
+import ImageSection from '../ImageSection/ImgSection'; // Importa el nuevo componente
 
 const images = [
     'https://cdn-cemnc.nitrocdn.com/VpRCNzZxvcuRoMlvVcXWGPvNRVQJdDtQ/assets/images/optimized/rev-1959f9d/www.networkcablingservices.com/wp-content/uploads/2021/08/Next-Generation-Data-Centers-Everything-You-Need-to-Know.jpeg',
@@ -36,7 +37,9 @@ const Body = () => {
                 title="Soluciones de redes de voz y datos de vanguardia para su empresa"
                 description="En Grupo Alternativas, ofrecemos soluciones de redes de voz y datos a medida, diseñadas para optimizar la comunicación y la productividad de su negocio. Nuestros expertos implementan las tecnologías más avanzadas, asegurando una conectividad confiable y segura"
             />
+            
             <Cards />
+            <ImageSection /> 
         </div>
     );
 };
