@@ -5,25 +5,25 @@ import { useNavigate } from 'react-router-dom';
 
 const cardsData = [
     {
-        imgSrc: 'https://i.pinimg.com/564x/fd/a2/65/fda265907b5aa6bb2d4a7b3a990137d8.jpg',
+        imgSrc: 'https://img.freepik.com/premium-photo/sticky-note-crumpled-paper-with-laptop-computer-cloud-network-sign-as-concept_103164-652.jpg?w=900',
         title: 'Antivirus en la nube',
         description: '¿Quieres proteger aplicaciones, infraestructura y datos en entornos de nube?',
         buttonText: 'Obtener Información'
     },
     {
-        imgSrc: 'https://img.freepik.com/free-vector/personal-digital-security_74855-4560.jpg?t=st=1717604425~exp=1717608025~hmac=0534d75d4466a9d2f3e3f10fba426ef75655dee3177556650b9c623a61cd8259&w=1060',
+        imgSrc: 'https://images.pexels.com/photos/8297478/pexels-photo-8297478.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
         title: 'Gestión de vulnerabilidades',
         description: 'Protege tu negocio identificando y mitigando amenazas antes de que se conviertan en problemas',
         buttonText: 'Obtener Información'
     },
     {
-        imgSrc: 'https://img.freepik.com/free-vector/data-management-collective-database-tower-people-share-commonplace-centralized-mainframe-widespread-info-stored-files-custom-regulation-isolated-concept-metaphor-illustration_335657-1194.jpg?t=st=1717604621~exp=1717608221~hmac=5d0085d2c15588bfb205ede65c7e40217a613aecf4e9cfe58392133f00ef3e81&w=740',
+        imgSrc: 'https://img.freepik.com/free-photo/i-see-how-man-had-worried-this-moment-polygraph-examiner-works-office-with-his-lie-detector-s-equipment_146671-17245.jpg?t=st=1718130478~exp=1718134078~hmac=91d8a3b389e247b06d0ec579711e5732a1af65bed8928fd273bdc6b48ed09a4c&w=1380',
         title: 'Sandboxing en la nube',
         description: 'Aísla y analiza amenazas de forma segura para mantener tu entorno protegido',
         buttonText: 'Obtener Información'
     },
     {
-        imgSrc: 'https://img.freepik.com/free-vector/phishing-account-concept_23-2148534567.jpg?t=st=1717604789~exp=1717608389~hmac=ddaa03ce140255316e113442a096ceac800b63741c8782dc552f28353e89940a&w=740',
+        imgSrc: 'https://img.freepik.com/free-photo/device-protected-by-cyber-security_23-2149270833.jpg?t=st=1718130908~exp=1718134508~hmac=2581cff38c13dff19def5b38d70470c2736ec71c0438f36bc02eacb1d6332f6d&w=1380',
         title: 'Protección de correo electrónico',
         description: 'Defiende tu bandeja de entrada contra amenazas y fraudes con seguridad avanzada',
         buttonText: 'Obtener Información'
