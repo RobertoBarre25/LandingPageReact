@@ -36,11 +36,11 @@ const Body = () => {
 
                         >
                             <button className="botonServiciosAzul">
-                                Contrata ya
+                                Contrata ya !
                             </button>
                         </Link>
                         <button className="botonServiciosTransparente" onClick={scrollToBottom}>
-                            Conoce más
+                            Conoce más !
                         </button>
                     </div>
                 </div>
