@@ -6,6 +6,7 @@ import Cards from '../CardsSer/cards';
 import { FaAngleDown } from 'react-icons/fa'; // Importa el ícono de flecha hacia abajo
 import { animateScroll as scroll } from 'react-scroll'; // Importa la función de scroll suave
 import ImageSection from '../ImageSection/ImgSection'; // Importa el nuevo componente
+import { Link } from 'react-router-dom'; // Asegúrate de importar Link
 
 const images = [
     'https://cdn-cemnc.nitrocdn.com/VpRCNzZxvcuRoMlvVcXWGPvNRVQJdDtQ/assets/images/optimized/rev-1959f9d/www.networkcablingservices.com/wp-content/uploads/2021/08/Next-Generation-Data-Centers-Everything-You-Need-to-Know.jpeg',
@@ -26,9 +27,14 @@ const Body = () => {
                     <div className="carouselText">
                         <h1 className="primerTitulo">¿Necesitas una red de datos y ciberseguridad?</h1>
                         <p className='textoSecundario'>Manténgase actualizado con las últimas tendencias y novedades en redes de voz y datos a través de nuestro blog.</p>
-                        <button className="botonServicios" onClick={scrollToBottom}>
-                            Nuestros Servicios <FaAngleDown className="iconoV" />
-                        </button>
+                        <Link to="/contact"
+                            className="text-white font-bold transition-colors duration-300 hover:bg-blue-700 focus:outline-none bg-transparent"
+                            style={{ textDecoration: 'none', fontSize: '17.5px' }}
+                        >
+                            <button className="botonServicios">
+                                Contactanos <FaAngleDown className="iconoV" />
+                            </button>
+                        </Link>
                     </div>
                 </div>
             </div>
