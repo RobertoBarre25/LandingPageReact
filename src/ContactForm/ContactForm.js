@@ -2,11 +2,11 @@ import React from "react";
 
 const ContactForm = () => {
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
+    <div className="flex justify-center items-center h-screen bg-gradient-to-r from-gray-400 to-gray-100 mt-20">
       <div className="rounded-lg p-8 max-w-2xl w-full bg-transparent">
         <div className="text-center mb-6">
           <img
-            src="https://solucione.com.mx/corporativo/wp-content/uploads/2020/04/cropped-solucione-logo-color-512x512-1.png"
+            src="https://pbs.twimg.com/profile_images/1246659738600783872/MsVt4gB0_400x400.jpg"
             className="w-32 mx-auto"
             alt="logo"
           />
@@ -18,7 +18,7 @@ const ContactForm = () => {
           <div className="grid gap-6 md:grid-cols-2">
             <input
               type="text"
-              className="block w-full px-4 py-2 text-sm border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none"
+              className="block w-full px-4 py-2 text-sm border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none black-placeholder"
               placeholder="Nombre(s)"
             />
             <input
@@ -117,7 +117,7 @@ const ContactForm = () => {
                 className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
               />
               <span className="ml-2 text-sm text-gray-700">
-                para actividades de marketing mediante correo electrónico
+                Para actividades de marketing mediante correo electrónico
                 (boletín informativo), teléfono, SMS, MMS, chat, banner en
                 nuestros sitios y aplicaciones, mensajería instantánea, redes
                 sociales y correo tradicional
@@ -129,7 +129,7 @@ const ContactForm = () => {
                 className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
               />
               <span className="ml-2 text-sm text-gray-700">
-                para la creación de perfiles, destinados a la personalización de
+                Para la creación de perfiles, destinados a la personalización de
                 ofertas e iniciativas de acuerdo con mis intereses y
                 preferencias
               </span>
