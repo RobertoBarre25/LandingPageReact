@@ -7,7 +7,7 @@
   .carouselContainer {
     position: relative;
     width: 100%;
-    height: auto; /* Adjust according to your needs */
+    height: auto; 
   }
   
   .carouselText {
@@ -45,6 +45,8 @@
     font-size: 1.5rem;
     cursor: pointer;
     margin-top: 10px;
+    border: 2px solid transparent; 
+
   }
   
   .botonServicios:hover {
@@ -59,4 +61,3 @@
     height: 990px;
     z-index: 6;
   }
-  

@@ -21,7 +21,7 @@ const ImageSection = () => {
           <img src="https://i.pinimg.com/564x/41/55/cc/4155cce579c9ae3a9399c146251081e2.jpg" alt="Localizador de concesionarios" />
           <div className="overlay">
             <div className="text">Localizador de concesionarios</div>
-          </div>
+          </div> 
         </div>
       </div>
     </div>
