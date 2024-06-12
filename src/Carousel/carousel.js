@@ -29,7 +29,8 @@ function Carousel({ images }) {
                         alt="carousel"
                         className="w-full h-full object-cover"
                     />
-                    <div className="carousel-text absolute inset-0 flex items-center justify-center text-center">
+                    <div className="overlay absolute inset-0 bg-black opacity-50"></div> {/* Superposición oscura */}
+                    <div className="carousel-text absolute inset-0 flex items-center justify-center text-center text-white">
                         {image.text}
                     </div>
                 </div>
