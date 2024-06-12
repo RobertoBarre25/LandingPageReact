@@ -24,9 +24,7 @@ const Body = () => {
                 <Carousel images={images} />
 
                 <div className="carouselTextFondo">
-                    <div>
-                        <p className='titulo'>Ciberseguridad</p>
-                    </div>
+                    
                     <div className="carouselText">
                         <h1 className="primerTitulo">
                             Antivirus<span className="cloudText">Cloud</span>
