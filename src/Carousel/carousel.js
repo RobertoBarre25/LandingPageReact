@@ -29,8 +29,8 @@ function Carousel({ images }) {
                         alt="carousel"
                         className="w-full h-full object-cover"
                     />
-                    <div className="carousel-text absolute inset-0 flex items-center justify-center">
-                        <p className="text-white text-2xl md:text-4xl lg:text-6xl">{image.text}</p>
+                    <div className="carousel-text absolute inset-0 flex items-center justify-center text-center">
+                        {image.text}
                     </div>
                 </div>
             ))}
