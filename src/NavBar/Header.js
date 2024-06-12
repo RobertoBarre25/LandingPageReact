@@ -37,20 +37,6 @@ function Header() {
           </li>
           <li>
             <div style={{ marginTop: '1.3rem' }}>
-              <Link to="/services" className="text-white font-bold transition-colors duration-300 hover:bg-blue-700 focus:outline-none bg-transparent p-3 m-3" style={{ textDecoration: 'none', fontSize: '17.5px' }}>
-                Services
-              </Link>
-            </div>
-          </li>
-          <li>
-            <div style={{ marginTop: '1.3rem' }}>
-              <Link to="/prices" className="text-white font-bold transition-colors duration-300 hover:bg-blue-700 focus:outline-none bg-transparent p-3 m-3" style={{ textDecoration: 'none', fontSize: '17.5px' }}>
-                Prices
-              </Link>
-            </div>
-          </li>
-          <li>
-            <div style={{ marginTop: '1.3rem' }}>
               <Link to="/contact" className="text-white font-bold transition-colors duration-300 hover:bg-blue-700 focus:outline-none bg-transparent p-3 m-3" style={{ textDecoration: 'none', fontSize: '17.5px' }}>
                 Contact
               </Link>
