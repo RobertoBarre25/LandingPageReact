@@ -1,63 +1,76 @@
 .bodyPrincipal {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .carouselContainer {
-    position: relative;
-    width: 100%;
-    height: auto; 
-  }
-  
-  .carouselText {
-    position: absolute;
-    top: 50%;
-    left: 10%; /* Adjust to move text to the left side */
-    transform: translateY(-50%);
-    text-align: left; /* Align text to the left */
-    color: white; /* Ensure the text is readable */
-    
-    padding: 20px;
-    border-radius: 10px;
-    width: 80%; /* Make the text block wider */
-  }
-  
-  .primerTitulo {
-    font-size: 4.2rem; /* Increase font size */
-    width: 80%; /* Adjust width as needed */
-    font-weight: 900; 
-  }
-  
-  .textoSecundario {
-    font-size: 1.8rem; /* Increase font size */
-    margin: 30px 0;
-    width: 100%; /* Adjust width as needed */
-     
-  }
-  
-  
-  .botonServicios {
-    background-color: #4234ff;
-    color: white;
-    border: none;
-    padding: 18px 30px;
-    font-size: 1.5rem;
-    cursor: pointer;
-    margin-top: 10px;
-    border: 2px solid transparent; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-  }
-  
-  .botonServicios:hover {
-    background-color: #0056b3;
-  }
+.carouselContainer {
+  position: relative;
+  width: 100%;
+  height: auto; 
+}
 
-  .carouselTextFondo{
-    background-color: rgba(0, 0, 0, 0.58);
-    position: absolute;
-    top: 0%;
-    width: 100%;
-    height: 990px;
-    z-index: 6;
-  }
+.carouselText {
+  position: absolute;
+  top: 50%;
+  left: 10%; /* Adjust to move text to the left */
+  transform: translateY(-50%);
+  text-align: left; /* Align text to the left */
+  color: white; /* Ensure the text is readable */
+  
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%; /* Make the text block wider */
+}
+
+.primerTitulo {
+  font-size: 4.2rem; /* Increase font size */
+  width: 80%; /* Adjust width as needed */
+  font-weight: 900; 
+}
+
+.cloudText {
+  color: blue; /* Set the text color of "Cloud" to blue */
+}
+
+.textoSecundario {
+  font-size: 1.8rem; /* Increase font size */
+ 
+  width: 100%; /* Adjust width as needed */
+}
+
+.botonServiciosAzul, .botonServiciosTransparente {
+  font-size: 1.8rem; /* Increase button font size */
+  padding: 15px 30px; /* Increase button padding */
+  cursor: pointer;
+  margin: 15px; /* Add margin between buttons */
+}
+
+.botonServiciosAzul {
+  background-color: #4234ff;
+  color: white;
+  border: none;
+}
+
+.botonServiciosAzul:hover {
+  background-color: #0056b3;
+}
+
+.botonServiciosTransparente {
+  background-color: transparent;
+  border: 2px solid white;
+  color: white;
+}
+
+.botonServiciosTransparente:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Slight background color on hover */
+}
+
+.carouselTextFondo {
+  background-color: rgba(0, 0, 0, 0.58);
+  position: absolute;
+  top: 0%;
+  width: 100%;
+  height: 990px;
+  z-index: 6;
+}
