@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-//import './carousel.css';
 
 function Carousel({ images }) {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -21,18 +20,25 @@ function Carousel({ images }) {
     return (
         <div className="relative max-w-full h-[990px] overflow-hidden">
             {images.map((image, index) => (
-                <img
+                <div
                     key={index}
-                    src={image}
-                    alt="carousel"
-                    className={`carousel-image absolute  w-full h-full transition-transform duration-700 ease-in-out ${index === currentIndex ? 'translate-x-0' : index === prevIndex ? '-translate-x-full' : 'translate-x-full'}`}
-                />
+                    className={`carousel-slide absolute w-full h-full transition-transform duration-700 ease-in-out ${index === currentIndex ? 'translate-x-0' : index === prevIndex ? '-translate-x-full' : 'translate-x-full'}`}
+                >
+                    <img
+                        src={image.src}
+                        alt="carousel"
+                        className="w-full h-full object-cover"
+                    />
+                    <div className="carousel-text absolute inset-0 flex items-center justify-center">
+                        <p className="text-white text-2xl md:text-4xl lg:text-6xl">{image.text}</p>
+                    </div>
+                </div>
             ))}
             <div className="carousel-indicators absolute flex justify-end space-x-2 bottom-4 right-4">
                 {images.map((_, index) => (
                     <span
                         key={index}
-                        className={`carousel-indicator inline-block w-3 h-3 bg-white rounded-full mx-1 cursor-pointer  ${index === currentIndex ? 'bg-opacity-100' : 'bg-opacity-50'}`}
+                        className={`carousel-indicator inline-block w-3 h-3 bg-white rounded-full mx-1 cursor-pointer ${index === currentIndex ? 'bg-opacity-100' : 'bg-opacity-50'}`}
                         onClick={() => setSlide(index)}
                     ></span>
                 ))}
