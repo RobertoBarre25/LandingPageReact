@@ -22,18 +22,20 @@ const Body = () => {
         <div className="bodyPrincipal">
             <div className="carouselContainer">
                 <Carousel images={images} />
+
                 <div className="carouselTextFondo">
+                    <div>
+                        <p className='titulo'>Ciberseguridad</p>
+                    </div>
                     <div className="carouselText">
                         <h1 className="primerTitulo">
                             Antivirus<span className="cloudText">Cloud</span>
                         </h1>
-                        <p className='textoSecundario'>Antivirus y antimalware empresarial
-                        </p>
+                        <p className='textoSecundario'>Antivirus y antimalware empresarial</p>
                         <p className='textoSecundario'>
                             Protección en tiempo real contra malware basada en la nube.</p>
                         <Link to="/contact"
-                            className="text-white font-bold transition-colors duration-300 hover:bg-blue-700 focus:outline-none bg-transparent"
-                            style={{ textDecoration: 'none', fontSize: '17.5px' }}
+
                         >
                             <button className="botonServiciosAzul">
                                 Contrata ya

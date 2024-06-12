@@ -13,20 +13,18 @@
 .carouselText {
   position: absolute;
   top: 50%;
-  left: 10%; /* Adjust to move text to the left */
+  left: 10%;
   transform: translateY(-50%);
-  text-align: left; /* Align text to the left */
-  color: white; /* Ensure the text is readable */
+  text-align: left;
+  color: white;
   
   padding: 20px;
   border-radius: 10px;
-  width: 80%; /* Make the text block wider */
+  width: 80%;
 }
 
 .primerTitulo {
-  font-size: 4.2rem; /* Increase font size */
-  width: 80%; /* Adjust width as needed */
-  font-weight: 900; 
+  font-size: 6.2rem;
 }
 
 .cloudText {
@@ -34,16 +32,15 @@
 }
 
 .textoSecundario {
-  font-size: 1.8rem; /* Increase font size */
- 
-  width: 100%; /* Adjust width as needed */
+  font-size: 1.8rem;
 }
 
 .botonServiciosAzul, .botonServiciosTransparente {
-  font-size: 1.8rem; /* Increase button font size */
-  padding: 15px 30px; /* Increase button padding */
+  font-size: 2rem; /* Increase button font size */
+  padding: 20px 40px; /* Increase button padding */
   cursor: pointer;
-  margin: 15px; /* Add margin between buttons */
+  margin: 20px; /* Add margin between buttons */
+  border-radius: 10px; /* Add border radius to buttons */
 }
 
 .botonServiciosAzul {
@@ -73,4 +70,11 @@
   width: 100%;
   height: 990px;
   z-index: 6;
+}
+
+.titulo {
+  text-align: center;
+  font-size: 2.2rem;
+  margin-top: 100px; 
+  color: white;
 }
