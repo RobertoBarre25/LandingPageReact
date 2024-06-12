@@ -2,7 +2,7 @@ import React from "react";
 
 const ContactForm = () => {
   return (
-    <div className="flex justify-center items-center h-screen bg-gradient-to-r from-gray-400 to-gray-100 mt-20">
+    <div className="flex justify-center items-center h-screen bg-gradient-to-r from-gray-100 to-gray-400 mt-20">
       <div className="rounded-lg p-8 max-w-2xl w-full bg-transparent">
         <div className="text-center mb-6">
           <img
