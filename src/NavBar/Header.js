@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-function Header() {
+function Header({ isBlue }) {
   const [scrollPosition, setScrollPosition] = useState(0);
   const location = useLocation();
 
@@ -20,7 +20,7 @@ function Header() {
 
   const isContactPage = location.pathname === '/contact';
   const headerClass = isContactPage
-    ? scrollPosition > 20 ? 'bg-transparent' : 'bg-blue-700'
+    ? scrollPosition > 20 ? 'bg-transparent' : (isBlue ? 'bg-blue-700' : 'bg-transparent')
     : scrollPosition > 20 ? 'bg-blue-700' : 'bg-transparent';
 
   return (

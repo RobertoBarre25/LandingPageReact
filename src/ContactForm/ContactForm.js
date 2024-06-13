@@ -1,8 +1,10 @@
 import React from "react";
+import Header from "../NavBar/Header";
 
 const ContactForm = () => {
   return (
     <div className="flex justify-center items-center h-screen bg-gradient-to-r from-gray-100 to-gray-300 mt-20">
+      <Header isBlue={true} />
       <div className="rounded-lg p-8 max-w-2xl w-full bg-transparent">
         <div className="text-center mb-6">
           <img
