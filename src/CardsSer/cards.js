@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 const cardsData = [
     {
-        imgSrc: 'https://img.freepik.com/premium-photo/sticky-note-crumpled-paper-with-laptop-computer-cloud-network-sign-as-concept_103164-652.jpg?w=900',
+        imgSrc: 'https://www.redseguridad.com/wp-content/uploads/sites/2/2022/01/seguridad-cloud--900x600.jpg',
         title: 'Antivirus en la nube',
         description: '¿Quieres proteger aplicaciones, infraestructura y datos en entornos de nube?',
         buttonText: 'Obtener Información'
@@ -16,7 +16,7 @@ const cardsData = [
         buttonText: 'Obtener Información'
     },
     {
-        imgSrc: 'https://img.freepik.com/free-photo/i-see-how-man-had-worried-this-moment-polygraph-examiner-works-office-with-his-lie-detector-s-equipment_146671-17245.jpg?t=st=1718130478~exp=1718134078~hmac=91d8a3b389e247b06d0ec579711e5732a1af65bed8928fd273bdc6b48ed09a4c&w=1380',
+        imgSrc: 'https://images.pexels.com/photos/89724/pexels-photo-89724.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
         title: 'Sandboxing en la nube',
         description: 'Aísla y analiza amenazas de forma segura para mantener tu entorno protegido',
         buttonText: 'Obtener Información'
@@ -36,7 +36,7 @@ const Cards = () => {
         <div className="mx-4 md:mx-12 lg:mx-20">
             <div className="grid grid-cols-2 gap-0">
                 {cardsData.map((card, index) => (
-                    <div key={index} className="relative  h-[800px] border-none group">
+                    <div key={index} className="relative h-[800px] border-none group">
                         <div className="relative overflow-hidden h-full border-none">
                             <img src={card.imgSrc} alt={card.title} className="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-110" />
                             <div className="absolute bottom-2.5 w-full text-center text-white p-2.5 z-10 transition-all duration-300 ease-in-out group-hover:bottom-full">
