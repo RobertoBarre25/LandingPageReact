@@ -1,5 +1,4 @@
 import React from 'react';
-import './cards.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
 
@@ -34,22 +33,26 @@ const Cards = () => {
     const navigate = useNavigate();
 
     return (
-        <div className="cards-container">
-            {cardsData.map((card, index) => (
-                <div key={index} className="card">
-                    <div className="card-image-container">
-                        <img src={card.imgSrc} alt={card.title} className="card-img" />
-                        <div className="card-title-overlay">{card.title}</div>
-                        <div className="card-overlay">
-                            <div className="card-text">
-                                <h3 className="card-title">{card.title}</h3>
-                                <p className="card-description">{card.description}</p>
-                                <button className="btn btn-primary" onClick={() => navigate('/info')}>{card.buttonText}</button>
+        <div className="mx-auto max-w-screen-lg px-4 md:px-8 lg:px-16">
+            <div className="grid grid-cols-2 gap-0">
+                {cardsData.map((card, index) => (
+                    <div key={index} className="relative overflow-hidden h-[500px] border-none group">
+                        <div className="relative overflow-hidden h-full border-none">
+                            <img src={card.imgSrc} alt={card.title} className="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-110" />
+                            <div className="absolute bottom-2.5 w-full text-center text-white p-2.5 z-10 transition-all duration-300 ease-in-out group-hover:bottom-full">
+                                {card.title}
+                            </div>
+                            <div className="absolute bottom-[-100%] left-0 w-full h-full bg-black bg-opacity-50 text-white p-5 transition-all duration-300 ease-in-out flex flex-col justify-center items-center group-hover:bottom-0">
+                                <div className="text-center">
+                                    <h3 className="text-xl mb-2.5">{card.title}</h3>
+                                    <p className="text-base mb-3.75">{card.description}</p>
+                                    <button className="bg-blue-500 text-white py-2.5 px-5 border-none cursor-pointer transition-colors duration-300 ease-in-out uppercase rounded-md hover:bg-blue-700" onClick={() => navigate('/info')}>{card.buttonText}</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            ))}
+                ))}
+            </div>
         </div>
     );
 };
