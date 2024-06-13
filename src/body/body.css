@@ -1,74 +1,31 @@
-.bodyPrincipal {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.carouselContainer {
-  position: relative;
-  width: 100%;
-  height: auto; 
-}
-
 .carouselText {
-  position: absolute;
-  top: 50%;
-  left: 10%;
-  transform: translateY(-50%);
-  text-align: left;
-  color: white;
-  
-  padding: 20px;
-  border-radius: 10px;
-  width: 80%;
+  @apply absolute top-1/2 left-10 transform -translate-y-1/2 text-left text-white p-5 rounded-lg w-full md:w-4/5;
 }
 
 .primerTitulo {
-  font-size: 6.2rem;
+  @apply text-3xl md:text-6xl;
 }
 
 .cloudText {
-  color: blue; /* Set the text color of "Cloud" to blue */
+  @apply text-blue-500;
 }
 
 .textoSecundario {
-  font-size: 1.8rem;
-}
-
-.botonServiciosAzul, .botonServiciosTransparente {
-  font-size: 2rem; /* Increase button font size */
-  padding: 20px 40px; /* Increase button padding */
-  cursor: pointer;
-  margin: 20px; /* Add margin between buttons */
-  border-radius: 10px; /* Add border radius to buttons */
+  @apply text-sm md:text-xl;
 }
 
 .botonServiciosAzul {
-  background-color: blue;
-  color: white;
-  border: none;
+  @apply bg-blue-500 text-white border-none text-sm md:text-xl py-2 md:py-5 px-4 md:px-10 cursor-pointer m-2 md:m-5 rounded-lg;
 }
 
 .botonServiciosAzul:hover {
-  background-color: #0056b3;
+  @apply bg-blue-700;
 }
 
 .botonServiciosTransparente {
-  background-color: transparent;
-  border: 2px solid white;
-  color: white;
+  @apply bg-transparent border-2 border-white text-white text-sm md:text-xl py-2 md:py-5 px-4 md:px-10 cursor-pointer m-2 md:m-5 rounded-lg;
 }
 
 .botonServiciosTransparente:hover {
-  background-color: rgba(255, 255, 255, 0.1); /* Slight background color on hover */
+  @apply bg-white bg-opacity-10;
 }
-
-.carouselTextFondo {
-  background-color: rgba(0, 0, 0, 0.58);
-  position: absolute;
-  top: 0%;
-  width: 100%;
-  height: 990px;
-  z-index: 6;
-}
-

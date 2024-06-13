@@ -2,7 +2,7 @@ import React from 'react';
 import './body.css';
 import HorizontalCard from '../CardShadow/HorizontalCard';
 import Carousel from '../Carousel/carousel';
-import Cards from '../CardsSer/cards';
+import Cards from '../CardsSer/cards'; // Ensure the import is correct
 import { animateScroll as scroll } from 'react-scroll';
 import ImageSection from '../ImageSection/ImgSection';
 import { Link } from 'react-router-dom';
@@ -75,8 +75,8 @@ const images = [
 
 const Body = () => {
     return (
-        <div className="bodyPrincipal">
-            <div className="carouselContainer">
+        <div className="flex flex-col items-center">
+            <div className="relative w-full">
                 <Carousel images={images} />
             </div>
             <HorizontalCard
