@@ -33,7 +33,7 @@ const Cards = () => {
     const navigate = useNavigate();
 
     return (
-        <div className="mx-auto max-w-screen-lg px-4 md:px-8 lg:px-16">
+        <div className="mx-4 md:mx-12 lg:mx-20">
             <div className="grid grid-cols-2 gap-0">
                 {cardsData.map((card, index) => (
                     <div key={index} className="relative overflow-hidden h-[500px] border-none group">

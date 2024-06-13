@@ -2,7 +2,7 @@ import React from 'react';
 
 const ImageSection = () => {
   return (
-    <div className="mx-auto max-w-screen-lg px-4 md:px-8 lg:px-16"> 
+    <div className="mx-10 md:mx-20 lg:mx-20"> 
       <div className="mt-20"> 
         <div className="flex flex-wrap justify-between">
           <div className="w-full sm:w-1/2 lg:w-1/3 mb-8">
