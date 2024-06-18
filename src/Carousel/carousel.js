@@ -10,7 +10,7 @@ function Carousel({ images }) {
         const interval = setInterval(() => {
             setPrevIndex(currentIndex);
             setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-        }, 5000);
+        }, 10000);
         return () => clearInterval(interval);
     }, [images.length, currentIndex]);
 

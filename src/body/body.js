@@ -9,14 +9,21 @@ import { Link } from 'react-router-dom';
 
 const images = [
     {
-        src: 'https://cdn-cemnc.nitrocdn.com/VpRCNzZxvcuRoMlvVcXWGPvNRVQJdDtQ/assets/images/optimized/rev-1959f9d/www.networkcablingservices.com/wp-content/uploads/2021/08/Next-Generation-Data-Centers-Everything-You-Need-to-Know.jpeg',
+        src: 'https://images.pexels.com/photos/5935794/pexels-photo-5935794.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
         text: (
             <div className="carouselText">
                 <h1 className="primerTitulo">
                     Antivirus<span className="cloudText">Cloud</span>
                 </h1>
-                <p className="textoSecundario">Antivirus y antimalware empresarial</p>
-                <p className="textoSecundario">Protección en tiempo real contra malware basada en la nube.</p>
+                <h2 className="textoSecundario">
+                 ! <span className="cloudTextTwo">Proteccion </span> Empresarial de <span className="cloudTextTwo">Ultima </span> Generacion¡
+            
+                    </h2>
+
+                <h3 className="textoTerceario">¡Protege tu empresa como nunca antes! Nuestro AntivirusCloud 
+                    ofrece defensa en tiempo real contra malware, impulsada por la tecnología más avanzada en la nube.
+                     No permitas que las amenazas cibernéticas pongan en riesgo tu negocio. 
+                    ¡Con AntivirusCloud, mantén tus datos seguros y enfócate en lo que mejor sabes hacer!</h3>
                 <Link to="/contact">
                     <button className="botonServiciosAzul">
                         Contrata ya!
@@ -29,15 +36,18 @@ const images = [
         )
     },
     {
-        src: 'https://engineering.fb.com/wp-content/uploads/2018/05/data-center-shot.jpg',
+        src: 'https://news-assets.onvista.com/9/21/ecc00f57c050caa04fb8e379c175894b2b979748ff531742c1213625c05bc610.jpg',
         text: (
             <div className="carouselText">
                 <h1 className="primerTitulo">
                     Cyber<span className="cloudText">Secure</span>
                 </h1>
-                <p className="textoSecundario">Protección integral contra amenazas cibernéticas</p>
-                <p className="textoSecundario">Defensa proactiva para asegurar tu red empresarial.
-                </p>
+                <h2 className="textoSecundario">¡La <span className="cloudTextTwo">Mejor Defensa </span> Contra Amenazas Cibernéticas!</h2>
+                <h3 className="textoTerceario">¡Protege tu empresa al máximo! Con CyberSecure, obtén protección integral
+                     contra todas las amenazas cibernéticas. Nuestra solución ofrece una defensa proactiva que garantiza la seguridad
+                      de tu red empresarial. No dejes que los ciberataques amenacen tu éxito.
+                     ¡Confía en CyberSecure y mantén tu negocio a salvo!.
+                </h3>
                 <Link to="/contact">
                     <button className="botonServiciosAzul">
                         Contrata ya!
@@ -56,10 +66,13 @@ const images = [
                 <h1 className="primerTitulo">
                     Cloud<span className="cloudText">Guard</span>
                 </h1>
-                <p className="textoSecundario">Seguridad y eficiencia en la nube</p>
-                <p className="textoSecundario">Monitoreo continuo y protección avanzada para tus datos.
+                <h2 className="textoSecundario">¡Seguridad y <span className="cloudTextTwo">Eficiencia </span> en la nube!</h2>
+                <h3 className="textoTerceario">¡Protege y optimiza tus datos como nunca antes! Con CloudGuard,
+                     disfruta de monitoreo continuo y protección avanzada para todos tus datos en la nube. 
+                     No dejes que las amenazas cibernéticas te tomen por sorpresa. 
+                    ¡Confía en CloudGuard y mantén tu información segura y eficiente en todo momento!
 
-                </p>
+                </h3>
                 <Link to="/contact">
                     <button className="botonServiciosAzul">
                         Contrata ya!
@@ -81,8 +94,8 @@ const Body = () => {
             </div>
             <HorizontalCard
                 imageSrc="https://fundacioncarlosslim.org/wp-content/uploads/2016/11/redes-de-datos.jpg"
-                title="Soluciones de redes de voz y datos de vanguardia para su empresa"
-                description="En Grupo Alternativas, ofrecemos soluciones de redes de voz y datos a medida, diseñadas para optimizar la comunicación y la productividad de su negocio. Nuestros expertos implementan las tecnologías más avanzadas, asegurando una conectividad confiable y segura"
+                title="Mantente Seguro en todo momento"
+                description="Diseñado para proteger tu comunicación con soluciones avanzadas de seguridad de correo electrónico, filtrado inteligente de amenazas y defensa de primer nivel. Somos tecnología de vanguardia para un futuro seguro."
             />
             <Cards />
             <ImageSection />

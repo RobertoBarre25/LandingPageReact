@@ -4,10 +4,10 @@ import { useNavigate } from 'react-router-dom';
 
 const cardsData = [
     {
-        imgSrc: 'https://img.freepik.com/premium-photo/sticky-note-crumpled-paper-with-laptop-computer-cloud-network-sign-as-concept_103164-652.jpg?w=900',
+        imgSrc: 'https://9nn339.p3cdn2.secureserver.net/wp-content/uploads/2023/03/seguridad-nube.jpg',
         title: 'Antivirus en la nube',
         description: '¿Quieres proteger aplicaciones, infraestructura y datos en entornos de nube?',
-        buttonText: 'Obtener Información'
+        buttonText: 'Descubrir'
     },
     {
         imgSrc: 'https://images.pexels.com/photos/8297478/pexels-photo-8297478.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
@@ -19,10 +19,10 @@ const cardsData = [
         imgSrc: 'https://images.pexels.com/photos/89724/pexels-photo-89724.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
         title: 'Sandboxing en la nube',
         description: 'Aísla y analiza amenazas de forma segura para mantener tu entorno protegido',
-        buttonText: 'Obtener Información'
+        buttonText: 'Descubrir'
     },
     {
-        imgSrc: 'https://img.freepik.com/free-photo/device-protected-by-cyber-security_23-2149270833.jpg?t=st=1718130908~exp=1718134508~hmac=2581cff38c13dff19def5b38d70470c2736ec71c0438f36bc02eacb1d6332f6d&w=1380',
+        imgSrc: 'https://lh3.googleusercontent.com/proxy/o7XhzmquUmwze9Qb1LEuHF457_1umUXCGvM_fpvHKqv40YWnrgvdbk1bH8Y0ZSDmS4ryfMwaXECIAYVpWA2MYuZUxMVfdC7qnHnktvCFGX7KfA4m_P9UlGFLE6nsG-ZfXZ6qokdtAPnLHjbUTpa8xrLfdnfTqBS-OVw',
         title: 'Protección de correo electrónico',
         description: 'Defiende tu bandeja de entrada contra amenazas y fraudes con seguridad avanzada',
         buttonText: 'Obtener Información'
@@ -46,7 +46,7 @@ const Cards = () => {
                                 <div className="text-center">
                                     <h3 className="text-xl mb-2.5">{card.title}</h3>
                                     <p className="text-base mb-3.75">{card.description}</p>
-                                    <button className="bg-blue-500 text-white py-2.5 px-5 border-none cursor-pointer transition-colors duration-300 ease-in-out uppercase rounded-md hover:bg-blue-700" onClick={() => navigate('/info')}>{card.buttonText}</button>
+                                    <button className="bg-blue-500 text-white py-2.5 px-5 border-none cursor-pointer transition-colors duration-300 ease-in-out uppercase rounded-md hover:bg-blue-700" onClick={() => navigate('/contact')}>{card.buttonText}</button>
                                 </div>
                             </div>
                         </div>

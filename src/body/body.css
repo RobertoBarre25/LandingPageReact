@@ -10,8 +10,15 @@
   @apply text-blue-500;
 }
 
+.cloudTextTwo {
+  @apply text-red-400;
+}
 .textoSecundario {
-  @apply text-sm md:text-xl;
+  @apply text-lg md:text-3xl;
+}
+
+.textoTerceario {
+  @apply text-base md:text-xl text-gray-400 text-gray-300;
 }
 
 .botonServiciosAzul {
