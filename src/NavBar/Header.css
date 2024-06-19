@@ -1,0 +1,30 @@
+/* Header.css */
+
+/* Estilos base para la línea */
+.nav-link {
+    position: relative;
+    text-decoration: none;
+    color: white; /* Color del texto */
+    font-size: 16px;
+    padding: 10px;
+    margin: 10px;
+  }
+  
+  /* Estilos para la línea blanca */
+  .nav-link::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background-color: white; /* Color de la línea blanca */
+    transition: width 0.3s ease-in-out;
+    transform-origin: left;
+  }
+  
+  /* Animación al hacer hover */
+  .nav-link:hover::before {
+    width: 100%;
+  }
+  
