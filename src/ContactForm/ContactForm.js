@@ -3,7 +3,7 @@ import Header from "../NavBar/Header";
 
 const ContactForm = () => {
   return (
-    <div className="flex justify-center items-center h-screen bg-gradient-to-r from-white-100 to-gray-500 mt-18">
+    <div className="flex flex-col justify-center items-center min-h-screen bg-gradient-to-r from-white-100 to-gray-500 py-10 px-4 sm:px-6 lg:px-8">
       <Header isBlue={true} />
       <div className="rounded-lg p-8 max-w-2xl w-full bg-transparent">
         <div className="text-center mb-6">
@@ -17,7 +17,7 @@ const ContactForm = () => {
           </h2>
         </div>
         <form className="space-y-6">
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-6 sm:grid-cols-2">
             <input
               required
               type="text"
@@ -43,11 +43,11 @@ const ContactForm = () => {
               placeholder="Código Postal"
             />
           </div>
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-6 sm:grid-cols-2">
             <input
               required
               type="number"
-              className="w-28 px-4 py-2 text-sm border border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none rounded-r-md"
+              className="w-full px-4 py-2 text-sm border border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none rounded-md sm:w-28"
               placeholder="+ Lada"
             />
             <div className="relative flex items-center">
@@ -59,7 +59,7 @@ const ContactForm = () => {
               />
             </div>
           </div>
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-6 sm:grid-cols-2">
             <div className="relative">
               <input
                 required
@@ -77,7 +77,7 @@ const ContactForm = () => {
               placeholder="Nombre de la Ubicación o Vendedor Autorizado"
             />
           </div>
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-6 sm:grid-cols-2">
             <div className="relative">
               <input
                 required
