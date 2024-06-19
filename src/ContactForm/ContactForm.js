@@ -3,12 +3,12 @@ import Header from "../NavBar/Header";
 
 const ContactForm = () => {
   return (
-    <div className="flex justify-center items-center h-screen bg-gradient-to-r from-gray-100 to-gray-300 mt-20">
+    <div className="flex justify-center items-center h-screen bg-gradient-to-r from-white-100 to-gray-500 mt-18">
       <Header isBlue={true} />
       <div className="rounded-lg p-8 max-w-2xl w-full bg-transparent">
         <div className="text-center mb-6">
           <img
-            src="https://pbs.twimg.com/profile_images/1246659738600783872/MsVt4gB0_400x400.jpg"
+            src="https://solucione.com.mx/corporativo/wp-content/uploads/2020/04/cropped-solucione-logo-color-512x512-1.png"
             className="w-32 mx-auto"
             alt="logo"
           />
@@ -19,21 +19,25 @@ const ContactForm = () => {
         <form className="space-y-6">
           <div className="grid gap-6 md:grid-cols-2">
             <input
+              required
               type="text"
               className="block w-full px-4 py-2 text-sm border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none black-placeholder"
               placeholder="Nombre(s)"
             />
             <input
+              required
               type="text"
               className="block w-full px-4 py-2 text-sm border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none"
               placeholder="Apellido(s)"
             />
             <input
+              required
               type="text"
               className="block w-full px-4 py-2 text-sm border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none"
               placeholder="País"
             />
             <input
+              required
               type="text"
               className="block w-full px-4 py-2 text-sm border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none"
               placeholder="Código Postal"
@@ -41,12 +45,14 @@ const ContactForm = () => {
           </div>
           <div className="grid gap-6 md:grid-cols-2">
             <input
+              required
               type="number"
               className="w-28 px-4 py-2 text-sm border border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none rounded-r-md"
               placeholder="+ Lada"
             />
             <div className="relative flex items-center">
               <input
+                required
                 type="number"
                 className="block w-full px-4 py-2 text-sm border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none"
                 placeholder="Teléfono"
@@ -56,6 +62,7 @@ const ContactForm = () => {
           <div className="grid gap-6 md:grid-cols-2">
             <div className="relative">
               <input
+                required
                 type="email"
                 className="block w-full px-4 py-2 text-sm border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none"
                 placeholder="Correo Electrónico"
@@ -64,6 +71,7 @@ const ContactForm = () => {
           </div>
           <div className="relative">
             <input
+              required
               type="text"
               className="block w-full px-4 py-2 text-sm border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none"
               placeholder="Nombre de la Ubicación o Vendedor Autorizado"
@@ -72,12 +80,14 @@ const ContactForm = () => {
           <div className="grid gap-6 md:grid-cols-2">
             <div className="relative">
               <input
+                required
                 type="date"
                 className="block w-full px-4 py-2 text-sm border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none"
               />
             </div>
             <div className="relative">
               <input
+                required
                 type="time"
                 className="block w-full px-4 py-2 text-sm border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none"
               />
@@ -90,7 +100,7 @@ const ContactForm = () => {
             </label>
             <div className="flex items-center justify-center mt-2">
               <label className="mr-4">
-                <input
+                <input required
                   type="radio"
                   name="additionalInfo"
                   className="mr-2"
@@ -98,13 +108,13 @@ const ContactForm = () => {
                 Sí
               </label>
               <label>
-                <input type="radio" name="additionalInfo" className="mr-2" />
+                <input required type="radio" name="additionalInfo" className="mr-2" />
                 No
               </label>
             </div>
           </div>
           <div className="relative">
-            <label className="block text-sm text-gray-700">
+            <label required className="block text-sm text-gray-700">
               <strong>Aceptar los términos y condiciones</strong>
             </label>
             <p className="text-sm text-gray-600 mb-2">
@@ -115,6 +125,7 @@ const ContactForm = () => {
             </p>
             <div className="flex items-start mb-2">
               <input
+                required
                 type="checkbox"
                 className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
               />
@@ -127,6 +138,7 @@ const ContactForm = () => {
             </div>
             <div className="flex items-start mb-2">
               <input
+                required
                 type="checkbox"
                 className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
               />
