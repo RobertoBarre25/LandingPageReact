@@ -11,7 +11,7 @@ const images = [
     {
         src: 'https://images.pexels.com/photos/5935794/pexels-photo-5935794.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
         text: (
-            <div className="carouselText">
+            <div className="carouselText select-text">
                 <h1 className="primerTitulo">
                     Antivirus<span className="cloudText">Cloud</span>
                 </h1>
@@ -24,14 +24,15 @@ const images = [
                     ofrece defensa en tiempo real contra malware, impulsada por la tecnología más avanzada en la nube.
                      No permitas que las amenazas cibernéticas pongan en riesgo tu negocio. 
                     ¡Con AntivirusCloud, mantén tus datos seguros y enfócate en lo que mejor sabes hacer!</h3>
-                <Link to="/contact">
-                    <button className="botonServiciosAzul">
+
+                    <Link to="/contact">
+                    <button className="bg-blue-500 border-2 border-white text-white border-none text-lg md:text-xl py-3 md:py-4 px-6 md:px-10 cursor-pointer m-3 md:m-5 rounded-[3px] hover:bg-red-500">
                         Contrata ya!
                     </button>
-                </Link>
-                <button className="botonServiciosTransparente" onClick={scroll.scrollToBottom}>
-                    Conoce más!
-                </button>
+                    </Link>
+                    <button className="border-2 border-white text-white text-lg md:text-xl py-3 md:py-4 px-6 md:px-10 cursor-pointer m-3 md:m-5 rounded-[3px] hover:bg-white hover:bg-opacity-10" onClick={scroll.scrollToBottom}>
+                        Conoce más!
+                    </button>
             </div>
         )
     },
@@ -49,11 +50,11 @@ const images = [
                      ¡Confía en CyberSecure y mantén tu negocio a salvo!.
                 </h3>
                 <Link to="/contact">
-                    <button className="botonServiciosAzul">
+                    <button className="bg-blue-500  border-2 border-white text-white border-none text-lg md:text-xl py-3 md:py-4 px-6 md:px-10 cursor-pointer m-3 md:m-5 rounded-[3px] hover:bg-red-500">
                         Contrata ya!
                     </button>
                 </Link>
-                <button className="botonServiciosTransparente" onClick={scroll.scrollToBottom}>
+                <button className="border-2 border-white text-white text-lg md:text-xl py-3 md:py-4 px-6 md:px-10 cursor-pointer m-3 md:m-5 rounded-[3px] hover:bg-white hover:bg-opacity-10" onClick={scroll.scrollToBottom}>
                     Conoce más!
                 </button>
             </div>
@@ -74,11 +75,11 @@ const images = [
 
                 </h3>
                 <Link to="/contact">
-                    <button className="botonServiciosAzul">
+                    <button className="bg-blue-500  border-2 border-white text-white border-none text-lg md:text-xl py-3 md:py-4 px-6 md:px-10 cursor-pointer m-3 md:m-5 rounded-[3px] hover:bg-red-500">
                         Contrata ya!
                     </button>
                 </Link>
-                <button className="botonServiciosTransparente" onClick={scroll.scrollToBottom}>
+                <button className="border-2 border-white text-white text-lg md:text-xl py-3 md:py-4 px-6 md:px-10 cursor-pointer m-3 md:m-5 rounded-[3px] hover:bg-white hover:bg-opacity-10" onClick={scroll.scrollToBottom}>
                     Conoce más!
                 </button>
             </div>
