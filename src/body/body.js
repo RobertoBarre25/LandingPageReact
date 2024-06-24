@@ -3,9 +3,16 @@ import './body.css';
 import HorizontalCard from '../CardShadow/HorizontalCard';
 import Carousel from '../Carousel/carousel';
 import Cards from '../CardsSer/cards'; // Ensure the import is correct
-import { animateScroll as scroll } from 'react-scroll';
 import ImageSection from '../ImageSection/ImgSection';
 import { Link } from 'react-router-dom';
+
+const scrollToMiddle = () => {
+    const targetPosition = window.innerHeight * 1.5;
+    window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
+    });
+};
 
 const images = [
     {
@@ -17,21 +24,27 @@ const images = [
                 </h1>
                 <h2 className="textoSecundario">
                  ! <span className="cloudTextTwo">Proteccion </span> Empresarial de <span className="cloudTextTwo">Ultima </span> Generacion¡
+
                     </h2>
 
                 <h3 className="textoTerceario">¡Protege tu empresa como nunca antes! Nuestro AntivirusCloud 
-                    ofrece defensa en tiempo real contra malware, impulsada por la tecnología más avanzada en la nube.
-                     No permitas que las amenazas cibernéticas pongan en riesgo tu negocio. 
-                    ¡Con AntivirusCloud, mantén tus datos seguros y enfócate en lo que mejor sabes hacer!</h3>
 
-                    <Link to="/contact">
+                </h3>
+                <h3 className="textoTerceario">
+                    ¡Protege tu empresa como nunca antes! Nuestro AntivirusCloud 
+
+                    ofrece defensa en tiempo real contra malware, impulsada por la tecnología más avanzada en la nube.
+                    No permitas que las amenazas cibernéticas pongan en riesgo tu negocio. 
+                    ¡Con AntivirusCloud, mantén tus datos seguros y enfócate en lo que mejor sabes hacer!
+                </h3>
+                <Link to="/contact">
                     <button className="bg-blue-500 border-2 border-white text-white border-none text-lg md:text-xl py-3 md:py-4 px-6 md:px-10 cursor-pointer m-3 md:m-5 rounded-[3px] hover:bg-red-500">
                         Contrata ya!
                     </button>
-                    </Link>
-                    <button className="border-2 border-white text-white text-lg md:text-xl py-3 md:py-4 px-6 md:px-10 cursor-pointer m-3 md:m-5 rounded-[3px] hover:bg-white hover:bg-opacity-10" onClick={scroll.scrollToBottom}>
-                        Conoce más!
-                    </button>
+                </Link>
+                <button className="border-2 border-white text-white text-lg md:text-xl py-3 md:py-4 px-6 md:px-10 cursor-pointer m-3 md:m-5 rounded-[3px] hover:bg-white hover:bg-opacity-10" onClick={scrollToMiddle}>
+                    Conoce más!
+                </button>
             </div>
         )
     },
@@ -43,17 +56,18 @@ const images = [
                     Cyber<span className="cloudText">Secure</span>
                 </h1>
                 <h2 className="textoSecundario">¡La <span className="cloudTextTwo">Mejor Defensa </span> Contra Amenazas Cibernéticas!</h2>
-                <h3 className="textoTerceario">¡Protege tu empresa al máximo! Con CyberSecure, obtén protección integral
-                     contra todas las amenazas cibernéticas. Nuestra solución ofrece una defensa proactiva que garantiza la seguridad
-                      de tu red empresarial. No dejes que los ciberataques amenacen tu éxito.
-                     ¡Confía en CyberSecure y mantén tu negocio a salvo!.
+                <h3 className="textoTerceario">
+                    ¡Protege tu empresa al máximo! Con CyberSecure, obtén protección integral
+                    contra todas las amenazas cibernéticas. Nuestra solución ofrece una defensa proactiva que garantiza la seguridad
+                    de tu red empresarial. No dejes que los ciberataques amenacen tu éxito.
+                    ¡Confía en CyberSecure y mantén tu negocio a salvo!
                 </h3>
                 <Link to="/contact">
                     <button className="bg-blue-500  border-2 border-white text-white border-none text-lg md:text-xl py-3 md:py-4 px-6 md:px-10 cursor-pointer m-3 md:m-5 rounded-[3px] hover:bg-red-500">
                         Contrata ya!
                     </button>
                 </Link>
-                <button className="border-2 border-white text-white text-lg md:text-xl py-3 md:py-4 px-6 md:px-10 cursor-pointer m-3 md:m-5 rounded-[3px] hover:bg-white hover:bg-opacity-10" onClick={scroll.scrollToBottom}>
+                <button className="border-2 border-white text-white text-lg md:text-xl py-3 md:py-4 px-6 md:px-10 cursor-pointer m-3 md:m-5 rounded-[3px] hover:bg-white hover:bg-opacity-10" onClick={scrollToMiddle}>
                     Conoce más!
                 </button>
             </div>
@@ -67,18 +81,18 @@ const images = [
                     Cloud<span className="cloudText">Guard</span>
                 </h1>
                 <h2 className="textoSecundario">¡Seguridad y <span className="cloudTextTwo">Eficiencia </span> en la nube!</h2>
-                <h3 className="textoTerceario">¡Protege y optimiza tus datos como nunca antes! Con CloudGuard,
-                     disfruta de monitoreo continuo y protección avanzada para todos tus datos en la nube. 
-                     No dejes que las amenazas cibernéticas te tomen por sorpresa. 
+                <h3 className="textoTerceario">
+                    ¡Protege y optimiza tus datos como nunca antes! Con CloudGuard,
+                    disfruta de monitoreo continuo y protección avanzada para todos tus datos en la nube. 
+                    No dejes que las amenazas cibernéticas te tomen por sorpresa. 
                     ¡Confía en CloudGuard y mantén tu información segura y eficiente en todo momento!
-
                 </h3>
                 <Link to="/contact">
                     <button className="bg-blue-500  border-2 border-white text-white border-none text-lg md:text-xl py-3 md:py-4 px-6 md:px-10 cursor-pointer m-3 md:m-5 rounded-[3px] hover:bg-red-500">
                         Contrata ya!
                     </button>
                 </Link>
-                <button className="border-2 border-white text-white text-lg md:text-xl py-3 md:py-4 px-6 md:px-10 cursor-pointer m-3 md:m-5 rounded-[3px] hover:bg-white hover:bg-opacity-10" onClick={scroll.scrollToBottom}>
+                <button className="border-2 border-white text-white text-lg md:text-xl py-3 md:py-4 px-6 md:px-10 cursor-pointer m-3 md:m-5 rounded-[3px] hover:bg-white hover:bg-opacity-10" onClick={scrollToMiddle}>
                     Conoce más!
                 </button>
             </div>
