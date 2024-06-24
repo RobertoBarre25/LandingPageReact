@@ -11,13 +11,12 @@ const images = [
     {
         src: 'https://images.pexels.com/photos/5935794/pexels-photo-5935794.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
         text: (
-            <div className="carouselText select-text">
+            <div className="carouselText">
                 <h1 className="primerTitulo">
                     Antivirus<span className="cloudText">Cloud</span>
                 </h1>
                 <h2 className="textoSecundario">
                  ! <span className="cloudTextTwo">Proteccion </span> Empresarial de <span className="cloudTextTwo">Ultima </span> Generacion¡
-            
                     </h2>
 
                 <h3 className="textoTerceario">¡Protege tu empresa como nunca antes! Nuestro AntivirusCloud 
