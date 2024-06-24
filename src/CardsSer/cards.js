@@ -32,6 +32,16 @@ const cardsData = [
 const Cards = () => {
     const navigate = useNavigate();
 
+    const handleButtonClick = () => {
+        navigate('/contact', { replace: true });
+        setTimeout(() => {
+            const formElement = document.getElementById('contact-form');
+            if (formElement) {
+                formElement.scrollIntoView({ behavior: 'smooth' });
+            }
+        }, 100); // Espera un breve momento para asegurar que la navegación se complete
+    };
+
     return (
         <div className="mx-4 md:mx-12 lg:mx-20">
             <div className="grid grid-cols-2 gap-0">
@@ -46,7 +56,7 @@ const Cards = () => {
                                 <div className="text-center">
                                     <h3 className="text-xl mb-2.5">{card.title}</h3>
                                     <p className="text-base mb-3.75">{card.description}</p>
-                                    <button className="bg-blue-500 text-white py-2.5 px-5 border-none cursor-pointer transition-colors duration-300 ease-in-out uppercase rounded-md hover:bg-blue-700" onClick={() => navigate('/contact')}>{card.buttonText}</button>
+                                    <button className="bg-blue-500 text-white py-2.5 px-5 border-none cursor-pointer transition-colors duration-300 ease-in-out uppercase rounded-md hover:bg-blue-700" onClick={handleButtonClick}>{card.buttonText}</button>
                                 </div>
                             </div>
                         </div>

@@ -3,7 +3,7 @@ import Header from "../NavBar/Header";
 
 const ContactForm = () => {
   return (
-    <div className="flex flex-col justify-center items-center min-h-screen bg-gradient-to-r from-white-100 to-gray-500 py-10 px-4 sm:px-6 lg:px-8">
+    <div id="contact-form" className="flex flex-col justify-center items-center min-h-screen bg-gradient-to-r from-white-100 to-gray-500 py-10 px-4 sm:px-6 lg:px-8">
       <Header isBlue={true} />
       <div className="rounded-lg p-8 max-w-2xl w-full bg-transparent">
         <div className="text-center mb-6">
@@ -69,14 +69,7 @@ const ContactForm = () => {
               />
             </div>
           </div>
-          <div className="relative">
-            <input
-              required
-              type="text"
-              className="block w-full px-4 py-2 text-sm border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none"
-              placeholder="Nombre de la Ubicación o Vendedor Autorizado"
-            />
-          </div>
+          
           <div className="grid gap-6 sm:grid-cols-2">
             <div className="relative">
               <input
