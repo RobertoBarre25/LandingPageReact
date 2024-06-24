@@ -7,7 +7,7 @@ import ImageSection from '../ImageSection/ImgSection';
 import { Link } from 'react-router-dom';
 
 const scrollToMiddle = () => {
-    const targetPosition = window.innerHeight * 1.5;
+    const targetPosition = window.innerHeight * 1.8;
     window.scrollTo({
         top: targetPosition,
         behavior: 'smooth'
@@ -19,18 +19,16 @@ const images = [
         src: 'https://images.pexels.com/photos/5935794/pexels-photo-5935794.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
         text: (
             <div className="carouselText">
-                <h1 className="primerTitulo">
+                <h1 className="firstText">
                     Antivirus<span className="cloudText">Cloud</span>
                 </h1>
-                <h2 className="textoSecundario">
+                <h2 className="secondText">
                  ! <span className="cloudTextTwo">Proteccion </span> Empresarial de <span className="cloudTextTwo">Ultima </span> Generacion¡
 
                     </h2>
 
-                <h3 className="textoTerceario">¡Protege tu empresa como nunca antes! Nuestro AntivirusCloud 
-
-                </h3>
-                <h3 className="textoTerceario">
+             
+                <h3 className="thirdText">
                     ¡Protege tu empresa como nunca antes! Nuestro AntivirusCloud 
 
                     ofrece defensa en tiempo real contra malware, impulsada por la tecnología más avanzada en la nube.
@@ -52,11 +50,11 @@ const images = [
         src: 'https://news-assets.onvista.com/9/21/ecc00f57c050caa04fb8e379c175894b2b979748ff531742c1213625c05bc610.jpg',
         text: (
             <div className="carouselText">
-                <h1 className="primerTitulo">
+                <h1 className="firstText">
                     Cyber<span className="cloudText">Secure</span>
                 </h1>
-                <h2 className="textoSecundario">¡La <span className="cloudTextTwo">Mejor Defensa </span> Contra Amenazas Cibernéticas!</h2>
-                <h3 className="textoTerceario">
+                <h2 className="secondText">¡La <span className="cloudTextTwo">Mejor Defensa </span> Contra Amenazas Cibernéticas!</h2>
+                <h3 className="thirdText">
                     ¡Protege tu empresa al máximo! Con CyberSecure, obtén protección integral
                     contra todas las amenazas cibernéticas. Nuestra solución ofrece una defensa proactiva que garantiza la seguridad
                     de tu red empresarial. No dejes que los ciberataques amenacen tu éxito.
@@ -77,11 +75,11 @@ const images = [
         src: 'https://img.jakpost.net/c/2022/04/01/2022_04_01_124204_1648793484._large.jpg',
         text: (
             <div className="carouselText">
-                <h1 className="primerTitulo">
+                <h1 className="firstText">
                     Cloud<span className="cloudText">Guard</span>
                 </h1>
-                <h2 className="textoSecundario">¡Seguridad y <span className="cloudTextTwo">Eficiencia </span> en la nube!</h2>
-                <h3 className="textoTerceario">
+                <h2 className="secondText">¡Seguridad y <span className="cloudTextTwo">Eficiencia </span> en la nube!</h2>
+                <h3 className="thirdText">
                     ¡Protege y optimiza tus datos como nunca antes! Con CloudGuard,
                     disfruta de monitoreo continuo y protección avanzada para todos tus datos en la nube. 
                     No dejes que las amenazas cibernéticas te tomen por sorpresa. 
@@ -107,9 +105,8 @@ const Body = () => {
                 <Carousel images={images} />
             </div>
             <HorizontalCard
-                imageSrc="https://fundacioncarlosslim.org/wp-content/uploads/2016/11/redes-de-datos.jpg"
-                title="Mantente Seguro en todo momento"
-                description="Diseñado para proteger tu comunicación con soluciones avanzadas de seguridad de correo electrónico, filtrado inteligente de amenazas y defensa de primer nivel. Somos tecnología de vanguardia para un futuro seguro."
+                imgSrc='publicidad.png'
+              
             />
             <Cards />
             <ImageSection />

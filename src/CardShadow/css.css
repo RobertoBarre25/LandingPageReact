@@ -1,0 +1,11 @@
+.Image{
+ position: absolute;
+ top: 5%;
+ left: 0%;
+    width: 1900px;
+    height: 590px;
+}
+
+p{
+    font-size: 25px;
+}

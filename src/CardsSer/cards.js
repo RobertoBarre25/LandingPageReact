@@ -22,7 +22,7 @@ const cardsData = [
         buttonText: 'Descubrir'
     },
     {
-        imgSrc: 'https://lh3.googleusercontent.com/proxy/o7XhzmquUmwze9Qb1LEuHF457_1umUXCGvM_fpvHKqv40YWnrgvdbk1bH8Y0ZSDmS4ryfMwaXECIAYVpWA2MYuZUxMVfdC7qnHnktvCFGX7KfA4m_P9UlGFLE6nsG-ZfXZ6qokdtAPnLHjbUTpa8xrLfdnfTqBS-OVw',
+        imgSrc: 'card.png',
         title: 'Protección de correo electrónico',
         description: 'Defiende tu bandeja de entrada contra amenazas y fraudes con seguridad avanzada',
         buttonText: 'Obtener Información'
