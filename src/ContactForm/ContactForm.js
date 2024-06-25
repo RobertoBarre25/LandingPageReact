@@ -1,12 +1,38 @@
-import React from "react";
-import Header from "../NavBar/Header";
+import React, { useState } from 'react';
+import axios from 'axios';
+import Header from '../NavBar/Header';
 
 const ContactForm = () => {
+  const [formData, setFormData] = useState({
+    nombre: '',
+    apellido: '',
+    direccion: '',
+    email: '',
+    lada: '',
+    telefono: '',
+    fecha: '',
+    hora: '',
+    additionalInfo: '',
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post('http://localhost:5000/send-email', formData);
+      alert('Correo enviado exitosamente');
+    } catch (error) {
+      console.error('Error al enviar el correo:', error);
+      alert('Hubo un error al enviar el correo');
+    }
+  };
+
   return (
-    <div
-      id="contact-form"
-      className="flex flex-col justify-center items-center min-h-screen bg-gradient-to-r from-white-100 to-gray-500 py-10 px-4 sm:px-6 lg:px-8"
-    >
+    <div id="contact-form" className="flex flex-col justify-center items-center min-h-screen bg-gradient-to-r from-white-100 to-gray-500 py-10 px-4 sm:px-6 lg:px-8">
       <Header isBlue={true} />
       <div className="rounded-lg p-8 max-w-2xl w-full bg-transparent">
         <div className="text-center mb-6">
@@ -17,31 +43,43 @@ const ContactForm = () => {
           />
           <h2 className="text-2xl font-bold">Solicitar Información del Servicio</h2>
         </div>
-        <form className="space-y-6">
+        <form className="space-y-6" onSubmit={handleSubmit}>
           <div className="grid gap-6 sm:grid-cols-2">
             <input
               required
               type="text"
               className="block w-full px-4 py-2 text-sm text-black border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none black-placeholder"
               placeholder="Nombre"
+              name="nombre"
+              value={formData.nombre}
+              onChange={handleChange}
             />
             <input
               required
               type="text"
               className="textColor-black block w-full px-4 py-2 text-sm text-black border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none"
               placeholder="Apellido"
+              name="apellido"
+              value={formData.apellido}
+              onChange={handleChange}
             />
             <input
               required
               type="text"
               className="block w-full px-4 py-2 text-sm text-black border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none"
               placeholder="Dirección"
+              name="direccion"
+              value={formData.direccion}
+              onChange={handleChange}
             />
             <input
               required
               type="email"
               className="block w-full px-4 py-2 text-sm text-black border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none"
               placeholder="Correo Electrónico"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
             />
           </div>
           <div className="grid gap-6 sm:grid-cols-2">
@@ -50,6 +88,9 @@ const ContactForm = () => {
               type="number"
               className="w-full px-4 py-2 text-sm text-black border border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none rounded-md sm:w-28"
               placeholder="+ Lada"
+              name="lada"
+              value={formData.lada}
+              onChange={handleChange}
             />
             <div className="relative flex items-center">
               <input
@@ -57,6 +98,9 @@ const ContactForm = () => {
                 type="number"
                 className="block w-full px-4 py-2 text-sm text-black border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none"
                 placeholder="Teléfono"
+                name="telefono"
+                value={formData.telefono}
+                onChange={handleChange}
               />
             </div>
           </div>
@@ -66,6 +110,9 @@ const ContactForm = () => {
                 required
                 type="date"
                 className="block w-full px-4 py-2 text-sm text-black border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none"
+                name="fecha"
+                value={formData.fecha}
+                onChange={handleChange}
               />
             </div>
             <div className="relative">
@@ -73,6 +120,9 @@ const ContactForm = () => {
                 required
                 type="time"
                 className="block w-full px-4 py-2 text-sm text-black border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none"
+                name="hora"
+                value={formData.hora}
+                onChange={handleChange}
               />
             </div>
           </div>
@@ -87,6 +137,8 @@ const ContactForm = () => {
                   type="radio"
                   name="additionalInfo"
                   className="mr-2"
+                  value="Sí"
+                  onChange={handleChange}
                 />
                 Sí
               </label>
@@ -96,6 +148,8 @@ const ContactForm = () => {
                   type="radio"
                   name="additionalInfo"
                   className="mr-2"
+                  value="No"
+                  onChange={handleChange}
                 />
                 No
               </label>
