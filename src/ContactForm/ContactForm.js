@@ -56,6 +56,18 @@ const ContactForm = () => {
     try {
       await axios.post("http://localhost:5000/send-email", formData);
       alert("Correo enviado exitosamente");
+      setFormData({
+        nombre: "",
+        apellido: "",
+        direccion: "",
+        email: "",
+        lada: "",
+        telefono: "",
+        fecha: "",
+        hora: "",
+        additionalInfo: "",
+      });
+      window.location.reload(); // Refrescar la página
     } catch (error) {
       console.error("Error al enviar el correo:", error);
       alert("Hubo un error al enviar el correo");
