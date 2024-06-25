@@ -1,9 +1,9 @@
 .carouselText {
-  @apply absolute top-1/2 left-10 transform -translate-y-1/2 text-left text-white p-5 rounded-lg w-full md:w-4/5;
+  @apply absolute top-1/2 left-20 transform -translate-y-1/2 text-left text-white p-5 rounded-lg w-full md:w-4/5;
 }
 
-.primerTitulo {
-  @apply text-3xl md:text-6xl;
+.firstText {
+  @apply text-3xl md:text-8xl;
 }
 
 .cloudText {
@@ -13,12 +13,12 @@
 .cloudTextTwo {
   @apply text-red-400;
 }
-.textoSecundario {
+.secondText {
   @apply text-lg md:text-3xl;
 }
 
-.textoTerceario {
-  @apply text-base md:text-xl text-gray-400 text-gray-300;
+.thirdText {
+  @apply text-base md:text-xl text-gray-400 text-gray-300 w-[800px] ;
 }
 
 

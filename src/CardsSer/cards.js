@@ -22,7 +22,7 @@ const cardsData = [
         buttonText: 'Descubrir'
     },  
     {
-        imgSrc: 'https://lh3.googleusercontent.com/proxy/o7XhzmquUmwze9Qb1LEuHF457_1umUXCGvM_fpvHKqv40YWnrgvdbk1bH8Y0ZSDmS4ryfMwaXECIAYVpWA2MYuZUxMVfdC7qnHnktvCFGX7KfA4m_P9UlGFLE6nsG-ZfXZ6qokdtAPnLHjbUTpa8xrLfdnfTqBS-OVw',
+        imgSrc: 'card.png',
         title: 'Protección de correo electrónico',
         description: 'Defiende tu bandeja de entrada contra amenazas y fraudes con seguridad avanzada',
         buttonText: 'Obtener Información'
@@ -31,6 +31,16 @@ const cardsData = [
 
 const Cards = () => {
     const navigate = useNavigate();
+
+    const handleButtonClick = () => {
+        navigate('/contact', { replace: true });
+        setTimeout(() => {
+            const formElement = document.getElementById('contact-form');
+            if (formElement) {
+                formElement.scrollIntoView({ behavior: 'smooth' });
+            }
+        }, 100); // Espera un breve momento para asegurar que la navegación se complete
+    };
 
     return (
         <div className="mx-4 md:mx-12 lg:mx-20">
@@ -46,7 +56,7 @@ const Cards = () => {
                                 <div className="text-center">
                                     <h3 className="text-xl mb-2.5">{card.title}</h3>
                                     <p className="text-base mb-3.75">{card.description}</p>
-                                    <button className="bg-blue-500 text-white py-2.5 px-5 border-none cursor-pointer transition-colors duration-300 ease-in-out uppercase rounded-md hover:bg-blue-700" onClick={() => navigate('/contact')}>{card.buttonText}</button>
+                                    <button className="bg-blue-500 text-white py-2.5 px-5 border-none cursor-pointer transition-colors duration-300 ease-in-out uppercase rounded-md hover:bg-blue-700" onClick={handleButtonClick}>{card.buttonText}</button>
                                 </div>
                             </div>
                         </div>

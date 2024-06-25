@@ -1,9 +1,84 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import Header from "../NavBar/Header";
 
+const isValidInput = (value) => {
+  return /^[a-zA-Z0-9\s]+$/.test(value); // Allow spaces as well
+};
+
 const ContactForm = () => {
+  const [formData, setFormData] = useState({
+    nombre: "",
+    apellido: "",
+    direccion: "",
+    email: "",
+    lada: "",
+    telefono: "",
+    fecha: "",
+    hora: "",
+    additionalInfo: "",
+  });
+
+  const [errors, setErrors] = useState({
+    nombre: null,
+    apellido: null,
+    direccion: null,
+    lada: null,
+    telefono: null,
+  });
+
+  useEffect(() => {
+    const currentDateObj = new Date();
+    const formattedDate = currentDateObj.toISOString().substr(0, 10); // YYYY-MM-DD
+    const formattedTime = currentDateObj.toTimeString().substr(0, 5); // HH:MM (24-hour format)
+
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      fecha: formattedDate,
+      hora: formattedTime,
+    }));
+  }, []);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    let error = null;
+    if (name !== "direccion" && !isValidInput(value)) {
+      error = "No debe contener caracteres especiales ni espacios en blanco.";
+    } else if (name === "direccion" && !/^[a-zA-Z0-9\s]+$/.test(value)) {
+      error = "No debe contener caracteres especiales.";
+    }
+    setErrors({ ...errors, [name]: error });
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post("http://localhost:5000/send-email", formData);
+      alert("Correo enviado exitosamente");
+      setFormData({
+        nombre: "",
+        apellido: "",
+        direccion: "",
+        email: "",
+        lada: "",
+        telefono: "",
+        fecha: "",
+        hora: "",
+        additionalInfo: "",
+      });
+      window.location.reload(); // Refrescar la página
+    } catch (error) {
+      console.error("Error al enviar el correo:", error);
+      alert("Hubo un error al enviar el correo");
+    }
+  };
+
   return (
-    <div className="flex flex-col justify-center items-center min-h-screen bg-gradient-to-r from-white-100 to-gray-500 py-10 px-4 sm:px-6 lg:px-8">
+    <div
+      id="contact-form"
+      className="flex flex-col justify-center items-center min-h-screen bg-gradient-to-r from-white-100 to-gray-500 py-10 px-4 sm:px-6 lg:px-8"
+    >
       <Header isBlue={true} />
       <div className="rounded-lg p-8 max-w-2xl w-full bg-transparent">
         <div className="text-center mb-6">
@@ -12,50 +87,61 @@ const ContactForm = () => {
             className="w-32 mx-auto"
             alt="logo"
           />
-          <h2 className="text-2xl font-bold">
-            Solicitar Información del Servicio
-          </h2>
+          <h2 className="text-2xl font-bold">Solicitar Información del Servicio</h2>
         </div>
-        <form className="space-y-6">
+        <form className="space-y-6" onSubmit={handleSubmit}>
           <div className="grid gap-6 sm:grid-cols-2">
-            <input
-              required
-              type="text"
-              className="block w-full px-4 py-2 text-sm border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none black-placeholder"
-              placeholder="Nombre(s)"
-            />
-            <input
-              required
-              type="text"
-              className="block w-full px-4 py-2 text-sm border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none"
-              placeholder="Apellido(s)"
-            />
-            <input
-              required
-              type="text"
-              className="block w-full px-4 py-2 text-sm border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none"
-              placeholder="País"
-            />
-            <input
-              required
-              type="text"
-              className="block w-full px-4 py-2 text-sm border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none"
-              placeholder="Código Postal"
-            />
-          </div>
-          <div className="grid gap-6 sm:grid-cols-2">
-            <input
-              required
-              type="number"
-              className="w-full px-4 py-2 text-sm border border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none rounded-md sm:w-28"
-              placeholder="+ Lada"
-            />
-            <div className="relative flex items-center">
+            <div className="relative">
               <input
                 required
-                type="number"
-                className="block w-full px-4 py-2 text-sm border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none"
-                placeholder="Teléfono"
+                type="text"
+                className="block w-full px-4 py-2 text-sm text-black border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none black-placeholder"
+                placeholder="Nombre"
+                name="nombre"
+                value={formData.nombre}
+                onChange={handleChange}
+              />
+              {errors.nombre && (
+                <p className="text-red-500 text-sm mt-1">{errors.nombre}</p>
+              )}
+            </div>
+            <div className="relative">
+              <input
+                required
+                type="text"
+                className="textColor-black block w-full px-4 py-2 text-sm text-black border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none"
+                placeholder="Apellido"
+                name="apellido"
+                value={formData.apellido}
+                onChange={handleChange}
+              />
+              {errors.apellido && (
+                <p className="text-red-500 text-sm mt-1">{errors.apellido}</p>
+              )}
+            </div>
+            <div className="relative">
+              <input
+                required
+                type="text"
+                className="block w-full px-4 py-2 text-sm text-black border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none"
+                placeholder="Dirección"
+                name="direccion"
+                value={formData.direccion}
+                onChange={handleChange}
+              />
+              {errors.direccion && (
+                <p className="text-red-500 text-sm mt-1">{errors.direccion}</p>
+              )}
+            </div>
+            <div className="relative">
+              <input
+                required
+                type="email"
+                className="block w-full px-4 py-2 text-sm text-black border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none"
+                placeholder="Correo Electrónico"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
               />
             </div>
           </div>
@@ -63,90 +149,81 @@ const ContactForm = () => {
             <div className="relative">
               <input
                 required
-                type="email"
-                className="block w-full px-4 py-2 text-sm border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none"
-                placeholder="Correo Electrónico"
+                type="number"
+                className="w-full px-4 py-2 text-sm text-black border border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none rounded-md sm:w-28"
+                placeholder="+ Lada"
+                name="lada"
+                value={formData.lada}
+                onChange={handleChange}
               />
+              {errors.lada && (
+                <p className="text-red-500 text-sm mt-1">{errors.lada}</p>
+              )}
             </div>
-          </div>
-          <div className="relative">
-            <input
-              required
-              type="text"
-              className="block w-full px-4 py-2 text-sm border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none"
-              placeholder="Nombre de la Ubicación o Vendedor Autorizado"
-            />
+            <div className="relative flex items-center">
+              <input
+                required
+                type="number"
+                className="block w-full px-4 py-2 text-sm text-black border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none"
+                placeholder="Teléfono"
+                name="telefono"
+                value={formData.telefono}
+                onChange={handleChange}
+              />
+              {errors.telefono && (
+                <p className="text-red-500 text-sm mt-1">{errors.telefono}</p>
+              )}
+            </div>
           </div>
           <div className="grid gap-6 sm:grid-cols-2">
             <div className="relative">
               <input
                 required
                 type="date"
-                className="block w-full px-4 py-2 text-sm border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none"
+                className="block w-full px-4 py-2 text-sm text-black border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none"
+                name="fecha"
+                value={formData.fecha}
+                onChange={handleChange}
               />
             </div>
             <div className="relative">
               <input
                 required
                 type="time"
-                className="block w-full px-4 py-2 text-sm border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none"
+                className="block w-full px-4 py-2 text-sm text-black border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none"
+                name="hora"
+                value={formData.hora}
+                onChange={handleChange}
               />
             </div>
           </div>
           <div className="relative">
             <label className="block text-sm text-gray-700">
-              ¿Deseas ofrecernos información adicional para ayudarnos a
-              conocerte mejor?
+              ¿Deseas ofrecernos información adicional para ayudarnos a conocerte mejor?
             </label>
             <div className="flex items-center justify-center mt-2">
               <label className="mr-4">
-                <input required
+                <input
+                  required
                   type="radio"
                   name="additionalInfo"
                   className="mr-2"
+                  value="Sí"
+                  onChange={handleChange}
                 />
                 Sí
               </label>
               <label>
-                <input required type="radio" name="additionalInfo" className="mr-2" />
+                <input
+                  required
+                  type="radio"
+                  name="additionalInfo"
+                  className="mr-2"
+                  value="No"
+                  onChange={handleChange}
+                />
                 No
               </label>
-            </div>
-          </div>
-          <div className="relative">
-            <label required className="block text-sm text-gray-700">
-              <strong>Aceptar los términos y condiciones</strong>
-            </label>
-            <p className="text-sm text-gray-600 mb-2">
-              Antes de continuar, le rogamos leer nuestra nota informativa sobre
-              la privacidad. Después de haber leído y entendido la nota
-              informativa sobre la privacidad, autorizo el tratamiento de mis
-              datos personales por parte de Grupo Alternativas y Solucione:
-            </p>
-            <div className="flex items-start mb-2">
-              <input
-                required
-                type="checkbox"
-                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-              />
-              <span className="ml-2 text-sm text-gray-700">
-                Para actividades de marketing mediante correo electrónico
-                (boletín informativo), teléfono, SMS, MMS, chat, banner en
-                nuestros sitios y aplicaciones, mensajería instantánea, redes
-                sociales y correo tradicional
-              </span>
-            </div>
-            <div className="flex items-start mb-2">
-              <input
-                required
-                type="checkbox"
-                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-              />
-              <span className="ml-2 text-sm text-gray-700">
-                Para la creación de perfiles, destinados a la personalización de
-                ofertas e iniciativas de acuerdo con mis intereses y
-                preferencias
-              </span>
             </div>
           </div>
           <div className="flex items-center justify-center">
@@ -156,6 +233,16 @@ const ContactForm = () => {
             >
               Enviar
             </button>
+          </div>
+          <div className="flex items-center justify-center mt-12">
+            <input
+              required
+              type="checkbox"
+              className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded mr-2"
+            />
+            <label className="block text-sm text-gray-600">
+              <strong>Aceptar los términos y condiciones</strong>
+            </label>
           </div>
         </form>
       </div>
