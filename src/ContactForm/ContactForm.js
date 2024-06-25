@@ -1,38 +1,72 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import Header from '../NavBar/Header';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Header from "../NavBar/Header";
+
+const isValidInput = (value) => {
+  return /^[a-zA-Z0-9\s]+$/.test(value); // Allow spaces as well
+};
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
-    nombre: '',
-    apellido: '',
-    direccion: '',
-    email: '',
-    lada: '',
-    telefono: '',
-    fecha: '',
-    hora: '',
-    additionalInfo: '',
+    nombre: "",
+    apellido: "",
+    direccion: "",
+    email: "",
+    lada: "",
+    telefono: "",
+    fecha: "",
+    hora: "",
+    additionalInfo: "",
   });
+
+  const [errors, setErrors] = useState({
+    nombre: null,
+    apellido: null,
+    direccion: null,
+    lada: null,
+    telefono: null,
+  });
+
+  useEffect(() => {
+    const currentDateObj = new Date();
+    const formattedDate = currentDateObj.toISOString().substr(0, 10); // YYYY-MM-DD
+    const formattedTime = currentDateObj.toTimeString().substr(0, 5); // HH:MM (24-hour format)
+
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      fecha: formattedDate,
+      hora: formattedTime,
+    }));
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    let error = null;
+    if (name !== "direccion" && !isValidInput(value)) {
+      error = "No debe contener caracteres especiales ni espacios en blanco.";
+    } else if (name === "direccion" && !/^[a-zA-Z0-9\s]+$/.test(value)) {
+      error = "No debe contener caracteres especiales.";
+    }
+    setErrors({ ...errors, [name]: error });
     setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/send-email', formData);
-      alert('Correo enviado exitosamente');
+      await axios.post("http://localhost:5000/send-email", formData);
+      alert("Correo enviado exitosamente");
     } catch (error) {
-      console.error('Error al enviar el correo:', error);
-      alert('Hubo un error al enviar el correo');
+      console.error("Error al enviar el correo:", error);
+      alert("Hubo un error al enviar el correo");
     }
   };
 
   return (
-    <div id="contact-form" className="flex flex-col justify-center items-center min-h-screen bg-gradient-to-r from-white-100 to-gray-500 py-10 px-4 sm:px-6 lg:px-8">
+    <div
+      id="contact-form"
+      className="flex flex-col justify-center items-center min-h-screen bg-gradient-to-r from-white-100 to-gray-500 py-10 px-4 sm:px-6 lg:px-8"
+    >
       <Header isBlue={true} />
       <div className="rounded-lg p-8 max-w-2xl w-full bg-transparent">
         <div className="text-center mb-6">
@@ -45,53 +79,75 @@ const ContactForm = () => {
         </div>
         <form className="space-y-6" onSubmit={handleSubmit}>
           <div className="grid gap-6 sm:grid-cols-2">
-            <input
-              required
-              type="text"
-              className="block w-full px-4 py-2 text-sm text-black border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none black-placeholder"
-              placeholder="Nombre"
-              name="nombre"
-              value={formData.nombre}
-              onChange={handleChange}
-            />
-            <input
-              required
-              type="text"
-              className="textColor-black block w-full px-4 py-2 text-sm text-black border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none"
-              placeholder="Apellido"
-              name="apellido"
-              value={formData.apellido}
-              onChange={handleChange}
-            />
-            <input
-              required
-              type="text"
-              className="block w-full px-4 py-2 text-sm text-black border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none"
-              placeholder="Dirección"
-              name="direccion"
-              value={formData.direccion}
-              onChange={handleChange}
-            />
-            <input
-              required
-              type="email"
-              className="block w-full px-4 py-2 text-sm text-black border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none"
-              placeholder="Correo Electrónico"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-            />
+            <div className="relative">
+              <input
+                required
+                type="text"
+                className="block w-full px-4 py-2 text-sm text-black border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none black-placeholder"
+                placeholder="Nombre"
+                name="nombre"
+                value={formData.nombre}
+                onChange={handleChange}
+              />
+              {errors.nombre && (
+                <p className="text-red-500 text-sm mt-1">{errors.nombre}</p>
+              )}
+            </div>
+            <div className="relative">
+              <input
+                required
+                type="text"
+                className="textColor-black block w-full px-4 py-2 text-sm text-black border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none"
+                placeholder="Apellido"
+                name="apellido"
+                value={formData.apellido}
+                onChange={handleChange}
+              />
+              {errors.apellido && (
+                <p className="text-red-500 text-sm mt-1">{errors.apellido}</p>
+              )}
+            </div>
+            <div className="relative">
+              <input
+                required
+                type="text"
+                className="block w-full px-4 py-2 text-sm text-black border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none"
+                placeholder="Dirección"
+                name="direccion"
+                value={formData.direccion}
+                onChange={handleChange}
+              />
+              {errors.direccion && (
+                <p className="text-red-500 text-sm mt-1">{errors.direccion}</p>
+              )}
+            </div>
+            <div className="relative">
+              <input
+                required
+                type="email"
+                className="block w-full px-4 py-2 text-sm text-black border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none"
+                placeholder="Correo Electrónico"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+              />
+            </div>
           </div>
           <div className="grid gap-6 sm:grid-cols-2">
-            <input
-              required
-              type="number"
-              className="w-full px-4 py-2 text-sm text-black border border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none rounded-md sm:w-28"
-              placeholder="+ Lada"
-              name="lada"
-              value={formData.lada}
-              onChange={handleChange}
-            />
+            <div className="relative">
+              <input
+                required
+                type="number"
+                className="w-full px-4 py-2 text-sm text-black border border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none rounded-md sm:w-28"
+                placeholder="+ Lada"
+                name="lada"
+                value={formData.lada}
+                onChange={handleChange}
+              />
+              {errors.lada && (
+                <p className="text-red-500 text-sm mt-1">{errors.lada}</p>
+              )}
+            </div>
             <div className="relative flex items-center">
               <input
                 required
@@ -102,6 +158,9 @@ const ContactForm = () => {
                 value={formData.telefono}
                 onChange={handleChange}
               />
+              {errors.telefono && (
+                <p className="text-red-500 text-sm mt-1">{errors.telefono}</p>
+              )}
             </div>
           </div>
           <div className="grid gap-6 sm:grid-cols-2">
@@ -163,13 +222,13 @@ const ContactForm = () => {
               Enviar
             </button>
           </div>
-          <div className="flex items-center justify-center mt-45"> 
+          <div className="flex items-center justify-center mt-12">
             <input
               required
               type="checkbox"
               className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded mr-2"
             />
-            <label className=" text-sm text-gray-500">
+            <label className="block text-sm text-gray-600">
               <strong>Aceptar los términos y condiciones</strong>
             </label>
           </div>
