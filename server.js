@@ -11,16 +11,16 @@ app.use(bodyParser.json());
 
 // Configurar nodemailer con SMTP
 const transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
+  host: 'mail09.xinet.com.mx',
   port: 465,
   secure: true,
   auth: {
-    user: 'ezequielcruzpaz@gmail.com',  // Cambiar por tu correo remitente
-    pass: 'fggl wuym vbxc eisw'         // Cambiar por tu contraseña
-  }
+    user: 'comercio@solucione.mx',  // Correo remitente
+    pass: 'Crm#140324$%',          // Contraseña
+  },
 });
 
-const emailDestinatario = 'ezequielcruzpaz@gmail.com';  // Cambiar por el correo destinatario predeterminado
+const emailDestinatario = 'comercio@solucione.mx';  // Correo destinatario predeterminado
 
 app.post('/send-email', (req, res) => {
   const { nombre, apellido, direccion, email, lada, telefono, fecha, hora, additionalInfo } = req.body;
