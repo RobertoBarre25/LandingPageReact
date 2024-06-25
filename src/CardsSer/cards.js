@@ -20,7 +20,7 @@ const cardsData = [
         title: 'Sandboxing en la nube',
         description: 'Aísla y analiza amenazas de forma segura para mantener tu entorno protegido',
         buttonText: 'Descubrir'
-    },
+    },  
     {
         imgSrc: 'https://lh3.googleusercontent.com/proxy/o7XhzmquUmwze9Qb1LEuHF457_1umUXCGvM_fpvHKqv40YWnrgvdbk1bH8Y0ZSDmS4ryfMwaXECIAYVpWA2MYuZUxMVfdC7qnHnktvCFGX7KfA4m_P9UlGFLE6nsG-ZfXZ6qokdtAPnLHjbUTpa8xrLfdnfTqBS-OVw',
         title: 'Protección de correo electrónico',
