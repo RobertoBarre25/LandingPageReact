@@ -20,7 +20,7 @@ const cardsData = [
         title: 'Sandboxing en la nube',
         description: 'Aísla y analiza amenazas de forma segura para mantener tu entorno protegido',
         buttonText: 'Descubrir'
-    },
+    },  
     {
         imgSrc: 'card.png',
         title: 'Protección de correo electrónico',
