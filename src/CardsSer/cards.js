@@ -48,10 +48,7 @@ const Cards = () => {
                 {cardsData.map((card, index) => (
                     <div key={index} className="relative h-[800px] border-none group">
                         <div className="relative overflow-hidden h-full border-none">
-                            <img src={card.imgSrc} alt={card.title} className="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-110" />
-                            <div className="absolute bottom-2.5 w-full text-center text-white p-2.5 z-10 transition-all duration-300 ease-in-out group-hover:bottom-full">
-                                {card.title}
-                            </div>
+                            <img src={card.imgSrc} alt={card.title} className="w-full h-full object-cover" />
                             <div className="absolute bottom-[-100%] left-0 w-full h-full bg-black bg-opacity-50 text-white p-5 transition-all duration-300 ease-in-out flex flex-col justify-center items-center group-hover:bottom-0">
                                 <div className="text-center">
                                     <h3 className="text-xl mb-2.5">{card.title}</h3>
