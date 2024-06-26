@@ -23,19 +23,18 @@ const transporter = nodemailer.createTransport({
 const emailDestinatario = 'comercio@solucione.mx';  // Correo destinatario predeterminado
 
 app.post('/send-email', (req, res) => {
-  const { nombre, apellido, direccion, email, lada, telefono, fecha, hora, additionalInfo } = req.body;
+  const { name, address, email, country, Phonenumber, fecha, hora, additionalInfo } = req.body;
 
   const mailOptions = {
     from: email,  // El correo del remitente será el proporcionado en el formulario
     to: emailDestinatario, // El correo del destinatario está especificado aquí
     subject: 'Nueva solicitud de información del servicio',
     html: `
-      <p>Nombre: ${nombre}</p>
-      <p>Apellido: ${apellido}</p>
-      <p>Dirección: ${direccion}</p>
+      <p>Nombre Completo: ${name}</p>
+      <p>Dirección: ${address}</p>
       <p>Correo Electrónico: ${email}</p>
-      <p>Lada: ${lada}</p>
-      <p>Teléfono: ${telefono}</p>
+      <p>Lada: ${country}</p>
+      <p>Teléfono: ${Phonenumber}</p>
       <p>Fecha: ${fecha}</p>
       <p>Hora: ${hora}</p>
       <p>Información adicional: ${additionalInfo}</p>
