@@ -1,46 +1,43 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
-
-const cardsData = [
-    {
-        imgSrc: 'ANTIVIRUS.png',
-        title: 'Antivirus en la nube',
-        description: '¿Quieres proteger aplicaciones, infraestructura y datos en entornos de nube?',
-        buttonText: 'Descubrir'
-    },
-    {
-        imgSrc: 'GESTION.png',
-        title: 'Gestión de vulnerabilidades',
-        description: 'Protege tu negocio identificando y mitigando amenazas antes de que se conviertan en problemas',
-        buttonText: 'Obtener Información'
-    },
-    {
-        imgSrc: 'SAND.png',
-        title: 'Sandboxing en la nube',
-        description: 'Aísla y analiza amenazas de forma segura para mantener tu entorno protegido',
-        buttonText: 'Descubrir'
-    },  
-    {
-        imgSrc: 'PROTEC.png',
-        title: 'Protección de correo electrónico',
-        description: 'Defiende tu bandeja de entrada contra amenazas y fraudes con seguridad avanzada',
-        buttonText: 'Obtener Información'
-    },
-];
 
 const Cards = () => {
     const navigate = useNavigate();
 
-    const handleButtonClick = () => {
-        navigate('/contact', { replace: true });
-        setTimeout(() => {
-            const formElement = document.getElementById('contact-form');
-            if (formElement) {
-                formElement.scrollIntoView({ behavior: 'smooth' });
-            }
-        }, 100); // Espera un breve momento para asegurar que la navegación se complete
+    const handleClick = (service) => {
+        navigate('/contact', { state: { service } });
     };
+
+    const cardsData = [
+        {
+            imgSrc: 'ANTIVIRUS.png',
+            title: 'Antivirus en la nube',
+            description: '¿Quieres proteger aplicaciones, infraestructura y datos en entornos de nube?',
+            buttonText: 'Descubrir',
+            service: 'Antivirus en la nube'
+        },
+        {
+            imgSrc: 'GESTION.png',
+            title: 'Gestión de vulnerabilidades',
+            description: 'Protege tu negocio identificando y mitigando amenazas antes de que se conviertan en problemas',
+            buttonText: 'Obtener Información',
+            service: 'Gestión de vulnerabilidades'
+        },
+        {
+            imgSrc: 'SAND.png',
+            title: 'Sandboxing en la nube',
+            description: 'Aísla y analiza amenazas de forma segura para mantener tu entorno protegido',
+            buttonText: 'Descubrir',
+            service: 'Sandboxing en la nube'
+        },
+        {
+            imgSrc: 'PROTEC.png',
+            title: 'Protección de correo electrónico',
+            description: 'Defiende tu bandeja de entrada contra amenazas y fraudes con seguridad avanzada',
+            buttonText: 'Obtener Información',
+            service: 'Protección de correo electrónico'
+        },
+    ];
 
     return (
         <div className="mx-4 md:mx-12 lg:mx-20">
@@ -53,7 +50,7 @@ const Cards = () => {
                                 <div className="text-center">
                                     <h3 className="text-xl mb-2.5">{card.title}</h3>
                                     <p className="text-base mb-3.75">{card.description}</p>
-                                    <button className="bg-blue-500 text-white py-2.5 px-5 border-none cursor-pointer transition-colors duration-300 ease-in-out uppercase rounded-md hover:bg-blue-700" onClick={handleButtonClick}>{card.buttonText}</button>
+                                    <button onClick={() => handleClick(card.service)} className="bg-blue-500 text-white py-2.5 px-5 border-none cursor-pointer transition-colors duration-300 ease-in-out uppercase rounded-md hover:bg-blue-700">{card.buttonText}</button>
                                 </div>
                             </div>
                         </div>

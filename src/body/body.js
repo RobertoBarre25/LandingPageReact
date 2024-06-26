@@ -4,7 +4,7 @@ import HorizontalCard from '../CardShadow/HorizontalCard';
 import Carousel from '../Carousel/carousel';
 import Cards from '../CardsSer/cards'; // Ensure the import is correct
 import ImageSection from '../ImageSection/ImgSection';
-import { Link, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 
 const scrollToMiddle = () => {
     const targetPosition = window.innerHeight * 1.8;
