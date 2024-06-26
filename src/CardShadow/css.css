@@ -15,7 +15,7 @@
   .Image {
     width: 120%; 
     max-width: 1200px; 
-    height: 590px; 
+    height: auto; 
     object-fit: cover; 
     max-height: 800px; 
   }
