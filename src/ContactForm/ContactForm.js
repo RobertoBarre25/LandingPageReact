@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Header from "../NavBar/Header";
+import './ContactForm.css'; // Importa tu archivo CSS aquí
 
 const isValidInput = (value) => {
   return /^[a-zA-Z0-9\s]+$/.test(value); // Allow spaces as well
@@ -8,23 +9,24 @@ const isValidInput = (value) => {
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
-    nombre: "",
+    name: "",
     apellido: "",
-    direccion: "",
+    address: "",
     email: "",
-    lada: "",
-    telefono: "",
+    country: "",
+    Phonenumber: "",
     fecha: "",
     hora: "",
     additionalInfo: "",
+    additionalText: "", // Añadimos el nuevo campo aquí
   });
 
   const [errors, setErrors] = useState({
-    nombre: null,
+    name: null,
     apellido: null,
-    direccion: null,
-    lada: null,
-    telefono: null,
+    address: null,
+    country: null,
+    Phonenumber: null,
   });
 
   useEffect(() => {
@@ -42,9 +44,9 @@ const ContactForm = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     let error = null;
-    if (name !== "direccion" && !isValidInput(value)) {
+    if (name !== "address" && !isValidInput(value)) {
       error = "No debe contener caracteres especiales ni espacios en blanco.";
-    } else if (name === "direccion" && !/^[a-zA-Z0-9\s]+$/.test(value)) {
+    } else if (name === "address" && !/^[a-zA-Z0-9\s]+$/.test(value)) {
       error = "No debe contener caracteres especiales.";
     }
     setErrors({ ...errors, [name]: error });
@@ -57,15 +59,15 @@ const ContactForm = () => {
       await axios.post("http://localhost:5000/send-email", formData);
       alert("Correo enviado exitosamente");
       setFormData({
-        nombre: "",
-        apellido: "",
-        direccion: "",
+        name: "",
+        address: "",
         email: "",
-        lada: "",
-        telefono: "",
+        country: "",
+        Phonenumber: "",
         fecha: "",
         hora: "",
         additionalInfo: "",
+        additionalText: "", // Resetear el campo adicional aquí también
       });
       window.location.reload(); // Refrescar la página
     } catch (error) {
@@ -90,47 +92,33 @@ const ContactForm = () => {
           <h2 className="text-2xl font-bold">Solicitar Información del Servicio</h2>
         </div>
         <form className="space-y-6" onSubmit={handleSubmit}>
+          <div className="relative">
+            <input
+              required
+              type="text"
+              className="block w-full px-4 py-2 text-sm text-black border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none black-placeholder placeholder-center"
+              placeholder="Nombre Completo"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+            />
+            {errors.name && (
+              <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+            )}
+          </div>
           <div className="grid gap-6 sm:grid-cols-2">
-            <div className="relative">
-              <input
-                required
-                type="text"
-                className="block w-full px-4 py-2 text-sm text-black border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none black-placeholder"
-                placeholder="Nombre"
-                name="nombre"
-                value={formData.nombre}
-                onChange={handleChange}
-              />
-              {errors.nombre && (
-                <p className="text-red-500 text-sm mt-1">{errors.nombre}</p>
-              )}
-            </div>
-            <div className="relative">
-              <input
-                required
-                type="text"
-                className="textColor-black block w-full px-4 py-2 text-sm text-black border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none"
-                placeholder="Apellido"
-                name="apellido"
-                value={formData.apellido}
-                onChange={handleChange}
-              />
-              {errors.apellido && (
-                <p className="text-red-500 text-sm mt-1">{errors.apellido}</p>
-              )}
-            </div>
             <div className="relative">
               <input
                 required
                 type="text"
                 className="block w-full px-4 py-2 text-sm text-black border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none"
                 placeholder="Dirección"
-                name="direccion"
-                value={formData.direccion}
+                name="address"  
+                value={formData.address}
                 onChange={handleChange}
               />
-              {errors.direccion && (
-                <p className="text-red-500 text-sm mt-1">{errors.direccion}</p>
+              {errors.address && (
+                <p className="text-red-500 text-sm mt-1">{errors.address}</p>
               )}
             </div>
             <div className="relative">
@@ -151,13 +139,13 @@ const ContactForm = () => {
                 required
                 type="number"
                 className="w-full px-4 py-2 text-sm text-black border border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none rounded-md sm:w-28"
-                placeholder="+ Lada"
-                name="lada"
-                value={formData.lada}
+                placeholder="+Lada"
+                name="country"
+                value={formData.country}
                 onChange={handleChange}
               />
-              {errors.lada && (
-                <p className="text-red-500 text-sm mt-1">{errors.lada}</p>
+              {errors.country && (
+                <p className="text-red-500 text-sm mt-1">{errors.country}</p>
               )}
             </div>
             <div className="relative flex items-center">
@@ -166,12 +154,12 @@ const ContactForm = () => {
                 type="number"
                 className="block w-full px-4 py-2 text-sm text-black border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none"
                 placeholder="Teléfono"
-                name="telefono"
-                value={formData.telefono}
+                name="Phonenumber"
+                value={formData.Phonenumber}
                 onChange={handleChange}
               />
-              {errors.telefono && (
-                <p className="text-red-500 text-sm mt-1">{errors.telefono}</p>
+              {errors.Phonenumber && (
+                <p className="text-red-500 text-sm mt-1">{errors.Phonenumber}</p>
               )}
             </div>
           </div>
@@ -196,6 +184,15 @@ const ContactForm = () => {
                 onChange={handleChange}
               />
             </div>
+          </div>
+          <div className="relative">
+            <textarea
+              className="block w-full px-4 py-2 text-sm text-black border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none placeholder-center"
+              placeholder="Información Adicional"
+              name="additionalText"
+              value={formData.additionalText}
+              onChange={handleChange}
+            ></textarea>
           </div>
           <div className="relative">
             <label className="block text-sm text-gray-700">
