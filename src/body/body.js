@@ -105,7 +105,7 @@ const Body = () => {
                 <Carousel images={images} />
             </div>
             <HorizontalCard
-                imgSrc='publicidad.png'
+                imgSrc='ws(1).png'
               
             />
             <Cards />

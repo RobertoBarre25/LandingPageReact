@@ -4,25 +4,25 @@ import { useNavigate } from 'react-router-dom';
 
 const cardsData = [
     {
-        imgSrc: 'https://9nn339.p3cdn2.secureserver.net/wp-content/uploads/2023/03/seguridad-nube.jpg',
+        imgSrc: '1.png',
         title: 'Antivirus en la nube',
         description: '¿Quieres proteger aplicaciones, infraestructura y datos en entornos de nube?',
         buttonText: 'Descubrir'
     },
     {
-        imgSrc: 'https://images.pexels.com/photos/8297478/pexels-photo-8297478.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        imgSrc: '2.png',
         title: 'Gestión de vulnerabilidades',
         description: 'Protege tu negocio identificando y mitigando amenazas antes de que se conviertan en problemas',
         buttonText: 'Obtener Información'
     },
     {
-        imgSrc: 'https://images.pexels.com/photos/89724/pexels-photo-89724.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        imgSrc: '4.png',
         title: 'Sandboxing en la nube',
         description: 'Aísla y analiza amenazas de forma segura para mantener tu entorno protegido',
         buttonText: 'Descubrir'
     },  
     {
-        imgSrc: 'card.png',
+        imgSrc: '3.png',
         title: 'Protección de correo electrónico',
         description: 'Defiende tu bandeja de entrada contra amenazas y fraudes con seguridad avanzada',
         buttonText: 'Obtener Información'
