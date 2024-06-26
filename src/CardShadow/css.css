@@ -1,11 +1,23 @@
-.Image{
- position: absolute;
- top: 5%;
- left: 0%;
+.container {
+    transform: scale(0.5);
+    opacity: 0;
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  }
+  
+  .container.in-view {
+    transform: scale(1);
+    opacity: 1;
+  }
+  
+  .Image {
+    position: absolute;
+    top: 5%;
+    left: 0%;
     width: 1900px;
     height: 590px;
-}
-
-p{
+  }
+  
+  p {
     font-size: 25px;
-}
+  }
+  
