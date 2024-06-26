@@ -1,20 +1,23 @@
-.container {
+.horizontal-card-container {
     transform: scale(0.5);
     opacity: 0;
     transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    width: 100%;
+    max-width: 1900px;
+    margin: auto;
   }
   
-  .container.in-view {
+  .horizontal-card-container.in-view {
     transform: scale(1);
     opacity: 1;
   }
   
   .Image {
-    position: absolute;
-    top: 5%;
-    left: 0%;
-    width: 1900px;
-    height: 590px;
+    width: 120%; 
+    max-width: 1200px; 
+    height: 590px; 
+    object-fit: cover; 
+    max-height: 800px; 
   }
   
   p {

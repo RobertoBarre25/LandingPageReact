@@ -20,5 +20,11 @@
 .thirdText {
   @apply text-base md:text-xl text-gray-400 text-gray-300 w-[800px] ;
 }
-
+.horizontal-card-container {
+  transform: scale(0.5);
+  opacity: 0;
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  max-width: 3000px; /* Ajusta este valor según sea necesario */
+  margin: auto;
+}
 

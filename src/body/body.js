@@ -118,17 +118,16 @@ const Body = () => {
     ];
     return (
         <div className="flex flex-col items-center">
-            <div className="relative w-full">
-                <Carousel images={images} />
-            </div>
-            <HorizontalCard
-                imgSrc='ws(1).png'
-              
-            />
-            <Cards />
-            <ImageSection />
+        <div className="relative w-full">
+            <Carousel images={images} />
         </div>
-    );
-};
+        <HorizontalCard
+            imgSrc='ws(1).png'
+        />
+        <Cards />
+        <ImageSection />
+        </div>
+        );
+    };
 
 export default Body;
