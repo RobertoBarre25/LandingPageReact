@@ -1,0 +1,10 @@
+/* ContactForm.css */
+
+input::placeholder,
+textarea::placeholder {
+  text-align: center;
+}
+
+.placeholder-center::placeholder {
+  text-align: center;
+}

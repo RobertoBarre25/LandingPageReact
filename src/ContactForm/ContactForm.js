@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Header from "../NavBar/Header";
+import './ContactForm.css'; // Importa tu archivo CSS aquí
 
 const isValidInput = (value) => {
   return /^[a-zA-Z0-9\s]+$/.test(value); // Allow spaces as well
@@ -17,6 +18,7 @@ const ContactForm = () => {
     fecha: "",
     hora: "",
     additionalInfo: "",
+    additionalText: "", // Añadimos el nuevo campo aquí
   });
 
   const [errors, setErrors] = useState({
@@ -65,6 +67,7 @@ const ContactForm = () => {
         fecha: "",
         hora: "",
         additionalInfo: "",
+        additionalText: "", // Resetear el campo adicional aquí también
       });
       window.location.reload(); // Refrescar la página
     } catch (error) {
@@ -89,21 +92,21 @@ const ContactForm = () => {
           <h2 className="text-2xl font-bold">Solicitar Información del Servicio</h2>
         </div>
         <form className="space-y-6" onSubmit={handleSubmit}>
+          <div className="relative">
+            <input
+              required
+              type="text"
+              className="block w-full px-4 py-2 text-sm text-black border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none black-placeholder placeholder-center"
+              placeholder="Nombre Completo"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+            />
+            {errors.name && (
+              <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+            )}
+          </div>
           <div className="grid gap-6 sm:grid-cols-2">
-            <div className="relative">
-              <input
-                required
-                type="text"
-                className="block w-full px-4 py-2 text-sm text-black border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none black-placeholder"
-                placeholder="Nombre Completo"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-              />
-              {errors.name && (
-                <p className="text-red-500 text-sm mt-1">{errors.name}</p>
-              )}
-            </div>
             <div className="relative">
               <input
                 required
@@ -181,6 +184,15 @@ const ContactForm = () => {
                 onChange={handleChange}
               />
             </div>
+          </div>
+          <div className="relative">
+            <textarea
+              className="block w-full px-4 py-2 text-sm text-black border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none placeholder-center"
+              placeholder="Información Adicional"
+              name="additionalText"
+              value={formData.additionalText}
+              onChange={handleChange}
+            ></textarea>
           </div>
           <div className="relative">
             <label className="block text-sm text-gray-700">

@@ -23,7 +23,7 @@ const transporter = nodemailer.createTransport({
 const emailDestinatario = 'comercio@solucione.mx';  // Correo destinatario predeterminado
 
 app.post('/send-email', (req, res) => {
-  const { name, address, email, country, Phonenumber, fecha, hora, additionalInfo } = req.body;
+  const { name, address, email, country, Phonenumber, fecha, hora, additionalInfo, additionalText } = req.body;
 
   const mailOptions = {
     from: email,  // El correo del remitente será el proporcionado en el formulario
@@ -38,6 +38,7 @@ app.post('/send-email', (req, res) => {
       <p>Fecha: ${fecha}</p>
       <p>Hora: ${hora}</p>
       <p>Información adicional: ${additionalInfo}</p>
+      <p>Mensaje: ${additionalText}</p>
     `
   };
 
