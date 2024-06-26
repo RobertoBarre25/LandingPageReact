@@ -4,13 +4,13 @@ import { useNavigate } from 'react-router-dom';
 
 const cardsData = [
     {
-        imgSrc: '1.png',
+        imgSrc: '21.png',
         title: 'Antivirus en la nube',
         description: '¿Quieres proteger aplicaciones, infraestructura y datos en entornos de nube?',
         buttonText: 'Descubrir'
     },
     {
-        imgSrc: '2.png',
+        imgSrc: '20.png',
         title: 'Gestión de vulnerabilidades',
         description: 'Protege tu negocio identificando y mitigando amenazas antes de que se conviertan en problemas',
         buttonText: 'Obtener Información'
@@ -22,7 +22,7 @@ const cardsData = [
         buttonText: 'Descubrir'
     },  
     {
-        imgSrc: '3.png',
+        imgSrc: '15.png',
         title: 'Protección de correo electrónico',
         description: 'Defiende tu bandeja de entrada contra amenazas y fraudes con seguridad avanzada',
         buttonText: 'Obtener Información'
