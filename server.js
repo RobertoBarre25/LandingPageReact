@@ -15,30 +15,33 @@ const transporter = nodemailer.createTransport({
   port: 465,
   secure: true,
   auth: {
-    user: 'comercio@solucione.mx',  // Correo remitente
-    pass: 'Crm#140324$%',          // Contraseña
-  },
+    user: 'comercio@solucione.mx',  // Cambiar por tu correo remitente
+    pass: 'Crm#140324$%'         // Cambiar por tu contraseña
+  }
 });
 
-const emailDestinatario = 'comercio@solucione.mx';  // Correo destinatario predeterminado
+const emailDestinatario = 'comercio@solucione.mx';  // Cambiar por el correo destinatario predeterminado
 
 app.post('/send-email', (req, res) => {
-  const { name, address, email, country, Phonenumber, fecha, hora, additionalInfo, additionalText } = req.body;
+  const { name, address, email, country, Phonenumber, fecha, hora, additionalInfo, additionalText,service } = req.body;
 
   const mailOptions = {
-    from: email,  // El correo del remitente será el proporcionado en el formulario
-    to: emailDestinatario, // El correo del destinatario está especificado aquí
-    subject: 'Nueva solicitud de información del servicio',
+    from: emailDestinatario,
+    to:emailDestinatario,  // El correo del remitente será el proporcionado en el formulario
+    subject: 'Nueva solicitud de información del servicio' + service,
+    name: name,
+    email: email,
+    phoneNumber: Phonenumber,
+    messageBody: additionalInfo,
     html: `
-      <p>Nombre Completo: ${name}</p>
+      <p>Nombre: ${name}</p>
       <p>Dirección: ${address}</p>
       <p>Correo Electrónico: ${email}</p>
-      <p>Lada: ${country}</p>
       <p>Teléfono: ${Phonenumber}</p>
       <p>Fecha: ${fecha}</p>
       <p>Hora: ${hora}</p>
+      <p>${additionalText}</p>
       <p>Información adicional: ${additionalInfo}</p>
-      <p>Mensaje: ${additionalText}</p>
     `
   };
 

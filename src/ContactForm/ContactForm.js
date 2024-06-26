@@ -75,7 +75,7 @@ const ContactForm = () => {
         hora: "",
         additionalInfo: "",
         additionalText: "", // Resetear el campo adicional aquí también
-
+        service:""
       });
       window.location.reload(); // Refrescar la página
     } catch (error) {
@@ -101,7 +101,7 @@ const ContactForm = () => {
         </div>
         <form className="space-y-6" onSubmit={handleSubmit}>
           <div className="relative">
-            <input name="" type="hidden" value={service}/>
+            <input name="service" type="hidden" value={service}/>
             <input
               required
               type="text"
