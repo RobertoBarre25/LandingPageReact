@@ -2,12 +2,19 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Header from "../NavBar/Header";
 import './ContactForm.css'; // Importa tu archivo CSS aquí
+import { useLocation } from 'react-router-dom';
+
 
 const isValidInput = (value) => {
   return /^[a-zA-Z0-9\s]+$/.test(value); // Allow spaces as well
 };
 
 const ContactForm = () => {
+
+  const location = useLocation();
+  const { service } = location.state || {};
+
+
   const [formData, setFormData] = useState({
     name: "",
     apellido: "",
@@ -68,6 +75,7 @@ const ContactForm = () => {
         hora: "",
         additionalInfo: "",
         additionalText: "", // Resetear el campo adicional aquí también
+
       });
       window.location.reload(); // Refrescar la página
     } catch (error) {
@@ -93,6 +101,7 @@ const ContactForm = () => {
         </div>
         <form className="space-y-6" onSubmit={handleSubmit}>
           <div className="relative">
+            <input name="" type="hidden" value={service}/>
             <input
               required
               type="text"
