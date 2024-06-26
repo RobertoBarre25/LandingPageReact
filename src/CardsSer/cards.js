@@ -46,11 +46,11 @@ const Cards = () => {
                     <div key={index} className="relative h-[800px] border-none group">
                         <div className="relative overflow-hidden h-full border-none">
                             <img src={card.imgSrc} alt={card.title} className="w-full h-full object-cover" />
-                            <div className="absolute bottom-[-100%] left-0 w-full h-full bg-black bg-opacity-50 text-white p-5 transition-all duration-300 ease-in-out flex flex-col justify-center items-center group-hover:bottom-0">
+                            <div className="absolute bottom-[-100%] left-0 w-full h-full bg-black bg-opacity-50 text-white p-5 transition-all duration-700 ease-in-out flex flex-col justify-center items-center group-hover:bottom-0">
                                 <div className="text-center">
                                     <h3 className="text-xl mb-2.5">{card.title}</h3>
                                     <p className="text-base mb-3.75">{card.description}</p>
-                                    <button onClick={() => handleClick(card.service)} className="bg-blue-500 text-white py-2.5 px-5 border-none cursor-pointer transition-colors duration-300 ease-in-out uppercase rounded-md hover:bg-blue-700">{card.buttonText}</button>
+                                    <button onClick={() => handleClick(card.service)} className="bg-blue-500 text-white py-2.5 px-5 border-none cursor-pointer transition-colors duration-700 ease-in-out uppercase rounded-md hover:bg-blue-700">{card.buttonText}</button>
                                 </div>
                             </div>
                         </div>
