@@ -2,7 +2,7 @@ import React from 'react';
 
 const ImageSection = () => {
   return (
-    <div className="px-4 md:px-8 lg:px-12 w-full"> 
+    <div className="px-8 md:px-16 lg:px-20 w-full"> 
       <div className="mt-20"> 
         <div className="flex flex-wrap justify-between">
           <div className="w-full sm:w-1/2 lg:w-1/3 mb-8">
