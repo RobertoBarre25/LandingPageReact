@@ -26,7 +26,7 @@ app.post('/send-email', (req, res) => {
   const { name, address, email, country, Phonenumber, fecha, hora, additionalInfo, additionalText,service } = req.body;
 
   const mailOptions = {
-    from: emailDestinatario,
+    from: name , emailDestinatario,
     to:emailDestinatario,  // El correo del remitente será el proporcionado en el formulario
     subject: 'Nueva solicitud de información del servicio' + service,
     name: name,
