@@ -8,3 +8,31 @@ textarea::placeholder {
 .placeholder-center::placeholder {
   text-align: center;
 }
+
+
+
+.styled-popup {
+  background-color: #f0f0f0;
+  border-radius: 10px;
+}
+
+.styled-title {
+  color: #333;
+  font-family: 'Arial', sans-serif;
+}
+
+.styled-content {
+  color: #666;
+  font-family: 'Arial', sans-serif;
+}
+
+.styled-confirm-button {
+  background-color: #3085d6;
+  color: white;
+  border-radius: 5px;
+  font-family: 'Arial', sans-serif;
+}
+
+.styled-confirm-button:hover {
+  background-color: #1e70bf;
+}

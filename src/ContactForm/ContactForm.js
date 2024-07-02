@@ -4,6 +4,7 @@ import Header from "../NavBar/Header";
 import './ContactForm.css';
 import { useLocation } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
 
 const isValidInput = (value) => {
   return /^[a-zA-Z0-9\s]+$/.test(value);
@@ -66,7 +67,13 @@ const ContactForm = () => {
         icon: 'success',
         title: 'Correo enviado exitosamente',
         showConfirmButton: false,
-        timer: 1500
+        timer: 1500,
+        customClass: {
+          popup: 'styled-popup',
+          title: 'styled-title',
+          content: 'styled-content',
+          confirmButton: 'styled-confirm-button'
+        }
       });
       setFormData({
         name: "",
@@ -86,6 +93,12 @@ const ContactForm = () => {
         icon: 'error',
         title: 'Hubo un error al enviar el correo',
         text: error.toString(),
+        customClass: {
+          popup: 'styled-popup',
+          title: 'styled-title',
+          content: 'styled-content',
+          confirmButton: 'styled-confirm-button'
+        }
       });
     }
   };
