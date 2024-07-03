@@ -25,7 +25,6 @@ const ContactForm = () => {
     hora: "",
     additionalInfo: "",
     additionalText: "",
-    serviceRecipe: "",
   });
 
   const [errors, setErrors] = useState({
@@ -86,7 +85,6 @@ const ContactForm = () => {
         hora: "",
         additionalInfo: "",
         additionalText: "",
-        serviceRecipe: "",
       });
     } catch (error) {
       console.error("Error al enviar el correo:", error);
@@ -118,7 +116,7 @@ const ContactForm = () => {
         </div>
         <form className="space-y-6" onSubmit={handleSubmit}>
           <div className="relative">
-            <input name="service" type="hidden" value={formData.serviceRecipe} />
+            <input name="service" type="hidden" value={service} />
             <input
               required
               type="text"
