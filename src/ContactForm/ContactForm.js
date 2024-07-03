@@ -20,11 +20,12 @@ const ContactForm = () => {
     address: "",
     email: "",
     country: "",
-    Phonenumber: "",
+    phone: "",
     fecha: "",
     hora: "",
     additionalInfo: "",
     additionalText: "",
+    serviceRecipe: "",
   });
 
   const [errors, setErrors] = useState({
@@ -32,7 +33,7 @@ const ContactForm = () => {
     apellido: null,
     address: null,
     country: null,
-    Phonenumber: null,
+    phone: null,
   });
 
   useEffect(() => {
@@ -80,12 +81,12 @@ const ContactForm = () => {
         address: "",
         email: "",
         country: "",
-        Phonenumber: "",
+        phone: "",
         fecha: "",
         hora: "",
         additionalInfo: "",
         additionalText: "",
-        service: ""
+        serviceRecipe: "",
       });
     } catch (error) {
       console.error("Error al enviar el correo:", error);
@@ -117,7 +118,7 @@ const ContactForm = () => {
         </div>
         <form className="space-y-6" onSubmit={handleSubmit}>
           <div className="relative">
-            <input name="service" type="hidden" value={service} />
+            <input name="service" type="hidden" value={formData.serviceRecipe} />
             <input
               required
               type="text"
@@ -179,12 +180,12 @@ const ContactForm = () => {
                 type="number"
                 className="block w-full px-4 py-2 text-sm text-black border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none"
                 placeholder="Teléfono"
-                name="Phonenumber"
-                value={formData.Phonenumber}
+                name="phone"
+                value={formData.phone}
                 onChange={handleChange}
               />
               {errors.Phonenumber && (
-                <p className="text-red-500 text-sm mt-1">{errors.Phonenumber}</p>
+                <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
               )}
             </div>
           </div>
