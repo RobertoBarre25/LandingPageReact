@@ -61,8 +61,12 @@ const ContactForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const dataToSend = {
+      ...formData,
+      serviceRecipe: service // Agrega este campo al objeto que se envía
+    };
     try {
-      await axios.post("http://localhost:5000/send-email", formData);
+      await axios.post("http://localhost:5000/send-email", dataToSend);
       Swal.fire({
         icon: 'success',
         title: 'Correo enviado exitosamente',
@@ -182,7 +186,7 @@ const ContactForm = () => {
                 value={formData.phone}
                 onChange={handleChange}
               />
-              {errors.Phonenumber && (
+              {errors.phone && (
                 <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
               )}
             </div>
