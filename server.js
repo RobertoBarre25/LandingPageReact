@@ -10,16 +10,16 @@ app.use(cors());
 app.use(bodyParser.json());
 
 const transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
+  host: 'mail09.xinet.com.mx',
   port: 465,
   secure: true,
   auth: {
-    user: 'arturdar16@gmail.com',
-    pass: 'ylue wezw chfw kbws'
+    user: 'comercio@solucione.mx',
+    pass: 'Crm#140324$%'
   }
 });
 
-const emailDestinatario = 'arturdar16@gmail.com';
+const emailDestinatario = 'comercio@solucione.mx';
 
 app.post('/send-email', (req, res) => {
   const { name, email, phone, additionalText, serviceRecipe } = req.body;
@@ -38,10 +38,12 @@ app.post('/send-email', (req, res) => {
           <p>${name}</p>
           <label>Email:</label><br>
           <p>${email}</p>
+          <label>Comapany:</label><br>
+          <div id="field_company">${company}</div>
           <label>Phone Number:</label><br>
-          <p>${phone}</p>
-          <label>Message Body:</label><br>
-          <p>${additionalText}</p>
+          <div id="field_phonenumber">${phone}</div>
+          <label">Message Body:</label><br>
+          <div id="field_description>${additionalText}</div>
         </body>
       </html>
     `
