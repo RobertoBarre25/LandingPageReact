@@ -5,6 +5,8 @@ import './ContactForm.css';
 import { useLocation } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
 
 const isValidInput = (value) => {
   return /^[a-zA-Z0-9\s]+$/.test(value);
@@ -47,6 +49,10 @@ const ContactForm = () => {
     }));
   }, []);
 
+  const handlePhoneChange = (value, country) => {
+    setFormData({ ...formData, phone: value, country: country.name });
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     let error = null;
@@ -68,10 +74,16 @@ const ContactForm = () => {
     try {
       await axios.post("http://localhost:5000/send-email", dataToSend);
       Swal.fire({
-        icon: 'success',
-        title: 'Correo enviado exitosamente',
+        html: `
+          <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: white; padding: 20px; border-radius: 10px; position: relative;">
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 8px; background-color: #ccc;">
+              <div style="width: 0; height: 100%; background-color: #007bff; animation: load 2.5s linear forwards;"></div>
+            </div>
+            <img src="animation-email.gif" alt="Enviando correo" style="width: 200px; height: 150px; margin-top: 10px;">
+            <h2 style="color: black; margin-top: 20px;">Correo enviado exitosamente</h2>
+          </div>`,
         showConfirmButton: false,
-        timer: 1500,
+        timer: 2500,
         customClass: {
           popup: 'styled-popup',
           title: 'styled-title',
@@ -79,6 +91,15 @@ const ContactForm = () => {
           confirmButton: 'styled-confirm-button'
         }
       });
+      
+      // Agrega esta parte de CSS en tu archivo CSS
+      const style = document.createElement('style');
+      style.innerHTML = `
+        @keyframes load {
+          0% { width: 0; }
+          100% { width: 100%; }
+        }
+      `;
       setFormData({
         name: "",
         address: "",
@@ -93,9 +114,16 @@ const ContactForm = () => {
     } catch (error) {
       console.error("Error al enviar el correo:", error);
       Swal.fire({
-        icon: 'error',
-        title: 'Hubo un error al enviar el correo',
-        text: error.toString(),
+        html: `
+          <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; background-color:  #f7fafc; padding: 20px; border-radius: 10px; position: relative;">
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 8px; background-color: #ccc;">
+              <div style="width: 0; height: 100%; background-color: red; animation: load 2.5s linear forwards;"></div>
+            </div>
+            <img src="email-error.gif" alt="Enviando correo" style="width: 200px; height: 140px; margin-top: 10px;">
+            <h2 style="color: black; margin-top: 20px;">Error al enviar el correo</h2>
+          </div>`,
+        showConfirmButton: false,
+        timer: 3000,
         customClass: {
           popup: 'styled-popup',
           title: 'styled-title',
@@ -124,7 +152,7 @@ const ContactForm = () => {
             <input
               required
               type="text"
-              className="block w-full px-4 py-2 text-sm text-black border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none black-placeholder placeholder-center"
+              className="block w-full px-4 py-2 text-sm text-black border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none black-placeholder placeholder-center hover:shadow-xl input-hover-effect transition duration-300"
               placeholder="Nombre Completo"
               name="name"
               value={formData.name}
@@ -134,12 +162,11 @@ const ContactForm = () => {
               <p className="text-red-500 text-sm mt-1">{errors.name}</p>
             )}
           </div>
-          <div className="grid gap-6 sm:grid-cols-2">
             <div className="relative">
               <input
                 required
                 type="text"
-                className="block w-full px-4 py-2 text-sm text-black border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none"
+                className="block w-full px-4 py-2 text-sm text-black border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none hover:shadow-xl input-hover-effect transition duration-300"
                 placeholder="Dirección"
                 name="address"
                 value={formData.address}
@@ -149,11 +176,46 @@ const ContactForm = () => {
                 <p className="text-red-500 text-sm mt-1">{errors.address}</p>
               )}
             </div>
+          <div className="grid gap-6 sm:grid-cols-2">
+            <div className="relative">
+              <PhoneInput
+                name="phone"
+                country={'mx'}
+                value={formData.phone}
+                onChange={handlePhoneChange}
+                inputStyle={{
+                  width: '100%',
+                  padding: '8px 16px 8px 48px', // Ajusta el padding izquierdo
+                  borderBottom: '1px solid gray',
+                  background: 'transparent',
+                  fontSize: '14px',
+                  color: 'black',
+                  transition: 'all 0.3s', // Agrega la transición
+                  boxShadow: 'none', // Inicializa sin sombra
+                }}
+                containerStyle={{ width: '100%' }}
+                buttonStyle={{ 
+                  background: 'transparent', 
+                  border: 'none',
+                  position: 'absolute', // Asegura que la bandera no se mueva
+                  left: '0',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  padding: '0 8px', // Ajusta el padding
+                  boxShadow: 'none',
+                }}
+                dropdownStyle={{ color: 'black' }}
+                className="hover:shadow-xl input-hover-effect transition duration-300"
+              />
+              {errors.phone && (
+                <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
+              )}
+            </div>
             <div className="relative">
               <input
                 required
                 type="email"
-                className="block w-full px-4 py-2 text-sm text-black border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none"
+                className="block w-full px-4 py-2 text-sm text-black border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none hover:shadow-xl input-hover-effect transition duration-300"
                 placeholder="Correo Electrónico"
                 name="email"
                 value={formData.email}
@@ -165,38 +227,8 @@ const ContactForm = () => {
             <div className="relative">
               <input
                 required
-                type="number"
-                className="w-full px-4 py-2 text-sm text-black border border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none rounded-md sm:w-28"
-                placeholder="+Lada"
-                name="country"
-                value={formData.country}
-                onChange={handleChange}
-              />
-              {errors.country && (
-                <p className="text-red-500 text-sm mt-1">{errors.country}</p>
-              )}
-            </div>
-            <div className="relative flex items-center">
-              <input
-                required
-                type="number"
-                className="block w-full px-4 py-2 text-sm text-black border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none"
-                placeholder="Teléfono"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-              />
-              {errors.phone && (
-                <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
-              )}
-            </div>
-          </div>
-          <div className="grid gap-6 sm:grid-cols-2">
-            <div className="relative">
-              <input
-                required
                 type="date"
-                className="block w-full px-4 py-2 text-sm text-black border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none"
+                className="block w-full px-4 py-2 text-sm text-black border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none hover:shadow-xl input-hover-effect transition duration-300"
                 name="fecha"
                 value={formData.fecha}
                 onChange={handleChange}
@@ -206,7 +238,7 @@ const ContactForm = () => {
               <input
                 required
                 type="time"
-                className="block w-full px-4 py-2 text-sm text-black border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none"
+                className="block w-full px-4 py-2 text-sm text-black border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none hover:shadow-xl input-hover-effect transition duration-300"
                 name="hora"
                 value={formData.hora}
                 onChange={handleChange}
@@ -215,11 +247,12 @@ const ContactForm = () => {
           </div>
           <div className="relative">
             <textarea
-              className="block w-full px-4 py-2 text-sm text-black border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none placeholder-center"
+              className="block w-full px-4 py-2 text-sm text-black border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none placeholder-center hover:shadow-xl input-hover-effect transition duration-300"
               placeholder="Información Adicional"
               name="additionalText"
               value={formData.additionalText}
               onChange={handleChange}
+              style={{ resize: "none" }}
             ></textarea>
           </div>
           <div className="relative">

@@ -36,3 +36,50 @@ textarea::placeholder {
 .styled-confirm-button:hover {
   background-color: #1e70bf;
 }
+
+@keyframes load {
+  0% { width: 0; }
+  100% { width: 100%; }
+}
+
+.loading-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background-color: #ccc;
+}
+
+.loading-bar-inner {
+  width: 0;
+  height: 100%;
+  background-color: #007bff;
+  animation: load 2.5s linear forwards;
+}
+
+/* ContactForm.css */
+.input-hover-effect {
+  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.input-hover-effect:hover {
+  border-color: #1e90ff; /* Azul claro */
+  box-shadow: 0px 4px 8px rgba(30, 144, 255, 0.3); /* Sombra azul claro */
+}
+
+textarea.input-hover-effect {
+  resize: none;
+}
+
+.react-tel-input .form-control {
+  border-bottom: 2px solid gray;
+  background: transparent;
+  color: black;
+  font-size: 14px;
+}
+
+.react-tel-input .flag-dropdown {
+  background: transparent;
+  border: none;
+}

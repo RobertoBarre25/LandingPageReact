@@ -12,16 +12,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 
 const transporter = nodemailer.createTransport({
-  host: 'mail09.xinet.com.mx',
+  host: 'smtp.gmail.com',
   port: 465,
   secure: true,
   auth: {
-    user: 'comercio@solucione.mx', // Reemplaza con tu correo de Gmail
-    pass: 'Crm#140324$%', // Reemplaza con tu contraseña de Gmail
+    user: 'robegamer25@gmail.com', // Reemplaza con tu correo de Gmail
+    pass: 'vlep jrwc oheb sint', // Reemplaza con tu contraseña de Gmail
   },
 });
 
-const emailDestinatario = 'comercio@solucione.mx'; // Reemplaza con el correo del destinatario
+const emailDestinatario = 'robegamer25@gmail.com'; // Reemplaza con el correo del destinatario
 
 
 
