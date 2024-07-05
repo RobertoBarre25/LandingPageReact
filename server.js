@@ -46,7 +46,7 @@ app.post('/send-email', (req, res) => {
           <label>Email:</label><br>
           <p>${email}</p>
           <label>Comapany:</label><br>
-          <div id="field_company">${company}</div>
+          <div id="field_company">${company} ${serviceRecipe}</div>
           <label>Phone Number:</label><br>
           <div id="field_phonenumber">${phone}</div>
           <label>Message Body:</label><br>
