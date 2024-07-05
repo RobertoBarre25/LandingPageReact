@@ -87,13 +87,13 @@ const CarouselComponent = () => {
         </Carousel.Item>
       </Carousel>
       <div className="position-absolute top-50 start-0 translate-middle-y">
-        <button className="btn btn-icon btn-black m-3" onClick={handlePrevClick}>
-          <BsChevronLeft size={32} />
+        <button className="btn btn-icon btn-blue m-3" onClick={handlePrevClick}>
+          <BsChevronLeft size={62} style={{ color: 'blue' }} />
         </button>
       </div>
       <div className="position-absolute top-50 end-0 translate-middle-y">
-        <button className="btn btn-icon btn-black m-3" onClick={handleNextClick}>
-          <BsChevronRight size={32} />
+        <button className="btn btn-icon btn-blue m-3" onClick={handleNextClick}>
+          <BsChevronRight size={62} style={{ color: 'blue' }} />
         </button>
       </div>
     </div>

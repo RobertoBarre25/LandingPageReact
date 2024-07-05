@@ -12,16 +12,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 
 const transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
+  host: 'mail09.xinet.com.mx',
   port: 465,
   secure: true,
   auth: {
-    user: 'robegamer25@gmail.com', // Reemplaza con tu correo de Gmail
-    pass: 'vlep jrwc oheb sint', // Reemplaza con tu contraseña de Gmail
+    user: 'comercio@solucione.mx', // Reemplaza con tu correo de Gmail
+    pass: 'Crm#140324$%', // Reemplaza con tu contraseña de Gmail
   },
 });
 
-const emailDestinatario = 'robegamer25@gmail.com'; // Reemplaza con el correo del destinatario
+const emailDestinatario = 'comercio@solucione.mx'; // Reemplaza con el correo del destinatario
 
 
 
@@ -30,7 +30,7 @@ app.post('/send-email', (req, res) => {
 
   console.log(req.body); // Para verificar que se recibe correctamente el serviceRecipe
 
-  const company = "Landin Page";
+  const company = "Landing Page";
 
   const mailOptions = {
     from: `${name} <${email}>`,
