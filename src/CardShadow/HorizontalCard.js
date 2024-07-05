@@ -40,7 +40,7 @@ const HorizontalCard = ({ imgSrc, title, description }) => {
               <div className="p-4 text-left">
                 <h2 className="text-4xl font-sans font-semibold mb-2">{title}</h2>
                 <p className="text-gray-700 font-sans">{description}</p>
-                <img src={imgSrc} alt="img" className="Image" />
+                <img src={imgSrc} alt="img" className="shadow-sm" />
               </div>
             </div>
           </div>

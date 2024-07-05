@@ -122,7 +122,7 @@ const Body = () => {
             <Carousel images={images} />
         </div>
         <HorizontalCard
-            imgSrc='ws(1).png'
+            imgSrc='ws(1).jpeg'
         />
         <Cards />
         <ImageSection />
