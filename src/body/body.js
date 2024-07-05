@@ -5,6 +5,7 @@ import Carousel from '../Carousel/carousel';
 import Cards from '../CardsSer/cards'; // Ensure the import is correct
 import ImageSection from '../ImageSection/ImgSection';
 import {  useNavigate } from 'react-router-dom';
+import CarouselComponent from '../Components/CarouselComponent';
 
 const scrollToMiddle = () => {
     const targetPosition = window.innerHeight * 1.8;
@@ -124,9 +125,13 @@ const Body = () => {
         <HorizontalCard
             imgSrc='ws(1).jpeg'
         />
-        <Cards />
         <ImageSection />
+        <Cards />
+        
+      <CarouselComponent />
+   
         </div>
+        
         );
     };
 
