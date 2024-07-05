@@ -34,8 +34,8 @@ const HorizontalCard = ({ imgSrc, title, description }) => {
   return (
     <div ref={cardRef} className={`horizontal-card-container ${inView ? 'in-view' : ''}`}>
       <div className="relative flex justify-center">
-        <div className="w-full md:w-10/12 lg:w-8/12 xl:w-6/12">
-          <div className="max-w-6xl mx-auto">
+        <div className="w-full md:w-11/12 lg:w-10/12 xl:w-9/12">
+          <div className="max-w-8xl mx-auto">
             <div className="bg-transparent overflow-hidden shadow-none rounded-lg flex items-center justify-center h-full">
               <div className="p-4 text-left">
                 <h2 className="text-4xl font-sans font-semibold mb-2">{title}</h2>
