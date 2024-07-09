@@ -23,9 +23,9 @@ const CarouselComponent = () => {
       <Carousel
         controls={false}
         indicators={false}
-        interval={3000}
+        interval={null}
         touch={true}
-        className="w-100"
+        className="w-100 px-12"
         ref={carouselRef}
       >
         <Carousel.Item>
@@ -43,7 +43,7 @@ const CarouselComponent = () => {
             <div className="col d-flex flex-column align-items-center justify-content-center m-5 bg-black text-white rounded" style={{ height: '90vh', marginLeft: '30px', marginRight: '30px' }}>
               <h3>Personaliza tu iPhone</h3>
               <p>Ponle tu estilo. En cada detalle.</p>
-              <img src="ruta-a-la-imagen-de-personalizacion.png" alt="Personalización" className="w-75 rounded" />
+              <img src="https://i.pinimg.com/564x/c7/57/7c/c7577cb0fbd63a7ef1630a54829fae2c.jpg" alt="Personalización" className="w-75 rounded" />
             </div>
           </div>
         </Carousel.Item>
@@ -86,15 +86,15 @@ const CarouselComponent = () => {
           </div>
         </Carousel.Item>
       </Carousel>
-      <div className="position-absolute top-50 start-0 translate-middle-y">
-        <button className="btn btn-icon btn-blue m-3" onClick={handlePrevClick}>
+      <div className="position-absolute top-50 start-0 translate-middle-y" style={{ marginLeft: '20px' }}>
+        <div onClick={handlePrevClick} style={{ cursor: 'pointer' }}>
           <BsChevronLeft size={62} style={{ color: 'blue' }} />
-        </button>
+        </div>
       </div>
-      <div className="position-absolute top-50 end-0 translate-middle-y">
-        <button className="btn btn-icon btn-blue m-3" onClick={handleNextClick}>
+      <div className="position-absolute top-50 end-0 translate-middle-y" style={{ marginRight: '20px' }}>
+        <div onClick={handleNextClick} style={{ cursor: 'pointer' }}>
           <BsChevronRight size={62} style={{ color: 'blue' }} />
-        </button>
+        </div>
       </div>
     </div>
   );
