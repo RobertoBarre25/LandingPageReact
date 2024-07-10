@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import './Header.css'; 
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import './Header.css';
 
 function Header({ isBlue }) {
   const [scrollPosition, setScrollPosition] = useState(0);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const handleScroll = () => {
     const position = window.scrollY;
@@ -24,6 +25,17 @@ function Header({ isBlue }) {
     ? scrollPosition > 20 ? 'bg-transparent' : (isBlue ? 'bg-blue-700' : 'bg-transparent')
     : scrollPosition > 20 ? 'bg-blue-700' : 'bg-transparent';
 
+  const services = [
+    'Antivirus en la nube',
+    'Gestión de vulnerabilidades',
+    'Sandboxing en la nube',
+    'Protección de correo electrónico'
+  ];
+
+  const handleContactClick = () => {
+    navigate('/contact', { state: { services } });
+  };
+
   return (
     <header className={`fixed top-0 left-0 w-full z-10 transition-all duration-800 ease-in-out h-16 ${headerClass}`}>
       <nav className="flex justify-between items-center px-5 h-full">
@@ -33,7 +45,7 @@ function Header({ isBlue }) {
             <Link to="/" className="nav-link">Home</Link>
           </li>
           <li style={{ marginTop: '1.2rem' }}>
-            <Link to="/contact" className="nav-link">Contact</Link>
+            <Link to="/contact" onClick={handleContactClick} className="nav-link">Contact</Link>
           </li>
         </ul>
       </nav>
