@@ -25,27 +25,20 @@ function Header({ isBlue }) {
     ? scrollPosition > 20 ? 'bg-transparent' : (isBlue ? 'bg-blue-700' : 'bg-transparent')
     : scrollPosition > 20 ? 'bg-blue-700' : 'bg-transparent';
 
-  const services = [
-    'Antivirus en la nube',
-    'Gestión de vulnerabilidades',
-    'Sandboxing en la nube',
-    'Protección de correo electrónico'
-  ];
-
   const handleContactClick = () => {
-    navigate('/contact', { state: { services } });
+    navigate('/contact');
   };
 
   return (
     <header className={`fixed top-0 left-0 w-full z-10 transition-all duration-800 ease-in-out h-16 ${headerClass}`}>
       <nav className="flex justify-between items-center px-5 h-full">
         <div className="text-white text-lg md:text-xl">Grupo Alternativas y Soluciones</div>
-        <ul className=" text-white flex space-x-5 list-none">
+        <ul className="text-white flex space-x-5 list-none">
           <li style={{ marginTop: '1.2rem' }}>
             <Link to="/" className="nav-link">Home</Link>
           </li>
           <li style={{ marginTop: '1.2rem' }}>
-            <Link to="/contact" onClick={handleContactClick} className="nav-link">Contact</Link>
+            <button onClick={handleContactClick} className="nav-link">Contact</button>
           </li>
         </ul>
       </nav>

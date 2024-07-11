@@ -14,9 +14,16 @@ const isValidInput = (value) => {
 
 const ContactForm = () => {
   const location = useLocation();
-  const { service, services = [] } = location.state || {};
-  console.log("Services passed:", services); // Agrega este console.log para verificar los servicios
+  const initialService = location.state?.service || "";
+  
+  const services = [
+    'Antivirus en la nube',
+    'Gestión de vulnerabilidades',
+    'Sandboxing en la nube',
+    'Protección de correo electrónico'
+  ];
 
+  console.log("Services passed:", services); // Agrega este console.log para verificar los servicios
 
   const [formData, setFormData] = useState({
     name: "",
@@ -29,7 +36,7 @@ const ContactForm = () => {
     hora: "",
     additionalInfo: "",
     additionalText: "",
-    selectedService: ""
+    service: initialService
   });
 
   const [errors, setErrors] = useState({
@@ -52,6 +59,10 @@ const ContactForm = () => {
     }));
   }, []);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const handlePhoneChange = (value, country) => {
     setFormData({ ...formData, phone: value, country: country.name });
   };
@@ -72,7 +83,7 @@ const ContactForm = () => {
     e.preventDefault();
     const dataToSend = {
       ...formData,
-      service: formData.selectedService // Agrega este campo al objeto que se envía
+      serviceRecipe: formData.service // Agrega este campo al objeto que se envía // Agrega este campo al objeto que se envía
     };
     try {
       await axios.post("http://localhost:5000/send-email", dataToSend);
@@ -113,7 +124,7 @@ const ContactForm = () => {
         hora: "",
         additionalInfo: "",
         additionalText: "",
-        selectedService: ""
+        service: ""
       });
     } catch (error) {
       console.error("Error al enviar el correo:", error);
@@ -151,25 +162,27 @@ const ContactForm = () => {
           <h2 className="text-2xl font-bold">Solicitar Información del Servicio</h2>
         </div>
         <form className="space-y-6" onSubmit={handleSubmit}>
-          <div className="relative">
-            {service ? (
-              <input name="service" type="hidden" value={service} />
-            ) : (
+        <input type="hidden" name="service" value={formData.service} />
+          {initialService === "" && (
+            <div className="relative">
               <select
-                name="selectedService"
-                value={formData.selectedService}
+                name="service"
+                value={formData.service}
                 onChange={handleChange}
+                className="block w-full px-4 py-2 text-sm text-black border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none hover:shadow-xl input-hover-effect transition duration-300"
                 required
-                className="block w-full px-4 py-2 text-sm text-black border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none black-placeholder placeholder-center hover:shadow-xl input-hover-effect transition duration-300"
               >
-                <option value="" disabled>Seleccione un servicio</option>
-                {services.map((serviceOption, index) => (
-                  <option key={index} value={serviceOption}>{serviceOption}</option>
+                <option value="">Seleccionar servicio</option>
+                {services.map((service) => (
+                  <option key={service} value={service}>
+                    {service}
+                  </option>
                 ))}
               </select>
-            )}
-          </div>
-          <div className="relative">
+            </div>
+          )}
+           <div className="relative">
+            <input name="service" type="hidden" value={formData.service} />
             <input
               required
               type="text"
@@ -330,3 +343,4 @@ const ContactForm = () => {
 };
 
 export default ContactForm;
+
