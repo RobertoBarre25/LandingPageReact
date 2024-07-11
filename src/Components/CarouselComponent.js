@@ -75,7 +75,7 @@ const CarouselComponent = () => {
               <div style={textOverlayStyle}>
                 <h3 className="text-center">Batería</h3>
                 <p className="text-center">Larga vida a la batería.</p>
-               
+                <button className="btn btn-primary">Ver más</button>
               </div>
             </div>
             <div className="d-flex flex-column align-items-center m-5 justify-content-center p-0" style={cardStyle}>
@@ -87,7 +87,7 @@ const CarouselComponent = () => {
               <div style={textOverlayStyle}>
                 <h3 className="text-center">Innovación</h3>
                 <p className="text-center">Diseñado para durar. Y enamorar.</p>
-               
+                <button className="btn btn-primary">Ver más</button>
               </div>
             </div>
             <div className="d-flex flex-column align-items-center  m-5 justify-content-center p-0" style={cardStyle}>
@@ -99,7 +99,7 @@ const CarouselComponent = () => {
               <div style={textOverlayStyle}>
                 <h3 className="text-center">Personaliza tu iPhone</h3>
                 <p className="text-center">Ponle tu estilo. En cada detalle.</p>
-               
+                <button className="btn btn-primary">Ver más</button>
               </div>
             </div>
           </div>
@@ -117,7 +117,7 @@ const CarouselComponent = () => {
               <div style={textOverlayStyle}>
                 <h3 className="text-center">Seguridad</h3>
                 <p className="text-center">Protege tus datos con la mejor tecnología.</p>
-               
+                <button className="btn btn-primary">Ver más</button>
               </div>
             </div>
             <div className="d-flex flex-column align-items-center m-5  justify-content-center p-0" style={cardStyle}>
@@ -129,7 +129,7 @@ const CarouselComponent = () => {
               <div style={textOverlayStyle}>
                 <h3 className="text-center">Velocidad</h3>
                 <p className="text-center">Rendimiento superior en cada tarea.</p>
-               
+                <button className="btn btn-primary">Ver más</button>
               </div>
             </div>
             <div className="d-flex flex-column align-items-center m-5  justify-content-center p-0" style={cardStyle}>
@@ -141,7 +141,7 @@ const CarouselComponent = () => {
               <div style={textOverlayStyle}>
                 <h3 className="text-center">Calidad de Cámara</h3>
                 <p className="text-center">Fotos y videos de alta calidad.</p>
-               
+                <button className="btn btn-primary">Ver más</button>
               </div>
             </div>
           </div>
@@ -159,7 +159,7 @@ const CarouselComponent = () => {
               <div style={textOverlayStyle}>
                 <h3 className="text-center">Durabilidad</h3>
                 <p className="text-center">Construcción resistente y duradera.</p>
-               
+                <button className="btn btn-primary">Ver más</button>
               </div>
             </div>
             <div className="d-flex flex-column align-items-center  m-5 justify-content-center p-0" style={cardStyle}>
@@ -171,7 +171,7 @@ const CarouselComponent = () => {
               <div style={textOverlayStyle}>
                 <h3 className="text-center">Interfaz</h3>
                 <p className="text-center">Interfaz amigable y fácil de usar.</p>
-               
+                <button className="btn btn-primary">Ver más</button>
               </div>
             </div>
             <div className="d-flex flex-column align-items-center m-5  justify-content-center p-0" style={cardStyle}>
@@ -183,7 +183,7 @@ const CarouselComponent = () => {
               <div style={textOverlayStyle}>
                 <h3 className="text-center">Compatibilidad</h3>
                 <p className="text-center">Compatibilidad con múltiples dispositivos.</p>
-               
+                <button className="btn btn-primary">Ver más</button>
               </div>
             </div>
           </div>
