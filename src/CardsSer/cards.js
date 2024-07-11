@@ -40,8 +40,8 @@ const Cards = () => {
     ];
 
     return (
-        <div className="mx-4 md:mx-12 lg:mx-20">
-            <div className="grid grid-cols-2 gap-0">
+        <div className="w-full">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
                 {cardsData.map((card, index) => (
                     <div key={index} className="relative h-[800px] border-none group">
                         <div className="relative overflow-hidden h-full border-none">
