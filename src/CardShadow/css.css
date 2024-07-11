@@ -1,26 +1,43 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .horizontal-card-container {
-    transform: scale(0.5);
-    opacity: 0;
-    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
-    width: 100%;
-    max-width: 1900px;
-    margin: auto;
-  }
-  
-  .horizontal-card-container.in-view {
-    transform: scale(1);
-    opacity: 1;
-  }
-  
-  .Image {
-    width: 120%; 
-    max-width: 1200px; 
-    height: auto; 
-    object-fit: cover; 
-    max-height: 800px; 
-  }
-  
-  p {
-    font-size: 25px;
-  }
-  
+  transform: scale(0.5);
+  opacity: 0;
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  width: 100%;
+  margin: 0 auto; /* Asegura que no haya margen lateral */
+  position: relative; /* Para posicionar el contenido absolutamente dentro de este contenedor */
+}
+
+.horizontal-card-container.in-view {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.Image {
+  width: 100%; /* Hacer que la imagen ocupe todo el ancho del contenedor */
+  height: auto; 
+  object-fit: cover; 
+  max-height: 800px; 
+  position: relative; /* Necesario para posicionar el fondo negro fijo */
+}
+
+.horizontal-card-container .p-4:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Fondo negro con opacidad */
+  opacity: 1; /* Mantener el fondo negro fijo visible */
+  transition: opacity 0.3s ease;
+}
+
+p {
+  font-size: 25px;
+}

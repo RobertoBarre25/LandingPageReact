@@ -3,6 +3,7 @@ import Carousel from 'react-bootstrap/Carousel';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+
 const CarouselComponent = () => {
   const carouselRef = useRef(null);
 
@@ -28,65 +29,107 @@ const CarouselComponent = () => {
         className="w-100 px-12"
         ref={carouselRef}
       >
+        {/* Primera sección del Carousel */}
         <Carousel.Item>
           <div className="row justify-content-center align-items-center">
-            <div className="col d-flex flex-column align-items-center justify-content-center m-5 bg-black text-white rounded" style={{ height: '90vh', marginLeft: '30px', marginRight: '30px' }}>
-              <h3>Batería</h3>
-              <p>Larga vida a la batería.</p>
-              <img src="https://i.pinimg.com/564x/87/77/f3/8777f3a36f7a8349c2b6882691df7471.jpg" alt="Descripción" className="w-100 img-fluid rounded" />
+            {/* Primera tarjeta */}
+            <div className="col d-flex flex-column align-items-center justify-content-center m-5 text-white rounded position-relative" style={{ height: '90vh' }}>
+              <img src="https://i.pinimg.com/564x/20/b5/b5/20b5b5b4163c62258cef3bf7e96f151f.jpg" alt="Batería" className="w-100 h-100 rounded" />
+              <div className="text-overlay d-flex flex-column justify-content-center align-items-center position-absolute top-0 start-0 w-100 h-100">
+                <h3 className="text-white text-center">Batería</h3>
+                <p className="text-white text-center">Larga vida a la batería.</p>
+                <button className="btn btn-primary">Ver más</button>
+              </div>
             </div>
-            <div className="col d-flex flex-column align-items-center justify-content-center m-5 bg-black text-white rounded" style={{ height: '90vh', marginLeft: '30px', marginRight: '30px' }}>
-              <h3>Innovación</h3>
-              <p>Diseñado para durar. Y enamorar.</p>
-              <img src="https://i.pinimg.com/564x/87/77/f3/8777f3a36f7a8349c2b6882691df7471.jpg" alt="Descripción" className="w-100 img-fluid rounded" />
+            {/* Segunda tarjeta */}
+            <div className="col d-flex flex-column align-items-center justify-content-center m-5 text-white rounded position-relative" style={{ height: '90vh' }}>
+              <img src="https://i.pinimg.com/564x/87/77/f3/8777f3a36f7a8349c2b6882691df7471.jpg" alt="Innovación" className="w-100 h-100 rounded" />
+              <div className="text-overlay d-flex flex-column justify-content-center align-items-center position-absolute top-0 start-0 w-100 h-100">
+                <h3 className="text-white text-center">Innovación</h3>
+                <p className="text-white text-center">Diseñado para durar. Y enamorar.</p>
+                <button className="btn btn-primary">Ver más</button>
+              </div>
             </div>
-            <div className="col d-flex flex-column align-items-center justify-content-center m-5 bg-black text-white rounded" style={{ height: '90vh', marginLeft: '30px', marginRight: '30px' }}>
-              <h3>Personaliza tu iPhone</h3>
-              <p>Ponle tu estilo. En cada detalle.</p>
-              <img src="https://i.pinimg.com/564x/87/77/f3/8777f3a36f7a8349c2b6882691df7471.jpg" alt="Descripción" className="w-100 img-fluid rounded" />
+            {/* Tercera tarjeta */}
+            <div className="col d-flex flex-column align-items-center justify-content-center m-5 text-white rounded position-relative" style={{ height: '90vh' }}>
+              <img src="https://i.pinimg.com/564x/8d/71/5f/8d715f8a777a0547f56e494468b54daf.jpg" alt="Personalización" className="w-100 h-100 rounded" />
+              <div className="text-overlay d-flex flex-column justify-content-center align-items-center position-absolute top-0 start-0 w-100 h-100">
+                <h3 className="text-white text-center">Personaliza tu iPhone</h3>
+                <p className="text-white text-center">Ponle tu estilo. En cada detalle.</p>
+                <button className="btn btn-primary">Ver más</button>
+              </div>
             </div>
           </div>
         </Carousel.Item>
+        
+        {/* Segunda sección del Carousel */}
         <Carousel.Item>
           <div className="row justify-content-center align-items-center">
-            <div className="col d-flex flex-column align-items-center justify-content-center m-5 bg-black text-white rounded" style={{ height: '90vh', marginLeft: '30px', marginRight: '30px' }}>
-              <h3>Seguridad</h3>
-              <p>Protege tus datos con la mejor tecnología.</p>
-              <img src="https://i.pinimg.com/564x/87/77/f3/8777f3a36f7a8349c2b6882691df7471.jpg" alt="Descripción" className="w-100 img-fluid rounded" />
+            {/* Primera tarjeta */}
+            <div className="col d-flex flex-column align-items-center justify-content-center m-5 text-white rounded position-relative" style={{ height: '90vh' }}>
+              <img src="https://i.pinimg.com/564x/87/77/f3/8777f3a36f7a8349c2b6882691df7471.jpg" alt="Seguridad" className="w-100 h-100 rounded" />
+              <div className="text-overlay d-flex flex-column justify-content-center align-items-center position-absolute top-0 start-0 w-100 h-100">
+                <h3 className="text-white text-center">Seguridad</h3>
+                <p className="text-white text-center">Protege tus datos con la mejor tecnología.</p>
+                <button className="btn btn-primary">Ver más</button>
+              </div>
             </div>
-            <div className="col d-flex flex-column align-items-center justify-content-center m-5 bg-black text-white rounded" style={{ height: '90vh', marginLeft: '30px', marginRight: '30px' }}>
-              <h3>Velocidad</h3>
-              <p>Rendimiento superior en cada tarea.</p>
-              <img src="https://i.pinimg.com/564x/87/77/f3/8777f3a36f7a8349c2b6882691df7471.jpg" alt="Descripción" className="w-100 img-fluid rounded" />
+            {/* Segunda tarjeta */}
+            <div className="col d-flex flex-column align-items-center justify-content-center m-5 text-white rounded position-relative" style={{ height: '90vh' }}>
+              <img src="https://i.pinimg.com/564x/87/77/f3/8777f3a36f7a8349c2b6882691df7471.jpg" alt="Velocidad" className="w-100 h-100 rounded" />
+              <div className="text-overlay d-flex flex-column justify-content-center align-items-center position-absolute top-0 start-0 w-100 h-100">
+                <h3 className="text-white text-center">Velocidad</h3>
+                <p className="text-white text-center">Rendimiento superior en cada tarea.</p>
+                <button className="btn btn-primary">Ver más</button>
+              </div>
             </div>
-            <div className="col d-flex flex-column align-items-center justify-content-center m-5 bg-black text-white rounded" style={{ height: '90vh', marginLeft: '30px', marginRight: '30px' }}>
-              <h3>Calidad de Cámara</h3>
-              <p>Fotos y videos de alta calidad.</p>
-              <img src="https://i.pinimg.com/564x/87/77/f3/8777f3a36f7a8349c2b6882691df7471.jpg" alt="Descripción" className="w-100 img-fluid rounded" />
+            {/* Tercera tarjeta */}
+            <div className="col d-flex flex-column align-items-center justify-content-center m-5 text-white rounded position-relative" style={{ height: '90vh' }}>
+              <img src="https://i.pinimg.com/564x/87/77/f3/8777f3a36f7a8349c2b6882691df7471.jpg" alt="Cámara" className="w-100 h-100 rounded" />
+              <div className="text-overlay d-flex flex-column justify-content-center align-items-center position-absolute top-0 start-0 w-100 h-100">
+                <h3 className="text-white text-center">Calidad de Cámara</h3>
+                <p className="text-white text-center">Fotos y videos de alta calidad.</p>
+                <button className="btn btn-primary">Ver más</button>
+              </div>
             </div>
           </div>
         </Carousel.Item>
+        
+        {/* Tercera sección del Carousel */}
         <Carousel.Item>
           <div className="row justify-content-center align-items-center">
-            <div className="col d-flex flex-column align-items-center justify-content-center m-5 bg-black text-white rounded" style={{ height: '90vh', marginLeft: '30px', marginRight: '30px' }}>
-              <h3>Durabilidad</h3>
-              <p>Construcción resistente y duradera.</p>
-              <img src="https://i.pinimg.com/564x/87/77/f3/8777f3a36f7a8349c2b6882691df7471.jpg" alt="Descripción" className="w-100 img-fluid rounded" />
+            {/* Primera tarjeta */}
+            <div className="col d-flex flex-column align-items-center justify-content-center m-5 text-white rounded position-relative" style={{ height: '90vh' }}>
+              <img src="https://i.pinimg.com/564x/87/77/f3/8777f3a36f7a8349c2b6882691df7471.jpg" alt="Durabilidad" className="w-100 h-100 rounded" />
+              <div className="text-overlay d-flex flex-column justify-content-center align-items-center position-absolute top-0 start-0 w-100 h-100">
+                <h3 className="text-white text-center">Durabilidad</h3>
+                <p className="text-white text-center">Construcción resistente y duradera.</p>
+                <button className="btn btn-primary">Ver más</button>
+              </div>
             </div>
-            <div className="col d-flex flex-column align-items-center justify-content-center m-5 bg-black text-white rounded" style={{ height: '90vh', marginLeft: '30px', marginRight: '30px' }}>
-              <h3>Interfaz</h3>
-              <p>Interfaz amigable y fácil de usar.</p>
-              <img src="https://i.pinimg.com/564x/87/77/f3/8777f3a36f7a8349c2b6882691df7471.jpg" alt="Descripción" className="w-100 img-fluid rounded" />
+            {/* Segunda tarjeta */}
+            <div className="col d-flex flex-column align-items-center justify-content-center m-5 text-white rounded position-relative" style={{ height: '90vh' }}>
+              <img src="https://i.pinimg.com/564x/87/77/f3/8777f3a36f7a8349c2b6882691df7471.jpg" alt="Interfaz" className="w-100 h-100 rounded" />
+              <div className="text-overlay d-flex flex-column justify-content-center align-items-center position-absolute top-0 start-0 w-100 h-100">
+                <h3 className="text-white text-center">Interfaz</h3>
+                <p className="text-white text-center">Interfaz amigable y fácil de usar.</p>
+                <button className="btn btn-primary">Ver más</button>
+              </div>
             </div>
-            <div className="col d-flex flex-column align-items-center justify-content-center m-5 bg-black text-white rounded" style={{ height: '90vh', marginLeft: '30px', marginRight: '30px' }}>
-              <h3>Compatibilidad</h3>
-              <p>Compatibilidad con múltiples dispositivos.</p>
-              <img src="https://i.pinimg.com/564x/87/77/f3/8777f3a36f7a8349c2b6882691df7471.jpg" alt="Descripción" className="w-100 img-fluid rounded" />
-
+            {/* Tercera tarjeta */}
+            <div className="col d-flex flex-column align-items-center justify-content-center m-5 text-white rounded position-relative" style={{ height: '90vh' }}>
+              <img src="https://i.pinimg.com/564x/87/77/f3/8777f3a36f7a8349c2b6882691df7471.jpg" alt="Compatibilidad" className="w-100 h-100 rounded" />
+              <div className="text-overlay d-flex flex-column justify-content-center align-items-center position-absolute top-0 start-0 w-100 h-100">
+                <h3 className="text-white text-center">Compatibilidad</h3>
+                <p className="text-white text-center">Compatibilidad con múltiples dispositivos.</p>
+                <button className="btn btn-primary">Ver más</button>
+              </div>
             </div>
           </div>
         </Carousel.Item>
       </Carousel>
+
+      {/* Botones de navegación */}
       <div className="position-absolute top-50 start-0 translate-middle-y" style={{ marginLeft: '20px' }}>
         <div onClick={handlePrevClick} style={{ cursor: 'pointer' }}>
           <BsChevronLeft size={62} style={{ color: 'blue' }} />
