@@ -11,6 +11,18 @@
   width: 100%;
   margin: 0 auto; /* Asegura que no haya margen lateral */
   position: relative; /* Para posicionar el contenido absolutamente dentro de este contenedor */
+ 
+}
+
+.titlePubliciti{
+  color: aliceblue;
+  position: absolute;
+  top: 20%;
+  left: 60%;
+  width: 600px;
+  font-size: 50px;
+  font-family: sans-serif;
+  font-weight: 700;
 }
 
 .horizontal-card-container.in-view {
@@ -40,4 +52,11 @@
 
 p {
   font-size: 25px;
+}
+
+.PublicitiImg {
+  position: relative;
+  z-index: -2;
+  width: 100%;
+  right: 0%;
 }

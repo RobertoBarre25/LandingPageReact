@@ -35,14 +35,15 @@ const HorizontalCard = ({ imgSrc, title, description }) => {
     <div ref={cardRef} className={`horizontal-card-container ${inView ? 'in-view' : ''}`}>
       <div className="relative flex justify-center">
           <div className="max-w-8xl mx-auto">
-            <div className="bg-transparent overflow-hidden shadow-none rounded-lg flex items-center justify-center h-full">
-              <div className="p-4 text-left">
-                <h2 className="text-4xl font-sans font-semibold mb-2">{title}</h2>
-                <p className="text-gray-700 font-sans">{description}</p>
-                <img src={imgSrc} alt="img" className="shadow-sm" />
-              </div>
-            </div>
+            <div className="bg-transparent overflow-hidden shadow-sm rounded-lg flex items-center justify-center h-full">
+              <div className="p-0 text-left">
+                
+              </div>   
+            </div> 
           </div>
+          <h2 className="titlePubliciti">{title}</h2>
+                <p className="text-gray-700 font-sans">{description}</p>
+          <img src={imgSrc} alt="img" className="PublicitiImg" style={{ filter: 'brightness(60%)' }}/>
         </div>
       </div>
    
