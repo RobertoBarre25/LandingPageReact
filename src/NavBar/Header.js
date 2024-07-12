@@ -36,7 +36,7 @@ function Header({ isBlue }) {
   return (
     <header className={`fixed top-0 left-0 w-full z-10 transition-all duration-800 ease-in-out h-16 ${headerClass}`}>
       <nav className="flex justify-between items-center px-5 h-full">
-        <div className="text-white text-lg md:text-xl">Grupo Alternativas y Soluciones</div>
+        <a href='https://solucione.com.mx/corporativo/'><div className="text-white text-lg md:text-xl">Grupo Alternativas y Soluciones</div></a>
         <ul className="text-white flex space-x-5 list-none">
           <li style={{ marginTop: '1.2rem' }}>
             <button onClick={handleHomeClick} className="nav-link">Servicios</button>

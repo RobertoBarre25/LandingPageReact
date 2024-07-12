@@ -4,14 +4,15 @@ function Services() {
     return (
         <div className="relative h-screen bg-cover bg-center" style={{ backgroundImage: "url('https://www.udima.es/sites/udima.es/files/GettyImages-1407650545.jpg')" }}>
             <div className="absolute inset-0 bg-black opacity-50"></div>
-            <header className="fixed top-0 left-0 w-full z-50 transition-all duration-800 ease-in-out h-16 bg-transparent">
+            <header className="fixed top-0 left-0 w-full z-5 transition-all duration-800 ease-in-out h-16 bg-transparent">
                 {/* Contenido del header */}
             </header>
-            <div className="relative flex items-center justify-center h-full z-30">
+            <div className="relative flex items-center justify-center h-full z-3">
                 <div className="text-center text-white">
                     <h1 className="text-7xl md:text-9xl font-bold">Grupo Alternativas Soluciones</h1>
                     <button className="mt-16 px-10 py-6 md:py-8 border border-white text-white text-2xl md:text-3xl">Conócenos</button>
                 </div>
+                
             </div>
             <div className="relative z-10 p-8">
                 <h2 className="text-4xl font-bold text-center text-black mb-8">Servicios</h2>

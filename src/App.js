@@ -11,9 +11,11 @@ import Services from './Services/services'
 const App = () => {
   return (
     <Router>
+          
       <div className="App">
-                         <Header />
+      <Header/>
         <Routes>
+          
           <Route path="/" element={<Body />} />
           <Route path="/cards" element={<Cards />} />
           <Route path="/info" element={<InfoPage />} />
@@ -24,9 +26,9 @@ const App = () => {
         </Routes>
        
       </div>
-     
-    </Router>
 
+    </Router>
+    
     
   );
 };
