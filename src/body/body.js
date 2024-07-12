@@ -123,7 +123,8 @@ const Body = () => {
             <Carousel images={images} />
         </div>
         <HorizontalCard
-            imgSrc='ws(1).jpeg'
+            title='! Contactanos Ahora y obten un 10% de descuento en cualquiera de nuestros servicios !'
+            imgSrc='https://cdn-3.expansion.mx/dims4/default/48ecff4/2147483647/strip/true/crop/4288x2848+0+0/resize/1200x797!/format/webp/quality/60/?url=https%3A%2F%2Fcdn-3.expansion.mx%2F89%2F3d%2F5c3a335c41a6be6d486fe52b2712%2Fistock-173029893.jpg'
         />
         <ImageSection />
         <Cards />

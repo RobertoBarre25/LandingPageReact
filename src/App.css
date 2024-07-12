@@ -17,6 +17,10 @@
   }
 }
 
+.App{
+  background-color:rgb(238, 238, 238) ;
+}
+
 .App-header {
   min-height: 6vh;
   display: flex;

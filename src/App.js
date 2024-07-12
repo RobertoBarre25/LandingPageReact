@@ -12,7 +12,7 @@ const App = () => {
   return (
     <Router>
       <div className="App">
-        <Header />
+                         <Header />
         <Routes>
           <Route path="/" element={<Body />} />
           <Route path="/cards" element={<Cards />} />
