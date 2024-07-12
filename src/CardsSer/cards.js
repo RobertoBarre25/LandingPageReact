@@ -40,11 +40,11 @@ const Cards = () => {
     ];
 
     return (
-        <div className="mx-4 md:mx-12 lg:mx-20">
-            <div className="grid grid-cols-2 gap-0">
+        <div className="w-full">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
                 {cardsData.map((card, index) => (
-                    <div key={index} className="relative h-[800px] border-none group">
-                        <div className="relative overflow-hidden h-full border-none">
+                    <div key={index} className="relative border-none group">
+                        <div className="relative overflow-hidden h-96 md:h-auto border-none">
                             <img src={card.imgSrc} alt={card.title} className="w-full h-full object-cover" />
                             <div className="absolute bottom-[-100%] left-0 w-full h-full bg-black bg-opacity-50 text-white p-5 transition-all duration-700 ease-in-out flex flex-col justify-center items-center group-hover:bottom-0">
                                 <div className="text-center">
