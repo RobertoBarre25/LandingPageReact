@@ -6,6 +6,7 @@ import Cards from './CardsSer/cards'; // Importa tu componente Cards
 import InfoPage from './InfoPage/InfoPage'; // Importa el componente InfoPage
 import ContactForm from './ContactForm/ContactForm';
 import Footer from './footer/footer';
+import Services from './Services/services'
 
 const App = () => {
   return (
@@ -17,6 +18,8 @@ const App = () => {
           <Route path="/cards" element={<Cards />} />
           <Route path="/info" element={<InfoPage />} />
           <Route path="/contact" element={<ContactForm />} />
+          <Route path="/service" element={<Services />} />
+
         </Routes>
         <Footer />
       </div>

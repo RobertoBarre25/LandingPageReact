@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './Header.css';
 
 function Header({ isBlue }) {
@@ -29,13 +29,17 @@ function Header({ isBlue }) {
     navigate('/contact');
   };
 
+  const handleHomeClick = () => {
+    navigate('/service'); // Cambia "/nueva-ruta" a la ruta que desees
+  };
+
   return (
     <header className={`fixed top-0 left-0 w-full z-10 transition-all duration-800 ease-in-out h-16 ${headerClass}`}>
       <nav className="flex justify-between items-center px-5 h-full">
         <div className="text-white text-lg md:text-xl">Grupo Alternativas y Soluciones</div>
         <ul className="text-white flex space-x-5 list-none">
           <li style={{ marginTop: '1.2rem' }}>
-            <Link to="/" className="nav-link">Home</Link>
+            <button onClick={handleHomeClick} className="nav-link">Servicios</button>
           </li>
           <li style={{ marginTop: '1.2rem' }}>
             <button onClick={handleContactClick} className="nav-link">Contact</button>
