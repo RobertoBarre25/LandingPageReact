@@ -23,8 +23,6 @@ const transporter = nodemailer.createTransport({
 
 const emailDestinatario = 'comercio@solucione.mx'; // Reemplaza con el correo del destinatario
 
-
-
 app.post('/send-email', (req, res) => {
   const { name, email, phone, additionalText, serviceRecipe } = req.body;
 
