@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Header from "../NavBar/Header";
-import './ContactForm.css';
-import { useLocation } from 'react-router-dom';
-import Swal from 'sweetalert2';
-import 'sweetalert2/dist/sweetalert2.min.css';
-import PhoneInput from 'react-phone-input-2';
-import 'react-phone-input-2/lib/style.css';
+import "./ContactForm.css";
+import { useLocation, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 
 const isValidInput = (value) => {
   return /^[a-zA-Z0-9\s]+$/.test(value);
@@ -14,13 +14,14 @@ const isValidInput = (value) => {
 
 const ContactForm = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const initialService = location.state?.service || "";
-  
+
   const services = [
-    'Antivirus en la nube',
-    'Gestión de vulnerabilidades',
-    'Sandboxing en la nube',
-    'Protección de correo electrónico'
+    "Antivirus en la nube",
+    "Gestión de vulnerabilidades",
+    "Sandboxing en la nube",
+    "Protección de correo electrónico",
   ];
 
   console.log("Services passed:", services); // Agrega este console.log para verificar los servicios
@@ -36,7 +37,7 @@ const ContactForm = () => {
     hora: "",
     additionalInfo: "",
     additionalText: "",
-    service: initialService
+    service: initialService,
   });
 
   const [errors, setErrors] = useState({
@@ -83,7 +84,7 @@ const ContactForm = () => {
     e.preventDefault();
     const dataToSend = {
       ...formData,
-      serviceRecipe: formData.service // Agrega este campo al objeto que se envía // Agrega este campo al objeto que se envía
+      serviceRecipe: formData.service, // Agrega este campo al objeto que se envía // Agrega este campo al objeto que se envía
     };
     try {
       await axios.post("http://localhost:5000/send-email", dataToSend);
@@ -99,15 +100,15 @@ const ContactForm = () => {
         showConfirmButton: false,
         timer: 2500,
         customClass: {
-          popup: 'styled-popup',
-          title: 'styled-title',
-          content: 'styled-content',
-          confirmButton: 'styled-confirm-button'
-        }
+          popup: "styled-popup",
+          title: "styled-title",
+          content: "styled-content",
+          confirmButton: "styled-confirm-button",
+        },
       });
-      
+
       // Agrega esta parte de CSS en tu archivo CSS
-      const style = document.createElement('style');
+      const style = document.createElement("style");
       style.innerHTML = `
         @keyframes load {
           0% { width: 0; }
@@ -124,7 +125,7 @@ const ContactForm = () => {
         hora: "",
         additionalInfo: "",
         additionalText: "",
-        service: ""
+        service: "",
       });
     } catch (error) {
       console.error("Error al enviar el correo:", error);
@@ -140,17 +141,24 @@ const ContactForm = () => {
         showConfirmButton: false,
         timer: 3000,
         customClass: {
-          popup: 'styled-popup',
-          title: 'styled-title',
-          content: 'styled-content',
-          confirmButton: 'styled-confirm-button'
-        }
+          popup: "styled-popup",
+          title: "styled-title",
+          content: "styled-content",
+          confirmButton: "styled-confirm-button",
+        },
       });
     }
   };
 
+  const handleBack = () => {
+    navigate("/");
+  };
+
   return (
-    <div id="contact-form" className="flex flex-col justify-center items-center min-h-screen bg-gradient-to-r from-white-100 to-gray-500 py-10 px-4 sm:px-6 lg:px-8">
+    <div
+      id="contact-form"
+      className="flex flex-col justify-center items-center min-h-screen bg-gradient-to-r from-white-100 to-gray-500 py-10 px-4 sm:px-6 lg:px-8"
+    >
       <Header isBlue={true} />
       <div className="contact-form-container">
         <div className="text-center mb-6">
@@ -159,17 +167,19 @@ const ContactForm = () => {
             className="w-32 mx-auto"
             alt="logo"
           />
-          <h2 className="text-2xl font-bold">Solicitar Información del Servicio</h2>
+          <h2 className="text-2xl font-bold">
+            Solicitar Información del Servicio
+          </h2>
         </div>
-        <form className="space-y-6" onSubmit={handleSubmit}>
-        <input type="hidden" name="service" value={formData.service} />
+        <form className="space-y-5 mt-10" onSubmit={handleSubmit}>
+          <input type="hidden" name="service" value={formData.service} />
           {initialService === "" && (
             <div className="relative">
               <select
                 name="service"
                 value={formData.service}
                 onChange={handleChange}
-                className="block w-full px-4 py-2 text-sm text-black border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none hover:shadow-xl input-hover-effect transition duration-300"
+                className="custom-select"
                 required
               >
                 <option value="">Seleccionar servicio</option>
@@ -181,7 +191,7 @@ const ContactForm = () => {
               </select>
             </div>
           )}
-           <div className="relative">
+          <div className="relative">
             <input name="service" type="hidden" value={formData.service} />
             <input
               required
@@ -196,49 +206,50 @@ const ContactForm = () => {
               <p className="text-red-500 text-sm mt-1">{errors.name}</p>
             )}
           </div>
-            <div className="relative">
-              <input
-                required
-                type="text"
-                className="block w-full px-4 py-2 text-sm text-black border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none hover:shadow-xl input-hover-effect transition duration-300"
-                placeholder="Dirección"
-                name="address"
-                value={formData.address}
-                onChange={handleChange}
-              />
-              {errors.address && (
-                <p className="text-red-500 text-sm mt-1">{errors.address}</p>
-              )}
-            </div>
+          <div className="relative">
+            <input
+              required
+              type="text"
+              className="block w-full px-4 py-2 text-sm text-black border-b-2 border-gray-300 bg-transparent focus:border-blue-600 focus:outline-none hover:shadow-xl input-hover-effect transition duration-300"
+              placeholder="Dirección"
+              name="address"
+              value={formData.address}
+              onChange={handleChange}
+            />
+            {errors.address && (
+              <p className="text-red-500 text-sm mt-1">{errors.address}</p>
+            )}
+          </div>
           <div className="grid gap-6 sm:grid-cols-2">
             <div className="relative">
               <PhoneInput
                 name="phone"
-                country={'mx'}
+                country={"mx"}
                 value={formData.phone}
                 onChange={handlePhoneChange}
                 inputStyle={{
-                  width: '100%',
-                  padding: '8px 16px 8px 48px', // Ajusta el padding izquierdo
-                  borderBottom: '1px solid gray',
-                  background: 'transparent',
-                  fontSize: '14px',
-                  color: 'black',
-                  transition: 'all 0.3s', // Agrega la transición
-                  boxShadow: 'none', // Inicializa sin sombra
+                  width: "100%",
+                  padding: "8px 16px 8px 48px", // Ajusta el padding izquierdo
+                  borderBottom: "2px solid #ccc",
+                  background: "transparent",
+                  fontSize: "14px",
+                  color: "black",
+                  transition: "all 0.3s", // Agrega la transición
+                  boxShadow: "none", // Inicializa sin sombra
+                  border: "none"
                 }}
-                containerStyle={{ width: '100%' }}
-                buttonStyle={{ 
-                  background: 'transparent', 
-                  border: 'none',
-                  position: 'absolute', // Asegura que la bandera no se mueva
-                  left: '0',
-                  top: '50%',
-                  transform: 'translateY(-50%)',
-                  padding: '0 8px', // Ajusta el padding
-                  boxShadow: 'none',
+                containerStyle={{ width: "100%" }}
+                buttonStyle={{
+                  background: "transparent",
+                  border: "none",
+                  position: "absolute", // Asegura que la bandera no se mueva
+                  left: "0",
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  padding: "0 8px", // Ajusta el padding
+                  boxShadow: "none",
                 }}
-                dropdownStyle={{ color: 'black' }}
+                dropdownStyle={{ color: "black" }}
                 className="hover:shadow-xl input-hover-effect transition duration-300"
               />
               {errors.phone && (
@@ -291,7 +302,8 @@ const ContactForm = () => {
           </div>
           <div className="relative">
             <label className="block text-sm text-gray-700">
-              ¿Deseas ofrecernos información adicional para ayudarnos a conocerte mejor?
+              ¿Deseas ofrecernos información adicional para ayudarnos a
+              conocerte mejor?
             </label>
             <div className="flex items-center justify-center mt-2">
               <label className="mr-4">
@@ -318,14 +330,22 @@ const ContactForm = () => {
               </label>
             </div>
           </div>
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-center space-x-4">
+            <button
+              type="button"
+              onClick={handleBack}
+              className="bg-blue-900 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            >
+              Regresar
+            </button>
             <button
               type="submit"
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
               Enviar
             </button>
           </div>
+
           <div className="flex items-center justify-center mt-12">
             <input
               required
@@ -343,4 +363,3 @@ const ContactForm = () => {
 };
 
 export default ContactForm;
-
