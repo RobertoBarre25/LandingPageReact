@@ -83,3 +83,13 @@ textarea.input-hover-effect {
   background: transparent;
   border: none;
 }
+
+.contact-form-container {
+  border: 2px solid #ccc; /* Color del borde */
+  border-radius: 10px; /* Redondear bordes */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Añadir sombra */
+  background-color: #fff; /* Fondo blanco */
+  padding: 20px; /* Espaciado interior */
+  max-width: 800px; /* Ancho máximo del formulario */
+  margin: 0 auto; /* Centrar el formulario */
+}

@@ -29,8 +29,12 @@ function Header({ isBlue }) {
     navigate('/contact');
   };
 
-  const handleHomeClick = () => {
+  const handleServicesClick = () => {
     navigate('/service'); // Cambia "/nueva-ruta" a la ruta que desees
+  };
+  
+  const handleHomeClick = () => {
+    navigate('/'); // Cambia "/nueva-ruta" a la ruta que desees
   };
 
   return (
@@ -39,7 +43,10 @@ function Header({ isBlue }) {
         <a href='https://solucione.com.mx/corporativo/'><div className="text-white text-lg md:text-xl">Grupo Alternativas Soluciones</div></a>
         <ul className="text-white flex space-x-5 list-none">
           <li style={{ marginTop: '1.2rem' }}>
-            <button onClick={handleHomeClick} className="nav-link">Servicios</button>
+            <button onClick={handleHomeClick} className="nav-link">Home</button>
+          </li>
+          <li style={{ marginTop: '1.2rem' }}>
+            <button onClick={handleServicesClick} className="nav-link">Servicios</button>
           </li>
           <li style={{ marginTop: '1.2rem' }}>
             <button onClick={handleContactClick} className="nav-link">Contact</button>

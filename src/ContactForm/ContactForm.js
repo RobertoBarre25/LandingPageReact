@@ -152,7 +152,7 @@ const ContactForm = () => {
   return (
     <div id="contact-form" className="flex flex-col justify-center items-center min-h-screen bg-gradient-to-r from-white-100 to-gray-500 py-10 px-4 sm:px-6 lg:px-8">
       <Header isBlue={true} />
-      <div className="rounded-lg p-8 max-w-2xl w-full bg-transparent">
+      <div className="contact-form-container">
         <div className="text-center mb-6">
           <img
             src="https://solucione.com.mx/corporativo/wp-content/uploads/2020/04/cropped-solucione-logo-color-512x512-1.png"
