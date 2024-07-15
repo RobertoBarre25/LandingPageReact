@@ -12,25 +12,26 @@ const scrollToMiddle = () => {
 
 function Services() {
     return (
-        <div className="relative h-screen bg-cover bg-center" style={{ backgroundImage: "url('https://www.udima.es/sites/udima.es/files/GettyImages-1407650545.jpg')" }}>
-            <div className="absolute inset-0 bg-black opacity-50"></div>
-            <header className="fixed top-0 left-0 w-full z-5 transition-all duration-800 ease-in-out h-16 bg-transparent">
-                {/* Contenido del header */}
-            </header>
-            <div className="relative flex items-center justify-center h-full z-3">
-                <div className="text-center text-white">
-                    <h1 className="text-7xl md:text-9xl font-bold">Grupo Alternativas Solucione</h1>
-                    <button className="mt-16 px-10 py-6 md:py-8 border border-white text-white text-2xl md:text-3xl" onClick={scrollToMiddle}>Conoce Nuestros Servicios</button>
-                    <div className="mt-4 flex items-center justify-center">
-                        <div className="text-white text-4xl">
-                            <FontAwesomeIcon icon={faAngleDoubleDown} className="text-white text-4xl animate-bounce mr-2 mt-20" />
-                          
+        <div className="flex flex-col min-h-screen">
+            <div className="relative bg-cover bg-center h-screen" style={{ backgroundImage: "url('https://www.udima.es/sites/udima.es/files/GettyImages-1407650545.jpg')" }}>
+                <div className="absolute inset-0 bg-black opacity-50"></div>
+                <header className="fixed top-0 left-0 w-full z-5 transition-all duration-800 ease-in-out h-16 bg-transparent">
+                    {/* Contenido del header */}
+                </header>
+                <div className="relative flex items-center justify-center h-full z-3">
+                    <div className="text-center text-white">
+                        <h1 className="text-7xl md:text-9xl font-bold">Grupo Alternativas Solucione</h1>
+                        <button className="mt-16 px-10 py-6 md:py-8 border border-white text-white text-2xl md:text-3xl" onClick={scrollToMiddle}>Conoce Nuestros Servicios</button>
+                        <div className="mt-4 flex items-center justify-center">
+                            <div className="text-white text-4xl">
+                                <FontAwesomeIcon icon={faAngleDoubleDown} className="text-white text-4xl animate-bounce mr-2 mt-20" />
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div className="relative z-5 p-8">
-            <h2 className="text-7xl font-bold text-center text-gray-700 mb-8 mr-4 mt-8 ml-5">Servicios</h2>
+            <div className="relative z-5 p-8 flex-grow">
+                <h2 className="text-7xl font-bold text-center text-gray-700 mb-8 mr-4 mt-8 ml-5">Servicios</h2>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-4 justify-items-center">
                     {[{ place: 'Cámaras de videovigilancia', discount: '-15%', rating: 5, reviews: 10, img: 'https://i.pinimg.com/564x/96/fb/ce/96fbce687cd179fe05c90731e658c7c2.jpg', link: '/camaras' },
@@ -57,6 +58,7 @@ function Services() {
                     ))}
                 </div>
             </div>
+            
         </div>
     );
 }
