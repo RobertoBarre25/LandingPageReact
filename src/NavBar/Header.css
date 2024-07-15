@@ -6,6 +6,7 @@
     text-decoration: none;
     color: white; /* Color del texto */
     font-size: 16px;
+    font-weight: 800;
     padding: 10px;
     margin: 10px;
   z-index: 10;
@@ -28,4 +29,4 @@
   .nav-link:hover::before {
     width: 100%;
   }
-  
+
