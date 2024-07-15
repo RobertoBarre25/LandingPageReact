@@ -1,4 +1,6 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleDoubleDown } from '@fortawesome/free-solid-svg-icons';
 
 function Services() {
     return (
@@ -9,33 +11,40 @@ function Services() {
             </header>
             <div className="relative flex items-center justify-center h-full z-3">
                 <div className="text-center text-white">
-                    <h1 className="text-7xl md:text-9xl font-bold">Grupo Alternativas Solucione</h1>
-                    <button className="mt-16 px-10 py-6 md:py-8 border border-white text-white text-2xl md:text-3xl">Conócenos</button>
+                    <h1 className="text-7xl md:text-9xl font-bold">Grupo Alternativas Soluciones</h1>
+                    <button className="mt-16 px-10 py-6 md:py-8 border border-white text-white text-2xl md:text-3xl">Conoce Nuestros Servicios</button>
+                    <div className="mt-4 flex items-center justify-center">
+                        <div className="text-white text-4xl">
+                            <FontAwesomeIcon icon={faAngleDoubleDown} className="text-white text-4xl animate-bounce mr-2 mt-20" />
+                          
+                        </div>
+                    </div>
                 </div>
             </div>
             <div className="relative z-5 p-8">
                 <h2 className="text-4xl font-bold text-center text-black mb-8">Servicios</h2>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-2 justify-items-center">
-                    {[{ place: 'Cámaras de videovigilancia', priceOld: '$1800', priceNew: '$1550', days: '6 días', discount: '-15%', rating: 5, reviews: 10, img: 'https://i.pinimg.com/564x/96/fb/ce/96fbce687cd179fe05c90731e658c7c2.jpg' },
-                    { place: 'Routers', priceOld: '$1800', priceNew: '$1550', days: '6 días', discount: '-15%', rating: 4, reviews: 8, img: 'https://i.pinimg.com/564x/e3/da/05/e3da05fff94eea57cf8b7395cc6f9979.jpg' },
-                    { place: 'Instalación de fibra', priceOld: '$1800', priceNew: '$1550', days: '6 días', discount: '-15%', rating: 3, reviews: 12, img: 'https://i.pinimg.com/564x/b1/e0/15/b1e0155a8cc3db972b7cb9cb6ffc79f4.jpg' },
-                    { place: 'Mantenimiento de equipos', priceOld: '$1800', priceNew: '$1550', days: '6 días', discount: '-15%', rating: 4, reviews: 5, img: 'https://i.pinimg.com/564x/cb/df/89/cbdf8978a85635559958afcd832918cf.jpg' },
-                    { place: 'Protección antivirus', priceOld: '$1800', priceNew: '$1550', days: '6 días', discount: '-15%', rating: 5, reviews: 10, img: 'https://i.pinimg.com/564x/a1/4c/38/a14c383ac13d55e1ff84fb4b64c9c8ff.jpg' },
-                    { place: 'Maldives', priceOld: '$1500', priceNew: '$1870', days: '4 días', discount: '-20%', rating: 5, reviews: 10, img: 'https://i.pinimg.com/564x/96/fb/ce/96fbce687cd179fe05c90731e658c7c2.jpg' },
-                    { place: 'PhongNha, Vietnam', priceOld: '$1500', priceNew: '$1300', days: '5 días', discount: '-15%', rating: 4, reviews: 7, img: 'https://i.pinimg.com/564x/e3/da/05/e3da05fff94eea57cf8b7395cc6f9979.jpg' },
-                    { place: 'Namdu Islands', priceOld: '$1500', priceNew: '$1459', days: '7 días', discount: '-10%', rating: 4, reviews: 9, img: 'https://i.pinimg.com/564x/b1/e0/15/b1e0155a8cc3db972b7cb9cb6ffc79f4.jpg' },
-                    { place: 'Santorini, Greece', priceOld: '$1800', priceNew: '$1550', days: '6 días', discount: '-15%', rating: 5, reviews: 11, img: 'https://i.pinimg.com/564x/cb/df/89/cbdf8978a85635559958afcd832918cf.jpg' },
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-4 justify-items-center">
+                    {[{ place: 'Cámaras de videovigilancia', discount: '-15%', rating: 5, reviews: 10, img: 'https://i.pinimg.com/564x/96/fb/ce/96fbce687cd179fe05c90731e658c7c2.jpg', link: '/camaras' },
+                    { place: 'Routers', discount: '-15%', rating: 4, reviews: 8, img: 'https://i.pinimg.com/564x/e3/da/05/e3da05fff94eea57cf8b7395cc6f9979.jpg', link: '/routers' },
+                    { place: 'Instalación de fibra', discount: '-15%', rating: 3, reviews: 12, img: 'https://i.pinimg.com/564x/b1/e0/15/b1e0155a8cc3db972b7cb9cb6ffc79f4.jpg', link: '/fibra' },
+                    { place: 'Mantenimiento de equipos', discount: '-15%', rating: 4, reviews: 5, img: 'https://i.pinimg.com/564x/cb/df/89/cbdf8978a85635559958afcd832918cf.jpg', link: '/mantenimiento' },
+                    { place: 'Protección antivirus', discount: '-15%', rating: 5, reviews: 10, img: 'https://i.pinimg.com/564x/a1/4c/38/a14c383ac13d55e1ff84fb4b64c9c8ff.jpg', link: '/antivirus' },
+                    { place: 'Maldives', discount: '-20%', rating: 5, reviews: 10, img: 'https://i.pinimg.com/564x/96/fb/ce/96fbce687cd179fe05c90731e658c7c2.jpg', link: '/maldives' },
+                    { place: 'PhongNha, Vietnam',  discount: '-15%', rating: 4, reviews: 7, img: 'https://i.pinimg.com/564x/e3/da/05/e3da05fff94eea57cf8b7395cc6f9979.jpg', link: '/phongnha' },
+                    { place: 'Namdu Islands',  discount: '-10%', rating: 4, reviews: 9, img: 'https://i.pinimg.com/564x/b1/e0/15/b1e0155a8cc3db972b7cb9cb6ffc79f4.jpg', link: '/namdu' },
+                    { place: 'Santorini, Greece', discount: '-15%', rating: 5, reviews: 11, img: 'https://i.pinimg.com/564x/cb/df/89/cbdf8978a85635559958afcd832918cf.jpg', link: '/santorini' },
+                    { place: 'Santorini, Greece', discount: '-15%', rating: 5, reviews: 11, img: 'https://i.pinimg.com/564x/cb/df/89/cbdf8978a85635559958afcd832918cf.jpg', link: '/santorini' },
+                    { place: 'Santorini, Greece', discount: '-15%', rating: 5, reviews: 11, img: 'https://i.pinimg.com/564x/cb/df/89/cbdf8978a85635559958afcd832918cf.jpg', link: '/santorini' },
+                    { place: 'Santorini, Greece', discount: '-15%', rating: 5, reviews: 11, img: 'https://i.pinimg.com/564x/cb/df/89/cbdf8978a85635559958afcd832918cf.jpg', link: '/santorini' },
                     ].map((deal, index) => (
-                        <div key={index} className="relative w-96 h-112 bg-cover bg-center overflow-hidden shadow-lg">
+                        <div key={index} className="relative w-96 h-96 bg-cover bg-center overflow-hidden shadow-lg mb-8 mx-4">
                             <div className="absolute top-0 left-0 bg-red-500 text-white px-2 py-1 z-10">{deal.discount}</div>
-                            <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 w-2/3 bg-white p-1 shadow-lg z-10 text-xs md:text-sm">
-                                <h3 className="text-lg font-semibold">{deal.place}</h3>
-                                <p className="text-gray-700">{deal.days}</p>
-                                <p className="text-red-500 line-through">{deal.priceOld}</p>
-                                <p className="text-green-500">{deal.priceNew}</p>
-                            </div>
                             <img src={deal.img} alt={deal.place} className="w-full h-full object-cover" />
+                            <div className="absolute bottom-4 left-4 right-4  bg-white bg-opacity-75 p-4">
+                                <h3 className="text-lg font-semibold text-black">{deal.place}</h3>
+                                <a href={deal.link} className="text-black underline hover:no-underline">Detalles</a>
+                            </div>
                         </div>
                     ))}
                 </div>

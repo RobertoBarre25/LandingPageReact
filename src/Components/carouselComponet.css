@@ -1,0 +1,27 @@
+.card-hover:hover img {
+    filter: brightness(70%); /* Reducir el brillo al hacer hover */
+    transition: filter 0.3s ease; /* Transición suave */
+  }
+  
+  .card-hover .text-overlay {
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo negro con opacidad */
+    transition: background-color 0.3s ease; /* Transición suave */
+  }
+  
+  .card-hover:hover .text-overlay {
+    background-color: rgba(0, 0, 0, 0.9); /* Fondo negro más oscuro al hacer hover */
+  }
+  
+  .card-hover .text-overlay h3,
+  .card-hover .text-overlay p,
+  .card-hover .text-overlay button {
+    color: rgba(255, 255, 255, 0.7); /* Color de texto con opacidad */
+    transition: color 0.3s ease; /* Transición suave */
+  }
+  
+  .card-hover:hover .text-overlay h3,
+  .card-hover:hover .text-overlay p,
+  .card-hover:hover .text-overlay button {
+    color: #f20404; /* Color de texto blanco al hacer hover */
+  }
+  
