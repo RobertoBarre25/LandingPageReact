@@ -2,6 +2,14 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDoubleDown } from '@fortawesome/free-solid-svg-icons';
 
+const scrollToMiddle = () => {
+    const targetPosition = window.innerHeight * 1.8;
+    window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
+    });
+};
+
 function Services() {
     return (
         <div className="relative h-screen bg-cover bg-center" style={{ backgroundImage: "url('https://www.udima.es/sites/udima.es/files/GettyImages-1407650545.jpg')" }}>
@@ -11,8 +19,8 @@ function Services() {
             </header>
             <div className="relative flex items-center justify-center h-full z-3">
                 <div className="text-center text-white">
-                    <h1 className="text-7xl md:text-9xl font-bold">Grupo Alternativas Soluciones</h1>
-                    <button className="mt-16 px-10 py-6 md:py-8 border border-white text-white text-2xl md:text-3xl">Conoce Nuestros Servicios</button>
+                    <h1 className="text-7xl md:text-9xl font-bold">Grupo Alternativas Solucione</h1>
+                    <button className="mt-16 px-10 py-6 md:py-8 border border-white text-white text-2xl md:text-3xl" onClick={scrollToMiddle}>Conoce Nuestros Servicios</button>
                     <div className="mt-4 flex items-center justify-center">
                         <div className="text-white text-4xl">
                             <FontAwesomeIcon icon={faAngleDoubleDown} className="text-white text-4xl animate-bounce mr-2 mt-20" />
@@ -22,7 +30,7 @@ function Services() {
                 </div>
             </div>
             <div className="relative z-5 p-8">
-                <h2 className="text-4xl font-bold text-center text-black mb-8">Servicios</h2>
+            <h2 className="text-7xl font-bold text-center text-gray-700 mb-8 mr-4 mt-8 ml-5">Servicios</h2>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-4 justify-items-center">
                     {[{ place: 'Cámaras de videovigilancia', discount: '-15%', rating: 5, reviews: 10, img: 'https://i.pinimg.com/564x/96/fb/ce/96fbce687cd179fe05c90731e658c7c2.jpg', link: '/camaras' },
@@ -39,7 +47,7 @@ function Services() {
                     { place: 'Santorini, Greece', discount: '-15%', rating: 5, reviews: 11, img: 'https://i.pinimg.com/564x/cb/df/89/cbdf8978a85635559958afcd832918cf.jpg', link: '/santorini' },
                     ].map((deal, index) => (
                         <div key={index} className="relative w-96 h-96 bg-cover bg-center overflow-hidden shadow-lg mb-8 mx-4">
-                            <div className="absolute top-0 left-0 bg-red-500 text-white px-2 py-1 z-10">{deal.discount}</div>
+                            <div className="absolute top-0 left-0 bg-red-500 text-white px-2 py-1">{deal.discount}</div>
                             <img src={deal.img} alt={deal.place} className="w-full h-full object-cover" />
                             <div className="absolute bottom-4 left-4 right-4  bg-white bg-opacity-75 p-4">
                                 <h3 className="text-lg font-semibold text-black">{deal.place}</h3>
