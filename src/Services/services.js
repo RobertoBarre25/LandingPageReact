@@ -33,7 +33,7 @@ function Services() {
             <div className="relative z-5 p-8 flex-grow">
                 <h2 className="text-7xl font-bold text-center text-gray-700 mb-8 mr-4 mt-8 ml-5">Servicios</h2>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-4 justify-items-center">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-5 justify-items-center">
                     {[{ place: 'Cámaras de videovigilancia', discount: '-15%', rating: 5, reviews: 10, img: 'https://i.pinimg.com/564x/96/fb/ce/96fbce687cd179fe05c90731e658c7c2.jpg', link: '/camaras' },
                     { place: 'Routers', discount: '-15%', rating: 4, reviews: 8, img: 'https://i.pinimg.com/564x/e3/da/05/e3da05fff94eea57cf8b7395cc6f9979.jpg', link: '/routers' },
                     { place: 'Instalación de fibra', discount: '-15%', rating: 3, reviews: 12, img: 'https://i.pinimg.com/564x/b1/e0/15/b1e0155a8cc3db972b7cb9cb6ffc79f4.jpg', link: '/fibra' },
