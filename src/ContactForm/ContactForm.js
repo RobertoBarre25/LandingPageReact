@@ -230,7 +230,7 @@ const ContactForm = () => {
                 inputStyle={{
                   width: "100%",
                   padding: "8px 16px 8px 48px", // Ajusta el padding izquierdo
-                  borderBottom: "2px solid #ccc",
+                  borderBottom: "2px solid grey",
                   background: "transparent",
                   fontSize: "14px",
                   color: "black",
