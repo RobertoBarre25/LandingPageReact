@@ -15,8 +15,7 @@ function Services() {
                     <button className="mt-16 px-10 py-6 md:py-8 border border-white text-white text-2xl md:text-3xl">Conoce Nuestros Servicios</button>
                     <div className="mt-4 flex items-center justify-center">
                         <div className="text-white text-4xl">
-                            <FontAwesomeIcon icon={faAngleDoubleDown} className="text-white text-4xl animate-bounce mr-2 mt-20" />
-                          
+                            <FontAwesomeIcon icon={faAngleDoubleDown} className="text-white text-4xl animate-bounce mr-2 mt-20" />                       
                         </div>
                     </div>
                 </div>
