@@ -85,11 +85,34 @@ textarea.input-hover-effect {
 }
 
 .contact-form-container {
-  border: 2px solid #ccc; /* Color del borde */
+  border: 2px solid transparent; /* Color del borde */
   border-radius: 10px; /* Redondear bordes */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Añadir sombra */
-  background-color: #fff; /* Fondo blanco */
-  padding: 20px; /* Espaciado interior */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Añadir sombra más pronunciada */
+  background-color: #ffffff; /* Fondo blanco */
+  padding: 30px; /* Espaciado interior */
   max-width: 800px; /* Ancho máximo del formulario */
   margin: 0 auto; /* Centrar el formulario */
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
+
+.contact-form-container:hover {
+  transform: translateY(-10px); 
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); 
+}
+
+.custom-select {
+  width: 100%;
+  padding: 8px 16px;
+  font-size: 14px;
+  outline: none;
+  color: black;
+  border: none;
+  background-color: transparent;
+  transition: all 0.3s;
+  border-bottom: 2px solid #ccc; 
+}
+
+.custom-select:focus {
+  border-bottom: 2px solid #007bff; 
+}
+
