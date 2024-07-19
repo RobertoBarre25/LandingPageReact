@@ -33,4 +33,7 @@
   a{
     text-decoration: none;   
   }
-
+  .link-underline {
+    text-decoration: none; /* Elimina el subrayado */
+    color: inherit; /* Hereda el color del texto del contenedor */
+  }
