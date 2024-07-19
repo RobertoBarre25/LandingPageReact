@@ -36,7 +36,7 @@ function Services() {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     {[{ place: 'Cámaras de videovigilancia', discount: '-15%', rating: 5, reviews: 10, img: 'https://i.pinimg.com/564x/96/fb/ce/96fbce687cd179fe05c90731e658c7c2.jpg', link: '/camaras' },
-                    { place: 'Routers', discount: '-15%', rating: 4, reviews: 8, img: 'https://i.pinimg.com/564x/e3/da/05/e3da05fff94eea57cf8b7395cc6f9979.jpg', link: '/routers' },
+                    { place: 'Routers', discount: '-15%', rating: 4, reviews: 8, img: 'https://i.pinimg.com/564x/e3/da/05/e3da05fff94eea57cf8b7395cc6f9979.jpg', link: '/paths' },
                     { place: 'Instalación de fibra', discount: '-15%', rating: 3, reviews: 12, img: 'https://i.pinimg.com/564x/b1/e0/15/b1e0155a8cc3db972b7cb9cb6ffc79f4.jpg', link: '/fibra' },
                     { place: 'Mantenimiento de equipos', discount: '-15%', rating: 4, reviews: 5, img: 'https://i.pinimg.com/564x/cb/df/89/cbdf8978a85635559958afcd832918cf.jpg', link: '/mantenimiento' },
                     { place: 'Protección antivirus', discount: '-15%', rating: 5, reviews: 10, img: 'https://i.pinimg.com/564x/a1/4c/38/a14c383ac13d55e1ff84fb4b64c9c8ff.jpg', link: '/antivirus' },

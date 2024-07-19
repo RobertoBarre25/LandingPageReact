@@ -6,8 +6,10 @@ import Cards from './CardsSer/cards'; // Importa tu componente Cards
 import InfoPage from './InfoPage/InfoPage'; // Importa el componente InfoPage
 import ContactForm from './ContactForm/ContactForm';
 import Footer from './footer/footer';
-import Services from './Services/services'
-
+import Services from './Services/services';
+import Camaras from './CCTV/Camaras';
+import  Paths from './RTS/paths';
+import FibraOptica from './FO/FibraOptica'
 const App = () => {
   return (
     <Router>
@@ -21,7 +23,11 @@ const App = () => {
           <Route path="/info" element={<InfoPage />} />
           <Route path="/service" element={<Services />} />
           <Route path="/contact" element={<ContactForm />} />
-          
+          <Route path="/camaras" element={<Camaras />} />
+          <Route path="/paths" element={<Paths />} />
+          <Route path="/fibra" element={<FibraOptica />} />
+
+         
 
         </Routes>
         <Footer />
