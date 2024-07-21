@@ -157,7 +157,7 @@ const App = () => {
             </div>
             <div className="px-4 md:px-8 lg:px-12 w-full py-12 bg-beige">
                 <div className="text-center mb-12">
-                    <h3 className="text-7xl font-semibold mb-4 text-blue-500">Routes</h3>
+                    <h3 className="text-7xl font-semibold mb-4 text-blue-500">Card 1</h3>
                 </div>
                 <div className="flex flex-wrap justify-center gap-4">
                     {/* Ejemplo de otros componentes o secciones debajo del carrusel */}
