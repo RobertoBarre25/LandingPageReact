@@ -171,7 +171,7 @@ const ContactForm = () => {
             Solicitar Información del Servicio
           </h2>
         </div>
-        <form className="space-y-5 mt-10" onSubmit={handleSubmit}>
+        <form className="space-y-4 mt-10" onSubmit={handleSubmit}>
           <input type="hidden" name="service" value={formData.service} />
           {initialService === "" && (
             <div className="relative">
