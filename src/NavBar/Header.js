@@ -30,17 +30,17 @@ function Header({ isBlue }) {
   };
 
   const handleServicesClick = () => {
-    navigate('/service'); // Cambia "/nueva-ruta" a la ruta que desees
+    navigate('/service'); 
   };
   
   const handleHomeClick = () => {
-    navigate('/'); // Cambia "/nueva-ruta" a la ruta que desees
+    navigate('/'); 
   };
 
   return (
     <header className={`fixed top-0 left-0 w-full z-10 transition-all duration-800 ease-in-out h-16 ${headerClass}`}>
       <nav className="flex justify-between items-center px-5 h-full">
-        <a href='https://solucione.com.mx/corporativo/'><div className="text-white text-lg md:text-xl">Grupo Alternativas Soluciones</div></a>
+        <a href='https://solucione.com.mx/corporativo/' className="nav-link"><div className="text-white text-lg md:text-xl">Grupo Alternativas Soluciones</div></a>
         <ul className="text-white flex space-x-5 list-none">
           <li style={{ marginTop: '1.2rem' }}>
             <button onClick={handleHomeClick} className="nav-link">Home</button>

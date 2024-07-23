@@ -171,7 +171,7 @@ const ContactForm = () => {
             Solicitar Información del Servicio
           </h2>
         </div>
-        <form className="space-y-4 mt-10" onSubmit={handleSubmit}>
+        <form className="space-y-6 mt-10" onSubmit={handleSubmit}>
           <input type="hidden" name="service" value={formData.service} />
           {initialService === "" && (
             <div className="relative">
@@ -236,7 +236,6 @@ const ContactForm = () => {
                   color: "black",
                   transition: "all 0.3s", // Agrega la transición
                   boxShadow: "none", // Inicializa sin sombra
-                  border: "none"
                 }}
                 containerStyle={{ width: "100%" }}
                 buttonStyle={{
@@ -334,7 +333,7 @@ const ContactForm = () => {
             <button
               type="button"
               onClick={handleBack}
-              className="bg-blue-900 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
               Regresar
             </button>

@@ -40,13 +40,13 @@ function Services() {
                     { place: 'Instalación de fibra', discount: '-15%', rating: 3, reviews: 12, img: 'https://i.pinimg.com/564x/b1/e0/15/b1e0155a8cc3db972b7cb9cb6ffc79f4.jpg', link: '/fibra' },
                     { place: 'Mantenimiento de equipos', discount: '-15%', rating: 4, reviews: 5, img: 'https://i.pinimg.com/564x/cb/df/89/cbdf8978a85635559958afcd832918cf.jpg', link: '/mantenimiento' },
                     { place: 'Protección antivirus', discount: '-15%', rating: 5, reviews: 10, img: 'https://i.pinimg.com/564x/a1/4c/38/a14c383ac13d55e1ff84fb4b64c9c8ff.jpg', link: '/antivirus' },
-                    { place: 'Maldives', discount: '-20%', rating: 5, reviews: 10, img: 'https://i.pinimg.com/564x/96/fb/ce/96fbce687cd179fe05c90731e658c7c2.jpg', link: '/maldives' },
-                    { place: 'PhongNha, Vietnam',  discount: '-15%', rating: 4, reviews: 7, img: 'https://i.pinimg.com/564x/e3/da/05/e3da05fff94eea57cf8b7395cc6f9979.jpg', link: '/phongnha' },
-                    { place: 'Namdu Islands',  discount: '-10%', rating: 4, reviews: 9, img: 'https://i.pinimg.com/564x/b1/e0/15/b1e0155a8cc3db972b7cb9cb6ffc79f4.jpg', link: '/namdu' },
-                    { place: 'Santorini, Greece', discount: '-15%', rating: 5, reviews: 11, img: 'https://i.pinimg.com/564x/cb/df/89/cbdf8978a85635559958afcd832918cf.jpg', link: '/santorini' },
-                    { place: 'Santorini, Greece', discount: '-15%', rating: 5, reviews: 11, img: 'https://i.pinimg.com/564x/cb/df/89/cbdf8978a85635559958afcd832918cf.jpg', link: '/santorini' },
-                    { place: 'Santorini, Greece', discount: '-15%', rating: 5, reviews: 11, img: 'https://i.pinimg.com/564x/cb/df/89/cbdf8978a85635559958afcd832918cf.jpg', link: '/santorini' },
-                    { place: 'Santorini, Greece', discount: '-15%', rating: 5, reviews: 11, img: 'https://i.pinimg.com/564x/cb/df/89/cbdf8978a85635559958afcd832918cf.jpg', link: '/santorini' },
+                    { place: 'Maldives', discount: '-20%', rating: 5, reviews: 10, img: 'https://i.pinimg.com/564x/96/fb/ce/96fbce687cd179fe05c90731e658c7c2.jpg', link: '/card1' },
+                    { place: 'PhongNha, Vietnam',  discount: '-15%', rating: 4, reviews: 7, img: 'https://i.pinimg.com/564x/e3/da/05/e3da05fff94eea57cf8b7395cc6f9979.jpg', link: '/card2' },
+                    { place: 'Namdu Islands',  discount: '-10%', rating: 4, reviews: 9, img: 'https://i.pinimg.com/564x/b1/e0/15/b1e0155a8cc3db972b7cb9cb6ffc79f4.jpg', link: '/card3' },
+                    { place: 'Santorini, Greece', discount: '-15%', rating: 5, reviews: 11, img: 'https://i.pinimg.com/564x/cb/df/89/cbdf8978a85635559958afcd832918cf.jpg', link: '/card4' },
+                    { place: 'Santorini, Greece', discount: '-15%', rating: 5, reviews: 11, img: 'https://i.pinimg.com/564x/cb/df/89/cbdf8978a85635559958afcd832918cf.jpg', link: '/card5' },
+                    { place: 'Santorini, Greece', discount: '-15%', rating: 5, reviews: 11, img: 'https://i.pinimg.com/564x/cb/df/89/cbdf8978a85635559958afcd832918cf.jpg', link: '/card6' },
+                    { place: 'Santorini, Greece', discount: '-15%', rating: 5, reviews: 11, img: 'https://i.pinimg.com/564x/cb/df/89/cbdf8978a85635559958afcd832918cf.jpg', link: '/card7' },
                     ].map((deal, index) => (
                         <div key={index} className="relative border-none group m-4">
                             <div className="relative overflow-hidden h-80 w-full border-none">
