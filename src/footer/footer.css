@@ -1,18 +1,36 @@
+.footer {
+  background-color: #333;
+  color: #fff; /* Color del texto */
+  text-align: center; /* Centra el texto del footer */
+  padding: 1rem;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
 
 .footer-top {
-  padding-bottom: 10px;
+  padding-bottom: 20px;
   border-bottom: 1px solid #b1aaaa;
-  
+}
+
+.footer-logo-container {
+  text-align: center; /* Centra la imagen del logo */
+  margin-bottom: 20px;
 }
 
 .footer-logo {
   max-width: 150px;
 }
 
+.footer-links {
+  padding: 10px 0;
+}
+
 .footer-links a {
-  color: #504b4be7;
+  color: #fff; /* Color de los enlaces */
   text-decoration: none;
   font-size: 14px;
+  margin: 0 10px; /* Espaciado entre los enlaces */
 }
 
 .footer-links a:hover {
@@ -23,27 +41,29 @@
   padding-top: 20px;
 }
 
+.footer-social {
+  display: flex;
+  justify-content: center;
+  gap: 10px; /* Espaciado entre los iconos */
+}
+
 .footer-social img {
   width: 24px;
   height: 24px;
 }
-body {
+.footer-logo-container {
   display: flex;
-  flex-direction: column;
-  min-height: 100vh; /* Esto asegura que el contenido ocupe al menos toda la altura de la ventana */
-  margin: 0;
+  flex-direction: column; /* Organiza los elementos en una columna */
+  justify-content: center; /* Centra el contenido horizontalmente */
+  align-items: center; /* Centra el contenido verticalmente si es necesario */
+  text-align: center; /* Asegura que el texto esté centrado */
+  margin: 20px; /* Margen igual en todos los lados */
 }
 
-.App {
-  flex: 1; /* Esto hace que el contenido ocupe todo el espacio disponible */
+.footer-logo {
+  max-width: 150px; /* Tamaño máximo del logotipo */
 }
 
-.footer {
-  background-color: #333;
-  color: white;
-  text-align: center;
-  padding: 1rem;
-  position: relative;
-  bottom: 0; /* Asegura que el footer esté siempre al final */
-  width: 100%;
+.footer-logo-container p {
+  margin-top: 10px; /* Margen superior para separar el texto del logotipo */
 }
