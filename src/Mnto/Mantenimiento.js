@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Card, Container, Row, Col, Button } from 'react-bootstrap';
+import { motion } from 'framer-motion';
+import ReactPlayer from 'react-player';
+import Spline from '@splinetool/react-spline';
+import { Link, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
 
 const scrollToMiddle = () => {
     const targetPosition = window.innerHeight * 1.8;
@@ -164,7 +170,7 @@ const App = () => {
                     <div className="w-full sm:w-1/2 lg:w-1/4 mb-8">
                         <div className="bg-white shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 h-full flex flex-col justify-between mx-6">
                             <div className="p-6 flex-1 flex flex-col justify-between bg-white">
-                                <img src="https://i.pinimg.com/564x/68/11/b2/6811b267d09424da65ae68a6614cf6aa.jpg" alt="Bean Scene" className="w-full h-48 object-cover mb-6 mt-2" />
+                            <Spline scene="https://prod.spline.design/fm6r9Ujx42txyLnz/scene.splinecode" />
                                 <p className="text-gray-700 text-left text-base mt-4 mx-6 flex-grow">Get your caffeine fix at the cozy, local cafe or discover their sweet treat options for non-caffeine lovers at Bean Scene.</p>
                                 <div className="text-center mt-4">
                                     <button className="bg-blue-500 text-white py-2 px-4 rounded">Ver más</button>
@@ -196,6 +202,28 @@ const App = () => {
                     </div>
                 </div>
             </div>
+            <Element name="highlight" className="element">
+                <motion.section className="container my-5"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1, delay: 0.2 }}
+                >
+                <Row className="align-items-center">
+                    <Col md={5}>
+                    <h2 className="text-center">¡Transforma tu infraestructura de TI!</h2>
+                    <p className="text-center small">
+                        ¡Regístrate ahora y descubre ofertas exclusivas en servicios de cableado estructurado! No te pierdas esta oportunidad única para transformar tu empresa. ¡El futuro es tuyo!
+                    </p>
+                    <div className="text-center">
+                        <Button variant="primary" size="lg">¡Compra Ahora!</Button>
+                    </div>
+                    </Col>
+                    <Col md={7} className="text-center">
+                    <Spline scene="https://prod.spline.design/fm6r9Ujx42txyLnz/scene.splinecode" />
+                    </Col>
+                </Row>
+                </motion.section>
+            </Element>
         </div>
     );
 };

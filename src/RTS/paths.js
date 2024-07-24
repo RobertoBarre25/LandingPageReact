@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Card, Container, Row, Col, Button } from 'react-bootstrap';
+import { motion } from 'framer-motion';
+import ReactPlayer from 'react-player';
+import Spline from '@splinetool/react-spline';
+import { Link, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
 
 const scrollToMiddle = () => {
     const targetPosition = window.innerHeight * 1.8;
@@ -159,6 +165,28 @@ const App = () => {
                 <div className="text-center mb-12">
                     <h3 className="text-7xl font-semibold mb-4 text-blue-500">Routes</h3>
                 </div>
+                <Element name="highlight" className="element">
+                    <motion.section className="container my-5"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 1, delay: 0.2 }}
+                    >
+                    <Row className="align-items-center">
+                        <Col md={5}>
+                        <h2 className="text-center">¡Transforma tu infraestructura de TI!</h2>
+                        <p className="text-center small">
+                            ¡Regístrate ahora y descubre ofertas exclusivas en servicios de cableado estructurado! No te pierdas esta oportunidad única para transformar tu empresa. ¡El futuro es tuyo!
+                        </p>
+                        <div className="text-center">
+                            <Button variant="primary" size="lg">¡Compra Ahora!</Button>
+                        </div>
+                        </Col>
+                        <Col md={7} className="text-center">
+                        <Spline scene="https://prod.spline.design/fm6r9Ujx42txyLnz/scene.splinecode" />
+                        </Col>
+                    </Row>
+                    </motion.section>
+                </Element>
                 <div className="flex flex-wrap justify-center gap-4">
                     {/* Ejemplo de otros componentes o secciones debajo del carrusel */}
                     <div className="w-full sm:w-1/2 lg:w-1/4 mb-8">
