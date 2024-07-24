@@ -103,12 +103,8 @@ const Body = () => {
                         No dejes que las amenazas cibernéticas te tomen por sorpresa. 
                         ¡Confía en CloudGuard y mantén tu información segura y eficiente en todo momento!
                     </h3>
-                  <button 
-                        className="bg-blue-500 border-2 border-white text-white border-none text-lg md:text-xl py-3 md:py-4 px-6 md:px-10 cursor-pointer m-3 md:m-5 rounded-[3px] hover:bg-red-500"
-                        onClick={() => handleClick("Me interesa el servicio: Cloud Guard")}
-                        >
-                            Contrata ya!
-                        </button>
+                 
+                 
 
                     <button className="border-2 border-white text-white text-lg md:text-xl py-3 md:py-4 px-6 md:px-10 cursor-pointer m-3 md:m-5 rounded-[3px] hover:bg-white hover:bg-opacity-10" onClick={scrollToMiddle}>
                         Conoce más!
@@ -119,19 +115,17 @@ const Body = () => {
     ];
     return (
         <div className="flex flex-col items-center">
+        <HorizontalCard
+            title='¡Contactanos Ahora y obten un 10% de descuento en cualquiera de nuestros servicios!'
+            videoSrc='videoT.mp4'
+        />
         <div className="relative w-full">
             <Carousel images={images} />
         </div>
-        <HorizontalCard
-            title='! Contactanos Ahora y obten un 10% de descuento en cualquiera de nuestros servicios !'
-            imgSrc='https://cdn-3.expansion.mx/dims4/default/48ecff4/2147483647/strip/true/crop/4288x2848+0+0/resize/1200x797!/format/webp/quality/60/?url=https%3A%2F%2Fcdn-3.expansion.mx%2F89%2F3d%2F5c3a335c41a6be6d486fe52b2712%2Fistock-173029893.jpg'
-        />
         <ImageSection />
         <Cards />
-        
-      <CarouselComponent />
-   
-        </div>
+        <CarouselComponent />
+    </div>
         
         );
     };

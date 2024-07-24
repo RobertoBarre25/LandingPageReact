@@ -49,7 +49,7 @@ function Header({ isBlue }) {
             <button onClick={handleServicesClick} className="nav-link">Servicios</button>
           </li>
           <li style={{ marginTop: '1.2rem' }}>
-            <button onClick={handleContactClick} className="nav-link">Contact</button>
+            <button onClick={handleContactClick} style={{ backgroundColor: '#3B82F6', borderRadius: '2px', width:"140px", height:"30px"}} className="nav-link">Contact</button>
           </li>
         </ul>
       </nav>
