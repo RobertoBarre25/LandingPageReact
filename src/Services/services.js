@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDoubleDown } from '@fortawesome/free-solid-svg-icons';
 
 const scrollToMiddle = () => {
-    const targetPosition = window.innerHeight * 1;
+    const targetPosition = window.innerHeight * 0.95;
     window.scrollTo({
         top: targetPosition,
         behavior: 'smooth'
