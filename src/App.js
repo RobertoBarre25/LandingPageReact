@@ -19,6 +19,8 @@ import Card4 from './Card4/card4'
 import Card5 from './Card5/card5'
 import Card6 from './Card6/card6'
 import Card7 from './Card7/card7'
+import Login from './Login/Login'
+import Register from './Registrer/Register'
 
 const App = () => {
   return (
@@ -45,8 +47,9 @@ const App = () => {
           <Route path="/card5" element={<Card5 />} />
           <Route path="/card6" element={<Card6 />} />
           <Route path="/card7" element={<Card7 />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
 
-         
 
         </Routes>
         <Footer />
