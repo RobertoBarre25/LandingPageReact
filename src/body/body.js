@@ -103,7 +103,7 @@ const Body = () => {
         <div className="flex flex-col items-center">
             <HorizontalCard
                 title='¡Contáctanos Ahora y obtén un 10% de descuento en cualquiera de nuestros servicios!'
-                videoSrc='videoT.mp4'
+                videoSrc='videoTel.mp4'
             />
             <div className="relative w-full">
                 <Carousel images={images} />

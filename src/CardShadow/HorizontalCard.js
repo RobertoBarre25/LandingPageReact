@@ -91,7 +91,7 @@ const HorizontalCard = ({ videoSrc, title, description }) => {
           ref={videoRef}
           src={videoSrc}
           className="PublicitiImg"
-          style={{ filter: 'brightness(60%)', width: 'auto', height: 'auto' }}
+          style={{ filter: 'brightness(60%)', width: '1920px', height: 'auto' }}
           loop
           muted
           playsInline
@@ -100,7 +100,7 @@ const HorizontalCard = ({ videoSrc, title, description }) => {
            <FontAwesomeIcon icon={faAngleDoubleDown} className="text-white text-2xl sm:text-3xl md:text-4xl animate-bounce mt-4 md:mt-20" />
           </div>
       
-    </div>
+       </div>
     </div>
   );
 };

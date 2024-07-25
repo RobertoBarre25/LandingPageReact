@@ -2,10 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Card, Container, Row, Col, Button } from 'react-bootstrap';
-import { motion } from 'framer-motion';
-import ReactPlayer from 'react-player';
 import Spline from '@splinetool/react-spline';
-import { Link, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
+
 
 const scrollToMiddle = () => {
     const targetPosition = window.innerHeight * 1.8;
