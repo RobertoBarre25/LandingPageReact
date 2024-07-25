@@ -53,17 +53,17 @@
 }
 .footer-logo-container {
   display: flex;
-  flex-direction: column; /* Organiza los elementos en una columna */
-  justify-content: center; /* Centra el contenido horizontalmente */
-  align-items: center; /* Centra el contenido verticalmente si es necesario */
-  text-align: center; /* Asegura que el texto esté centrado */
-  margin: 20px; /* Margen igual en todos los lados */
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center;
+  text-align: center; 
+  margin: 20px; 
 }
 
 .footer-logo {
-  max-width: 150px; /* Tamaño máximo del logotipo */
+  max-width: 150px; 
 }
 
 .footer-logo-container p {
-  margin-top: 10px; /* Margen superior para separar el texto del logotipo */
+  margin-top: 10px; 
 }
