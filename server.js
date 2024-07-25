@@ -27,12 +27,18 @@ const transporter = nodemailer.createTransport({
 
 const emailDestinatario = 'comercio@solucione.mx';
 
-// Conexión a MongoDB
-mongoose.connect('mongodb://localhost:27017/Administrador', {
+// Conexión a MongoDBconst mongoose = require('mongoose');
+
+// Reemplaza <username>, <password>, <cluster-address>, y <database> con tus valores
+const uri = 'mongodb+srv://Arturo:1234@cluster0.eoflwrk.mongodb.net/Administrador';
+
+mongoose.connect(uri, {
   useNewUrlParser: true,
-  useUnifiedTopology: true,
-}).then(() => console.log('MongoDB connected'))
-  .catch(err => console.log(err));
+  useUnifiedTopology: true
+})
+.then(() => console.log('MongoDB connected'))
+.catch(err => console.error('Error connecting to MongoDB:', err));
+
 
 // Definir esquema y modelo de Mongoose para usuarios
 const userSchema = new mongoose.Schema({
