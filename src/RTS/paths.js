@@ -165,28 +165,18 @@ const App = () => {
                 <div className="text-center mb-12">
                     <h3 className="text-7xl font-semibold mb-4 text-blue-500">Routes</h3>
                 </div>
-                <Element name="highlight" className="element">
-                    <motion.section className="container my-5"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 1, delay: 0.2 }}
-                    >
-                    <Row className="align-items-center">
-                        <Col md={5}>
-                        <h2 className="text-center">¡Transforma tu infraestructura de TI!</h2>
-                        <p className="text-center small">
+                <div className="flex flex-col md:flex-row px-4 md:px-6 lg:px-8 w-full py-8 bg-beige">
+                    <div className="text-section flex-1 mb-5 md:mb-0 md:mr-4 flex flex-col justify-center">
+                        <h2 className="text-2xl md:text-3xl font-bold mb-6 text-gray-800">¡Transforma tu infraestructura de TI!</h2>
+                        <p className="text-base md:text-lg mb-6 text-gray-700 leading-relaxed">
                             ¡Regístrate ahora y descubre ofertas exclusivas en servicios de cableado estructurado! No te pierdas esta oportunidad única para transformar tu empresa. ¡El futuro es tuyo!
                         </p>
-                        <div className="text-center">
-                            <Button variant="primary" size="lg">¡Compra Ahora!</Button>
-                        </div>
-                        </Col>
-                        <Col md={7} className="text-center">
-                        <Spline scene="https://prod.spline.design/fm6r9Ujx42txyLnz/scene.splinecode" />
-                        </Col>
-                    </Row>
-                    </motion.section>
-                </Element>
+                        <Button variant="primary" size="sm" className="py-2 px-3">¡Compra Ahora!</Button>
+                    </div>
+                    <div className="spline-section flex-1 flex justify-center items-center">
+                        <Spline scene="https://prod.spline.design/fm6r9Ujx42txyLnz/scene.splinecode" className="w-full h-auto md:h-64" />
+                    </div>
+                </div>
                 <div className="flex flex-wrap justify-center gap-4">
                     {/* Ejemplo de otros componentes o secciones debajo del carrusel */}
                     <div className="w-full sm:w-1/2 lg:w-1/4 mb-8">
