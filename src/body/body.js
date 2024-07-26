@@ -1,4 +1,3 @@
-import React from 'react';
 import './body.css';
 import HorizontalCard from '../CardShadow/HorizontalCard';
 import Carousel from '../Carousel/carousel';
@@ -6,6 +5,8 @@ import Cards from '../CardsSer/cards';
 import ImageSection from '../ImageSection/ImgSection';
 import { useNavigate } from 'react-router-dom';
 import CarouselComponent from '../Components/CarouselComponent';
+import React, { useState, useEffect } from 'react';  // Asegúrate de importar useState y useEffect
+import axios from 'axios';  // Asegúrate de importar axios
 
 const scrollToMiddle = () => {
     const targetPosition = window.innerHeight * 1.8;
@@ -17,6 +18,22 @@ const scrollToMiddle = () => {
 
 const Body = () => {
     const navigate = useNavigate();
+    const [principalText, setPrincipalText] = useState('');
+    const [loading, setLoading] = useState(true);  // Definir el estado para loading
+    const [error, setError] = useState(null); 
+
+    useEffect(() => {
+  axios.get('http://localhost:5000/api/body')
+    .then(response => {
+      setPrincipalText(response.data.principalText);
+      setLoading(false);
+    })
+    .catch(error => {
+      console.error('Error al obtener el texto principal:', error);
+      setError('Ocurrió un error al obtener el texto principal');
+      setLoading(false);
+    });
+}, []);
 
     const handleClick = (service) => {
         navigate('/contact', { state: { service } });
@@ -89,6 +106,12 @@ const Body = () => {
                         ¡Protege y optimiza tus datos como nunca antes! Con CloudGuard, disfruta de monitoreo continuo y protección avanzada para todos tus datos en la nube. No dejes que las amenazas cibernéticas te tomen por sorpresa. ¡Confía en CloudGuard y mantén tu información segura y eficiente en todo momento!
                     </h3>
                     <button 
+                        className="bg-blue-500 border-2 border-white text-white text-lg md:text-xl py-3 md:py-4 px-6 md:px-10 cursor-pointer m-3 md:m-5 rounded-[3px] hover:bg-red-500"
+                        onClick={() => handleClick("Me interesa el servicio: Cloud Guard")}
+                    >
+                        ¡Contrata ya!
+                    </button>
+                    <button 
                         className="border-2 border-white text-white text-lg md:text-xl py-3 md:py-4 px-6 md:px-10 cursor-pointer m-3 md:m-5 rounded-[3px] hover:bg-white hover:bg-opacity-10"
                         onClick={scrollToMiddle}
                     >
@@ -100,11 +123,15 @@ const Body = () => {
     ];
 
     return (
-        <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center">
+        {loading && <p>Cargando...</p>}
+        {error && <p>Ocurrió un error al cargar el texto principal.</p>}
+        {!loading && !error && (
             <HorizontalCard
-                title='¡Contáctanos Ahora y obtén un 10% de descuento en cualquiera de nuestros servicios!'
+                title={principalText}
                 videoSrc='videoTel.mp4'
             />
+        )}
             <div className="relative w-full">
                 <Carousel images={images} />
             </div>
