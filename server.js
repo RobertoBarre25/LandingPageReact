@@ -47,7 +47,7 @@ const carouselSchema = new mongoose.Schema({
   buttonText2: { type: String, required: true },
   buttonAction2: { type: String, required: true },
   subSection: { type: String, required: true }
-}, { collection: 'carousel' });
+}, { collection: 'body' });
 
 const Carousel = mongoose.model('Carousel', carouselSchema);
 
