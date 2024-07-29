@@ -51,6 +51,24 @@ const carouselSchema = new mongoose.Schema({
 
 const Carousel = mongoose.model('Carousel', carouselSchema);
 
+
+
+// Definir esquema y modelo de Mongoose para la colección 'm1'
+const m1Schema = new mongoose.Schema({
+  section: { type: String, required: true },
+  title: { type: String, required: true },
+  subtitle: { type: String, required: true },
+  description: { type: String, required: true },
+  imageUrl: { type: String, required: true },
+  buttonText1: { type: String, required: true },
+  buttonAction1: { type: String, required: true },
+  buttonText2: { type: String },
+  buttonAction2: { type: String }
+}, { collection: 'm1' });
+
+const M1 = mongoose.model('M1', m1Schema);
+
+
 // Conexión a MongoDB
 const uri = 'mongodb+srv://Arturo:1234@cluster0.eoflwrk.mongodb.net/Administrador?retryWrites=true&w=majority';
 
@@ -114,8 +132,21 @@ app.get('/api/body', async (req, res) => {
   }
 });
 
-// Endpoint para obtener los datos del carousel
-// Endpoint para obtener los datos del carousel
+// Endpoint para obtener los datos del carrusel en la colección 'm1'
+app.get('/api/m1', async (req, res) => {
+  console.log('Received request for /api/m1');
+  try {
+    const m1Data = await M1.find({ section: 'carousel' }).sort({ subSection: 1 });
+    if (!m1Data || m1Data.length === 0) return res.status(404).send('No se encontró información en m1');
+    res.json(m1Data);
+  } catch (err) {
+    console.error('Error:', err.message);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
+
 app.get('/api/carousel', async (req, res) => {
   console.log('Received request for /api/carousel');
   try {
