@@ -27,12 +27,39 @@ const transporter = nodemailer.createTransport({
 
 const emailDestinatario = 'comercio@solucione.mx';
 
+// Definir esquema y modelo de Mongoose para la colección 'body'
+const bodySchema = new mongoose.Schema({
+  tag: { type: String, required: true },
+  principalText: { type: String, required: true }
+}, { collection: 'body' });
+
+const Body = mongoose.model('Body', bodySchema);
+
+// Definir esquema y modelo de Mongoose para la colección 'carousel'
+const carouselSchema = new mongoose.Schema({
+  section: { type: String, required: true },
+  title: { type: String, required: true },
+  subtitle: { type: String, required: true },
+  description: { type: String, required: true },
+  imageUrl: { type: String, required: true },
+  buttonText1: { type: String, required: true },
+  buttonAction1: { type: String, required: true },
+  buttonText2: { type: String, required: true },
+  buttonAction2: { type: String, required: true },
+  subSection: { type: String, required: true }
+}, { collection: 'body' });
+
+const Carousel = mongoose.model('Carousel', carouselSchema);
+
 // Conexión a MongoDB
-mongoose.connect('mongodb://localhost:27017/Administrador', {
+const uri = 'mongodb+srv://Arturo:1234@cluster0.eoflwrk.mongodb.net/Administrador?retryWrites=true&w=majority';
+
+mongoose.connect(uri, {
   useNewUrlParser: true,
-  useUnifiedTopology: true,
-}).then(() => console.log('MongoDB connected'))
-  .catch(err => console.log(err));
+  useUnifiedTopology: true
+})
+.then(() => console.log('MongoDB connected'))
+.catch(err => console.error('Error connecting to MongoDB:', err));
 
 // Definir esquema y modelo de Mongoose para usuarios
 const userSchema = new mongoose.Schema({
@@ -72,6 +99,43 @@ app.post('/login', async (req, res) => {
     res.status(500).send('Error al autenticar usuario');
   }
 });
+
+// Endpoint para obtener el texto principal
+app.get('/api/body', async (req, res) => {
+  console.log('Received request for /api/body');
+  try {
+    const bodyData = await Body.findOne({ tag: 'principalText' });
+    console.log('Body data:', bodyData);
+    if (!bodyData) return res.status(404).send('No se encontró el texto principal');
+    res.json(bodyData);
+  } catch (err) {
+    console.error('Error:', err.message);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Endpoint para obtener los datos del carousel
+// Endpoint para obtener los datos del carousel
+app.get('/api/carousel', async (req, res) => {
+  console.log('Received request for /api/carousel');
+  try {
+    // Obtener todos los documentos de la sección 'carousel' y ordenarlos por 'subSection'
+    const carouselData = await Carousel.find({ section: 'carousel' }).sort({ subSection: 1 });
+
+    // Verificar si se encontró datos
+    if (!carouselData || carouselData.length === 0) {
+      return res.status(404).send('No se encontró la sección del carrusel');
+    }
+
+    res.json(carouselData);
+  } catch (err) {
+    console.error('Error:', err.message);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+    
+
 
 // Endpoint para enviar correo electrónico
 app.post('/send-email', (req, res) => {
