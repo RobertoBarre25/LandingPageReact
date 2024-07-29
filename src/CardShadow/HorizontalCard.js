@@ -41,9 +41,13 @@ const HorizontalCard = ({ videoSrc, title, description }) => {
     const handleIntersection = (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          videoRef.current.play();
+          if (videoRef.current) {
+            videoRef.current.play();
+          }
         } else {
-          videoRef.current.pause();
+          if (videoRef.current) {
+            videoRef.current.pause();
+          }
         }
       });
     };
@@ -76,7 +80,7 @@ const HorizontalCard = ({ videoSrc, title, description }) => {
         <p className="description">{description}</p>
         <button
           className="mt-4 px-6 py-3 border border-white"
-         
+          onClick={() => handleClick('service')}
         >
           Contacta ya!
         </button>
