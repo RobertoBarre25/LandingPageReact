@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';  // Asegúrate de importar useState y useEffect
+import axios from 'axios';  // Asegúrate de importar axios
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDoubleDown } from '@fortawesome/free-solid-svg-icons';
 
@@ -10,7 +11,34 @@ const scrollToMiddle = () => {
     });
 };
 
-function Services() {
+const Services = () => {
+    const [imgText, setImgText] = useState('');
+    const [buttonServText, setButtonServText] = useState('');
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        axios.get('http://localhost:5000/api/service')
+            .then(response => {
+                if (response.data.length > 0) {
+                    const { imgTextServ, buttonTextServ } = response.data[0];
+                    setImgText(imgTextServ);
+                    setButtonServText(buttonTextServ);
+                }
+            })
+            .catch(error => {
+                console.error('Error al obtener los datos de servicios:', error);
+                setError('Ocurrió un error al obtener los datos de servicios');
+            })
+            .finally(() => {
+                setLoading(false);
+            });
+    }, []);
+
+    if (loading) return <p>Cargando...</p>;
+    if (error) return <p>{error}</p>;
+
+
     return (
         <div className="flex flex-col min-h-screen">
                         <div className="relative h-screen">
