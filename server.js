@@ -68,6 +68,32 @@ const m1Schema = new mongoose.Schema({
 
 const M1 = mongoose.model('M1', m1Schema);
 
+const serviceSchema = new mongoose.Schema({
+  imgText: String,
+  buttonServText: String
+}, { collection: 'services' });
+
+const Service = mongoose.model('Service', serviceSchema);
+
+// Endpoint para obtener datos de servicios
+app.get('/api/service', async (req, res) => {
+  console.log('Received request for /api/service');
+  try {
+      const servicesData = await Service.find({});
+      
+      if (!servicesData || servicesData.length === 0) {
+          console.log('No se encontraron servicios');
+          return res.status(404).send('No se encontraron servicios');
+      }
+
+      console.log('Servicios encontrados:', servicesData);
+      res.json(servicesData);
+  } catch (err) {
+      console.error('Error:', err.message);
+      res.status(500).json({ error: err.message });
+  }
+});
+
 
 // Conexión a MongoDB
 const uri = 'mongodb+srv://Arturo:1234@cluster0.eoflwrk.mongodb.net/Administrador?retryWrites=true&w=majority';
