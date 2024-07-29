@@ -14,6 +14,10 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+
+// Conexión a MongoDB
+const uri = 'mongodb+srv://Arturo:1234@cluster0.eoflwrk.mongodb.net/Administrador?retryWrites=true&w=majority';
+
 // Configuración de Nodemailer
 const transporter = nodemailer.createTransport({
   host: 'mail09.xinet.com.mx',
@@ -27,6 +31,24 @@ const transporter = nodemailer.createTransport({
 
 const emailDestinatario = 'comercio@solucione.mx';
 
+const imageSectionSchema = new mongoose.Schema({
+  tag: { type: String, required: true },
+  section: { type: String, required: true },
+  img: { type: String, required: true },
+  description: { type: String, required: true },
+  buttonText: { type: String, required: true },
+  buttonValue: { type: String, required: true }
+}, { collection: 'body' });
+
+const ImageSec = mongoose.model('ImageSec', imageSectionSchema);
+
+
+const imageSectionSchemaTitle =new mongoose.Schema({
+    title: {type: String, required: true}
+  },{collection: 'body'});
+
+const ImageSecTitle = mongoose.model('ImageSecTitle', imageSectionSchemaTitle);
+
 // Definir esquema y modelo de Mongoose para la colección 'body'
 const bodySchema = new mongoose.Schema({
   tag: { type: String, required: true },
@@ -35,7 +57,7 @@ const bodySchema = new mongoose.Schema({
 
 const Body = mongoose.model('Body', bodySchema);
 
-// Definir esquema y modelo de Mongoose para la colección 'carousel'
+// Definir esquema y modelo de Mongoose para la colección ''
 const carouselSchema = new mongoose.Schema({
   section: { type: String, required: true },
   title: { type: String, required: true },
@@ -51,8 +73,6 @@ const carouselSchema = new mongoose.Schema({
 
 const Carousel = mongoose.model('Carousel', carouselSchema);
 
-// Conexión a MongoDB
-const uri = 'mongodb+srv://Arturo:1234@cluster0.eoflwrk.mongodb.net/Administrador?retryWrites=true&w=majority';
 
 mongoose.connect(uri, {
   useNewUrlParser: true,
@@ -114,7 +134,7 @@ app.get('/api/body', async (req, res) => {
   }
 });
 
-// Endpoint para obtener los datos del carousel
+
 // Endpoint para obtener los datos del carousel
 app.get('/api/carousel', async (req, res) => {
   console.log('Received request for /api/carousel');
@@ -134,8 +154,40 @@ app.get('/api/carousel', async (req, res) => {
   }
 });
 
-    
+app.get('/api/ImageSection', async(req, res) => {
+  console.log('Recibed request for api/body');
+    try{
+      const  ImageSectionData = await ImageSecTitle.findOne({tag: 'ImageSection'});
+      console.log('ImageSection Data: ', ImageSectionData);
+      if(!ImageSectionData) return res.status(404).send('Ups ha ocurrido un error al encontrar los datos');
+          res.json(ImageSectionData)
+      }catch(err){
+        console.error('Error:', err.message);
+        res.status(500).json({error: err.message});
+      }
+});
 
+app.get('/api/ImageSectionCards', async (req, res) => {
+  console.log('Received request for /api/ImageSectionCards');
+  try {
+    const section = req.query.section;
+
+    if (!section) {
+      return res.status(400).send('Se requiere el parámetro de sección');
+    }
+
+    const imageSectionData = await ImageSecTitle.find({ tag: 'ImagenSectionCards' })
+      .sort({ section: 1 });
+
+    console.log('ImageSection Data:', imageSectionData);
+    if (imageSectionData.length === 0) return res.status(404).send('No se encontraron datos para la sección especificada');
+
+    res.json(imageSectionData);
+  } catch (err) {
+    console.error('Error:', err.message);
+    res.status(500).json({ error: err.message });
+  }
+});
 
 // Endpoint para enviar correo electrónico
 app.post('/send-email', (req, res) => {
