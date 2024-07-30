@@ -18,7 +18,7 @@ const ImageSection = () => {
       });
 
     // Obtener los datos de ImageSectionCards para una sección específica
-    axios.get('http://localhost:5000/api/ImageSectionCards', { params: { section: '3' } })
+    axios.get('http://localhost:5000/api/ImageSectionCards', { params: { section: '1' } })
       .then(response => {
         setImageSectionData(response.data);
       })

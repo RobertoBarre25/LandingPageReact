@@ -116,10 +116,6 @@ app.get('/api/service', async (req, res) => {
 });
 
 
-// Conexión a MongoDB
-const uri = 'mongodb+srv://Arturo:1234@cluster0.eoflwrk.mongodb.net/Administrador?retryWrites=true&w=majority';
-
-
 mongoose.connect(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true
