@@ -42,17 +42,17 @@ const App = () => {
           
 
           <Route path="/M1" element={<M1 />} />
-          <Route path="/camaras" element={<M2 />} />
-          <Route path="/card1" element={<M3 />} />
-          <Route path="/card2" element={<M4 />} />
-          <Route path="/card3" element={<M5 />} />
-          <Route path="/card4" element={<M6 />} />
-          <Route path="/card5" element={<M7 />} />
-          <Route path="/card6" element={<M8 />} />
-          <Route path="/fibra" element={<M9 />} />
-          <Route path="/card7" element={<M10 />} />
-          <Route path="/paths" element={<M11 />} />
-          <Route path="/mantenimiento" element={<M12 />} />
+          <Route path="/M2" element={<M2 />} />
+          <Route path="/M3" element={<M3 />} />
+          <Route path="/M4" element={<M4 />} />
+          <Route path="/M5" element={<M5 />} />
+          <Route path="/M6" element={<M6 />} />
+          <Route path="/M7" element={<M7 />} />
+          <Route path="/M8" element={<M8 />} />
+          <Route path="/M9" element={<M9 />} />
+          <Route path="/M10" element={<M10 />} />
+          <Route path="/M11" element={<M11 />} />
+          <Route path="/M12" element={<M12 />} />
 
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
