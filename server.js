@@ -39,7 +39,6 @@ const imageSectionSchema = new mongoose.Schema({
 
 const ImageSec = mongoose.model('ImageSec', imageSectionSchema);
 
-
 const imageSectionSchemaTitle =new mongoose.Schema({
     title: {type: String, required: true}
   },{collection: 'body'});
@@ -80,11 +79,268 @@ const m1Schema = new mongoose.Schema({
   imageUrl: { type: String, required: true },
   buttonText1: { type: String, required: true },
   buttonAction1: { type: String, required: true },
-  buttonText2: { type: String },
-  buttonAction2: { type: String }
+  buttonText2: { type: String, required: true },
+  buttonAction2: { type: String, required: true },
+  cards: [
+    {
+      imageUrl: { type: String, required: true },
+      text: { type: String, required: true },
+      buttonText: { type: String, required: true }
+    }
+  ]
 }, { collection: 'm1' });
 
 const M1 = mongoose.model('M1', m1Schema);
+
+
+
+// Esquemas y modelos para la colección 'm2'
+const m2Schema = new mongoose.Schema({
+  section: { type: String, required: true },
+  title: { type: String, required: true },
+  subtitle: { type: String, required: true },
+  description: { type: String, required: true },
+  imageUrl: { type: String, required: true },
+  buttonText1: { type: String, required: true },
+  buttonAction1: { type: String, required: true },
+  buttonText2: { type: String, required: true },
+  buttonAction2: { type: String, required: true },
+  cards: [
+    {
+      imageUrl: { type: String, required: true },
+      text: { type: String, required: true },
+      buttonText: { type: String, required: true }
+    }
+  ]
+}, { collection: 'm2' });
+
+const M2 = mongoose.model('M2', m2Schema);
+
+
+// Esquemas y modelos para la colección 'm3'
+const m3Schema = new mongoose.Schema({
+  section: { type: String, required: true },
+  title: { type: String, required: true },
+  subtitle: { type: String, required: true },
+  description: { type: String, required: true },
+  imageUrl: { type: String, required: true },
+  buttonText1: { type: String, required: true },
+  buttonAction1: { type: String, required: true },
+  buttonText2: { type: String, required: true },
+  buttonAction2: { type: String, required: true },
+  cards: [
+    {
+      imageUrl: { type: String, required: true },
+      text: { type: String, required: true },
+      buttonText: { type: String, required: true }
+    }
+  ]
+}, { collection: 'm3' });
+
+const M3 = mongoose.model('M3', m3Schema);
+
+// Esquemas y modelos para la colección 'm4'
+const m4Schema = new mongoose.Schema({
+  section: { type: String, required: true },
+  title: { type: String, required: true },
+  subtitle: { type: String, required: true },
+  description: { type: String, required: true },
+  imageUrl: { type: String, required: true },
+  buttonText1: { type: String, required: true },
+  buttonAction1: { type: String, required: true },
+  buttonText2: { type: String, required: true },
+  buttonAction2: { type: String, required: true },
+  cards: [
+    {
+      imageUrl: { type: String, required: true },
+      text: { type: String, required: true },
+      buttonText: { type: String, required: true }
+    }
+  ]
+}, { collection: 'm4' });
+
+const M4 = mongoose.model('M4', m4Schema);
+
+
+// Esquemas y modelos para la colección 'm5'
+const m5Schema = new mongoose.Schema({
+  section: { type: String, required: true },
+  title: { type: String, required: true },
+  subtitle: { type: String, required: true },
+  description: { type: String, required: true },
+  imageUrl: { type: String, required: true },
+  buttonText1: { type: String, required: true },
+  buttonAction1: { type: String, required: true },
+  buttonText2: { type: String, required: true },
+  buttonAction2: { type: String, required: true },
+  cards: [
+    {
+      imageUrl: { type: String, required: true },
+      text: { type: String, required: true },
+      buttonText: { type: String, required: true }
+    }
+  ]
+}, { collection: 'm5' });
+
+const M5 = mongoose.model('M5', m5Schema);
+
+// Esquemas y modelos para la colección 'm6'
+const m6Schema = new mongoose.Schema({
+  section: { type: String, required: true },
+  title: { type: String, required: true },
+  subtitle: { type: String, required: true },
+  description: { type: String, required: true },
+  imageUrl: { type: String, required: true },
+  buttonText1: { type: String, required: true },
+  buttonAction1: { type: String, required: true },
+  buttonText2: { type: String, required: true },
+  buttonAction2: { type: String, required: true },
+  cards: [
+    {
+      imageUrl: { type: String, required: true },
+      text: { type: String, required: true },
+      buttonText: { type: String, required: true }
+    }
+  ]
+}, { collection: 'm6' });
+
+const M6 = mongoose.model('M6', m6Schema);
+
+// Esquemas y modelos para la colección 'm2'
+const m7Schema = new mongoose.Schema({
+  section: { type: String, required: true },
+  title: { type: String, required: true },
+  subtitle: { type: String, required: true },
+  description: { type: String, required: true },
+  imageUrl: { type: String, required: true },
+  buttonText1: { type: String, required: true },
+  buttonAction1: { type: String, required: true },
+  buttonText2: { type: String, required: true },
+  buttonAction2: { type: String, required: true },
+  cards: [
+    {
+      imageUrl: { type: String, required: true },
+      text: { type: String, required: true },
+      buttonText: { type: String, required: true }
+    }
+  ]
+}, { collection: 'm7' });
+
+const M7 = mongoose.model('M7', m7Schema);
+
+
+
+// Esquemas y modelos para la colección 'm2'
+const m8Schema = new mongoose.Schema({
+  section: { type: String, required: true },
+  title: { type: String, required: true },
+  subtitle: { type: String, required: true },
+  description: { type: String, required: true },
+  imageUrl: { type: String, required: true },
+  buttonText1: { type: String, required: true },
+  buttonAction1: { type: String, required: true },
+  buttonText2: { type: String, required: true },
+  buttonAction2: { type: String, required: true },
+  cards: [
+    {
+      imageUrl: { type: String, required: true },
+      text: { type: String, required: true },
+      buttonText: { type: String, required: true }
+    }
+  ]
+}, { collection: 'm8' });
+
+const M8 = mongoose.model('M8', m8Schema);
+
+// Esquemas y modelos para la colección 'm9'
+const m9Schema = new mongoose.Schema({
+  section: { type: String, required: true },
+  title: { type: String, required: true },
+  subtitle: { type: String, required: true },
+  description: { type: String, required: true },
+  imageUrl: { type: String, required: true },
+  buttonText1: { type: String, required: true },
+  buttonAction1: { type: String, required: true },
+  buttonText2: { type: String, required: true },
+  buttonAction2: { type: String, required: true },
+  cards: [
+    {
+      imageUrl: { type: String, required: true },
+      text: { type: String, required: true },
+      buttonText: { type: String, required: true }
+    }
+  ]
+}, { collection: 'm9' });
+
+const M9 = mongoose.model('M9', m9Schema);
+
+// Esquemas y modelos para la colección 'm10'
+const m10Schema = new mongoose.Schema({
+  section: { type: String, required: true },
+  title: { type: String, required: true },
+  subtitle: { type: String, required: true },
+  description: { type: String, required: true },
+  imageUrl: { type: String, required: true },
+  buttonText1: { type: String, required: true },
+  buttonAction1: { type: String, required: true },
+  buttonText2: { type: String, required: true },
+  buttonAction2: { type: String, required: true },
+  cards: [
+    {
+      imageUrl: { type: String, required: true },
+      text: { type: String, required: true },
+      buttonText: { type: String, required: true }
+    }
+  ]
+}, { collection: 'm10' });
+
+const M10 = mongoose.model('M10', m10Schema);
+
+// Esquemas y modelos para la colección 'm11'
+const m11Schema = new mongoose.Schema({
+  section: { type: String, required: true },
+  title: { type: String, required: true },
+  subtitle: { type: String, required: true },
+  description: { type: String, required: true },
+  imageUrl: { type: String, required: true },
+  buttonText1: { type: String, required: true },
+  buttonAction1: { type: String, required: true },
+  buttonText2: { type: String, required: true },
+  buttonAction2: { type: String, required: true },
+  cards: [
+    {
+      imageUrl: { type: String, required: true },
+      text: { type: String, required: true },
+      buttonText: { type: String, required: true }
+    }
+  ]
+}, { collection: 'm11' });
+
+const M11 = mongoose.model('M11', m11Schema);
+
+// Esquemas y modelos para la colección 'm12'
+const m12Schema = new mongoose.Schema({
+  section: { type: String, required: true },
+  title: { type: String, required: true },
+  subtitle: { type: String, required: true },
+  description: { type: String, required: true },
+  imageUrl: { type: String, required: true },
+  buttonText1: { type: String, required: true },
+  buttonAction1: { type: String, required: true },
+  buttonText2: { type: String, required: true },
+  buttonAction2: { type: String, required: true },
+  cards: [
+    {
+      imageUrl: { type: String, required: true },
+      text: { type: String, required: true },
+      buttonText: { type: String, required: true }
+    }
+  ]
+}, { collection: 'm12' });
+
+const M12 = mongoose.model('M12', m12Schema);
+
+
 
 const serviceSchema = new mongoose.Schema({
   imgText: String,
@@ -335,17 +591,112 @@ app.get('/api/body', async (req, res) => {
 
 // Endpoint para obtener los datos del carrusel en la colección 'm1'
 app.get('/api/m1', async (req, res) => {
-  console.log('Received request for /api/m1');
   try {
-    const m1Data = await M1.find({ section: 'carousel' }).sort({ subSection: 1 });
-    if (!m1Data || m1Data.length === 0) return res.status(404).send('No se encontró información en m1');
-    res.json(m1Data);
-  } catch (err) {
-    console.error('Error:', err.message);
-    res.status(500).json({ error: err.message });
+    const data = await M1.findOne(); // Asegúrate de que `findOne` obtenga los datos correctos
+    res.json(data);
+  } catch (error) {
+    res.status(500).send('Error al obtener datos');
   }
 });
 
+app.get('/api/m2', async (req, res) => {
+  try {
+    const data = await M2.findOne(); // Asegúrate de que `findOne` obtenga los datos correctos
+    res.json(data);
+  } catch (error) {
+    res.status(500).send('Error al obtener datos');
+  }
+});
+
+app.get('/api/m3', async (req, res) => {
+  try {
+    const data = await M3.findOne(); // Asegúrate de que `findOne` obtenga los datos correctos
+    res.json(data);
+  } catch (error) {
+    res.status(500).send('Error al obtener datos');
+  }
+});
+
+app.get('/api/m4', async (req, res) => {
+  try {
+    const data = await M4.findOne(); // Asegúrate de que `findOne` obtenga los datos correctos
+    res.json(data);
+  } catch (error) {
+    res.status(500).send('Error al obtener datos');
+  }
+});
+
+app.get('/api/m5', async (req, res) => {
+  try {
+    const data = await M5.findOne(); // Asegúrate de que `findOne` obtenga los datos correctos
+    res.json(data);
+  } catch (error) {
+    res.status(500).send('Error al obtener datos');
+  }
+});
+
+app.get('/api/m6', async (req, res) => {
+  try {
+    const data = await M6.findOne(); // Asegúrate de que `findOne` obtenga los datos correctos
+    res.json(data);
+  } catch (error) {
+    res.status(500).send('Error al obtener datos');
+  }
+});
+
+app.get('/api/m7', async (req, res) => {
+  try {
+    const data = await M7.findOne(); // Asegúrate de que `findOne` obtenga los datos correctos
+    res.json(data);
+  } catch (error) {
+    res.status(500).send('Error al obtener datos');
+  }
+});
+
+app.get('/api/m8', async (req, res) => {
+  try {
+    const data = await M8.findOne(); // Asegúrate de que `findOne` obtenga los datos correctos
+    res.json(data);
+  } catch (error) {
+    res.status(500).send('Error al obtener datos');
+  }
+});
+
+app.get('/api/m9', async (req, res) => {
+  try {
+    const data = await M9.findOne(); // Asegúrate de que `findOne` obtenga los datos correctos
+    res.json(data);
+  } catch (error) {
+    res.status(500).send('Error al obtener datos');
+  }
+});
+
+app.get('/api/m10', async (req, res) => {
+  try {
+    const data = await M10.findOne(); // Asegúrate de que `findOne` obtenga los datos correctos
+    res.json(data);
+  } catch (error) {
+    res.status(500).send('Error al obtener datos');
+  }
+});
+
+app.get('/api/m11', async (req, res) => {
+  try {
+    const data = await M11.findOne(); // Asegúrate de que `findOne` obtenga los datos correctos
+    res.json(data);
+  } catch (error) {
+    res.status(500).send('Error al obtener datos');
+  }
+});
+
+app.get('/api/m12', async (req, res) => {
+  try {
+    const data = await M12.findOne(); // Asegúrate de que `findOne` obtenga los datos correctos
+    res.json(data);
+  } catch (error) {
+    res.status(500).send('Error al obtener datos');
+  }
+});
 
 
 app.get('/api/carousel', async (req, res) => {

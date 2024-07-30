@@ -214,18 +214,19 @@ const Services = () => {
                 <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-7xl font-bold text-center text-gray-700 mb-8 md:mb-16">Servicios</h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     {[
-                        { place: CardM1Text, img: img, link: '/camaras' },
-                        { place: CardM2Text, img: imgCardM2, link: '/paths' },
-                        { place: CardM3Text, img: imgCardM3, link: '/fibra' },
-                        { place: CardM4Text, img: imgCardM4, link: '/mantenimiento' },
-                        { place: CardM5Text, img: imgCardM5, link: '/antivirus' },
-                        { place: CardM6Text, img: imgCardM6, link: '/card1' },
-                        { place: CardM7Text, img: imgCardM7, link: '/card2' },
-                        { place: 'Namdu Islands', img: 'https://i.pinimg.com/564x/b1/e0/15/b1e0155a8cc3db972b7cb9cb6ffc79f4.jpg', link: '/card3' },
-                        { place: 'Santorini, Greece', img: 'https://i.pinimg.com/564x/cb/df/89/cbdf8978a85635559958afcd832918cf.jpg', link: '/card4' },
-                        { place: 'Santorini, Greece',   img: 'https://i.pinimg.com/564x/cb/df/89/cbdf8978a85635559958afcd832918cf.jpg', link: '/card5' },
-                        { place: 'Santorini, Greece', img: 'https://i.pinimg.com/564x/cb/df/89/cbdf8978a85635559958afcd832918cf.jpg', link: '/card6' },
-                        { place: 'Santorini, Greece', img: 'https://i.pinimg.com/564x/cb/df/89/cbdf8978a85635559958afcd832918cf.jpg', link: '/card7' },
+
+                        { place: CardM1Text, img: img, link: '/M1' },
+                        { place: CardM2Text, img: imgCardM2, link: '/M2' },
+                        { place: CardM3Text, img: imgCardM3, link: '/M3' },
+                        { place: CardM4Text, img: imgCardM4, link: '/M4' },
+                        { place: CardM5Text, img: imgCardM5, link: '/M5' },
+                        { place: CardM6Text, img: imgCardM6, link: '/M6' },
+                        { place: CardM7Text, img: imgCardM7, link: '/M7' },
+                        { place: 'Namdu Islands', img: 'https://i.pinimg.com/564x/b1/e0/15/b1e0155a8cc3db972b7cb9cb6ffc79f4.jpg', link: '/M8' },
+                        { place: 'Santorini, Greece', img: 'https://i.pinimg.com/564x/cb/df/89/cbdf8978a85635559958afcd832918cf.jpg', link: '/M9' },
+                        { place: 'Santorini, Greece',   img: 'https://i.pinimg.com/564x/cb/df/89/cbdf8978a85635559958afcd832918cf.jpg', link: '/M10' },
+                        { place: 'Santorini, Greece', img: 'https://i.pinimg.com/564x/cb/df/89/cbdf8978a85635559958afcd832918cf.jpg', link: '/M11' },
+                        { place: 'Santorini, Greece', img: 'https://i.pinimg.com/564x/cb/df/89/cbdf8978a85635559958afcd832918cf.jpg', link: '/M12' },
                     ].map((deal, index) => (
                         <div key={index} className="relative border-none group m-4">
                             <div className="relative overflow-hidden h-80 w-full border-none">
