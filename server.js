@@ -14,6 +14,8 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+// Conexión a MongoDB
+const uri = 'mongodb+srv://Arturo:1234@cluster0.eoflwrk.mongodb.net/Administrador?retryWrites=true&w=majority';
 
 // Configuración de Nodemailer
 const transporter = nodemailer.createTransport({
