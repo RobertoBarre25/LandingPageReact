@@ -15,9 +15,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 
-// Conexión a MongoDB
-const uri = 'mongodb+srv://Arturo:1234@cluster0.eoflwrk.mongodb.net/Administrador?retryWrites=true&w=majority';
-
 // Configuración de Nodemailer
 const transporter = nodemailer.createTransport({
   host: 'mail09.xinet.com.mx',
@@ -115,6 +112,161 @@ app.get('/api/service', async (req, res) => {
   }
 });
 
+// Endpoint para obtener datos de los CardM1
+const CardM1Schema = new mongoose.Schema({
+  CardM1Text: String,
+  detailText: String,
+  img: String,
+}, { collection: 'services' });
+
+const cardM1 = mongoose.model('cardM1', CardM1Schema);
+
+app.get('/api/cardM1', async (req, res) => {
+  try {
+      const CardM1Data = await cardM1.find({});
+      
+      if (!CardM1Data || CardM1Data.length === 0) {
+        return res.status(404).send('No se encontraron servicios');
+      }
+      res.json(CardM1Data);
+  } catch (err) {
+      console.error('Error:', err.message);
+      res.status(500).json({ error: err.message });
+  }
+});
+
+// Endpoint para obtener datos de los CardM2
+const CardM2Schema = new mongoose.Schema({
+  CardM2Text: String,
+  imgCardM2: String,
+}, { collection: 'services' });
+
+const cardM2 = mongoose.model('cardM2', CardM2Schema);
+
+app.get('/api/cardM2', async (req, res) => {
+  try {
+      const CardM2Data = await cardM2.find({});
+      
+      if (!CardM2Data || CardM2Data.length === 0) {
+          return res.status(404).send('No se encontraron servicios');
+      }
+      res.json(CardM2Data);
+  } catch (err) {
+      console.error('Error:', err.message);
+      res.status(500).json({ error: err.message });
+  }
+});
+
+// Endpoint para obtener datos de los CardM3
+const CardM3Schema = new mongoose.Schema({
+  CardM3Text: String,
+  imgCardM3: String,
+}, { collection: 'services' });
+
+const cardM3 = mongoose.model('cardM3', CardM3Schema);
+
+app.get('/api/cardM3', async (req, res) => {
+  try {
+      const CardM3Data = await cardM3.find({});
+      
+      if (!CardM3Data || CardM3Data.length === 0) {
+          return res.status(404).send('No se encontraron servicios');
+      }
+      res.json(CardM3Data);
+  } catch (err) {
+      console.error('Error:', err.message);
+      res.status(500).json({ error: err.message });
+  }
+});
+
+// Endpoint para obtener datos de los CardM4
+const CardM4Schema = new mongoose.Schema({
+  CardM4Text: String,
+  imgCardM4: String,
+}, { collection: 'services' });
+
+const cardM4 = mongoose.model('cardM4', CardM4Schema);
+
+app.get('/api/cardM4', async (req, res) => {
+  try {
+      const CardM4Data = await cardM4.find({});
+      
+      if (!CardM4Data || CardM4Data.length === 0) {
+          return res.status(404).send('No se encontraron servicios');
+      }
+      res.json(CardM4Data);
+  } catch (err) {
+      console.error('Error:', err.message);
+      res.status(500).json({ error: err.message });
+  }
+});
+
+// Endpoint para obtener datos de los CardM5
+const CardM5Schema = new mongoose.Schema({
+  CardM5Text: String,
+  imgCardM5: String,
+}, { collection: 'services' });
+
+const cardM5 = mongoose.model('cardM5', CardM5Schema);
+
+app.get('/api/cardM5', async (req, res) => {
+  try {
+      const CardM5Data = await cardM5.find({});
+      
+      if (!CardM5Data || CardM5Data.length === 0) {
+          return res.status(404).send('No se encontraron servicios');
+      }
+      res.json(CardM5Data);
+  } catch (err) {
+      console.error('Error:', err.message);
+      res.status(500).json({ error: err.message });
+  }
+});
+
+// Endpoint para obtener datos de los CardM6
+const CardM6Schema = new mongoose.Schema({
+  CardM6Text: String,
+  imgCardM6: String,
+}, { collection: 'services' });
+
+const cardM6 = mongoose.model('cardM6', CardM6Schema);
+
+app.get('/api/cardM6', async (req, res) => {
+  try {
+      const CardM6Data = await cardM6.find({});
+      
+      if (!CardM6Data || CardM6Data.length === 0) {
+          return res.status(404).send('No se encontraron servicios');
+      }
+      res.json(CardM6Data);
+  } catch (err) {
+      console.error('Error:', err.message);
+      res.status(500).json({ error: err.message });
+  }
+});
+
+
+// Endpoint para obtener datos de los CardM7
+const CardM7Schema = new mongoose.Schema({
+  CardM7Text: String,
+  imgCardM7: String,
+}, { collection: 'services' });
+
+const cardM7 = mongoose.model('cardM7', CardM7Schema);
+
+app.get('/api/cardM7', async (req, res) => {
+  try {
+      const CardM7Data = await cardM7.find({});
+      
+      if (!CardM7Data || CardM7Data.length === 0) {
+          return res.status(404).send('No se encontraron servicios');
+      }
+      res.json(CardM7Data);
+  } catch (err) {
+      console.error('Error:', err.message);
+      res.status(500).json({ error: err.message });
+  }
+});
 
 // Conexión a MongoDB
 const uri = 'mongodb+srv://Arturo:1234@cluster0.eoflwrk.mongodb.net/Administrador?retryWrites=true&w=majority';
