@@ -524,6 +524,116 @@ app.get('/api/cardM7', async (req, res) => {
   }
 });
 
+// Endpoint para obtener datos de los CardM8
+const CardM8Schema = new mongoose.Schema({
+  CardM8Text: String,
+  imgCardM8: String,
+}, { collection: 'services' });
+
+const cardM8 = mongoose.model('cardM8', CardM8Schema);
+
+app.get('/api/cardM8', async (req, res) => {
+  try {
+      const CardM8Data = await cardM8.find({});
+      
+      if (!CardM8Data || CardM8Data.length === 0) {
+          return res.status(404).send('No se encontraron servicios');
+      }
+      res.json(CardM8Data);
+  } catch (err) {
+      console.error('Error:', err.message);
+      res.status(500).json({ error: err.message });
+  }
+});
+
+// Endpoint para obtener datos de los CardM9
+const CardM9Schema = new mongoose.Schema({
+  CardM9Text: String,
+  imgCardM9: String,
+}, { collection: 'services' });
+
+const cardM9 = mongoose.model('cardM9', CardM9Schema);
+
+app.get('/api/cardM9', async (req, res) => {
+  try {
+      const CardM9Data = await cardM9.find({});
+      
+      if (!CardM9Data || CardM9Data.length === 0) {
+        return res.status(404).send('No se encontraron servicios');
+      }
+      res.json(CardM9Data);
+  } catch (err) {
+      console.error('Error:', err.message);
+      res.status(500).json({ error: err.message });
+  }
+});
+
+// Endpoint para obtener datos de los CardM10
+const CardM10Schema = new mongoose.Schema({
+  CardM10Text: String,
+  imgCardM10: String,
+}, { collection: 'services' });
+
+const cardM10 = mongoose.model('cardM10', CardM10Schema);
+
+app.get('/api/cardM10', async (req, res) => {
+  try {
+      const CardM10Data = await cardM10.find({});
+      
+      if (!CardM10Data || CardM10Data.length === 0) {
+        return res.status(404).send('No se encontraron servicios');
+      }
+      res.json(CardM10Data);
+  } catch (err) {
+      console.error('Error:', err.message);
+      res.status(500).json({ error: err.message });
+  }
+});
+
+// Endpoint para obtener datos de los CardM11
+const CardM11Schema = new mongoose.Schema({
+  CardM11Text: String,
+  imgCardM11: String,
+}, { collection: 'services' });
+
+const cardM11 = mongoose.model('cardM11', CardM11Schema);
+
+app.get('/api/cardM11', async (req, res) => {
+  try {
+      const CardM11Data = await cardM11.find({});
+      
+      if (!CardM11Data || CardM11Data.length === 0) {
+        return res.status(404).send('No se encontraron servicios');
+      }
+      res.json(CardM11Data);
+  } catch (err) {
+      console.error('Error:', err.message);
+      res.status(500).json({ error: err.message });
+  }
+});
+
+// Endpoint para obtener datos de los CardM12
+const CardM12Schema = new mongoose.Schema({
+  CardM12Text: String,
+  imgCardM12: String,
+}, { collection: 'services' });
+
+const cardM12 = mongoose.model('cardM12', CardM12Schema);
+
+app.get('/api/cardM12', async (req, res) => {
+  try {
+      const CardM12Data = await cardM12.find({});
+      
+      if (!CardM12Data || CardM12Data.length === 0) {
+        return res.status(404).send('No se encontraron servicios');
+      }
+      res.json(CardM12Data);
+  } catch (err) {
+      console.error('Error:', err.message);
+      res.status(500).json({ error: err.message });
+  }
+});
+
 // Conexión a MongoDB
 const uri = 'mongodb+srv://Arturo:1234@cluster0.eoflwrk.mongodb.net/Administrador?retryWrites=true&w=majority';
 

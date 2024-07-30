@@ -187,6 +187,111 @@ const Services = () => {
             });
     }, []);
 
+    const [CardM8Text, setCardM8Text] = useState('');
+    const [imgCardM8, setimgCardM8] = useState('');
+
+    useEffect(() => {
+        axios.get('http://localhost:5000/api/cardM8')
+            .then(response => {
+                if (response.data && response.data.length > 0) {
+                    const { CardM8Text, imgCardM8 } = response.data[8];
+                    setCardM8Text(CardM8Text);
+                    setimgCardM8(imgCardM8);
+                }
+            })
+            .catch(error => {
+                console.error('Error al obtener los datos de servicios CardM7:', error);
+                setError('Ocurrió un error al obtener los datos de servicios');
+            })
+            .finally(() => {
+                setLoading(false);
+            });
+    }, []);
+
+    const [CardM9Text, setCardM9Text] = useState('');
+    const [imgCardM9, setimgCardM9] = useState('');
+
+    useEffect(() => {
+        axios.get('http://localhost:5000/api/cardM9')
+            .then(response => {
+                if (response.data && response.data.length > 0) {
+                    const { CardM9Text, imgCardM9 } = response.data[9];
+                    setCardM9Text(CardM9Text);
+                    setimgCardM9(imgCardM9);
+                }
+            })
+            .catch(error => {
+                console.error('Error al obtener los datos de servicios CardM7:', error);
+                setError('Ocurrió un error al obtener los datos de servicios');
+            })
+            .finally(() => {
+                setLoading(false);
+            });
+    }, []);
+
+    const [CardM10Text, setCardM10Text] = useState('');
+    const [imgCardM10, setimgCardM10] = useState('');
+
+    useEffect(() => {
+        axios.get('http://localhost:5000/api/cardM10')
+            .then(response => {
+                if (response.data && response.data.length > 0) {
+                    const { CardM10Text, imgCardM10 } = response.data[10];
+                    setCardM10Text(CardM10Text);
+                    setimgCardM10(imgCardM10);
+                }
+            })
+            .catch(error => {
+                console.error('Error al obtener los datos de servicios CardM7:', error);
+                setError('Ocurrió un error al obtener los datos de servicios');
+            })
+            .finally(() => {
+                setLoading(false);
+            });
+    }, []);
+
+    const [CardM11Text, setCardM11Text] = useState('');
+    const [imgCardM11, setimgCardM11] = useState('');
+
+    useEffect(() => {
+        axios.get('http://localhost:5000/api/cardM10')
+            .then(response => {
+                if (response.data && response.data.length > 0) {
+                    const { CardM11Text, imgCardM11 } = response.data[11];
+                    setCardM11Text(CardM11Text);
+                    setimgCardM11(imgCardM11);
+                }
+            })
+            .catch(error => {
+                console.error('Error al obtener los datos de servicios CardM7:', error);
+                setError('Ocurrió un error al obtener los datos de servicios');
+            })
+            .finally(() => {
+                setLoading(false);
+            });
+    }, []);
+
+    const [CardM12Text, setCardM12Text] = useState('');
+    const [imgCardM12, setimgCardM12] = useState('');
+
+    useEffect(() => {
+        axios.get('http://localhost:5000/api/cardM12')
+            .then(response => {
+                if (response.data && response.data.length > 0) {
+                    const { CardM12Text, imgCardM12 } = response.data[12];
+                    setCardM12Text(CardM12Text);
+                    setimgCardM12(imgCardM12);
+                }
+            })
+            .catch(error => {
+                console.error('Error al obtener los datos de servicios CardM7:', error);
+                setError('Ocurrió un error al obtener los datos de servicios');
+            })
+            .finally(() => {
+                setLoading(false);
+            });
+    }, []);
+
     if (loading) return <p>Cargando...</p>;
     if (error) return <p>{error}</p>;
 
@@ -222,11 +327,11 @@ const Services = () => {
                         { place: CardM5Text, img: imgCardM5, link: '/M5' },
                         { place: CardM6Text, img: imgCardM6, link: '/M6' },
                         { place: CardM7Text, img: imgCardM7, link: '/M7' },
-                        { place: 'Namdu Islands', img: 'https://i.pinimg.com/564x/b1/e0/15/b1e0155a8cc3db972b7cb9cb6ffc79f4.jpg', link: '/M8' },
-                        { place: 'Santorini, Greece', img: 'https://i.pinimg.com/564x/cb/df/89/cbdf8978a85635559958afcd832918cf.jpg', link: '/M9' },
-                        { place: 'Santorini, Greece',   img: 'https://i.pinimg.com/564x/cb/df/89/cbdf8978a85635559958afcd832918cf.jpg', link: '/M10' },
-                        { place: 'Santorini, Greece', img: 'https://i.pinimg.com/564x/cb/df/89/cbdf8978a85635559958afcd832918cf.jpg', link: '/M11' },
-                        { place: 'Santorini, Greece', img: 'https://i.pinimg.com/564x/cb/df/89/cbdf8978a85635559958afcd832918cf.jpg', link: '/M12' },
+                        { place: CardM8Text, img: imgCardM8, link: '/M8' },
+                        { place: CardM9Text, img: imgCardM9, link: '/M9' },
+                        { place: CardM10Text, img: imgCardM10, link: '/M10' },
+                        { place: CardM11Text, img: imgCardM11, link: '/M11' },
+                        { place: CardM12Text, img: imgCardM12, link: '/M12' },
                     ].map((deal, index) => (
                         <div key={index} className="relative border-none group m-4">
                             <div className="relative overflow-hidden h-80 w-full border-none">
