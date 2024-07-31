@@ -31,13 +31,15 @@ const transporter = nodemailer.createTransport({
 const emailDestinatario = 'comercio@solucione.mx';
 
 const imageSectionSchema = new mongoose.Schema({
-  tag: { type: String, required: true },
-  section: { type: String, required: true },
-  img: { type: String, required: true },
-  description: { type: String, required: true },
-  buttonText: { type: String, required: true },
-  buttonValue: { type: String, required: true }
-}, { collection: 'body' });
+  sectionCards: [
+    {
+      section: { type: String, required: true },
+      img: { type: String, required: true },
+      description: { type: String, required: true },
+      buttonText: { type: String, required: true },
+      buttonValue: { type: String, required: true }
+    }
+  ]}, { collection: 'body' });
 
 const ImageSec = mongoose.model('ImageSec', imageSectionSchema);
 
@@ -55,18 +57,20 @@ const bodySchema = new mongoose.Schema({
 
 const Body = mongoose.model('Body', bodySchema);
 
-// Definir esquema y modelo de Mongoose para la colección ''
 const carouselSchema = new mongoose.Schema({
-  section: { type: String, required: true },
-  title: { type: String, required: true },
-  subtitle: { type: String, required: true },
-  description: { type: String, required: true },
-  imageUrl: { type: String, required: true },
-  buttonText1: { type: String, required: true },
-  buttonAction1: { type: String, required: true },
-  buttonText2: { type: String, required: true },
-  buttonAction2: { type: String, required: true },
-  subSection: { type: String, required: true }
+  sectionCarousel: [
+    {
+      title: { type: String, required: true },
+      subtitle: { type: String, required: true },
+      description: { type: String, required: true },
+      imageUrl: { type: String, required: true },
+      buttonText1: { type: String, required: true },
+      buttonAction1: { type: String },
+      buttonText2: { type: String },
+      buttonAction2: { type: String },
+      subSection: { type: String, required: true }
+    }
+  ]
 }, { collection: 'body' });
 
 const Carousel = mongoose.model('Carousel', carouselSchema);
@@ -810,20 +814,22 @@ app.get('/api/m12', async (req, res) => {
 app.get('/api/carousel', async (req, res) => {
   console.log('Received request for /api/carousel');
   try {
-    // Obtener todos los documentos de la sección 'carousel' y ordenarlos por 'subSection'
-    const carouselData = await Carousel.find({ section: 'carousel' }).sort({ subSection: 1 });
+    // Encuentra documentos donde el campo `sectionCarousel` existe
+    const carouselData = await Carousel.find({ sectionCarousel: { $exists: true } });
 
-    // Verificar si se encontró datos
+    // Verificar si se encontró algún documento
     if (!carouselData || carouselData.length === 0) {
-      return res.status(404).send('No se encontró la sección del carrusel');
+      return res.status(404).send('No se encontraron datos del carrusel');
     }
 
-    res.json(carouselData);
+    // Devolver los datos de `sectionCarousel` del primer documento encontrado
+    res.json(carouselData[0].sectionCarousel);
   } catch (err) {
     console.error('Error:', err.message);
     res.status(500).json({ error: err.message });
   }
 });
+
 
 app.get('/api/ImageSection', async(req, res) => {
   console.log('Recibed request for api/body');
@@ -841,19 +847,14 @@ app.get('/api/ImageSection', async(req, res) => {
 app.get('/api/ImageSectionCards', async (req, res) => {
   console.log('Received request for /api/ImageSectionCards');
   try {
-    const section = req.query.section;
 
-    if (!section) {
-      return res.status(400).send('Se requiere el parámetro de sección');
+    const imageSectionData = await ImageSec.find({ sectionCards: { $exists: true} });
+    
+    if (imageSectionData.length === 0) {
+      return res.status(404).send('No se encontraron datos para la sección especificada');
     }
 
-    const imageSectionData = await ImageSecTitle.find({ tag: 'ImagenSectionCards' })
-      .sort({ section: 1 });
-
-    console.log('ImageSection Data:', imageSectionData);
-    if (imageSectionData.length === 0) return res.status(404).send('No se encontraron datos para la sección especificada');
-
-    res.json(imageSectionData);
+    res.json(imageSectionData[0].sectionCards);
   } catch (err) {
     console.error('Error:', err.message);
     res.status(500).json({ error: err.message });

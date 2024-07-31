@@ -4,8 +4,8 @@ import Carousel from '../Carousel/carousel';
 import Cards from '../CardsSer/cards';
 import ImageSection from '../ImageSection/ImgSection';
 import { useNavigate } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';  // Asegúrate de importar useState y useEffect
-import axios from 'axios';  // Asegúrate de importar axios
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const scrollToMiddle = () => {
     const targetPosition = window.innerHeight * 1.8;
@@ -19,7 +19,7 @@ const Body = () => {
     const navigate = useNavigate();
     const [principalText, setPrincipalText] = useState('');
     const [carouselData, setCarouselData] = useState([]);
-    const [loading, setLoading] = useState(true);  // Definir el estado para loading
+    const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
@@ -51,7 +51,6 @@ const Body = () => {
         navigate('/contact', { state: { service } });
     };
 
-    // Mapea los datos del carrusel a la estructura requerida
     const images = carouselData.map(item => ({
         src: item.imageUrl,
         text: (

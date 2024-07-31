@@ -17,8 +17,8 @@ const ImageSection = () => {
         setError('Ocurrió un error al obtener los datos de ImageSection');
       });
 
-    // Obtener los datos de ImageSectionCards para una sección específica
-    axios.get('http://localhost:5000/api/ImageSectionCards', { params: { section: '1' } })
+    // Obtener los datos de ImageSectionCards
+    axios.get('http://localhost:5000/api/ImageSectionCards')
       .then(response => {
         setImageSectionData(response.data);
       })
@@ -41,7 +41,7 @@ const ImageSection = () => {
           <div key={item._id} className="w-full sm:w-1/2 lg:w-1/4 mb-8">
             <div className="bg-white shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 h-100 flex flex-col justify-between mx-6">
               <div className="p-6 flex-1 flex flex-col justify-between bg-white">
-                <img src={item.img} alt={item.section} className="w-full h-48 object-cover mb-6 mt-2" />
+                <img src={item.img} alt={item.description} className="w-full h-48 object-cover mb-6 mt-2" />
                 <p className="text-gray-700 text-left text-base mt-4 mx-6 flex-grow">{item.description}</p>
                 <div className="text-center mt-4">
                   <button className="btn btn-primary">{item.buttonText}</button>
