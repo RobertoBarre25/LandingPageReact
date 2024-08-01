@@ -711,6 +711,33 @@ app.get('/api/m1', async (req, res) => {
   }
 });
 
+
+// Endpoint para actualizar documentos en la colección 'm1' por tag
+app.put('/api/m1/update-by-tag', async (req, res) => {
+  try {
+      const { tag, ...updateData } = req.body;
+
+      // Asegúrate de que la búsqueda de documentos y actualización estén correctas
+      const result = await M1.updateOne(
+          { 'sections.tag': tag },
+          { $set: updateData }
+      );
+
+      if (result.nModified === 0) {
+          return res.status(404).send('No se encontró la sección con el tag proporcionado');
+      }
+
+      // Obtener el documento actualizado
+      const updatedData = await M1.findOne({ 'sections.tag': tag });
+      res.json(updatedData);
+  } catch (error) {
+      console.error('Error al actualizar la sección:', error);
+      res.status(500).send('Error al actualizar la información');
+  }
+});
+
+
+
 app.get('/api/m2', async (req, res) => {
   try {
     const data = await M2.findOne(); // Asegúrate de que `findOne` obtenga los datos correctos
@@ -720,7 +747,7 @@ app.get('/api/m2', async (req, res) => {
   }
 });
 
-app.get('/api/m3', async (req, res) => {
+app.get('/api/m3', async (req, res) => { 
   try {
     const data = await M3.findOne(); // Asegúrate de que `findOne` obtenga los datos correctos
     res.json(data);
