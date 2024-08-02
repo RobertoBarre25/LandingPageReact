@@ -9,29 +9,17 @@ const M1 = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [modalOpen, setModalOpen] = useState(false);
-    const [modalType, setModalType] = useState(''); // 'carousel' or 'card'
-    const [formData, setFormData] = useState({
-        tag: '',
-        title: '',
-        subtitle: '',
-        description: '',
-        carouselImageUrl: '',
-        buttonText1: '',
-        buttonAction1: '',
-        buttonText2: '',
-        buttonAction2: '',
-        cardImageUrl: '',
-        cardText: '',
-        cardButtonText: '',
-        simpleTitle: '',
-        simpleSubtitle: ''
-    });
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedSection, setSelectedSection] = useState(null);
+    const [mainTag, setMainTag] = useState(''); // Nuevo estado para el tag principal
 
     useEffect(() => {
         axios.get('http://localhost:5000/api/m1')
             .then(response => {
                 setCarouselData(response.data);
+                if (response.data.tag) {
+                    setMainTag(response.data.tag); // Establecer el tag principal
+                }
             })
             .catch(error => {
                 console.error('Error al obtener datos del carrusel:', error);
@@ -44,8 +32,8 @@ const M1 = () => {
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setCurrentIndex((prevIndex) => (prevIndex + 1) % (carouselData.sections ? carouselData.sections.length : 1));
-        }, 10000);
+            setCurrentIndex(prevIndex => (prevIndex + 1) % (carouselData.sections ? carouselData.sections.length : 1));
+        }, 10000); // Cambia a 10 segundos para que se ajuste a tu configuración
         return () => clearInterval(interval);
     }, [carouselData.sections]);
 
@@ -61,115 +49,98 @@ const M1 = () => {
         });
     };
 
-    const handleModalOpen = (item, type) => {
-        if (type === 'carousel') {
-            setFormData({
-                tag: item.tag || '',
-                title: item.title || '',
-                subtitle: item.subtitle || '',
-                description: item.description || '',
-                carouselImageUrl: item.carouselImageUrl || '',
-                buttonText1: item.buttonText1 || '',
-                buttonAction1: item.buttonAction1 || '',
-                buttonText2: item.buttonText2 || '',
-                buttonAction2: item.buttonAction2 || '',
-                cardImageUrl: '',
-                cardText: '',
-                cardButtonText: '',
-                simpleTitle: '',
-                simpleSubtitle: ''
-            });
-        } else if (type === 'card') {
-            setFormData({
-                tag: item.tag || '',
-                title: '',
-                subtitle: '',
-                description: '',
-                carouselImageUrl: '',
-                buttonText1: '',
-                buttonAction1: '',
-                buttonText2: '',
-                buttonAction2: '',
-                cardImageUrl: item.imageUrl || '',
-                cardText: item.text || '',
-                cardButtonText: item.buttonText || '',
-                simpleTitle: item.simpleTitle || '',
-                simpleSubtitle: item.simpleSubtitle || ''
-            });
-        }
-        setModalType(type);
-        setModalOpen(true);
+    const handleModalOpen = (section) => {
+        setSelectedSection(section);
+        setIsModalOpen(true);
     };
 
     const handleModalClose = () => {
-        setModalOpen(false);
+        setIsModalOpen(false);
+        setSelectedSection(null);
     };
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prevData => ({ ...prevData, [name]: value }));
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        setSelectedSection(prevSection => ({
+            ...prevSection,
+            [name]: value
+        }));
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const url = 'http://localhost:5000/api/m1/update-by-tag'; // URL para actualizar los datos del carrusel
-        axios.put(url, formData)
-            .then(response => {
-                alert('Información del carrusel actualizada con éxito');
-                setModalOpen(false);
-                // Actualiza los datos del carrusel en el estado después de la actualización
-                setCarouselData(prevData => ({
-                    ...prevData,
-                    sections: prevData.sections.map(item =>
-                        item.tag === formData.tag ? response.data : item
-                    )
-                }));
-            })
-            .catch(error => {
-                console.error('Error al actualizar la información del carrusel:', error);
-                alert('Ocurrió un error al actualizar la información del carrusel');
+    const handleUpdate = async (event) => {
+        event.preventDefault();
+        if (!selectedSection || !selectedSection.sectionTag || !mainTag) {
+            console.error('Faltan datos para actualizar');
+            alert('Faltan datos para actualizar');
+            return;
+        }
+
+        try {
+            await axios.put('http://localhost:5000/api/m1/update-by-tag', {
+                ...selectedSection,
+                tag: mainTag // Asegúrate de enviar el tag principal
+            }, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             });
+            alert('Datos actualizados correctamente');
+            handleModalClose();
+            const response = await axios.get('http://localhost:5000/api/m1');
+            setCarouselData(response.data);
+        } catch (error) {
+            if (error.response) {
+                console.error('Datos del error:', error.response.data);
+                console.error('Código del estado:', error.response.status);
+                console.error('Encabezados:', error.response.headers);
+            } else if (error.request) {
+                console.error('Error en la solicitud:', error.request);
+            } else {
+                console.error('Error', error.message);
+            }
+            alert('Error al actualizar los datos');
+        }
     };
-    
+
     const images = carouselData.sections ? carouselData.sections.map((item, index) => ({
-        src: item.carouselImageUrl || 'default-image-url.jpg',
+        src: item.carouselImageUrl,
         text: (
             <div className="carouselText p-4 bg-opacity-75 text-white" key={index}>
                 <h1 className="firstText text-3xl font-bold mb-4">
-                    {(item.title || '').split(' ').map((word, i) => (
+                    {item.title.split(' ').map((word, i) => (
                         <span className={`cloudText${i === 0 ? '' : 'Two'}`} key={i}>
                             {word}
                         </span>
                     ))}
                 </h1>
                 <h2 className="secondText text-xl mb-4">
-                    {(item.subtitle || '').split(' ').map((word, i) => (
+                    {item.subtitle.split(' ').map((word, i) => (
                         <span className={`cloudText${i === 0 ? '' : 'Two'}`} key={i}>
                             {word}
                         </span>
                     ))}
                 </h2>
                 <h3 className="thirdText text-lg">
-                    {item.description || 'Descripción no disponible'}
+                    {item.description}
                 </h3>
                 <div className="flex mt-4">
                     <button 
                         className="bg-blue-500 border-2 border-white text-white text-lg md:text-xl py-3 md:py-4 px-6 md:px-10 cursor-pointer m-3 md:m-5 rounded-[3px] hover:bg-red-500"
                         onClick={() => handleClick(item.buttonAction1)}
                     >
-                        {item.buttonText1 || 'Botón 1'}
+                        {item.buttonText1}
                     </button>
                     <button 
                         className="border-2 border-white text-white text-lg md:text-xl py-3 md:py-4 px-6 md:px-10 cursor-pointer m-3 md:m-5 rounded-[3px] hover:bg-white hover:bg-opacity-10"
                         onClick={scrollToMiddle}
                     >
-                        {item.buttonText2 || 'Botón 2'}
+                        {item.buttonText2}
                     </button>
                     <button 
-                        className="bg-green-500 text-white text-lg md:text-xl py-3 md:py-4 px-6 md:px-10 cursor-pointer m-3 md:m-5 rounded-[3px] hover:bg-green-600"
-                        onClick={() => handleModalOpen(item, 'carousel')}
+                        className="bg-green-500 border-2 border-white text-white text-lg md:text-xl py-3 md:py-4 px-6 md:px-10 cursor-pointer m-3 md:m-5 rounded-[3px] hover:bg-green-600"
+                        onClick={() => handleModalOpen(item)}
                     >
-                        Editar Carrusel
+                        Editar
                     </button>
                 </div>
             </div>
@@ -186,183 +157,158 @@ const M1 = () => {
                         <Carousel images={images} currentIndex={currentIndex} />
                     </div>
                     <div className="text-center mt-8">
-                        <button 
-                            className="bg-blue-500 text-white py-2 px-4 rounded" 
-                            onClick={() => handleModalOpen({}, 'card')}
-                        >
-                            Editar Tarjetas
-                        </button>
+                        {carouselData.TitlePlantilla.length > 0 && (
+                            <div>
+                                <h2 className="text-3xl font-bold mb-4">{carouselData.TitlePlantilla[0].title}</h2>
+                                <p className="text-lg">{carouselData.TitlePlantilla[0].subtitle}</p>
+                            </div>
+                        )}
+                    </div>
+                    <div className="flex flex-wrap justify-center gap-4 mt-8">
+                        {carouselData.cards && carouselData.cards.map((card, index) => (
+                            <div key={index} className="w-full sm:w-1/2 lg:w-1/4 mb-8">
+                                <div className="bg-white shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 h-full flex flex-col justify-between mx-6">
+                                    <div className="p-6 flex-1 flex flex-col justify-between bg-white">
+                                        <img src={card.imageUrl} alt={`Card ${index}`} className="w-full h-48 object-cover mb-6 mt-2" />
+                                        <p className="text-gray-700 text-left text-base mt-4 mx-6 flex-grow">{card.text}</p>
+                                        <div className="text-center mt-4">
+                                            <button className="bg-blue-500 text-white py-2 px-4 rounded">{card.buttonText}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 </>
             )}
-            {/* Modal para editar el carrusel */}
-            {modalOpen && modalType === 'carousel' && (
-                <div className="fixed inset-0 flex items-center justify-center z-50">
-                    <div className="bg-white p-8 rounded shadow-lg w-11/12 max-w-lg h-{500px}">
-                        <h2 className="text-2xl font-bold mb-4">Editar Información del Carrusel</h2>
-                        <form onSubmit={handleSubmit}>
-                            <div className="grid grid-cols-1 gap-4">
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 mb-2" htmlFor="title">Título</label>
-                                    <input 
-                                        type="text" 
-                                        id="title" 
-                                        name="title"
-                                        value={formData.title}
-                                        onChange={handleInputChange}
-                                        className="w-full p-2 border border-gray-300 rounded"
-                                    />
-                                </div>
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 mb-2" htmlFor="subtitle">Subtítulo</label>
-                                    <input 
-                                        type="text" 
-                                        id="subtitle" 
-                                        name="subtitle"
-                                        value={formData.subtitle}
-                                        onChange={handleInputChange}
-                                        className="w-full p-2 border border-gray-300 rounded"
-                                    />
-                                </div>
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 mb-2" htmlFor="description">Descripción</label>
-                                    <textarea 
-                                        id="description" 
-                                        name="description"
-                                        value={formData.description}
-                                        onChange={handleInputChange}
-                                        className="w-full p-2 border border-gray-300 rounded"
-                                    />
-                                </div>
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 mb-2" htmlFor="carouselImageUrl">URL de la Imagen del Carrusel</label>
-                                    <input 
-                                        type="text" 
-                                        id="carouselImageUrl" 
-                                        name="carouselImageUrl"
-                                        value={formData.carouselImageUrl}
-                                        onChange={handleInputChange}
-                                        className="w-full p-2 border border-gray-300 rounded"
-                                    />
-                                </div>
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 mb-2" htmlFor="buttonText1">Texto del Botón 1</label>
-                                    <input 
-                                        type="text" 
-                                        id="buttonText1" 
-                                        name="buttonText1"
-                                        value={formData.buttonText1}
-                                        onChange={handleInputChange}
-                                        className="w-full p-2 border border-gray-300 rounded"
-                                    />
-                                </div>
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 mb-2" htmlFor="buttonAction1">Acción del Botón 1</label>
-                                    <input 
-                                        type="text" 
-                                        id="buttonAction1" 
-                                        name="buttonAction1"
-                                        value={formData.buttonAction1}
-                                        onChange={handleInputChange}
-                                        className="w-full p-2 border border-gray-300 rounded"
-                                    />
-                                </div>
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 mb-2" htmlFor="buttonText2">Texto del Botón 2</label>
-                                    <input 
-                                        type="text" 
-                                        id="buttonText2" 
-                                        name="buttonText2"
-                                        value={formData.buttonText2}
-                                        onChange={handleInputChange}
-                                        className="w-full p-2 border border-gray-300 rounded"
-                                    />
-                                </div>
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 mb-2" htmlFor="buttonAction2">Acción del Botón 2</label>
-                                    <input 
-                                        type="text" 
-                                        id="buttonAction2" 
-                                        name="buttonAction2"
-                                        value={formData.buttonAction2}
-                                        onChange={handleInputChange}
-                                        className="w-full p-2 border border-gray-300 rounded"
-                                    />
-                                </div>
-                            </div>
-                            <div className="flex justify-end mt-4">
-                                <button 
-                                    type="submit" 
-                                    className="bg-blue-500 text-white py-2 px-4 rounded mr-2"
-                                >
-                                    Guardar
-                                </button>
-                                <button 
-                                    type="button" 
-                                    onClick={handleModalClose}
-                                    className="bg-gray-500 text-white py-2 px-4 rounded"
-                                >
-                                    Cancelar
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            )}
 
-            {/* Modal para editar la tarjeta */}
-            {modalOpen && modalType === 'card' && (
-                <div className="fixed inset-0 flex items-center justify-center z-50">
-                    <div className="bg-white p-8 rounded shadow-lg w-11/12 max-w-lg">
-                        <h2 className="text-2xl font-bold mb-4">Editar Tarjeta</h2>
-                        <form onSubmit={handleSubmit}>
-                            <div className="grid grid-cols-1 gap-4">
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 mb-2" htmlFor="cardImageUrl">URL de la Imagen de la Tarjeta</label>
-                                    <input 
-                                        type="text" 
-                                        id="cardImageUrl" 
-                                        name="cardImageUrl"
-                                        value={formData.cardImageUrl}
-                                        onChange={handleInputChange}
-                                        className="w-full p-2 border border-gray-300 rounded"
-                                    />
-                                </div>
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 mb-2" htmlFor="cardText">Texto de la Tarjeta</label>
-                                    <textarea 
-                                        id="cardText" 
-                                        name="cardText"
-                                        value={formData.cardText}
-                                        onChange={handleInputChange}
-                                        className="w-full p-2 border border-gray-300 rounded"
-                                    />
-                                </div>
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 mb-2" htmlFor="cardButtonText">Texto del Botón de la Tarjeta</label>
-                                    <input 
-                                        type="text" 
-                                        id="cardButtonText" 
-                                        name="cardButtonText"
-                                        value={formData.cardButtonText}
-                                        onChange={handleInputChange}
-                                        className="w-full p-2 border border-gray-300 rounded"
-                                    />
-                                </div>
+            {/* Modal para editar sección */}
+            {isModalOpen && selectedSection && (
+                <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
+                    <div className="bg-white p-6 rounded-lg shadow-lg w-11/12 md:w-1/2 lg:w-1/3">
+                        <h2 className="text-2xl font-bold mb-4">Editar Sección</h2>
+                        <form onSubmit={handleUpdate}>
+                            <input type="hidden" name="tag" value={mainTag} /> {/* Campo oculto para el tag principal */}
+                            <div className="mb-4">
+                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="sectionTag">
+                                    Tag de la Sección
+                                </label>
+                                <input
+                                    type="text"
+                                    name="sectionTag"
+                                    value={selectedSection.sectionTag || ''}
+                                    onChange={handleInputChange}
+                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                />
                             </div>
-                            <div className="flex justify-end mt-4">
-                                <button 
-                                    type="submit" 
-                                    className="bg-blue-500 text-white py-2 px-4 rounded mr-2"
-                                >
-                                    Guardar
-                                </button>
-                                <button 
-                                    type="button" 
+                            <div className="mb-4">
+                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="title">
+                                    Título
+                                </label>
+                                <input
+                                    type="text"
+                                    name="title"
+                                    value={selectedSection.title || ''}
+                                    onChange={handleInputChange}
+                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                />
+                            </div>
+                            <div className="mb-4">
+                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="subtitle">
+                                    Subtítulo
+                                </label>
+                                <input
+                                    type="text"
+                                    name="subtitle"
+                                    value={selectedSection.subtitle || ''}
+                                    onChange={handleInputChange}
+                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                />
+                            </div>
+                            <div className="mb-4">
+                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="description">
+                                    Descripción
+                                </label>
+                                <textarea
+                                    name="description"
+                                    value={selectedSection.description || ''}
+                                    onChange={handleInputChange}
+                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                />
+                            </div>
+                            <div className="mb-4">
+                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="carouselImageUrl">
+                                    URL de la Imagen del Carrusel
+                                </label>
+                                <input
+                                    type="text"
+                                    name="carouselImageUrl"
+                                    value={selectedSection.carouselImageUrl || ''}
+                                    onChange={handleInputChange}
+                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                />
+                            </div>
+                            <div className="mb-4">
+                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="buttonText1">
+                                    Texto del Botón 1
+                                </label>
+                                <input
+                                    type="text"
+                                    name="buttonText1"
+                                    value={selectedSection.buttonText1 || ''}
+                                    onChange={handleInputChange}
+                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                />
+                            </div>
+                            <div className="mb-4">
+                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="buttonAction1">
+                                    Acción del Botón 1
+                                </label>
+                                <input
+                                    type="text"
+                                    name="buttonAction1"
+                                    value={selectedSection.buttonAction1 || ''}
+                                    onChange={handleInputChange}
+                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                />
+                            </div>
+                            <div className="mb-4">
+                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="buttonText2">
+                                    Texto del Botón 2
+                                </label>
+                                <input
+                                    type="text"
+                                    name="buttonText2"
+                                    value={selectedSection.buttonText2 || ''}
+                                    onChange={handleInputChange}
+                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                />
+                            </div>
+                            <div className="mb-4">
+                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="subSection">
+                                    Sub-Sección
+                                </label>
+                                <input
+                                    type="text"
+                                    name="subSection"
+                                    value={selectedSection.subSection || ''}
+                                    onChange={handleInputChange}
+                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                />
+                            </div>
+                            <div className="flex justify-end">
+                                <button
+                                    type="button"
                                     onClick={handleModalClose}
-                                    className="bg-gray-500 text-white py-2 px-4 rounded"
+                                    className="bg-gray-500 text-white py-2 px-4 rounded mr-2"
                                 >
                                     Cancelar
+                                </button>
+                                <button
+                                    type="submit"
+                                    className="bg-blue-500 text-white py-2 px-4 rounded"
+                                >
+                                    Actualizar
                                 </button>
                             </div>
                         </form>

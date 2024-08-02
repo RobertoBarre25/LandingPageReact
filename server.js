@@ -717,6 +717,7 @@ app.put('/api/m1/update-by-tag', async (req, res) => {
 
   console.log('Valores recibidos:', { tag, sectionTag, updateData });
 
+  // Validar la presencia de tag y sectionTag
   if (!tag || !sectionTag) {
     return res.status(400).json({ message: 'Tag principal y tag de la sección son requeridos' });
   }
@@ -745,6 +746,8 @@ app.put('/api/m1/update-by-tag', async (req, res) => {
 
     // Actualizar la sección
     document.sections[sectionIndex] = { ...document.sections[sectionIndex], ...updateData, sectionTag };
+    
+    // Guardar el documento
     await document.save();
 
     res.status(200).json({ message: 'Actualización exitosa', document });
