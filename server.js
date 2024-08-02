@@ -78,22 +78,27 @@ const Carousel = mongoose.model('Carousel', carouselSchema);
 
 // Definir esquema y modelo de Mongoose para la colección 'm1'
 const m1Schema = new mongoose.Schema({
-  section: { type: String, required: true },
-  title: { type: String, required: true },
-  subtitle: { type: String, required: true },
-  description: { type: String, required: true },
-  imageUrl: { type: String, required: true },
-  buttonText1: { type: String, required: true },
-  buttonAction1: { type: String, required: true },
-  buttonText2: { type: String, required: true },
-  buttonAction2: { type: String, required: true },
+   sections: [
+    {
+        sectionTag: String,
+        title: String,
+        subtitle: String,
+        description: String,
+        carouselImageUrl: String,
+        buttonText1: String,
+        buttonAction1: String,
+        buttonText2: String,
+        subSection: String
+    }
+],
   cards: [
     {
       imageUrl: { type: String, required: true },
       text: { type: String, required: true },
       buttonText: { type: String, required: true }
     }
-  ]
+  ],
+  tag: String,
 }, { collection: 'm1' });
 
 const M1 = mongoose.model('M1', m1Schema);
@@ -102,22 +107,28 @@ const M1 = mongoose.model('M1', m1Schema);
 
 // Esquemas y modelos para la colección 'm2'
 const m2Schema = new mongoose.Schema({
-  section: { type: String, required: true },
-  title: { type: String, required: true },
-  subtitle: { type: String, required: true },
-  description: { type: String, required: true },
-  imageUrl: { type: String, required: true },
-  buttonText1: { type: String, required: true },
-  buttonAction1: { type: String, required: true },
-  buttonText2: { type: String, required: true },
-  buttonAction2: { type: String, required: true },
+  
+  sections: [
+    {
+        tag: String,
+        title: String,
+        subtitle: String,
+        description: String,
+        carouselImageUrl: String,
+        buttonText1: String,
+        buttonAction1: String,
+        buttonText2: String,
+        subSection: String
+    }
+],
   cards: [
     {
       imageUrl: { type: String, required: true },
       text: { type: String, required: true },
       buttonText: { type: String, required: true }
     }
-  ]
+  ],
+  tag: String,
 }, { collection: 'm2' });
 
 const M2 = mongoose.model('M2', m2Schema);
@@ -701,7 +712,51 @@ app.get('/api/body', async (req, res) => {
 });
 
 
-// Endpoint para obtener los datos del carrusel en la colección 'm1'
+app.put('/api/m1/update-by-tag', async (req, res) => {
+  const { tag, sectionTag, ...updateData } = req.body;
+
+  console.log('Valores recibidos:', { tag, sectionTag, updateData });
+
+  if (!tag || !sectionTag) {
+    return res.status(400).json({ message: 'Tag principal y tag de la sección son requeridos' });
+  }
+
+  try {
+    // Buscar el documento con el tag principal
+    const document = await M1.findOne({ tag: tag });
+
+    console.log('Documento encontrado:', document);
+
+    // Verificar si el documento existe
+    if (!document) {
+      return res.status(404).json({ message: 'Documento no encontrado' });
+    }
+
+    // Buscar el índice de la sección a actualizar
+    const sectionIndex = document.sections.findIndex(sec => sec.sectionTag === sectionTag);
+
+    console.log('Índice de sección encontrado:', sectionIndex);
+    console.log('Secciones del documento:', document.sections);
+
+    // Verificar si la sección existe
+    if (sectionIndex === -1) {
+      return res.status(404).json({ message: 'Sección no encontrada' });
+    }
+
+    // Actualizar la sección
+    document.sections[sectionIndex] = { ...document.sections[sectionIndex], ...updateData, sectionTag };
+    await document.save();
+
+    res.status(200).json({ message: 'Actualización exitosa', document });
+  } catch (error) {
+    console.error('Error al actualizar:', error);
+    res.status(500).json({ message: 'Error al actualizar', error });
+  }
+});
+
+
+
+
 app.get('/api/m1', async (req, res) => {
   try {
     const data = await M1.findOne(); // Asegúrate de que `findOne` obtenga los datos correctos
@@ -710,33 +765,6 @@ app.get('/api/m1', async (req, res) => {
     res.status(500).send('Error al obtener datos');
   }
 });
-
-
-// Endpoint para actualizar documentos en la colección 'm1' por tag
-app.put('/api/m1/update-by-tag', async (req, res) => {
-  try {
-      const { tag, ...updateData } = req.body;
-
-      // Asegúrate de que la búsqueda de documentos y actualización estén correctas
-      const result = await M1.updateOne(
-          { 'sections.tag': tag },
-          { $set: updateData }
-      );
-
-      if (result.nModified === 0) {
-          return res.status(404).send('No se encontró la sección con el tag proporcionado');
-      }
-
-      // Obtener el documento actualizado
-      const updatedData = await M1.findOne({ 'sections.tag': tag });
-      res.json(updatedData);
-  } catch (error) {
-      console.error('Error al actualizar la sección:', error);
-      res.status(500).send('Error al actualizar la información');
-  }
-});
-
-
 
 app.get('/api/m2', async (req, res) => {
   try {
@@ -862,8 +890,7 @@ app.get('/api/ImageSection', async(req, res) => {
   console.log('Recibed request for api/body');
     try{
       const  ImageSectionData = await ImageSecTitle.findOne({tag: 'ImageSection'});
-      console.log('ImageSection Data: ', ImageSectionData);
-      if(!ImageSectionData) return res.status(404).send('Ups ha ocurrido un error al encontrar los datos');
+     if(!ImageSectionData) return res.status(404).send('Ups ha ocurrido un error al encontrar los datos');
           res.json(ImageSectionData)
       }catch(err){
         console.error('Error:', err.message);

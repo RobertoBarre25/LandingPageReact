@@ -64,15 +64,15 @@ const M1 = () => {
     const handleModalOpen = (item, type) => {
         if (type === 'carousel') {
             setFormData({
-                tag: item.tag,
-                title: item.title,
-                subtitle: item.subtitle,
-                description: item.description,
-                carouselImageUrl: item.carouselImageUrl,
-                buttonText1: item.buttonText1,
-                buttonAction1: item.buttonAction1,
-                buttonText2: item.buttonText2,
-                buttonAction2: item.buttonAction2,
+                tag: item.tag || '',
+                title: item.title || '',
+                subtitle: item.subtitle || '',
+                description: item.description || '',
+                carouselImageUrl: item.carouselImageUrl || '',
+                buttonText1: item.buttonText1 || '',
+                buttonAction1: item.buttonAction1 || '',
+                buttonText2: item.buttonText2 || '',
+                buttonAction2: item.buttonAction2 || '',
                 cardImageUrl: '',
                 cardText: '',
                 cardButtonText: '',
@@ -81,7 +81,7 @@ const M1 = () => {
             });
         } else if (type === 'card') {
             setFormData({
-                tag: item.tag,
+                tag: item.tag || '',
                 title: '',
                 subtitle: '',
                 description: '',
@@ -90,9 +90,9 @@ const M1 = () => {
                 buttonAction1: '',
                 buttonText2: '',
                 buttonAction2: '',
-                cardImageUrl: item.imageUrl,
-                cardText: item.text,
-                cardButtonText: item.buttonText,
+                cardImageUrl: item.imageUrl || '',
+                cardText: item.text || '',
+                cardButtonText: item.buttonText || '',
                 simpleTitle: item.simpleTitle || '',
                 simpleSubtitle: item.simpleSubtitle || ''
             });
@@ -132,38 +132,38 @@ const M1 = () => {
     };
     
     const images = carouselData.sections ? carouselData.sections.map((item, index) => ({
-        src: item.carouselImageUrl,
+        src: item.carouselImageUrl || 'default-image-url.jpg',
         text: (
             <div className="carouselText p-4 bg-opacity-75 text-white" key={index}>
                 <h1 className="firstText text-3xl font-bold mb-4">
-                    {item.title.split(' ').map((word, i) => (
+                    {(item.title || '').split(' ').map((word, i) => (
                         <span className={`cloudText${i === 0 ? '' : 'Two'}`} key={i}>
                             {word}
                         </span>
                     ))}
                 </h1>
                 <h2 className="secondText text-xl mb-4">
-                    {item.subtitle.split(' ').map((word, i) => (
+                    {(item.subtitle || '').split(' ').map((word, i) => (
                         <span className={`cloudText${i === 0 ? '' : 'Two'}`} key={i}>
                             {word}
                         </span>
                     ))}
                 </h2>
                 <h3 className="thirdText text-lg">
-                    {item.description}
+                    {item.description || 'Descripción no disponible'}
                 </h3>
                 <div className="flex mt-4">
                     <button 
                         className="bg-blue-500 border-2 border-white text-white text-lg md:text-xl py-3 md:py-4 px-6 md:px-10 cursor-pointer m-3 md:m-5 rounded-[3px] hover:bg-red-500"
                         onClick={() => handleClick(item.buttonAction1)}
                     >
-                        {item.buttonText1}
+                        {item.buttonText1 || 'Botón 1'}
                     </button>
                     <button 
                         className="border-2 border-white text-white text-lg md:text-xl py-3 md:py-4 px-6 md:px-10 cursor-pointer m-3 md:m-5 rounded-[3px] hover:bg-white hover:bg-opacity-10"
                         onClick={scrollToMiddle}
                     >
-                        {item.buttonText2}
+                        {item.buttonText2 || 'Botón 2'}
                     </button>
                     <button 
                         className="bg-green-500 text-white text-lg md:text-xl py-3 md:py-4 px-6 md:px-10 cursor-pointer m-3 md:m-5 rounded-[3px] hover:bg-green-600"
@@ -198,7 +198,7 @@ const M1 = () => {
             {/* Modal para editar el carrusel */}
             {modalOpen && modalType === 'carousel' && (
                 <div className="fixed inset-0 flex items-center justify-center z-50">
-                    <div className="bg-white p-8 rounded shadow-lg w-11/12 max-w-lg">
+                    <div className="bg-white p-8 rounded shadow-lg w-11/12 max-w-lg h-{500px}">
                         <h2 className="text-2xl font-bold mb-4">Editar Información del Carrusel</h2>
                         <form onSubmit={handleSubmit}>
                             <div className="grid grid-cols-1 gap-4">

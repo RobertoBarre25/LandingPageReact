@@ -41,7 +41,6 @@ const Services = () => {
     useEffect(() => {
         axios.get('http://localhost:5000/api/cardM1')
             .then(response => {
-                console.log('Respuesta de /api/cardM1:', response.data);  // Verifica la estructura
                 if (response.data && response.data.length > 0) {
                     const { CardM1Text, detailText, img } = response.data[1];
                     setCardM1Text(CardM1Text);
@@ -64,7 +63,6 @@ const Services = () => {
     useEffect(() => {
         axios.get('http://localhost:5000/api/cardM2')
             .then(response => {
-                console.log('Respuesta de /api/cardM2:', response.data);  // Verifica la estructura
                 if (response.data && response.data.length > 0) {
                     const { CardM2Text, imgCardM2 } = response.data[2];
                     setCardM2Text(CardM2Text);
@@ -86,7 +84,6 @@ const Services = () => {
     useEffect(() => {
         axios.get('http://localhost:5000/api/cardM3')
             .then(response => {
-                console.log('Respuesta de /api/cardM3:', response.data);  // Verifica la estructura
                 if (response.data && response.data.length > 0) {
                     const { CardM3Text, imgCardM3 } = response.data[3];
                     setCardM3Text(CardM3Text);
@@ -108,7 +105,6 @@ const Services = () => {
     useEffect(() => {
         axios.get('http://localhost:5000/api/cardM4')
             .then(response => {
-                console.log('Respuesta de /api/cardM4:', response.data);  // Verifica la estructura
                 if (response.data && response.data.length > 0) {
                     const { CardM4Text, imgCardM4 } = response.data[4];
                     setCardM4Text(CardM4Text);
