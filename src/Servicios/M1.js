@@ -10,15 +10,17 @@ const M1 = () => {
     const [error, setError] = useState(null);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isCardModalOpen, setIsCardModalOpen] = useState(false);
     const [selectedSection, setSelectedSection] = useState(null);
-    const [mainTag, setMainTag] = useState(''); // Nuevo estado para el tag principal
+    const [selectedCard, setSelectedCard] = useState(null);
+    const [mainTag, setMainTag] = useState('');
 
     useEffect(() => {
         axios.get('http://localhost:5000/api/m1')
             .then(response => {
                 setCarouselData(response.data);
                 if (response.data.tag) {
-                    setMainTag(response.data.tag); // Establecer el tag principal
+                    setMainTag(response.data.tag);
                 }
             })
             .catch(error => {
@@ -33,7 +35,7 @@ const M1 = () => {
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentIndex(prevIndex => (prevIndex + 1) % (carouselData.sections ? carouselData.sections.length : 1));
-        }, 10000); // Cambia a 10 segundos para que se ajuste a tu configuración
+        }, 10000);
         return () => clearInterval(interval);
     }, [carouselData.sections]);
 
@@ -52,22 +54,40 @@ const M1 = () => {
     const handleModalOpen = (section) => {
         setSelectedSection(section);
         setIsModalOpen(true);
+        document.body.style.overflow = 'hidden'; // Deshabilitar el scroll en el cuerpo
+    };
+
+    const handleCardModalOpen = (card) => {
+        setSelectedCard(card);
+        setIsCardModalOpen(true);
+        document.body.style.overflow = 'hidden'; // Deshabilitar el scroll en el cuerpo
     };
 
     const handleModalClose = () => {
         setIsModalOpen(false);
+        setIsCardModalOpen(false);
         setSelectedSection(null);
+        setSelectedCard(null);
+        document.body.style.overflow = 'auto'; // Habilitar el scroll en el cuerpo
     };
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
-        setSelectedSection(prevSection => ({
-            ...prevSection,
-            [name]: value
-        }));
+        if (selectedSection) {
+            setSelectedSection(prevSection => ({
+                ...prevSection,
+                [name]: value
+            }));
+        }
+        if (selectedCard) {
+            setSelectedCard(prevCard => ({
+                ...prevCard,
+                [name]: value
+            }));
+        }
     };
 
-    const handleUpdate = async (event) => {
+    const handleUpdateSection = async (event) => {
         event.preventDefault();
         if (!selectedSection || !selectedSection.sectionTag || !mainTag) {
             console.error('Faltan datos para actualizar');
@@ -78,27 +98,47 @@ const M1 = () => {
         try {
             await axios.put('http://localhost:5000/api/m1/update-by-tag', {
                 ...selectedSection,
-                tag: mainTag // Asegúrate de enviar el tag principal
+                tag: mainTag
             }, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
             });
-            alert('Datos actualizados correctamente');
+
+            alert('Datos de la sección actualizados correctamente');
             handleModalClose();
             const response = await axios.get('http://localhost:5000/api/m1');
             setCarouselData(response.data);
         } catch (error) {
-            if (error.response) {
-                console.error('Datos del error:', error.response.data);
-                console.error('Código del estado:', error.response.status);
-                console.error('Encabezados:', error.response.headers);
-            } else if (error.request) {
-                console.error('Error en la solicitud:', error.request);
-            } else {
-                console.error('Error', error.message);
-            }
-            alert('Error al actualizar los datos');
+            console.error('Error al actualizar los datos de la sección:', error);
+            alert('Error al actualizar los datos de la sección');
+        }
+    };
+
+    const handleUpdateCard = async (event) => {
+        event.preventDefault();
+        if (!selectedCard) {
+            console.error('Faltan datos para actualizar la tarjeta');
+            alert('Faltan datos para actualizar la tarjeta');
+            return;
+        }
+
+        try {
+            await axios.put('http://localhost:5000/api/m1', {
+                ...selectedCard
+            }, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            alert('Datos de la tarjeta actualizados correctamente');
+            handleModalClose();
+            const response = await axios.get('http://localhost:5000/api/m1');
+            setCarouselData(response.data);
+        } catch (error) {
+            console.error('Error al actualizar los datos de la tarjeta:', error);
+            alert('Error al actualizar los datos de la tarjeta');
         }
     };
 
@@ -173,6 +213,12 @@ const M1 = () => {
                                         <p className="text-gray-700 text-left text-base mt-4 mx-6 flex-grow">{card.text}</p>
                                         <div className="text-center mt-4">
                                             <button className="bg-blue-500 text-white py-2 px-4 rounded">{card.buttonText}</button>
+                                            <button 
+                                                className="bg-green-500 text-white py-2 px-4 rounded ml-4"
+                                                onClick={() => handleCardModalOpen(card)}
+                                            >
+                                                Editar
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -181,134 +227,148 @@ const M1 = () => {
                     </div>
                 </>
             )}
-
-            {/* Modal para editar sección */}
             {isModalOpen && selectedSection && (
-                <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
-                    <div className="bg-white p-6 rounded-lg shadow-lg w-11/12 md:w-1/2 lg:w-1/3">
-                        <h2 className="text-2xl font-bold mb-4">Editar Sección</h2>
-                        <form onSubmit={handleUpdate}>
-                            <input type="hidden" name="tag" value={mainTag} /> {/* Campo oculto para el tag principal */}
+                <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
+                    <div className="bg-white rounded-lg p-6 w-full max-w-2xl max-h-full overflow-y-auto">
+                        <h2 className="text-2xl font-bold mb-4">Editar Sección del Carousel </h2>
+                        <form onSubmit={handleUpdateSection}>
+                            
                             <div className="mb-4">
-                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="sectionTag">
-                                    Tag de la Sección
-                                </label>
-                                <input
-                                    type="text"
-                                    name="sectionTag"
-                                    value={selectedSection.sectionTag || ''}
-                                    onChange={handleInputChange}
-                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="title">
-                                    Título
-                                </label>
+                                <label className="block text-sm font-medium text-gray-700">Título:</label>
                                 <input
                                     type="text"
                                     name="title"
-                                    value={selectedSection.title || ''}
+                                    value={selectedSection.title}
                                     onChange={handleInputChange}
-                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3"
+                                    required
                                 />
                             </div>
                             <div className="mb-4">
-                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="subtitle">
-                                    Subtítulo
-                                </label>
+                                <label className="block text-sm font-medium text-gray-700">Subtítulo:</label>
                                 <input
                                     type="text"
                                     name="subtitle"
-                                    value={selectedSection.subtitle || ''}
+                                    value={selectedSection.subtitle}
                                     onChange={handleInputChange}
-                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3"
+                                    required
                                 />
                             </div>
                             <div className="mb-4">
-                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="description">
-                                    Descripción
-                                </label>
+                                <label className="block text-sm font-medium text-gray-700">Descripción:</label>
                                 <textarea
                                     name="description"
-                                    value={selectedSection.description || ''}
+                                    value={selectedSection.description}
                                     onChange={handleInputChange}
-                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 h-24"
+                                    required
                                 />
                             </div>
                             <div className="mb-4">
-                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="carouselImageUrl">
-                                    URL de la Imagen del Carrusel
-                                </label>
+                                <label className="block text-sm font-medium text-gray-700">URL de la Imagen del Carrusel:</label>
                                 <input
                                     type="text"
                                     name="carouselImageUrl"
-                                    value={selectedSection.carouselImageUrl || ''}
+                                    value={selectedSection.carouselImageUrl}
                                     onChange={handleInputChange}
-                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3"
+                                    required
                                 />
                             </div>
                             <div className="mb-4">
-                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="buttonText1">
-                                    Texto del Botón 1
-                                </label>
+                                <label className="block text-sm font-medium text-gray-700">Texto del Botón 1:</label>
                                 <input
                                     type="text"
                                     name="buttonText1"
-                                    value={selectedSection.buttonText1 || ''}
+                                    value={selectedSection.buttonText1}
                                     onChange={handleInputChange}
-                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3"
                                 />
                             </div>
                             <div className="mb-4">
-                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="buttonAction1">
-                                    Acción del Botón 1
-                                </label>
+                                <label className="block text-sm font-medium text-gray-700">Acción del Botón 1:</label>
                                 <input
                                     type="text"
                                     name="buttonAction1"
-                                    value={selectedSection.buttonAction1 || ''}
+                                    value={selectedSection.buttonAction1}
                                     onChange={handleInputChange}
-                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3"
                                 />
                             </div>
                             <div className="mb-4">
-                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="buttonText2">
-                                    Texto del Botón 2
-                                </label>
+                                <label className="block text-sm font-medium text-gray-700">Texto del Botón 2:</label>
                                 <input
                                     type="text"
                                     name="buttonText2"
-                                    value={selectedSection.buttonText2 || ''}
+                                    value={selectedSection.buttonText2}
                                     onChange={handleInputChange}
-                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="subSection">
-                                    Sub-Sección
-                                </label>
-                                <input
-                                    type="text"
-                                    name="subSection"
-                                    value={selectedSection.subSection || ''}
-                                    onChange={handleInputChange}
-                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3"
                                 />
                             </div>
                             <div className="flex justify-end">
                                 <button
                                     type="button"
-                                    onClick={handleModalClose}
                                     className="bg-gray-500 text-white py-2 px-4 rounded mr-2"
+                                    onClick={handleModalClose}
                                 >
                                     Cancelar
                                 </button>
+                                <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded">
+                                    Guardar Cambios
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            )}
+            {isCardModalOpen && selectedCard && (
+                <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
+                    <div className="bg-white rounded-lg p-6 w-full max-w-2xl max-h-full overflow-y-auto">
+                        <h2 className="text-2xl font-bold mb-4">Editar Tarjeta</h2>
+                        <form onSubmit={handleUpdateCard}>
+                            <div className="mb-4">
+                                <label className="block text-sm font-medium text-gray-700">URL de la Imagen:</label>
+                                <input
+                                    type="text"
+                                    name="imageUrl"
+                                    value={selectedCard.imageUrl}
+                                    onChange={handleInputChange}
+                                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3"
+                                    required
+                                />
+                            </div>
+                            <div className="mb-4">
+                                <label className="block text-sm font-medium text-gray-700">Texto:</label>
+                                <textarea
+                                    name="text"
+                                    value={selectedCard.text}
+                                    onChange={handleInputChange}
+                                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 h-24"
+                                    required
+                                />
+                            </div>
+                            <div className="mb-4">
+                                <label className="block text-sm font-medium text-gray-700">Texto del Botón:</label>
+                                <input
+                                    type="text"
+                                    name="buttonText"
+                                    value={selectedCard.buttonText}
+                                    onChange={handleInputChange}
+                                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3"
+                                    required
+                                />
+                            </div>
+                            <div className="flex justify-end">
                                 <button
-                                    type="submit"
-                                    className="bg-blue-500 text-white py-2 px-4 rounded"
+                                    type="button"
+                                    className="bg-gray-500 text-white py-2 px-4 rounded mr-2"
+                                    onClick={handleModalClose}
                                 >
-                                    Actualizar
+                                    Cancelar
+                                </button>
+                                <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded">
+                                    Guardar Cambios
                                 </button>
                             </div>
                         </form>
