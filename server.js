@@ -95,7 +95,8 @@ const m1Schema = new mongoose.Schema({
     {
       imageUrl: { type: String, required: true },
       text: { type: String, required: true },
-      buttonText: { type: String, required: true }
+      buttonText: { type: String, required: true },
+      sectionTag: String
     }
   ],
   tag: String,
@@ -746,6 +747,51 @@ app.put('/api/m1/update-by-tag', async (req, res) => {
 
     // Actualizar la sección
     document.sections[sectionIndex] = { ...document.sections[sectionIndex], ...updateData, sectionTag };
+    
+    // Guardar el documento
+    await document.save();
+
+    res.status(200).json({ message: 'Actualización exitosa', document });
+  } catch (error) {
+    console.error('Error al actualizar:', error);
+    res.status(500).json({ message: 'Error al actualizar', error });
+  }
+});
+
+app.put('/api/m1/update-by-tag-cards', async (req, res) => {
+  const { tag, sectionTag, ...updateData } = req.body;
+
+  console.log('Valores recibidos:', { tag, sectionTag, updateData });
+
+  // Validar la presencia de tag y sectionTag
+  if (!tag || !sectionTag) {
+    return res.status(400).json({ message: 'Tag principal y tag de la sección son requeridos' });
+  }
+
+  try {
+    // Buscar el documento con el tag principal
+    const document = await M1.findOne({ tag: tag });
+
+    console.log('Documento encontrado:', document);
+
+    // Verificar si el documento existe
+    if (!document) {
+      return res.status(404).json({ message: 'Documento no encontrado' });
+    }
+
+    // Buscar el índice de la sección a actualizar
+    const sectionIndex = document.cards.findIndex(sec => sec.sectionTag === sectionTag);
+
+    console.log('Índice de sección encontrado:', sectionIndex);
+    console.log('Secciones del documento:', document.sections);
+
+    // Verificar si la sección existe
+    if (sectionIndex === -1) {
+      return res.status(404).json({ message: 'Sección no encontrada' });
+    }
+
+    // Actualizar la sección
+    document.cards[sectionIndex] = { ...document.cards[sectionIndex], ...updateData, sectionTag };
     
     // Guardar el documento
     await document.save();
