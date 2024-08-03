@@ -16,6 +16,7 @@ const M1 = () => {
     const [isCardModalOpen, setIsCardModalOpen] = useState(false);
     const [selectedSection, setSelectedSection] = useState(null);
     const [selectedCard, setSelectedCard] = useState(null);
+    const [selectedCardIndex, setSelectedCardIndex] = useState(null);
     const [mainTag, setMainTag] = useState('');
 
     useEffect(() => {
@@ -60,8 +61,9 @@ const M1 = () => {
         document.body.style.overflow = 'hidden'; // Deshabilitar el scroll en el cuerpo
     };
 
-    const handleCardModalOpen = (card) => {
+    const handleCardModalOpen = (card, index) => {
         setSelectedCard(card);
+        setSelectedCardIndex(index);
         setIsCardModalOpen(true);
         document.body.style.overflow = 'hidden'; // Deshabilitar el scroll en el cuerpo
     };
@@ -108,7 +110,7 @@ const M1 = () => {
                 }
             });
 
-            MySwal.fire('Éxito', 'Datos del carousel  actualizados correctamente', 'success');
+            MySwal.fire('Éxito', 'Datos del carousel actualizados correctamente', 'success');
             handleModalClose();
             const response = await axios.get('http://localhost:5000/api/m1');
             setCarouselData(response.data);
@@ -120,14 +122,16 @@ const M1 = () => {
 
     const handleUpdateCard = async (event) => {
         event.preventDefault();
-        if (!selectedCard) {
+        if (!selectedCard || selectedCardIndex === null || !mainTag) {
             console.error('Faltan datos para actualizar la tarjeta');
             MySwal.fire('Error', 'Faltan datos para actualizar la tarjeta', 'error');
             return;
         }
 
         try {
-            await axios.put('http://localhost:5000/api/m1', {
+            await axios.put('http://localhost:5000/api/m1/update-by-tag-cards', {
+                tag: mainTag,
+                cardIndex: selectedCardIndex,
                 ...selectedCard
             }, {
                 headers: {
@@ -199,161 +203,190 @@ const M1 = () => {
                     <div className="relative w-full">
                         <Carousel images={images} currentIndex={currentIndex} />
                     </div>
-                    <div className="text-center mt-8">
-                        {carouselData.TitlePlantilla.length > 0 && (
-                            <div>
-                                <h2 className="text-3xl font-bold mb-4">{carouselData.TitlePlantilla[0].title}</h2>
-                                <p className="text-lg">{carouselData.TitlePlantilla[0].subtitle}</p>
-                            </div>
-                        )}
-                    </div>
-                    <div className="flex flex-wrap justify-center gap-4 mt-8">
+                    <div className="w-full mt-8">
                         {carouselData.cards && carouselData.cards.map((card, index) => (
-                            <div key={index} className="w-full sm:w-1/2 lg:w-1/4 mb-8">
-                                <div className="bg-white shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 h-full flex flex-col justify-between mx-6">
-                                    <div className="p-6 flex-1 flex flex-col justify-between bg-white">
-                                        <img src={card.imageUrl} alt={`Card ${index}`} className="w-full h-48 object-cover mb-6 mt-2" />
-                                        <p className="text-gray-700 text-left text-base mt-4 mx-6 flex-grow">{card.text}</p>
-                                        <div className="text-center mt-4">
-                                            <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" onClick={() => handleClick(card.buttonText)}>
-                                                {card.buttonText}
-                                            </button>
-                                            <button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 ml-2" onClick={() => handleCardModalOpen(card)}>
-                                                Editar
-                                            </button>
-                                        </div>
+                            <div key={index} className="max-w-sm mx-auto mb-4 p-4 bg-white shadow-md rounded-lg overflow-hidden">
+                                <div className="relative pb-48">
+                                    <img className="absolute inset-0 h-full w-full object-cover" src={card.imageUrl} alt={`Card ${index + 1}`} />
+                                </div>
+                                <div className="pt-4">
+                                    <h2 className="font-bold text-xl mb-2">{card.text}</h2>
+                                    <div className="flex justify-between items-center">
+                                        <button 
+                                            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                                            onClick={() => handleClick(card.buttonText)}
+                                        >
+                                            {card.buttonText}
+                                        </button>
+                                        <button 
+                                            className="bg-green-500 text-white px-4 py-2 rounded ml-2 hover:bg-green-600"
+                                            onClick={() => handleCardModalOpen(card, index)}
+                                        >
+                                            Editar
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                         ))}
                     </div>
+                    {isModalOpen && (
+                        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+                            <div className="bg-white p-6 w-11/12 md:w-1/2 lg:w-1/3 max-h-full overflow-auto rounded shadow-lg relative">
+                                <h2 className="text-2xl font-bold mb-4">Editar Sección</h2>
+                                <form onSubmit={handleUpdateSection} className="space-y-4">
+                                    <div>
+                                        <label htmlFor="title" className="block font-medium">Título:</label>
+                                        <input 
+                                            type="text" 
+                                            id="title" 
+                                            name="title" 
+                                            value={selectedSection?.title || ''} 
+                                            onChange={handleInputChange} 
+                                            className="w-full border border-gray-300 p-2 rounded" 
+                                        />
+                                    </div>
+                                    <div>
+                                        <label htmlFor="subtitle" className="block font-medium">Subtítulo:</label>
+                                        <input 
+                                            type="text" 
+                                            id="subtitle" 
+                                            name="subtitle" 
+                                            value={selectedSection?.subtitle || ''} 
+                                            onChange={handleInputChange} 
+                                            className="w-full border border-gray-300 p-2 rounded" 
+                                        />
+                                    </div>
+                                    <div>
+                                        <label htmlFor="description" className="block font-medium">Descripción:</label>
+                                        <textarea 
+                                            id="description" 
+                                            name="description" 
+                                            value={selectedSection?.description || ''} 
+                                            onChange={handleInputChange} 
+                                            className="w-full border border-gray-300 p-2 rounded" 
+                                        />
+                                    </div>
+                                    <div>
+                                        <label htmlFor="carouselImageUrl" className="block font-medium">URL de la Imagen del Carrusel:</label>
+                                        <input 
+                                            type="text" 
+                                            id="carouselImageUrl" 
+                                            name="carouselImageUrl" 
+                                            value={selectedSection?.carouselImageUrl || ''} 
+                                            onChange={handleInputChange} 
+                                            className="w-full border border-gray-300 p-2 rounded" 
+                                        />
+                                    </div>
+                                    <div>
+                                        <label htmlFor="buttonText1" className="block font-medium">Texto del Botón 1:</label>
+                                        <input 
+                                            type="text" 
+                                            id="buttonText1" 
+                                            name="buttonText1" 
+                                            value={selectedSection?.buttonText1 || ''} 
+                                            onChange={handleInputChange} 
+                                            className="w-full border border-gray-300 p-2 rounded" 
+                                        />
+                                    </div>
+                                    <div>
+                                        <label htmlFor="buttonAction1" className="block font-medium">Acción del Botón 1:</label>
+                                        <input 
+                                            type="text" 
+                                            id="buttonAction1" 
+                                            name="buttonAction1" 
+                                            value={selectedSection?.buttonAction1 || ''} 
+                                            onChange={handleInputChange} 
+                                            className="w-full border border-gray-300 p-2 rounded" 
+                                        />
+                                    </div>
+                                    <div>
+                                        <label htmlFor="buttonText2" className="block font-medium">Texto del Botón 2:</label>
+                                        <input 
+                                            type="text" 
+                                            id="buttonText2" 
+                                            name="buttonText2" 
+                                            value={selectedSection?.buttonText2 || ''} 
+                                            onChange={handleInputChange} 
+                                            className="w-full border border-gray-300 p-2 rounded" 
+                                        />
+                                    </div>
+                                    <div className="text-right">
+                                        <button 
+                                            type="button" 
+                                            onClick={handleModalClose} 
+                                            className="mr-4 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                                        >
+                                            Cancelar
+                                        </button>
+                                        <button 
+                                            type="submit" 
+                                            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                                        >
+                                            Guardar
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    )}
+                    {isCardModalOpen && (
+                        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+                            <div className="bg-white p-6 w-11/12 md:w-1/2 lg:w-1/3 max-h-full overflow-auto rounded shadow-lg relative">
+                                <h2 className="text-2xl font-bold mb-4">Editar Tarjeta</h2>
+                                <form onSubmit={handleUpdateCard} className="space-y-4">
+                                    <div>
+                                        <label htmlFor="imageUrl" className="block font-medium">URL de la Imagen:</label>
+                                        <input 
+                                            type="text" 
+                                            id="imageUrl" 
+                                            name="imageUrl" 
+                                            value={selectedCard?.imageUrl || ''} 
+                                            onChange={handleInputChange} 
+                                            className="w-full border border-gray-300 p-2 rounded" 
+                                        />
+                                    </div>
+                                    <div>
+                                        <label htmlFor="text" className="block font-medium">Texto:</label>
+                                        <input 
+                                            type="text" 
+                                            id="text" 
+                                            name="text" 
+                                            value={selectedCard?.text || ''} 
+                                            onChange={handleInputChange} 
+                                            className="w-full border border-gray-300 p-2 rounded" 
+                                        />
+                                    </div>
+                                    <div>
+                                        <label htmlFor="buttonText" className="block font-medium">Texto del Botón:</label>
+                                        <input 
+                                            type="text" 
+                                            id="buttonText" 
+                                            name="buttonText" 
+                                            value={selectedCard?.buttonText || ''} 
+                                            onChange={handleInputChange} 
+                                            className="w-full border border-gray-300 p-2 rounded" 
+                                        />
+                                    </div>
+                                    <div className="text-right">
+                                        <button 
+                                            type="button" 
+                                            onClick={handleModalClose} 
+                                            className="mr-4 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                                        >
+                                            Cancelar
+                                        </button>
+                                        <button 
+                                            type="submit" 
+                                            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                                        >
+                                            Guardar
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    )}
                 </>
-            )}
-
-            {isModalOpen && (
-                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 overflow-auto">
-                    <div className="bg-white rounded-lg p-6 w-full max-w-2xl max-h-full overflow-y-auto">
-                        <h2 className="text-2xl font-bold mb-4">Editar Sección</h2>
-                        <form onSubmit={handleUpdateSection} className="space-y-4">
-                            <div>
-                                <label className="block font-bold mb-1">Título</label>
-                                <input 
-                                    type="text" 
-                                    name="title" 
-                                    value={selectedSection.title} 
-                                    onChange={handleInputChange} 
-                                    className="w-full p-2 border border-gray-300 rounded"
-                                />
-                            </div>
-                            <div>
-                                <label className="block font-bold mb-1">Subtítulo</label>
-                                <input 
-                                    type="text" 
-                                    name="subtitle" 
-                                    value={selectedSection.subtitle} 
-                                    onChange={handleInputChange} 
-                                    className="w-full p-2 border border-gray-300 rounded"
-                                />
-                            </div>
-                            <div>
-                                <label className="block font-bold mb-1">Descripción</label>
-                                <textarea 
-                                    name="description" 
-                                    value={selectedSection.description} 
-                                    onChange={handleInputChange} 
-                                    className="w-full p-2 border border-gray-300 rounded"
-                                />
-                            </div>
-                            <div>
-                                <label className="block font-bold mb-1">URL de la imagen del carrusel</label>
-                                <input 
-                                    type="text" 
-                                    name="carouselImageUrl" 
-                                    value={selectedSection.carouselImageUrl} 
-                                    onChange={handleInputChange} 
-                                    className="w-full p-2 border border-gray-300 rounded"
-                                />
-                            </div>
-                            <div>
-                                <label className="block font-bold mb-1">Texto del Botón 1</label>
-                                <input 
-                                    type="text" 
-                                    name="buttonText1" 
-                                    value={selectedSection.buttonText1} 
-                                    onChange={handleInputChange} 
-                                    className="w-full p-2 border border-gray-300 rounded"
-                                />
-                            </div>
-                            <div>
-                                <label className="block font-bold mb-1">Acción del Botón 1</label>
-                                <input 
-                                    type="text" 
-                                    name="buttonAction1" 
-                                    value={selectedSection.buttonAction1} 
-                                    onChange={handleInputChange} 
-                                    className="w-full p-2 border border-gray-300 rounded"
-                                />
-                            </div>
-                            <div>
-                                <label className="block font-bold mb-1">Texto del Botón 2</label>
-                                <input 
-                                    type="text" 
-                                    name="buttonText2" 
-                                    value={selectedSection.buttonText2} 
-                                    onChange={handleInputChange} 
-                                    className="w-full p-2 border border-gray-300 rounded"
-                                />
-                            </div>
-                            <div className="text-right">
-                                <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Actualizar</button>
-                                <button type="button" onClick={handleModalClose} className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 ml-2">Cerrar</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            )}
-
-            {isCardModalOpen && (
-                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 overflow-auto">
-                    <div className="bg-white p-6 rounded shadow-lg w-3/4 max-h-full overflow-auto">
-                        <h2 className="text-2xl font-bold mb-4">Editar Tarjeta</h2>
-                        <form onSubmit={handleUpdateCard} className="space-y-4">
-                            <div>
-                                <label className="block font-bold mb-1">URL de la Imagen</label>
-                                <input 
-                                    type="text" 
-                                    name="imageUrl" 
-                                    value={selectedCard.imageUrl} 
-                                    onChange={handleInputChange} 
-                                    className="w-full p-2 border border-gray-300 rounded"
-                                />
-                            </div>
-                            <div>
-                                <label className="block font-bold mb-1">Texto</label>
-                                <textarea 
-                                    name="text" 
-                                    value={selectedCard.text} 
-                                    onChange={handleInputChange} 
-                                    className="w-full p-2 border border-gray-300 rounded"
-                                />
-                            </div>
-                            <div>
-                                <label className="block font-bold mb-1">Texto del Botón</label>
-                                <input 
-                                    type="text" 
-                                    name="buttonText" 
-                                    value={selectedCard.buttonText} 
-                                    onChange={handleInputChange} 
-                                    className="w-full p-2 border border-gray-300 rounded"
-                                />
-                            </div>
-                            <div className="text-right">
-                                <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Actualizar</button>
-                                <button type="button" onClick={handleModalClose} className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 ml-2">Cerrar</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
             )}
         </div>
     );
