@@ -171,19 +171,19 @@ const M1 = () => {
                     {item.description}
                 </h3>
                 <div className="flex mt-4">
-                    <button 
+                    <button
                         className="bg-blue-500 border-2 border-white text-white text-lg md:text-xl py-3 md:py-4 px-6 md:px-10 cursor-pointer m-3 md:m-5 rounded-[3px] hover:bg-red-500"
                         onClick={() => handleClick(item.buttonAction1)}
                     >
                         {item.buttonText1}
                     </button>
-                    <button 
+                    <button
                         className="border-2 border-white text-white text-lg md:text-xl py-3 md:py-4 px-6 md:px-10 cursor-pointer m-3 md:m-5 rounded-[3px] hover:bg-white hover:bg-opacity-10"
                         onClick={scrollToMiddle}
                     >
                         {item.buttonText2}
                     </button>
-                    <button 
+                    <button
                         className="bg-green-500 border-2 border-white text-white text-lg md:text-xl py-3 md:py-4 px-6 md:px-10 cursor-pointer m-3 md:m-5 rounded-[3px] hover:bg-green-600"
                         onClick={() => handleModalOpen(item)}
                     >
@@ -200,33 +200,40 @@ const M1 = () => {
             {error && <p>{error}</p>}
             {!loading && !error && (
                 <>
-                    <div className="relative w-full">
+                    <div className="relative w-full ">
                         <Carousel images={images} currentIndex={currentIndex} />
                     </div>
-                    <div className="w-full mt-8">
+                    <div className="w-full mt-8 flex overflow-x-auto  space-x-4 justify-center">
+
                         {carouselData.cards && carouselData.cards.map((card, index) => (
-                            <div key={index} className="max-w-sm mx-auto mb-4 p-4 bg-white shadow-md rounded-lg overflow-hidden">
-                                <div className="relative pb-48">
-                                    <img className="absolute inset-0 h-full w-full object-cover" src={card.imageUrl} alt={`Card ${index + 1}`} />
-                                </div>
-                                <div className="pt-4">
-                                    <h2 className="font-bold text-xl mb-2">{card.text}</h2>
-                                    <div className="flex justify-between items-center">
-                                        <button 
-                                            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-                                            onClick={() => handleClick(card.buttonText)}
-                                        >
-                                            {card.buttonText}
-                                        </button>
-                                        <button 
-                                            className="bg-green-500 text-white px-4 py-2 rounded ml-2 hover:bg-green-600"
-                                            onClick={() => handleCardModalOpen(card, index)}
-                                        >
-                                            Editar
-                                        </button>
+                            <div key={index} className="w-full sm:w-1/2 lg:w-1/4 mb-8">
+
+                                <div className="p-6 flex-1 flex flex-col justify-between bg-white">
+
+
+                                    <div className="relative pb-48">
+                                        <img className="absolute inset-0 h-full w-full object-cover" src={card.imageUrl} alt={`Card ${index + 1}`} />
+                                    </div>
+                                    <div className="pt-4">
+                                        <h2 className="font-bold text-xl mb-2">{card.text}</h2>
+                                        <div className="flex justify-between items-center">
+                                            <button
+                                                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                                                onClick={() => handleClick(card.buttonText)}
+                                            >
+                                                {card.buttonText}
+                                            </button>
+                                            <button
+                                                className="bg-green-500 text-white px-4 py-2 rounded ml-2 hover:bg-green-600"
+                                                onClick={() => handleCardModalOpen(card, index)}
+                                            >
+                                                Editar
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+
                         ))}
                     </div>
                     {isModalOpen && (
@@ -236,90 +243,90 @@ const M1 = () => {
                                 <form onSubmit={handleUpdateSection} className="space-y-4">
                                     <div>
                                         <label htmlFor="title" className="block font-medium">Título:</label>
-                                        <input 
-                                            type="text" 
-                                            id="title" 
-                                            name="title" 
-                                            value={selectedSection?.title || ''} 
-                                            onChange={handleInputChange} 
-                                            className="w-full border border-gray-300 p-2 rounded" 
+                                        <input
+                                            type="text"
+                                            id="title"
+                                            name="title"
+                                            value={selectedSection?.title || ''}
+                                            onChange={handleInputChange}
+                                            className="w-full border border-gray-300 p-2 rounded"
                                         />
                                     </div>
                                     <div>
                                         <label htmlFor="subtitle" className="block font-medium">Subtítulo:</label>
-                                        <input 
-                                            type="text" 
-                                            id="subtitle" 
-                                            name="subtitle" 
-                                            value={selectedSection?.subtitle || ''} 
-                                            onChange={handleInputChange} 
-                                            className="w-full border border-gray-300 p-2 rounded" 
+                                        <input
+                                            type="text"
+                                            id="subtitle"
+                                            name="subtitle"
+                                            value={selectedSection?.subtitle || ''}
+                                            onChange={handleInputChange}
+                                            className="w-full border border-gray-300 p-2 rounded"
                                         />
                                     </div>
                                     <div>
                                         <label htmlFor="description" className="block font-medium">Descripción:</label>
-                                        <textarea 
-                                            id="description" 
-                                            name="description" 
-                                            value={selectedSection?.description || ''} 
-                                            onChange={handleInputChange} 
-                                            className="w-full border border-gray-300 p-2 rounded" 
+                                        <textarea
+                                            id="description"
+                                            name="description"
+                                            value={selectedSection?.description || ''}
+                                            onChange={handleInputChange}
+                                            className="w-full border border-gray-300 p-2 rounded"
                                         />
                                     </div>
                                     <div>
                                         <label htmlFor="carouselImageUrl" className="block font-medium">URL de la Imagen del Carrusel:</label>
-                                        <input 
-                                            type="text" 
-                                            id="carouselImageUrl" 
-                                            name="carouselImageUrl" 
-                                            value={selectedSection?.carouselImageUrl || ''} 
-                                            onChange={handleInputChange} 
-                                            className="w-full border border-gray-300 p-2 rounded" 
+                                        <input
+                                            type="text"
+                                            id="carouselImageUrl"
+                                            name="carouselImageUrl"
+                                            value={selectedSection?.carouselImageUrl || ''}
+                                            onChange={handleInputChange}
+                                            className="w-full border border-gray-300 p-2 rounded"
                                         />
                                     </div>
                                     <div>
                                         <label htmlFor="buttonText1" className="block font-medium">Texto del Botón 1:</label>
-                                        <input 
-                                            type="text" 
-                                            id="buttonText1" 
-                                            name="buttonText1" 
-                                            value={selectedSection?.buttonText1 || ''} 
-                                            onChange={handleInputChange} 
-                                            className="w-full border border-gray-300 p-2 rounded" 
+                                        <input
+                                            type="text"
+                                            id="buttonText1"
+                                            name="buttonText1"
+                                            value={selectedSection?.buttonText1 || ''}
+                                            onChange={handleInputChange}
+                                            className="w-full border border-gray-300 p-2 rounded"
                                         />
                                     </div>
                                     <div>
                                         <label htmlFor="buttonAction1" className="block font-medium">Acción del Botón 1:</label>
-                                        <input 
-                                            type="text" 
-                                            id="buttonAction1" 
-                                            name="buttonAction1" 
-                                            value={selectedSection?.buttonAction1 || ''} 
-                                            onChange={handleInputChange} 
-                                            className="w-full border border-gray-300 p-2 rounded" 
+                                        <input
+                                            type="text"
+                                            id="buttonAction1"
+                                            name="buttonAction1"
+                                            value={selectedSection?.buttonAction1 || ''}
+                                            onChange={handleInputChange}
+                                            className="w-full border border-gray-300 p-2 rounded"
                                         />
                                     </div>
                                     <div>
                                         <label htmlFor="buttonText2" className="block font-medium">Texto del Botón 2:</label>
-                                        <input 
-                                            type="text" 
-                                            id="buttonText2" 
-                                            name="buttonText2" 
-                                            value={selectedSection?.buttonText2 || ''} 
-                                            onChange={handleInputChange} 
-                                            className="w-full border border-gray-300 p-2 rounded" 
+                                        <input
+                                            type="text"
+                                            id="buttonText2"
+                                            name="buttonText2"
+                                            value={selectedSection?.buttonText2 || ''}
+                                            onChange={handleInputChange}
+                                            className="w-full border border-gray-300 p-2 rounded"
                                         />
                                     </div>
                                     <div className="text-right">
-                                        <button 
-                                            type="button" 
-                                            onClick={handleModalClose} 
+                                        <button
+                                            type="button"
+                                            onClick={handleModalClose}
                                             className="mr-4 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
                                         >
                                             Cancelar
                                         </button>
-                                        <button 
-                                            type="submit" 
+                                        <button
+                                            type="submit"
                                             className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
                                         >
                                             Guardar
@@ -336,47 +343,47 @@ const M1 = () => {
                                 <form onSubmit={handleUpdateCard} className="space-y-4">
                                     <div>
                                         <label htmlFor="imageUrl" className="block font-medium">URL de la Imagen:</label>
-                                        <input 
-                                            type="text" 
-                                            id="imageUrl" 
-                                            name="imageUrl" 
-                                            value={selectedCard?.imageUrl || ''} 
-                                            onChange={handleInputChange} 
-                                            className="w-full border border-gray-300 p-2 rounded" 
+                                        <input
+                                            type="text"
+                                            id="imageUrl"
+                                            name="imageUrl"
+                                            value={selectedCard?.imageUrl || ''}
+                                            onChange={handleInputChange}
+                                            className="w-full border border-gray-300 p-2 rounded"
                                         />
                                     </div>
                                     <div>
                                         <label htmlFor="text" className="block font-medium">Texto:</label>
-                                        <input 
-                                            type="text" 
-                                            id="text" 
-                                            name="text" 
-                                            value={selectedCard?.text || ''} 
-                                            onChange={handleInputChange} 
-                                            className="w-full border border-gray-300 p-2 rounded" 
+                                        <input
+                                            type="text"
+                                            id="text"
+                                            name="text"
+                                            value={selectedCard?.text || ''}
+                                            onChange={handleInputChange}
+                                            className="w-full border border-gray-300 p-2 rounded"
                                         />
                                     </div>
                                     <div>
                                         <label htmlFor="buttonText" className="block font-medium">Texto del Botón:</label>
-                                        <input 
-                                            type="text" 
-                                            id="buttonText" 
-                                            name="buttonText" 
-                                            value={selectedCard?.buttonText || ''} 
-                                            onChange={handleInputChange} 
-                                            className="w-full border border-gray-300 p-2 rounded" 
+                                        <input
+                                            type="text"
+                                            id="buttonText"
+                                            name="buttonText"
+                                            value={selectedCard?.buttonText || ''}
+                                            onChange={handleInputChange}
+                                            className="w-full border border-gray-300 p-2 rounded"
                                         />
                                     </div>
                                     <div className="text-right">
-                                        <button 
-                                            type="button" 
-                                            onClick={handleModalClose} 
+                                        <button
+                                            type="button"
+                                            onClick={handleModalClose}
                                             className="mr-4 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
                                         >
                                             Cancelar
                                         </button>
-                                        <button 
-                                            type="submit" 
+                                        <button
+                                            type="submit"
                                             className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
                                         >
                                             Guardar
