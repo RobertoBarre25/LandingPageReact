@@ -473,37 +473,42 @@ app.put('/api/cardM1/update-card', async (req, res) => {
   const { tag, text, imageUrl } = req.body;
 
   if (!tag || !text || !imageUrl) {
-      return res.status(400).json({ message: 'Faltan datos para actualizar la tarjeta' });
+    return res.status(400).json({ message: 'Faltan datos para actualizar la tarjeta' });
   }
 
   try {
-      // Encuentra el documento
-      const document = await cardM1.findOne();
+    // Encuentra el documento
+    const document = await cardM1.findOne();
 
-      if (!document) {
-          return res.status(404).json({ message: 'Documento no encontrado' });
-      }
+    if (!document) {
+      return res.status(404).json({ message: 'Documento no encontrado' });
+    }
 
-      // Encuentra el índice del servicio que debe actualizarse
-      const index = document.services.findIndex(service => service.tag === tag);
+    // Encuentra el índice del servicio que debe actualizarse
+    const index = document.services.findIndex(service => service.tag === tag);
 
-      if (index === -1) {
-          return res.status(404).json({ message: 'Tarjeta no encontrada' });
-      }
+    if (index === -1) {
+      return res.status(404).json({ message: 'Tarjeta no encontrada' });
+    }
 
-      // Actualiza los datos
-      document.services[index].cardM1Text = text;
-      document.services[index].imgCardM1 = imageUrl;
+    // Construye el nombre del campo basado en el tag
+    const textField = `cardM${index + 1}Text`;
+    const imageField = `imgCardM${index + 1}`;
 
-      // Guarda el documento
-      await document.save();
+    // Actualiza los datos
+    document.services[index][textField] = text;
+    document.services[index][imageField] = imageUrl;
 
-      res.status(200).json({ message: 'Actualización exitosa', document });
+    // Guarda el documento
+    await document.save();
+
+    res.status(200).json({ message: 'Actualización exitosa', document });
   } catch (error) {
-      console.error('Error al actualizar la tarjeta:', error);
-      res.status(500).json({ message: 'Error al actualizar la tarjeta', error: error.message });
+    console.error('Error al actualizar la tarjeta:', error);
+    res.status(500).json({ message: 'Error al actualizar la tarjeta', error: error.message });
   }
 });
+
 
 mongoose.connect(uri, {
   useNewUrlParser: true,
@@ -776,7 +781,6 @@ app.get('/api/m3', async (req, res) => {
   }
 });
 
-
 app.put('/api/m3/update-by-tag', async (req, res) => {
   const { tag, sectionTag, ...updateData } = req.body;
 
@@ -879,7 +883,6 @@ app.get('/api/m4', async (req, res) => {
   }
 });
 
-
 app.put('/api/m4/update-by-tag', async (req, res) => {
   const { tag, sectionTag, ...updateData } = req.body;
 
@@ -971,8 +974,6 @@ app.put('/api/m4/update-by-tag-cards', async (req, res) => {
 });
 
 
-
-
 app.get('/api/m5', async (req, res) => {
   try {
     const data = await M5.findOne(); // Asegúrate de que `findOne` obtenga los datos correctos
@@ -981,7 +982,6 @@ app.get('/api/m5', async (req, res) => {
     res.status(500).send('Error al obtener datos');
   }
 });
-
 
 app.put('/api/m5/update-by-tag', async (req, res) => {
   const { tag, sectionTag, ...updateData } = req.body;
@@ -1073,9 +1073,6 @@ app.put('/api/m5/update-by-tag-cards', async (req, res) => {
   }
 });
 
-
-
-
 app.get('/api/m6', async (req, res) => {
   try {
     const data = await M6.findOne(); // Asegúrate de que `findOne` obtenga los datos correctos
@@ -1084,7 +1081,6 @@ app.get('/api/m6', async (req, res) => {
     res.status(500).send('Error al obtener datos');
   }
 });
-
 
 app.put('/api/m6/update-by-tag', async (req, res) => {
   const { tag, sectionTag, ...updateData } = req.body;
@@ -1175,8 +1171,6 @@ app.put('/api/m6/update-by-tag-cards', async (req, res) => {
     res.status(500).json({ message: 'Error al actualizar', error });
   }
 });
-
-
 
 app.get('/api/m7', async (req, res) => {
   try {
@@ -1278,9 +1272,6 @@ app.put('/api/m7/update-by-tag-cards', async (req, res) => {
 });
 
 
-
-
-
 app.get('/api/m8', async (req, res) => {
   try {
     const data = await M8.findOne(); // Asegúrate de que `findOne` obtenga los datos correctos
@@ -1289,7 +1280,6 @@ app.get('/api/m8', async (req, res) => {
     res.status(500).send('Error al obtener datos');
   }
 });
-
 
 app.put('/api/m8/update-by-tag', async (req, res) => {
   const { tag, sectionTag, ...updateData } = req.body;
@@ -1380,7 +1370,6 @@ app.put('/api/m8/update-by-tag-cards', async (req, res) => {
     res.status(500).json({ message: 'Error al actualizar', error });
   }
 });
-
 
 app.get('/api/m9', async (req, res) => {
   try {

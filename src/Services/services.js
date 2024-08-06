@@ -20,38 +20,35 @@ const Services = () => {
   const [editForm, setEditForm] = useState({ tag: "", text: "", imageUrl: "" });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/api/cardM1")
-      .then((response) => {
+    const fetchCards = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/cardM1");
         if (response.data) {
           const principalText = response.data.principalText[0] || {};
           setImgText(principalText.imgText || "");
           setButtonServText(principalText.buttonServText || "");
 
           const services = response.data.services || [];
-          if (services.length >= 12) {
-            setCards(
-              services.map((service, index) => ({
-                id: `cardM${index + 1}`,
-                tag: service.tag, // Añadir tag
-                text: service[`cardM${index + 1}Text`],
-                imageUrl: service[`imgCardM${index + 1}`],
-                link: `/M${index + 1}`,
-              }))
-            );
-          }
+          const fetchedCards = services.map((service, index) => ({
+            id: `cardM${index + 1}`,
+            tag: service.tag,
+            text: service[`cardM${index + 1}Text`],
+            imageUrl: service[`imgCardM${index + 1}`],
+            link: `/M${index + 1}`,
+          }));
+          setCards(fetchedCards);
         }
-      })
-      .catch((error) => {
-        console.error("Error al obtener los datos de servicios CardM1:", error);
-        setError("Ocurrió un error al obtener los datos de servicios CardM1");
-      })
-      .finally(() => {
+      } catch (error) {
+        console.error("Error al obtener los datos de servicios:", error);
+        setError("Ocurrió un error al obtener los datos de servicios");
+      } finally {
         setLoading(false);
-      });
+      }
+    };
+
+    fetchCards();
   }, []);
 
   const handleEditClick = (card) => {
@@ -78,45 +75,34 @@ const Services = () => {
     const { tag, text, imageUrl } = editForm;
 
     if (!tag || !text || !imageUrl) {
-      console.error("Faltan datos para actualizar la tarjeta");
       Swal.fire("Error", "Faltan datos para actualizar la tarjeta", "error");
       return;
     }
 
-    console.log("Datos enviados:", { tag, text, imageUrl });
-
     try {
       await axios.put(
-        "http://localhost:5000/api/cardM1/update-card",
-        {
-          tag,
-          text,
-          imageUrl,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
+        `http://localhost:5000/api/cardM1/update-card`,
+        { tag, text, imageUrl },
+        { headers: { "Content-Type": "application/json" } }
       );
 
-      Swal.fire(
-        "Éxito",
-        "Datos de la tarjeta actualizados correctamente",
-        "success"
-      );
+      Swal.fire("Éxito", "Datos de la tarjeta actualizados correctamente", "success");
       handleModalClose();
 
       // Obtener los datos actualizados
       const response = await axios.get("http://localhost:5000/api/cardM1");
-      setCards(response.data.services || []); // Asegúrate de que el estado `cards` se actualice correctamente
+      const services = response.data.services || [];
+      const updatedCards = services.map((service, index) => ({
+        id: `cardM${index + 1}`,
+        tag: service.tag,
+        text: service[`cardM${index + 1}Text`],
+        imageUrl: service[`imgCardM${index + 1}`],
+        link: `/M${index + 1}`,
+      }));
+      setCards(updatedCards);
     } catch (error) {
       console.error("Error al actualizar los datos de la tarjeta:", error);
-      Swal.fire(
-        "Error",
-        "Error al actualizar los datos de la tarjeta",
-        "error"
-      );
+      Swal.fire("Error", "Error al actualizar los datos de la tarjeta", "error");
     }
   };
 
@@ -128,10 +114,7 @@ const Services = () => {
       <div className="relative h-screen">
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage:
-              "url('https://www.udima.es/sites/udima.es/files/GettyImages-1407650545.jpg')",
-          }}
+          style={{ backgroundImage: "url('https://www.udima.es/sites/udima.es/files/GettyImages-1407650545.jpg')" }}
         ></div>
         <div className="absolute inset-0 bg-black opacity-50"></div>
         <header className="fixed top-0 left-0 w-full z-5 transition-all duration-800 ease-in-out h-16 bg-transparent">
@@ -139,9 +122,7 @@ const Services = () => {
         </header>
         <div className="relative flex items-center justify-center h-full z-3">
           <div className="text-center text-white p-4">
-            <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-9xl font-bold">
-              {imgText}
-            </h1>
+            <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-9xl font-bold">{imgText}</h1>
             <button
               className="mt-8 md:mt-16 px-6 py-4 md:px-10 md:py-6 border border-white text-white text-sm sm:text-xl md:text-2xl lg:text-3xl"
               onClick={scrollToMiddle}
@@ -166,22 +147,13 @@ const Services = () => {
             <div key={card.id} className="relative border-none group m-4">
               <div className="relative overflow-hidden h-80 w-full border-none">
                 <div className="absolute inset-0 bg-black opacity-25"></div>
-                <img
-                  src={card.imageUrl}
-                  alt={card.text}
-                  className="w-full h-full object-cover"
-                />
+                <img src={card.imageUrl} alt={card.text} className="w-full h-full object-cover" />
                 <div className="absolute inset-0 flex justify-center items-center">
-                  <h3 className="text-white text-xl md:text-2xl">
-                    {card.text}
-                  </h3>
+                  <h3 className="text-white text-xl md:text-2xl">{card.text}</h3>
                 </div>
                 <div className="absolute bottom-0 left-0 w-full h-full bg-black bg-opacity-50 text-white p-5 transition-transform duration-700 ease-in-out transform translate-y-full group-hover:translate-y-0 flex justify-center items-end">
                   <div className="text-center mb-8">
-                    <a
-                      href={card.link}
-                      className="text-white underline hover:no-underline"
-                    >
+                    <a href={card.link} className="text-white underline hover:no-underline">
                       detalles
                     </a>
                   </div>
@@ -242,7 +214,7 @@ const Services = () => {
                   Cancelar
                 </button>
                 <button
-                  type="submit" // Cambiado a `submit` para que el formulario lo maneje
+                  type="submit"
                   className="bg-blue-500 text-white py-2 px-4 rounded"
                 >
                   Guardar
