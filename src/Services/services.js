@@ -15,17 +15,31 @@ const scrollToMiddle = () => {
 const Services = () => {
   const [imgText, setImgText] = useState("");
   const [buttonServText, setButtonServText] = useState("");
+  const [backgroundImage, setBackgroundImage] = useState("");
   const [cards, setCards] = useState([]);
   const [editingCard, setEditingCard] = useState(null);
   const [editForm, setEditForm] = useState({ tag: "", text: "", imageUrl: "" });
+  const [isEditingPrincipal, setIsEditingPrincipal] = useState(false);
+  const [principalData, setPrincipalData] = useState({
+    tag: "",
+    section: "",
+    imgText: "",
+    buttonServText: "",
+    backgroundImage: ""
+  });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const processResponse = (response, index) => {
-    const principalText = response.data.principalText[0] || {};
+  const processPrincipalData = (response, index) => {
+    const principal = response.data.principalText[0] || {};
     if (index === 0) {
-      setImgText(principalText.imgText || "");
-      setButtonServText(principalText.buttonServText || "");
+      setPrincipalData({
+        tag: principal.tag || "",
+        section: principal.section || "",
+        imgText: principal.imgText || "",
+        buttonServText: principal.buttonServText || "",
+        backgroundImage: principal.backgroundImage || ""
+      });
     }
 
     const services = response.data.services || [];
@@ -55,17 +69,30 @@ const Services = () => {
           axios.get("http://localhost:5000/api/cardM10"),
           axios.get("http://localhost:5000/api/cardM11"),
           axios.get("http://localhost:5000/api/cardM12"),
+          axios.get("http://localhost:5000/api/principalText")
         ]);
-
+  
         const allCards = responses.flatMap((response, index) =>
-          processResponse(response, index)
+          processPrincipalData(response, index)
         );
-
-        // Filtra duplicados
+  
         const uniqueCards = allCards.filter((card, index, self) =>
           index === self.findIndex((t) => t.id === card.id)
         );
         setCards(uniqueCards);
+  
+        const principal = responses[12].data.principalText[0] || {};
+        setPrincipalData({
+          tag: principal.tag || "",
+          section: principal.section || "",
+          imgText: principal.imgText || "",
+          buttonServText: principal.buttonServText || "",
+          backgroundImage: principal.backgroundImage || ""
+        });
+  
+        setImgText(principal.imgText);
+        setButtonServText(principal.buttonServText);
+        setBackgroundImage(principal.backgroundImage);
       } catch (error) {
         console.error("Error al obtener los datos de servicios:", error);
         setError("Ocurrió un error al obtener los datos de servicios");
@@ -73,9 +100,10 @@ const Services = () => {
         setLoading(false);
       }
     };
-
+  
     fetchCards();
-  }, []);
+  }, [isEditingPrincipal]); // Añade `isEditingPrincipal` a las dependencias
+  
 
   const handleEditClick = (card) => {
     setEditingCard(card);
@@ -84,6 +112,7 @@ const Services = () => {
       text: card.text,
       imageUrl: card.imageUrl,
     });
+    document.body.style.overflow = 'hidden'; // Deshabilitar el scroll
   };
 
   const handleChange = (e) => {
@@ -93,9 +122,12 @@ const Services = () => {
 
   const handleModalClose = () => {
     setEditingCard(null);
+    document.body.style.overflow = 'auto'; // Restaurar el scroll
   };
+  
 
   const handleUpdateCard = async (event) => {
+    
     event.preventDefault();
 
     const { tag, text, imageUrl } = editForm;
@@ -126,6 +158,55 @@ const Services = () => {
       Swal.fire("Éxito", "Datos de la tarjeta actualizados correctamente", "success");
       handleModalClose();
 
+      const responses = await Promise.all([
+        axios.get("http://localhost:5000/api/cardM1"),
+        axios.get("http://localhost:5000/api/cardM2"),
+        axios.get("http://localhost:5000/api/cardM3"),
+        axios.get("http://localhost:5000/api/cardM4"),
+        axios.get("http://localhost:5000/api/cardM5"),
+        axios.get("http://localhost:5000/api/cardM6"),
+        axios.get("http://localhost:5000/api/cardM7"),
+        axios.get("http://localhost:5000/api/cardM8"),
+        axios.get("http://localhost:5000/api/cardM9"),
+        axios.get("http://localhost:5000/api/cardM10"),
+        axios.get("http://localhost:5000/api/cardM11"),
+        axios.get("http://localhost:5000/api/cardM12"),
+        axios.get("http://localhost:5000/api/principalText")
+      ]);
+
+      const allCards = responses.flatMap((response, index) =>
+        processPrincipalData(response, index)
+      );
+
+      const uniqueCards = allCards.filter((card, index, self) =>
+        index === self.findIndex((t) => t.id === card.id)
+      );
+      setCards(uniqueCards);
+    } catch (error) {
+      console.error("Error al actualizar los datos de la tarjeta:", error);
+      Swal.fire("Error", "Error al actualizar los datos de la tarjeta", "error");
+    }
+  };
+
+  const openPrincipalEditForm = () => {
+    setIsEditingPrincipal(true);
+    document.body.style.overflow = 'auto'; // Deshabilitar el scroll
+  };
+
+  const handlePrincipalDataChange = (e) => {
+    const { name, value } = e.target;
+    setPrincipalData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const updatePrincipalData = async (event) => {
+    event.preventDefault();
+  
+  
+    try {
+      const response = await axios.put("http://localhost:5000/api/principalText/update", principalData);
+      Swal.fire("Éxito", "Datos actualizados correctamente", "success");
+      setIsEditingPrincipal(false);
+  
       // Vuelve a obtener los datos actualizados
       const responses = await Promise.all([
         axios.get("http://localhost:5000/api/cardM1"),
@@ -140,21 +221,24 @@ const Services = () => {
         axios.get("http://localhost:5000/api/cardM10"),
         axios.get("http://localhost:5000/api/cardM11"),
         axios.get("http://localhost:5000/api/cardM12"),
+        axios.get("http://localhost:5000/api/principalText")
       ]);
-
+  
       const allCards = responses.flatMap((response, index) =>
-        processResponse(response, index)
+        processPrincipalData(response, index)
       );
-
+  
       const uniqueCards = allCards.filter((card, index, self) =>
         index === self.findIndex((t) => t.id === card.id)
       );
       setCards(uniqueCards);
     } catch (error) {
-      console.error("Error al actualizar los datos de la tarjeta:", error);
-      Swal.fire("Error", "Error al actualizar los datos de la tarjeta", "error");
+      console.error("Error al actualizar los datos principales:", error);
+      Swal.fire("Error", "Error al actualizar los datos principales", "error");
     }
+    document.body.style.overflow = 'auto'; // Restaurar el scroll
   };
+  
 
   if (loading) return <p>Cargando...</p>;
   if (error) return <p>{error}</p>;
@@ -164,7 +248,7 @@ const Services = () => {
       <div className="relative h-screen">
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: "url('https://www.udima.es/sites/udima.es/files/GettyImages-1407650545.jpg')" }}
+          style={{ backgroundImage: `url('${backgroundImage}')` }}
         ></div>
         <div className="absolute inset-0 bg-black opacity-50"></div>
         <header className="fixed top-0 left-0 w-full z-5 transition-all duration-800 ease-in-out h-16 bg-transparent">
@@ -178,6 +262,13 @@ const Services = () => {
               onClick={scrollToMiddle}
             >
               {buttonServText}
+            </button>
+            <br/>
+            <button
+              className="mt-8 md:mt-16 px-6 py-4 md:px-10 md:py-6 border border-white text-white text-sm sm:text-xl md:text-2xl lg:text-3xl"
+              onClick={openPrincipalEditForm}
+            >
+              Editar
             </button>
             <div className="mt-4 flex items-center justify-center">
               <FontAwesomeIcon
@@ -193,7 +284,7 @@ const Services = () => {
           Servicios
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {cards.map((card,index) => (
+          {cards.map((card, index) => (
             <div key={card.id} className="relative border-none group m-4">
               <div className="relative overflow-hidden h-80 w-full border-none">
                 <div className="absolute inset-0 bg-black opacity-25"></div>
@@ -204,7 +295,7 @@ const Services = () => {
                 <div className="absolute bottom-0 left-0 w-full h-full bg-black bg-opacity-50 text-white p-5 transition-transform duration-700 ease-in-out transform translate-y-full group-hover:translate-y-0 flex justify-center items-end">
                   <div className="text-center mb-8">
                     <a href={`/M${index + 1}`} className="text-white underline hover:no-underline">
-                      detalles
+                      Detalles
                     </a>
                   </div>
                 </div>
@@ -256,6 +347,63 @@ const Services = () => {
                 <button
                   type="button"
                   onClick={handleModalClose}
+                  className="ml-4 bg-gray-500 text-white px-4 py-2 rounded-md"
+                >
+                  Cancelar
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+      {isEditingPrincipal && (
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+          <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+            <h3 className="text-xl font-bold mb-4">Editar Información Principal</h3>
+            <form onSubmit={updatePrincipalData}>
+              <div className="mb-4">
+                <label htmlFor="imgText" className="block text-gray-700">Texto de Imagen</label>
+                <input
+                  type="text"
+                  id="imgText"
+                  name="imgText"
+                  value={principalData.imgText}
+                  onChange={handlePrincipalDataChange}
+                  className="w-full border border-gray-300 rounded-md p-2"
+                />
+              </div>
+              <div className="mb-4">
+                <label htmlFor="buttonServText" className="block text-gray-700">Texto del Botón de Servicios</label>
+                <input
+                  type="text"
+                  id="buttonServText"
+                  name="buttonServText"
+                  value={principalData.buttonServText}
+                  onChange={handlePrincipalDataChange}
+                  className="w-full border border-gray-300 rounded-md p-2"
+                />
+              </div>
+              <div className="mb-4">
+                <label htmlFor="backgroundImage" className="block text-gray-700">URL de Imagen de Fondo</label>
+                <input
+                  type="text"
+                  id="backgroundImage"
+                  name="backgroundImage"
+                  value={principalData.backgroundImage}
+                  onChange={handlePrincipalDataChange}
+                  className="w-full border border-gray-300 rounded-md p-2"
+                />
+              </div>
+              <div className="flex justify-end">
+                <button
+                  type="submit"
+                  className="bg-blue-500 text-white px-4 py-2 rounded-md"
+                >
+                  Actualizar
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setIsEditingPrincipal(false)}
                   className="ml-4 bg-gray-500 text-white px-4 py-2 rounded-md"
                 >
                   Cancelar
