@@ -11,6 +11,7 @@ const HorizontalCard = ({ videoSrc, title, description }) => {
   const [showModal, setShowModal] = useState(false);
   const [editedTitle, setEditedTitle] = useState(title);
   const [editedDescription, setEditedDescription] = useState(description);
+  const [buttonText, setButtonText] = useState('Contacta ya!');
 
   const cardRef = useRef();
   const videoRef = useRef();
@@ -90,12 +91,11 @@ const HorizontalCard = ({ videoSrc, title, description }) => {
       />
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white p-4">
         <h2 className="text-5xl sm:text-3xl md:text-5xl lg:text-8xl font-bold">{editedTitle}</h2>
-        <p className="description">{editedDescription}</p>
         <button
           className="mt-4 px-6 py-3 border border-white"
           onClick={() => handleClick('service')}
         >
-          Contacta ya!
+          {buttonText}
         </button>
         <Button variant="light" className="mt-4" onClick={() => setShowModal(true)}>
           Editar
@@ -119,13 +119,12 @@ const HorizontalCard = ({ videoSrc, title, description }) => {
                 onChange={(e) => setEditedTitle(e.target.value)}
               />
             </Form.Group>
-            <Form.Group controlId="formDescription" className="mt-3">
-              <Form.Label>Descripción</Form.Label>
+            <Form.Group controlId="formButtonText">
+              <Form.Label>Texto del Botón</Form.Label>
               <Form.Control
-                as="textarea"
-                rows={3}
-                value={editedDescription}
-                onChange={(e) => setEditedDescription(e.target.value)}
+                type="text"
+                value={buttonText}
+                onChange={(e) => setButtonText(e.target.value)}
               />
             </Form.Group>
           </Form>
