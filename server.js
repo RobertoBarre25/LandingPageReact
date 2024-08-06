@@ -75,6 +75,32 @@ const carouselSchema = new mongoose.Schema({
 
 const Carousel = mongoose.model('Carousel', carouselSchema);
 
+const cardsEndSchema = new mongoose.Schema({
+  sectionCardsEnd: [
+    {
+      sectionTag: { type: String, required: true },
+      title: { type: String, required: true },
+      description: { type: String, required: true },
+      imageUrl: { type: String, required: true },
+      buttonText1: { type: String, required: true },
+      
+    }
+  ]
+}, { collection: 'body' });
+
+const CardsEnd = mongoose.model('CardsEnd', cardsEndSchema);
+
+
+// Ruta para obtener los datos de la colección 'body'
+app.get('/api/cards-end', async (req, res) => {
+  try {
+      const cards = await CardsEnd.find({ sectionCardsEnd: { $exists: true } }); // Obtiene todos los documentos de la colección
+      res.json(cards);
+  } catch (err) {
+      res.status(500).send(err.message);
+  }
+});
+
 
 // Definir esquema y modelo de Mongoose para la colección 'm1'
 const m1Schema = new mongoose.Schema({

@@ -65,7 +65,10 @@ const HorizontalCard = ({ videoSrc, title, description }) => {
   }, []);
 
   return (
-    <div ref={cardRef} className={`horizontal-card-container ${inView ? 'in-view' : ''}`} style={{ position: 'relative', width: '100%', height: '100vh', overflow: 'hidden' }}>
+    <div
+      ref={cardRef}
+      className={`horizontal-card-container ${inView ? 'in-view' : ''} w-full h-screen flex items-center justify-center overflow-hidden`}
+    >
       <video
         ref={videoRef}
         src={videoSrc}
@@ -76,7 +79,7 @@ const HorizontalCard = ({ videoSrc, title, description }) => {
         playsInline
       />
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white p-4">
-        <h2 className="titlePubliciti">{title}</h2>
+        <h2 className="text-5xl sm:text-3xl md:text-5xl lg:text-8xl font-bold">{title}</h2>
         <p className="description">{description}</p>
         <button
           className="mt-4 px-6 py-3 border border-white"

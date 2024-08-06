@@ -1,61 +1,43 @@
 .horizontal-card-container {
-  transform: scale(1);
-  opacity: 0;
-  width: 100%;
   position: relative;
+  min-width:100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 
 .titlePubliciti {
   color: aliceblue;
-  position: absolute;
-  top: 20%;
-  left: 5%;
-  width: 90%;
-  font-size: 5vw;
+  font-size: 3vw;
   font-family: sans-serif;
   font-weight: 800;
   text-align: center;
+  margin: 0 auto;
 }
 
 .horizontal-card-container.in-view {
-  transform: scale(1);
   opacity: 1;
-}
-
-.Image {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  max-height: 800px;
-  position: relative;
-}
-
-p {
-  font-size: 2vw;
 }
 
 .PublicitiImg {
   position: absolute;
-  z-index: -2;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  filter: brightness(60%);
 }
 
-.row {
-  position: absolute;
-  top: 70%;
-  left: 50%;
-  transform: translateX(-50%);
+.description {
+  font-size: 2vw;
 }
 
-.buttomPrincipal {
-  position: absolute;
-  top: 60%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+button {
   font-size: 1.5rem;
-  padding: 1rem 3rem; /* Incrementa el padding horizontal para más ancho */
+  padding: 1rem 3rem;
   background-color: #007bff;
   border: 2px solid white;
   color: white;
@@ -64,26 +46,9 @@ p {
   transition: background-color 0.3s ease;
 }
 
-.buttomPrincipal:hover {
+button:hover {
   background-color: #0056b3;
 }
 
-@media (min-width: 768px) {
-  .titlePubliciti {
-    font-size: 4vw;
-  }
 
-  p {
-    font-size: 1.5vw;
-  }
-}
 
-@media (min-width: 1024px) {
-  .titlePubliciti {
-    font-size: 3.5vw;
-  }
-
-  p {
-    font-size: 1.2vw;
-  }
-}
