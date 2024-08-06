@@ -4,9 +4,14 @@ import './css.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDoubleDown } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
+import { Modal, Button, Form } from 'react-bootstrap';
 
 const HorizontalCard = ({ videoSrc, title, description }) => {
   const [inView, setInView] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [editedTitle, setEditedTitle] = useState(title);
+  const [editedDescription, setEditedDescription] = useState(description);
+
   const cardRef = useRef();
   const videoRef = useRef();
 
@@ -64,6 +69,11 @@ const HorizontalCard = ({ videoSrc, title, description }) => {
     };
   }, []);
 
+  const handleSave = () => {
+    // Aquí puedes añadir la lógica para guardar los cambios si es necesario
+    setShowModal(false);
+  };
+
   return (
     <div
       ref={cardRef}
@@ -79,18 +89,56 @@ const HorizontalCard = ({ videoSrc, title, description }) => {
         playsInline
       />
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white p-4">
-        <h2 className="text-5xl sm:text-3xl md:text-5xl lg:text-8xl font-bold">{title}</h2>
-        <p className="description">{description}</p>
+        <h2 className="text-5xl sm:text-3xl md:text-5xl lg:text-8xl font-bold">{editedTitle}</h2>
+        <p className="description">{editedDescription}</p>
         <button
           className="mt-4 px-6 py-3 border border-white"
           onClick={() => handleClick('service')}
         >
           Contacta ya!
         </button>
+        <Button variant="light" className="mt-4" onClick={() => setShowModal(true)}>
+          Editar
+        </Button>
       </div>
       <div className="absolute bottom-4 left-0 right-0 flex justify-center">
         <FontAwesomeIcon icon={faAngleDoubleDown} className="text-white text-2xl sm:text-3xl md:text-4xl animate-bounce" />
       </div>
+
+      <Modal show={showModal} onHide={() => setShowModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Editar Información</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group controlId="formTitle">
+              <Form.Label>Título</Form.Label>
+              <Form.Control
+                type="text"
+                value={editedTitle}
+                onChange={(e) => setEditedTitle(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group controlId="formDescription" className="mt-3">
+              <Form.Label>Descripción</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={3}
+                value={editedDescription}
+                onChange={(e) => setEditedDescription(e.target.value)}
+              />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowModal(false)}>
+            Cancelar
+          </Button>
+          <Button variant="primary" onClick={handleSave}>
+            Guardar Cambios
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

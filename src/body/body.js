@@ -111,7 +111,7 @@ const Body = () => {
                     </button>
                 )}
                 <button
-                    className="bg-yellow-500 border-2 border-white text-white text-lg md:text-xl py-3 md:py-4 px-6 md:px-10 cursor-pointer m-3 md:m-5 rounded-[3px] hover:bg-yellow-600"
+                    className="bg-green-500 border-2 border-white text-white text-lg md:text-xl py-3 md:py-4 px-6 md:px-10 cursor-pointer m-3 md:m-5 rounded-[3px] hover:bg-green-600"
                     onClick={() => handleEditClick(item)}
                 >
                     Editar

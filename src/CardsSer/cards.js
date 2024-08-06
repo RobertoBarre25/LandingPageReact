@@ -77,7 +77,7 @@ const Cards = () => {
                                     </button>
                                     <button
                                         onClick={() => handleEditClick(card)}
-                                        className="bg-yellow-500 text-white py-2.5 px-5 border-none cursor-pointer transition-colors duration-700 ease-in-out uppercase rounded-md hover:bg-yellow-600 mt-2"
+                                        className="bg-green-500 text-white py-2.5 px-5 border-none cursor-pointer transition-colors duration-700 ease-in-out uppercase rounded-md hover:bg-green-600 mt-2"
                                     >
                                         Editar
                                     </button>

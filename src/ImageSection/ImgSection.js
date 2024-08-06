@@ -1,10 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Modal, Button, Form } from 'react-bootstrap';
 
 const ImageSection = () => {
   const [title, setTitle] = useState('');
   const [imageSectionData, setImageSectionData] = useState([]);
   const [error, setError] = useState(null);
+
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [currentEdit, setCurrentEdit] = useState(null);
+  const [editItem, setEditItem] = useState({
+    img: '',
+    description: '',
+    buttonText: ''
+  });
 
   useEffect(() => {
     // Obtener el texto principal
@@ -28,6 +37,21 @@ const ImageSection = () => {
       });
   }, []);
 
+  const handleEditClick = (item) => {
+    setCurrentEdit(item);
+    setEditItem(item);
+    setShowEditModal(true);
+  };
+
+  const handleSaveEdit = () => {
+    // Guardar los cambios (puede ser una llamada a la API)
+    const updatedData = imageSectionData.map(data => 
+      data._id === currentEdit._id ? { ...data, ...editItem } : data
+    );
+    setImageSectionData(updatedData);
+    setShowEditModal(false);
+  };
+
   if (error) return <p>{error}</p>;
   if (!imageSectionData.length) return <p>Loading...</p>;
 
@@ -43,14 +67,62 @@ const ImageSection = () => {
               <div className="p-6 flex-1 flex flex-col justify-between bg-white">
                 <img src={item.img} alt={item.description} className="w-full h-48 object-cover mb-6 mt-2" />
                 <p className="text-gray-700 text-left text-base mt-4 mx-6 flex-grow">{item.description}</p>
-                <div className="text-center mt-4">
-                  <button className="btn btn-primary">{item.buttonText}</button>
+                <div className="text-center mt-4 flex justify-center gap-2">
+                  <button className="btn btn-primary mb-2">{item.buttonText}</button>
+                  <button
+                    onClick={() => handleEditClick(item)}
+                    className="btn btn-success mb-2 ml-2"
+                  >
+                    Editar
+                  </button>
                 </div>
               </div>
             </div>
           </div>
         ))}
       </div>
+
+      <Modal show={showEditModal} onHide={() => setShowEditModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Editar Item</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group controlId="formImgSrc">
+              <Form.Label>Imagen URL</Form.Label>
+              <Form.Control
+                type="text"
+                value={editItem.img}
+                onChange={(e) => setEditItem({ ...editItem, img: e.target.value })}
+              />
+            </Form.Group>
+            <Form.Group controlId="formDescription">
+              <Form.Label>Descripción</Form.Label>
+              <Form.Control
+                type="text"
+                value={editItem.description}
+                onChange={(e) => setEditItem({ ...editItem, description: e.target.value })}
+              />
+            </Form.Group>
+            <Form.Group controlId="formButtonText">
+              <Form.Label>Texto del Botón</Form.Label>
+              <Form.Control
+                type="text"
+                value={editItem.buttonText}
+                onChange={(e) => setEditItem({ ...editItem, buttonText: e.target.value })}
+              />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowEditModal(false)}>
+            Cerrar
+          </Button>
+          <Button variant="primary" onClick={handleSaveEdit}>
+            Guardar Cambios
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };
