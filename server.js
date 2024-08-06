@@ -403,10 +403,14 @@ const m12Schema = new mongoose.Schema({
 const M12 = mongoose.model('M12', m12Schema);
 
 
-
+// Endpoint para obtener datos de los CardM1
 const serviceSchema = new mongoose.Schema({
-  imgText: String,
-  buttonServText: String
+  sections: [
+      {
+        imgText: String,
+        buttonServText: String
+      }
+  ]
 }, { collection: 'services' });
 
 const Service = mongoose.model('Service', serviceSchema);
@@ -430,269 +434,74 @@ app.get('/api/service', async (req, res) => {
   }
 });
 
+
 // Endpoint para obtener datos de los CardM1
+
 const CardM1Schema = new mongoose.Schema({
-  CardM1Text: String,
-  detailText: String,
-  img: String,
+  tag: String,
+  services: [
+    {
+      tag: String,
+      cardM1Text: String,
+      imgCardM1: String
+    }
+  ],
+  principalText: [
+    {
+      tag: String,
+      section: String,
+      imgText: String,
+      buttonServText: String
+    }
+  ]
 }, { collection: 'services' });
 
 const cardM1 = mongoose.model('cardM1', CardM1Schema);
 
 app.get('/api/cardM1', async (req, res) => {
   try {
-      const CardM1Data = await cardM1.find({});
-      
-      if (!CardM1Data || CardM1Data.length === 0) {
-        return res.status(404).send('No se encontraron servicios');
-      }
-      res.json(CardM1Data);
-  } catch (err) {
-      console.error('Error:', err.message);
-      res.status(500).json({ error: err.message });
+      const data = await cardM1.findOne(); 
+      console.log('Datos obtenidos:', data); // Log de datos obtenidos
+      res.json(data);
+  } catch (error) {
+      console.error('Error al obtener datos:', error); // Log de errores
+      res.status(500).send('Error al obtener datos');
   }
 });
 
-// Endpoint para obtener datos de los CardM2
-const CardM2Schema = new mongoose.Schema({
-  CardM2Text: String,
-  imgCardM2: String,
-}, { collection: 'services' });
+app.put('/api/cardM1/update-card', async (req, res) => {
+  const { tag, text, imageUrl } = req.body;
 
-const cardM2 = mongoose.model('cardM2', CardM2Schema);
-
-app.get('/api/cardM2', async (req, res) => {
-  try {
-      const CardM2Data = await cardM2.find({});
-      
-      if (!CardM2Data || CardM2Data.length === 0) {
-          return res.status(404).send('No se encontraron servicios');
-      }
-      res.json(CardM2Data);
-  } catch (err) {
-      console.error('Error:', err.message);
-      res.status(500).json({ error: err.message });
+  if (!tag || !text || !imageUrl) {
+      return res.status(400).json({ message: 'Faltan datos para actualizar la tarjeta' });
   }
-});
 
-// Endpoint para obtener datos de los CardM3
-const CardM3Schema = new mongoose.Schema({
-  CardM3Text: String,
-  imgCardM3: String,
-}, { collection: 'services' });
-
-const cardM3 = mongoose.model('cardM3', CardM3Schema);
-
-app.get('/api/cardM3', async (req, res) => {
   try {
-      const CardM3Data = await cardM3.find({});
-      
-      if (!CardM3Data || CardM3Data.length === 0) {
-          return res.status(404).send('No se encontraron servicios');
+      // Encuentra el documento
+      const document = await cardM1.findOne();
+
+      if (!document) {
+          return res.status(404).json({ message: 'Documento no encontrado' });
       }
-      res.json(CardM3Data);
-  } catch (err) {
-      console.error('Error:', err.message);
-      res.status(500).json({ error: err.message });
-  }
-});
 
-// Endpoint para obtener datos de los CardM4
-const CardM4Schema = new mongoose.Schema({
-  CardM4Text: String,
-  imgCardM4: String,
-}, { collection: 'services' });
+      // Encuentra el índice del servicio que debe actualizarse
+      const index = document.services.findIndex(service => service.tag === tag);
 
-const cardM4 = mongoose.model('cardM4', CardM4Schema);
-
-app.get('/api/cardM4', async (req, res) => {
-  try {
-      const CardM4Data = await cardM4.find({});
-      
-      if (!CardM4Data || CardM4Data.length === 0) {
-          return res.status(404).send('No se encontraron servicios');
+      if (index === -1) {
+          return res.status(404).json({ message: 'Tarjeta no encontrada' });
       }
-      res.json(CardM4Data);
-  } catch (err) {
-      console.error('Error:', err.message);
-      res.status(500).json({ error: err.message });
-  }
-});
 
-// Endpoint para obtener datos de los CardM5
-const CardM5Schema = new mongoose.Schema({
-  CardM5Text: String,
-  imgCardM5: String,
-}, { collection: 'services' });
+      // Actualiza los datos
+      document.services[index].cardM1Text = text;
+      document.services[index].imgCardM1 = imageUrl;
 
-const cardM5 = mongoose.model('cardM5', CardM5Schema);
+      // Guarda el documento
+      await document.save();
 
-app.get('/api/cardM5', async (req, res) => {
-  try {
-      const CardM5Data = await cardM5.find({});
-      
-      if (!CardM5Data || CardM5Data.length === 0) {
-          return res.status(404).send('No se encontraron servicios');
-      }
-      res.json(CardM5Data);
-  } catch (err) {
-      console.error('Error:', err.message);
-      res.status(500).json({ error: err.message });
-  }
-});
-
-// Endpoint para obtener datos de los CardM6
-const CardM6Schema = new mongoose.Schema({
-  CardM6Text: String,
-  imgCardM6: String,
-}, { collection: 'services' });
-
-const cardM6 = mongoose.model('cardM6', CardM6Schema);
-
-app.get('/api/cardM6', async (req, res) => {
-  try {
-      const CardM6Data = await cardM6.find({});
-      
-      if (!CardM6Data || CardM6Data.length === 0) {
-          return res.status(404).send('No se encontraron servicios');
-      }
-      res.json(CardM6Data);
-  } catch (err) {
-      console.error('Error:', err.message);
-      res.status(500).json({ error: err.message });
-  }
-});
-
-
-// Endpoint para obtener datos de los CardM7
-const CardM7Schema = new mongoose.Schema({
-  CardM7Text: String,
-  imgCardM7: String,
-}, { collection: 'services' });
-
-const cardM7 = mongoose.model('cardM7', CardM7Schema);
-
-app.get('/api/cardM7', async (req, res) => {
-  try {
-      const CardM7Data = await cardM7.find({});
-      
-      if (!CardM7Data || CardM7Data.length === 0) {
-          return res.status(404).send('No se encontraron servicios');
-      }
-      res.json(CardM7Data);
-  } catch (err) {
-      console.error('Error:', err.message);
-      res.status(500).json({ error: err.message });
-  }
-});
-
-// Endpoint para obtener datos de los CardM8
-const CardM8Schema = new mongoose.Schema({
-  CardM8Text: String,
-  imgCardM8: String,
-}, { collection: 'services' });
-
-const cardM8 = mongoose.model('cardM8', CardM8Schema);
-
-app.get('/api/cardM8', async (req, res) => {
-  try {
-      const CardM8Data = await cardM8.find({});
-      
-      if (!CardM8Data || CardM8Data.length === 0) {
-          return res.status(404).send('No se encontraron servicios');
-      }
-      res.json(CardM8Data);
-  } catch (err) {
-      console.error('Error:', err.message);
-      res.status(500).json({ error: err.message });
-  }
-});
-
-// Endpoint para obtener datos de los CardM9
-const CardM9Schema = new mongoose.Schema({
-  CardM9Text: String,
-  imgCardM9: String,
-}, { collection: 'services' });
-
-const cardM9 = mongoose.model('cardM9', CardM9Schema);
-
-app.get('/api/cardM9', async (req, res) => {
-  try {
-      const CardM9Data = await cardM9.find({});
-      
-      if (!CardM9Data || CardM9Data.length === 0) {
-        return res.status(404).send('No se encontraron servicios');
-      }
-      res.json(CardM9Data);
-  } catch (err) {
-      console.error('Error:', err.message);
-      res.status(500).json({ error: err.message });
-  }
-});
-
-// Endpoint para obtener datos de los CardM10
-const CardM10Schema = new mongoose.Schema({
-  CardM10Text: String,
-  imgCardM10: String,
-}, { collection: 'services' });
-
-const cardM10 = mongoose.model('cardM10', CardM10Schema);
-
-app.get('/api/cardM10', async (req, res) => {
-  try {
-      const CardM10Data = await cardM10.find({});
-      
-      if (!CardM10Data || CardM10Data.length === 0) {
-        return res.status(404).send('No se encontraron servicios');
-      }
-      res.json(CardM10Data);
-  } catch (err) {
-      console.error('Error:', err.message);
-      res.status(500).json({ error: err.message });
-  }
-});
-
-// Endpoint para obtener datos de los CardM11
-const CardM11Schema = new mongoose.Schema({
-  CardM11Text: String,
-  imgCardM11: String,
-}, { collection: 'services' });
-
-const cardM11 = mongoose.model('cardM11', CardM11Schema);
-
-app.get('/api/cardM11', async (req, res) => {
-  try {
-      const CardM11Data = await cardM11.find({});
-      
-      if (!CardM11Data || CardM11Data.length === 0) {
-        return res.status(404).send('No se encontraron servicios');
-      }
-      res.json(CardM11Data);
-  } catch (err) {
-      console.error('Error:', err.message);
-      res.status(500).json({ error: err.message });
-  }
-});
-
-// Endpoint para obtener datos de los CardM12
-const CardM12Schema = new mongoose.Schema({
-  CardM12Text: String,
-  imgCardM12: String,
-}, { collection: 'services' });
-
-const cardM12 = mongoose.model('cardM12', CardM12Schema);
-
-app.get('/api/cardM12', async (req, res) => {
-  try {
-      const CardM12Data = await cardM12.find({});
-      
-      if (!CardM12Data || CardM12Data.length === 0) {
-        return res.status(404).send('No se encontraron servicios');
-      }
-      res.json(CardM12Data);
-  } catch (err) {
-      console.error('Error:', err.message);
-      res.status(500).json({ error: err.message });
+      res.status(200).json({ message: 'Actualización exitosa', document });
+  } catch (error) {
+      console.error('Error al actualizar la tarjeta:', error);
+      res.status(500).json({ message: 'Error al actualizar la tarjeta', error: error.message });
   }
 });
 
