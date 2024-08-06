@@ -429,37 +429,52 @@ const m12Schema = new mongoose.Schema({
 const M12 = mongoose.model('M12', m12Schema);
 
 
-// Endpoint para obtener datos de los CardM1
 const serviceSchema = new mongoose.Schema({
-  sections: [
-      {
-        imgText: String,
-        buttonServText: String
-      }
-  ]
+  tag: { type: String, required: true },
+  principalText: [
+    {
+      tag: { type: String, required: true },
+      section: { type: String, required: true },
+      imgText: { type: String },
+      buttonServText: { type: String },
+      backgroundImage: { type: String }
+    }
+  ],
 }, { collection: 'services' });
 
 const Service = mongoose.model('Service', serviceSchema);
 
 // Endpoint para obtener datos de servicios
-app.get('/api/service', async (req, res) => {
-  console.log('Received request for /api/service');
+app.get('/api/principalText', async (req, res) => {
   try {
-      const servicesData = await Service.find({});
-      
-      if (!servicesData || servicesData.length === 0) {
-          console.log('No se encontraron servicios');
-          return res.status(404).send('No se encontraron servicios');
-      }
-
-      console.log('Servicios encontrados:', servicesData);
-      res.json(servicesData);
-  } catch (err) {
-      console.error('Error:', err.message);
-      res.status(500).json({ error: err.message });
+    const principalText = await Service.findOne();
+    res.json(principalText);
+  } catch (error) {
+    res.status(500).json({ message: "Error al obtener los datos principales", error: error.message });
   }
 });
 
+// Endpoint para actualizar datos de servicios
+app.put('/api/principalText/update', async (req, res) => {
+  try {
+    const { imgText, buttonServText, backgroundImage } = req.body;
+
+    // Verifica que los campos necesarios estén presentes
+    if (typeof imgText !== 'string' || typeof buttonServText !== 'string' || typeof backgroundImage !== 'string') {
+      return res.status(400).json({ message: "Datos inválidos para la actualización" });
+    }
+
+    const updatedService = await Service.findOneAndUpdate(
+      {},
+      { 'principalText.0.imgText': imgText, 'principalText.0.buttonServText': buttonServText, 'principalText.0.backgroundImage': backgroundImage },
+      { new: true }
+    );
+
+    res.json(updatedService);
+  } catch (error) {
+    res.status(500).json({ message: "Error al actualizar los datos principales", error: error.message });
+  }
+});
 
 // Endpoint para obtener datos de los CardM1
 
@@ -469,7 +484,8 @@ const CardM1Schema = new mongoose.Schema({
     {
       tag: String,
       cardM1Text: String,
-      imgCardM1: String
+      imgCardM1: String,
+      detailText: String
     }
   ],
   principalText: [
@@ -716,21 +732,26 @@ const CardM12Schema = new mongoose.Schema({
 const cardM12 = mongoose.model('cardM12', CardM12Schema);
 
 
+// Endpoint para obtener datos de servicios
 app.get('/api/cardM1', async (req, res) => {
   try {
-    const data = await cardM1.findOne(); 
-    console.log('Datos obtenidos:', data);
+    const data = await cardM1.findOne({});
+    
+    if (!data || data.length === 0) {
+      return res.status(404).send('No se encontraron datos');
+    }
+
+    console.log('Datos encontrados:', data);
     res.json(data);
-  } catch (error) {
-    console.error('Error al obtener datos:', error);
-    res.status(500).send('Error al obtener datos');
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 });
+
 
 app.get('/api/cardM2', async (req, res) => {
   try {
     const data = await cardM2.findOne();
-    console.log('Datos obtenidos:', data);
     res.json(data);
   } catch (error) {
     console.error('Error al obtener datos:', error);
@@ -741,7 +762,6 @@ app.get('/api/cardM2', async (req, res) => {
 app.get('/api/cardM3', async (req, res) => {
   try {
     const data = await cardM3.findOne();
-    console.log('Datos obtenidos:', data);
     res.json(data);
   } catch (error) {
     console.error('Error al obtener datos:', error);
@@ -751,7 +771,6 @@ app.get('/api/cardM3', async (req, res) => {
 app.get('/api/cardM4', async (req, res) => {
   try {
     const data = await cardM4.findOne();
-    console.log('Datos obtenidos:', data);
     res.json(data);
   } catch (error) {
     console.error('Error al obtener datos:', error);
@@ -761,7 +780,6 @@ app.get('/api/cardM4', async (req, res) => {
 app.get('/api/cardM5', async (req, res) => {
   try {
     const data = await cardM5.findOne();
-    console.log('Datos obtenidos:', data);
     res.json(data);
   } catch (error) {
     console.error('Error al obtener datos:', error);
@@ -771,7 +789,6 @@ app.get('/api/cardM5', async (req, res) => {
 app.get('/api/cardM6', async (req, res) => {
   try {
     const data = await cardM6.findOne();
-    console.log('Datos obtenidos:', data);
     res.json(data);
   } catch (error) {
     console.error('Error al obtener datos:', error);
@@ -781,7 +798,6 @@ app.get('/api/cardM6', async (req, res) => {
 app.get('/api/cardM7', async (req, res) => {
   try {
     const data = await cardM7.findOne();
-    console.log('Datos obtenidos:', data);
     res.json(data);
   } catch (error) {
     console.error('Error al obtener datos:', error);
@@ -791,7 +807,6 @@ app.get('/api/cardM7', async (req, res) => {
 app.get('/api/cardM8', async (req, res) => {
   try {
     const data = await cardM8.findOne();
-    console.log('Datos obtenidos:', data);
     res.json(data);
   } catch (error) {
     console.error('Error al obtener datos:', error);
@@ -801,7 +816,6 @@ app.get('/api/cardM8', async (req, res) => {
 app.get('/api/cardM9', async (req, res) => {
   try {
     const data = await cardM9.findOne();
-    console.log('Datos obtenidos:', data);
     res.json(data);
   } catch (error) {
     console.error('Error al obtener datos:', error);
@@ -811,7 +825,6 @@ app.get('/api/cardM9', async (req, res) => {
 app.get('/api/cardM10', async (req, res) => {
   try {
     const data = await cardM2.findOne();
-    console.log('Datos obtenidos:', data);
     res.json(data);
   } catch (error) {
     console.error('Error al obtener datos:', error);
@@ -821,7 +834,6 @@ app.get('/api/cardM10', async (req, res) => {
 app.get('/api/cardM11', async (req, res) => {
   try {
     const data = await cardM11.findOne();
-    console.log('Datos obtenidos:', data);
     res.json(data);
   } catch (error) {
     console.error('Error al obtener datos:', error);
@@ -831,7 +843,6 @@ app.get('/api/cardM11', async (req, res) => {
 app.get('/api/cardM12', async (req, res) => {
   try {
     const data = await cardM12.findOne();
-    console.log('Datos obtenidos:', data);
     res.json(data);
   } catch (error) {
     console.error('Error al obtener datos:', error);
