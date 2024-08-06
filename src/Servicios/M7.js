@@ -153,20 +153,29 @@ const M7 = () => {
         src: item.carouselImageUrl,
         text: (
             <div className="carouselText p-4 bg-opacity-75 text-white" key={index}>
-                <h1 className="firstText text-3xl font-bold mb-4">
-                    {item.title.split(' ').map((word, i) => (
-                        <span className={`cloudText${i === 0 ? '' : 'Two'}`} key={i}>
-                            {word}
-                        </span>
-                    ))}
-                </h1>
-                <h2 className="secondText text-xl mb-4">
-                    {item.subtitle.split(' ').map((word, i) => (
-                        <span className={`cloudText${i === 0 ? '' : 'Two'}`} key={i}>
-                            {word}
-                        </span>
-                    ))}
-                </h2>
+            <h1 className="firstText text-3xl font-bold mb-4">
+                {item.title.split(' ').map((word, i) => (
+                    <span
+                        className={`cloudText${i === 0 ? '' : 'Two'}`}
+                        key={i}
+                        style={{ marginRight: '0.5rem' }} // Ajusta el margen según sea necesario
+                    >
+                        {word}
+                    </span>
+                ))}
+            </h1>
+
+            <h2 className="secondText text-xl mb-4">
+                {item.subtitle.split(' ').map((word, i) => (
+                    <span
+                        className={`cloudText${i === 0 ? '' : 'Two'}`}
+                        key={i}
+                        style={{ marginRight: '0.5rem' }} // Ajusta el valor del margen según sea necesario
+                    >
+                        {word}
+                    </span>
+                ))}
+            </h2>
                 <h3 className="thirdText text-lg">
                     {item.description}
                 </h3>
