@@ -29,11 +29,12 @@ const Services = () => {
     }
 
     const services = response.data.services || [];
+    
     return services.map((service, i) => ({
-      id: `cardM${index * services.length + i + 1}`,
+      id: `${service.tag}-${i}`, // Usa una combinación única del tag y el índice para evitar duplicados
       tag: service.tag,
-      text: service[`cardM${i + 1}Text`],
-      imageUrl: service[`imgCardM${i + 1}`],
+      text: service[`cardM${i + 1}Text`] || '',
+      imageUrl: service[`imgCardM${i + 1}`] || '',
       link: `/M${index + 1}`,
     }));
   };
@@ -60,7 +61,11 @@ const Services = () => {
           processResponse(response, index)
         );
 
-        setCards(allCards);
+        // Filtra duplicados
+        const uniqueCards = allCards.filter((card, index, self) =>
+          index === self.findIndex((t) => t.id === card.id)
+        );
+        setCards(uniqueCards);
       } catch (error) {
         console.error("Error al obtener los datos de servicios:", error);
         setError("Ocurrió un error al obtener los datos de servicios");
@@ -121,6 +126,7 @@ const Services = () => {
       Swal.fire("Éxito", "Datos de la tarjeta actualizados correctamente", "success");
       handleModalClose();
 
+      // Vuelve a obtener los datos actualizados
       const responses = await Promise.all([
         axios.get("http://localhost:5000/api/cardM1"),
         axios.get("http://localhost:5000/api/cardM2"),
@@ -140,7 +146,10 @@ const Services = () => {
         processResponse(response, index)
       );
 
-      setCards(allCards);
+      const uniqueCards = allCards.filter((card, index, self) =>
+        index === self.findIndex((t) => t.id === card.id)
+      );
+      setCards(uniqueCards);
     } catch (error) {
       console.error("Error al actualizar los datos de la tarjeta:", error);
       Swal.fire("Error", "Error al actualizar los datos de la tarjeta", "error");
@@ -184,9 +193,9 @@ const Services = () => {
           Servicios
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {cards.map((card) => (
+          {cards.map((card,index) => (
             <div key={card.id} className="relative border-none group m-4">
-                            <div className="relative overflow-hidden h-80 w-full border-none">
+              <div className="relative overflow-hidden h-80 w-full border-none">
                 <div className="absolute inset-0 bg-black opacity-25"></div>
                 <img src={card.imageUrl} alt={card.text} className="w-full h-full object-cover" />
                 <div className="absolute inset-0 flex justify-center items-center">
@@ -194,7 +203,7 @@ const Services = () => {
                 </div>
                 <div className="absolute bottom-0 left-0 w-full h-full bg-black bg-opacity-50 text-white p-5 transition-transform duration-700 ease-in-out transform translate-y-full group-hover:translate-y-0 flex justify-center items-end">
                   <div className="text-center mb-8">
-                    <a href={card.link} className="text-white underline hover:no-underline">
+                    <a href={`/M${index + 1}`} className="text-white underline hover:no-underline">
                       detalles
                     </a>
                   </div>
@@ -215,17 +224,6 @@ const Services = () => {
           <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
             <h3 className="text-xl font-bold mb-4">Editar Tarjeta</h3>
             <form onSubmit={handleUpdateCard}>
-              <div className="mb-4">
-                <label htmlFor="tag" className="block text-gray-700">Tag</label>
-                <input
-                  type="text"
-                  id="tag"
-                  name="tag"
-                  value={editForm.tag}
-                  onChange={handleChange}
-                  className="w-full border border-gray-300 rounded-md p-2"
-                />
-              </div>
               <div className="mb-4">
                 <label htmlFor="text" className="block text-gray-700">Texto</label>
                 <input

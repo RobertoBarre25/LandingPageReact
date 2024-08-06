@@ -405,12 +405,16 @@ const M12 = mongoose.model('M12', m12Schema);
 
 // Endpoint para obtener datos de los CardM1
 const serviceSchema = new mongoose.Schema({
-  sections: [
-      {
-        imgText: String,
-        buttonServText: String
-      }
-  ]
+  tag: { type: String, required: true },
+  principalText: [
+    {
+      tag: { type: String, required: true },
+      section: { type: String, required: true },
+      imgText: { type: String },
+      buttonServText: { type: String }
+    }
+  ],
+  // Agrega cualquier campo adicional que necesites aquí
 }, { collection: 'services' });
 
 const Service = mongoose.model('Service', serviceSchema);
@@ -419,18 +423,53 @@ const Service = mongoose.model('Service', serviceSchema);
 app.get('/api/service', async (req, res) => {
   console.log('Received request for /api/service');
   try {
-      const servicesData = await Service.find({});
-      
-      if (!servicesData || servicesData.length === 0) {
-          console.log('No se encontraron servicios');
-          return res.status(404).send('No se encontraron servicios');
-      }
+    const servicesData = await Service.find({});
+    
+    if (!servicesData || servicesData.length === 0) {
+      console.log('No se encontraron servicios');
+      return res.status(404).send('No se encontraron servicios');
+    }
 
-      console.log('Servicios encontrados:', servicesData);
-      res.json(servicesData);
+    console.log('Servicios encontrados:', servicesData);
+    res.json(servicesData);
   } catch (err) {
-      console.error('Error:', err.message);
-      res.status(500).json({ error: err.message });
+    console.error('Error:', err.message);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Endpoint para actualizar datos de servicios
+app.put('/api/service/:tag', async (req, res) => {
+  console.log('Received request for /api/service/:tag');
+
+  const { tag } = req.params;
+  const { section, imgText, buttonServText, backgroundImage } = req.body;
+
+  if (!section || !imgText || !buttonServText || !backgroundImage) {
+    return res.status(400).json({ error: 'Faltan datos para actualizar' });
+  }
+
+  try {
+    const updateResult = await Service.updateOne(
+      { 'principalText.section': section, tag: tag },
+      {
+        $set: {
+          'principalText.$.imgText': imgText,
+          'principalText.$.buttonServText': buttonServText,
+          'principalText.$.backgroundImage': backgroundImage
+        }
+      }
+    );
+
+    if (updateResult.matchedCount === 0) {
+      return res.status(404).json({ error: 'No se encontró el servicio o sección para actualizar' });
+    }
+
+    console.log('Actualización exitosa');
+    res.json({ message: 'Datos actualizados correctamente' });
+  } catch (err) {
+    console.error('Error:', err.message);
+    res.status(500).json({ error: err.message });
   }
 });
 
@@ -443,7 +482,8 @@ const CardM1Schema = new mongoose.Schema({
     {
       tag: String,
       cardM1Text: String,
-      imgCardM1: String
+      imgCardM1: String,
+      detailText: String
     }
   ],
   principalText: [
@@ -690,16 +730,25 @@ const CardM12Schema = new mongoose.Schema({
 const cardM12 = mongoose.model('cardM12', CardM12Schema);
 
 
+// Endpoint para obtener datos de servicios
 app.get('/api/cardM1', async (req, res) => {
+  console.log('Received request for /api/cardM1');
   try {
-    const data = await cardM1.findOne(); 
-    console.log('Datos obtenidos:', data);
+    const data = await cardM1.findOne({});
+    
+    if (!data || data.length === 0) {
+      console.log('No se encontraron datos');
+      return res.status(404).send('No se encontraron datos');
+    }
+
+    console.log('Datos encontrados:', data);
     res.json(data);
-  } catch (error) {
-    console.error('Error al obtener datos:', error);
-    res.status(500).send('Error al obtener datos');
+  } catch (err) {
+    console.error('Error:', err.message);
+    res.status(500).json({ error: err.message });
   }
 });
+
 
 app.get('/api/cardM2', async (req, res) => {
   try {
