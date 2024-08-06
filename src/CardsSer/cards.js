@@ -1,12 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { Modal, Button, Form } from 'react-bootstrap';
 
 const Cards = () => {
     const navigate = useNavigate();
     const [cardsData, setCardsData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
+    const [showEditModal, setShowEditModal] = useState(false);
+    const [currentEdit, setCurrentEdit] = useState(null);
+    const [editCard, setEditCard] = useState({
+        imgSrc: '',
+        title: '',
+        description: '',
+        buttonText: '',
+        service: ''
+    });
 
     useEffect(() => {
         const fetchData = async () => {
@@ -29,6 +40,21 @@ const Cards = () => {
         navigate('/contact', { state: { service } });
     };
 
+    const handleEditClick = (card) => {
+        setCurrentEdit(card);
+        setEditCard(card);
+        setShowEditModal(true);
+    };
+
+    const handleSaveEdit = () => {
+        // Guardar los cambios (puede ser una llamada a la API)
+        const updatedData = cardsData.map(card => 
+            card.imgSrc === currentEdit.imgSrc ? { ...card, ...editCard } : card
+        );
+        setCardsData(updatedData);
+        setShowEditModal(false);
+    };
+
     if (loading) return <p>Cargando...</p>;
     if (error) return <p>{error}</p>;
 
@@ -49,12 +75,76 @@ const Cards = () => {
                                     >
                                         {card.buttonText}
                                     </button>
+                                    <button
+                                        onClick={() => handleEditClick(card)}
+                                        className="bg-yellow-500 text-white py-2.5 px-5 border-none cursor-pointer transition-colors duration-700 ease-in-out uppercase rounded-md hover:bg-yellow-600 mt-2"
+                                    >
+                                        Editar
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 ))}
             </div>
+
+            <Modal show={showEditModal} onHide={() => setShowEditModal(false)}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Editar Card</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form>
+                        <Form.Group controlId="formImgSrc">
+                            <Form.Label>Imagen URL</Form.Label>
+                            <Form.Control
+                                type="text"
+                                value={editCard.imgSrc}
+                                onChange={(e) => setEditCard({ ...editCard, imgSrc: e.target.value })}
+                            />
+                        </Form.Group>
+                        <Form.Group controlId="formTitle">
+                            <Form.Label>Título</Form.Label>
+                            <Form.Control
+                                type="text"
+                                value={editCard.title}
+                                onChange={(e) => setEditCard({ ...editCard, title: e.target.value })}
+                            />
+                        </Form.Group>
+                        <Form.Group controlId="formDescription">
+                            <Form.Label>Descripción</Form.Label>
+                            <Form.Control
+                                type="text"
+                                value={editCard.description}
+                                onChange={(e) => setEditCard({ ...editCard, description: e.target.value })}
+                            />
+                        </Form.Group>
+                        <Form.Group controlId="formButtonText">
+                            <Form.Label>Texto del Botón</Form.Label>
+                            <Form.Control
+                                type="text"
+                                value={editCard.buttonText}
+                                onChange={(e) => setEditCard({ ...editCard, buttonText: e.target.value })}
+                            />
+                        </Form.Group>
+                        <Form.Group controlId="formService">
+                            <Form.Label>Servicio</Form.Label>
+                            <Form.Control
+                                type="text"
+                                value={editCard.service}
+                                onChange={(e) => setEditCard({ ...editCard, service: e.target.value })}
+                            />
+                        </Form.Group>
+                    </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setShowEditModal(false)}>
+                        Cerrar
+                    </Button>
+                    <Button variant="primary" onClick={handleSaveEdit}>
+                        Guardar Cambios
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     );
 };
