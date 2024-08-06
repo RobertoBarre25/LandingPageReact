@@ -21,25 +21,46 @@ const Services = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const processResponse = (response, index) => {
+    const principalText = response.data.principalText[0] || {};
+    if (index === 0) {
+      setImgText(principalText.imgText || "");
+      setButtonServText(principalText.buttonServText || "");
+    }
+
+    const services = response.data.services || [];
+    return services.map((service, i) => ({
+      id: `cardM${index * services.length + i + 1}`,
+      tag: service.tag,
+      text: service[`cardM${i + 1}Text`],
+      imageUrl: service[`imgCardM${i + 1}`],
+      link: `/M${index + 1}`,
+    }));
+  };
+
   useEffect(() => {
     const fetchCards = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/cardM1");
-        if (response.data) {
-          const principalText = response.data.principalText[0] || {};
-          setImgText(principalText.imgText || "");
-          setButtonServText(principalText.buttonServText || "");
+        const responses = await Promise.all([
+          axios.get("http://localhost:5000/api/cardM1"),
+          axios.get("http://localhost:5000/api/cardM2"),
+          axios.get("http://localhost:5000/api/cardM3"),
+          axios.get("http://localhost:5000/api/cardM4"),
+          axios.get("http://localhost:5000/api/cardM5"),
+          axios.get("http://localhost:5000/api/cardM6"),
+          axios.get("http://localhost:5000/api/cardM7"),
+          axios.get("http://localhost:5000/api/cardM8"),
+          axios.get("http://localhost:5000/api/cardM9"),
+          axios.get("http://localhost:5000/api/cardM10"),
+          axios.get("http://localhost:5000/api/cardM11"),
+          axios.get("http://localhost:5000/api/cardM12"),
+        ]);
 
-          const services = response.data.services || [];
-          const fetchedCards = services.map((service, index) => ({
-            id: `cardM${index + 1}`,
-            tag: service.tag,
-            text: service[`cardM${index + 1}Text`],
-            imageUrl: service[`imgCardM${index + 1}`],
-            link: `/M${index + 1}`,
-          }));
-          setCards(fetchedCards);
-        }
+        const allCards = responses.flatMap((response, index) =>
+          processResponse(response, index)
+        );
+
+        setCards(allCards);
       } catch (error) {
         console.error("Error al obtener los datos de servicios:", error);
         setError("Ocurrió un error al obtener los datos de servicios");
@@ -80,26 +101,46 @@ const Services = () => {
     }
 
     try {
-      await axios.put(
-        `http://localhost:5000/api/cardM1/update-card`,
-        { tag, text, imageUrl },
-        { headers: { "Content-Type": "application/json" } }
-      );
+      const updates = [
+        axios.put("http://localhost:5000/api/cardM1/update-card", { tag, text, imageUrl }),
+        axios.put("http://localhost:5000/api/cardM2/update-card", { tag, text, imageUrl }),
+        axios.put("http://localhost:5000/api/cardM3/update-card", { tag, text, imageUrl }),
+        axios.put("http://localhost:5000/api/cardM4/update-card", { tag, text, imageUrl }),
+        axios.put("http://localhost:5000/api/cardM5/update-card", { tag, text, imageUrl }),
+        axios.put("http://localhost:5000/api/cardM6/update-card", { tag, text, imageUrl }),
+        axios.put("http://localhost:5000/api/cardM7/update-card", { tag, text, imageUrl }),
+        axios.put("http://localhost:5000/api/cardM8/update-card", { tag, text, imageUrl }),
+        axios.put("http://localhost:5000/api/cardM9/update-card", { tag, text, imageUrl }),
+        axios.put("http://localhost:5000/api/cardM10/update-card", { tag, text, imageUrl }),
+        axios.put("http://localhost:5000/api/cardM11/update-card", { tag, text, imageUrl }),
+        axios.put("http://localhost:5000/api/cardM12/update-card", { tag, text, imageUrl }),
+      ];
+
+      await Promise.all(updates);
 
       Swal.fire("Éxito", "Datos de la tarjeta actualizados correctamente", "success");
       handleModalClose();
 
-      // Obtener los datos actualizados
-      const response = await axios.get("http://localhost:5000/api/cardM1");
-      const services = response.data.services || [];
-      const updatedCards = services.map((service, index) => ({
-        id: `cardM${index + 1}`,
-        tag: service.tag,
-        text: service[`cardM${index + 1}Text`],
-        imageUrl: service[`imgCardM${index + 1}`],
-        link: `/M${index + 1}`,
-      }));
-      setCards(updatedCards);
+      const responses = await Promise.all([
+        axios.get("http://localhost:5000/api/cardM1"),
+        axios.get("http://localhost:5000/api/cardM2"),
+        axios.get("http://localhost:5000/api/cardM3"),
+        axios.get("http://localhost:5000/api/cardM4"),
+        axios.get("http://localhost:5000/api/cardM5"),
+        axios.get("http://localhost:5000/api/cardM6"),
+        axios.get("http://localhost:5000/api/cardM7"),
+        axios.get("http://localhost:5000/api/cardM8"),
+        axios.get("http://localhost:5000/api/cardM9"),
+        axios.get("http://localhost:5000/api/cardM10"),
+        axios.get("http://localhost:5000/api/cardM11"),
+        axios.get("http://localhost:5000/api/cardM12"),
+      ]);
+
+      const allCards = responses.flatMap((response, index) =>
+        processResponse(response, index)
+      );
+
+      setCards(allCards);
     } catch (error) {
       console.error("Error al actualizar los datos de la tarjeta:", error);
       Swal.fire("Error", "Error al actualizar los datos de la tarjeta", "error");
@@ -145,7 +186,7 @@ const Services = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {cards.map((card) => (
             <div key={card.id} className="relative border-none group m-4">
-              <div className="relative overflow-hidden h-80 w-full border-none">
+                            <div className="relative overflow-hidden h-80 w-full border-none">
                 <div className="absolute inset-0 bg-black opacity-25"></div>
                 <img src={card.imageUrl} alt={card.text} className="w-full h-full object-cover" />
                 <div className="absolute inset-0 flex justify-center items-center">
@@ -170,54 +211,56 @@ const Services = () => {
         </div>
       </div>
       {editingCard && (
-        <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center">
-          <div className="bg-white p-6 rounded-lg shadow-lg">
-            <h3 className="text-xl font-bold mb-4">Editar {editingCard.id}</h3>
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+          <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+            <h3 className="text-xl font-bold mb-4">Editar Tarjeta</h3>
             <form onSubmit={handleUpdateCard}>
               <div className="mb-4">
-                <label className="block text-gray-700">Tag:</label>
+                <label htmlFor="tag" className="block text-gray-700">Tag</label>
                 <input
                   type="text"
+                  id="tag"
                   name="tag"
                   value={editForm.tag}
                   onChange={handleChange}
-                  className="w-full p-2 border border-gray-300 rounded"
-                  readOnly
+                  className="w-full border border-gray-300 rounded-md p-2"
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-gray-700">Texto:</label>
+                <label htmlFor="text" className="block text-gray-700">Texto</label>
                 <input
                   type="text"
+                  id="text"
                   name="text"
                   value={editForm.text}
                   onChange={handleChange}
-                  className="w-full p-2 border border-gray-300 rounded"
+                  className="w-full border border-gray-300 rounded-md p-2"
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-gray-700">Imagen URL:</label>
+                <label htmlFor="imageUrl" className="block text-gray-700">URL de Imagen</label>
                 <input
                   type="text"
+                  id="imageUrl"
                   name="imageUrl"
                   value={editForm.imageUrl}
                   onChange={handleChange}
-                  className="w-full p-2 border border-gray-300 rounded"
+                  className="w-full border border-gray-300 rounded-md p-2"
                 />
               </div>
               <div className="flex justify-end">
                 <button
-                  type="button"
-                  onClick={handleModalClose}
-                  className="bg-gray-500 text-white py-2 px-4 rounded mr-2"
+                  type="submit"
+                  className="bg-blue-500 text-white px-4 py-2 rounded-md"
                 >
-                  Cancelar
+                  Actualizar
                 </button>
                 <button
-                  type="submit"
-                  className="bg-blue-500 text-white py-2 px-4 rounded"
+                  type="button"
+                  onClick={handleModalClose}
+                  className="ml-4 bg-gray-500 text-white px-4 py-2 rounded-md"
                 >
-                  Guardar
+                  Cancelar
                 </button>
               </div>
             </form>
@@ -229,3 +272,4 @@ const Services = () => {
 };
 
 export default Services;
+
