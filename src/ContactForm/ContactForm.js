@@ -24,8 +24,6 @@ const ContactForm = () => {
     "Protección de correo electrónico",
   ];
 
-  console.log("Services passed:", services); // Agrega este console.log para verificar los servicios
-
   const [formData, setFormData] = useState({
     name: "",
     apellido: "",
