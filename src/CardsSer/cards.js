@@ -1,13 +1,10 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Modal, Button, Form } from 'react-bootstrap';
-import AuthContext from '../AuthContext'; // Asegúrate de que la ruta sea correcta
 
 const Cards = () => {
     const navigate = useNavigate();
-    const { isAuthenticated } = useContext(AuthContext); // Obtén el estado de autenticación
-
     const [cardsData, setCardsData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -40,8 +37,11 @@ const Cards = () => {
     }, []);
 
     const handleClick = (service) => {
+        console.log('Button clicked, service:', service); // Debugging
+
         navigate('/contact', { state: { service } });
     };
+
 
     const handleEditClick = (card) => {
         setCurrentEdit(card);
@@ -73,19 +73,20 @@ const Cards = () => {
                                     <h3 className="text-xl mb-2.5">{card.title}</h3>
                                     <p className="text-base mb-3.75">{card.description}</p>
                                     <button
-                                        onClick={() => handleClick(card.service)}
+                                        onClick={() =>{
+                                            console.log('Button clicked'); // Debugging
+                                            handleClick(card.buttonValue)
+                                            }}
                                         className="bg-blue-500 text-white py-2.5 px-5 border-none cursor-pointer transition-colors duration-700 ease-in-out uppercase rounded-md hover:bg-blue-700"
                                     >
                                         {card.buttonText}
                                     </button>
-                                    {isAuthenticated && (
-                                        <button
-                                            onClick={() => handleEditClick(card)}
-                                            className="bg-green-500 text-white py-2.5 px-5 border-none cursor-pointer transition-colors duration-700 ease-in-out uppercase rounded-md hover:bg-green-600 mt-2"
-                                        >
-                                            Editar
-                                        </button>
-                                    )}
+                                    <button
+                                        onClick={() => handleEditClick(card)}
+                                        className="bg-green-500 text-white py-2.5 px-5 border-none cursor-pointer transition-colors duration-700 ease-in-out uppercase rounded-md hover:bg-green-600 mt-2"
+                                    >
+                                        Editar
+                                    </button>
                                 </div>
                             </div>
                         </div>

@@ -2,10 +2,12 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { Modal, Button, Form } from 'react-bootstrap';
 import AuthContext from '../AuthContext'; // Asegúrate de que la ruta sea correcta
+import { useNavigate } from 'react-router-dom';
+
 
 const ImageSection = () => {
   const { isAuthenticated } = useContext(AuthContext); // Obtén el estado de autenticación
-
+  const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const [imageSectionData, setImageSectionData] = useState([]);
   const [error, setError] = useState(null);
@@ -46,6 +48,10 @@ const ImageSection = () => {
     setShowEditModal(true);
   };
 
+  const handleClick = (service) => {
+    navigate('/contact', { state: { service } });
+};
+
   const handleSaveEdit = () => {
     // Guardar los cambios (puede ser una llamada a la API)
     const updatedData = imageSectionData.map(data => 
@@ -71,7 +77,12 @@ const ImageSection = () => {
                 <img src={item.img} alt={item.description} className="w-full h-48 object-cover mb-6 mt-2" />
                 <p className="text-gray-700 text-left text-base mt-4 mx-6 flex-grow">{item.description}</p>
                 <div className="text-center mt-4 flex justify-center gap-2">
-                  <button className="btn btn-primary mb-2">{item.buttonText}</button>
+                <button 
+                    className="bg-blue-500 border-2 border-white text-white text-lg md:text-xl py-3 md:py-4 px-6 md:px-10 cursor-pointer m-3 md:m-5 rounded-[3px] hover:bg-red-500"
+                    onClick={() => handleClick(item.buttonValue)}
+                >
+                    {item.buttonText}
+                </button>
                   {isAuthenticated && (
                     <button
                       onClick={() => handleEditClick(item)}
