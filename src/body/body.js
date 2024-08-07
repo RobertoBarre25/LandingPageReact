@@ -30,7 +30,8 @@ const Body = () => {
         subtitle: '',
         description: '',
         buttonText1: '',
-        buttonText2: ''
+        buttonText2: '',
+        imageUrl: '' 
     });
 
     useEffect(() => {
@@ -69,19 +70,37 @@ const Body = () => {
             subtitle: item.subtitle,
             description: item.description,
             buttonText1: item.buttonText1,
-            buttonText2: item.buttonText2
+            buttonText2: item.buttonText2,
+            imageUrl: item.imageUrl,
         });
         setShowEditModal(true);
     };
 
-    const handleSaveEdit = () => {
-        // Guardar los cambios (puede ser una llamada a la API)
-        const updatedData = carouselData.map(item => 
-            item._id === currentEdit._id ? { ...item, ...editText } : item
-        );
-        setCarouselData(updatedData);
-        setShowEditModal(false);
+    const handleSaveEdit = async () => {
+        try {
+            // Crear el objeto de actualización con sectionTag
+            const updatedItem = {
+                ...editText,
+                sectionTag: currentEdit.sectionTag
+            };
+    
+            // Enviar la solicitud al backend
+            await axios.put('http://localhost:5000/api/carousel/update-by-section-tag', updatedItem);
+    
+            // Actualizar el estado local
+            const updatedData = carouselData.map(item =>
+                item.sectionTag === currentEdit.sectionTag ? { ...item, ...editText } : item
+            );
+            setCarouselData(updatedData);
+    
+            // Cerrar el modal
+            setShowEditModal(false);
+        } catch (error) {
+            console.error('Error al guardar los cambios:', error);
+            setError('Ocurrió un error al guardar los cambios');
+        }
     };
+    
 
     const images = carouselData.map(item => ({
         src: item.imageUrl,
@@ -119,6 +138,7 @@ const Body = () => {
             </div>
         )
     }));
+    
 
     return (
         <div className="flex flex-col items-center">
@@ -139,62 +159,71 @@ const Body = () => {
             <Cards />
 
             <Modal show={showEditModal} onHide={() => setShowEditModal(false)}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Editar Elemento</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <Form>
-                        <Form.Group controlId="formTitle">
-                            <Form.Label>Título</Form.Label>
-                            <Form.Control
-                                type="text"
-                                value={editText.title}
-                                onChange={(e) => setEditText({ ...editText, title: e.target.value })}
-                            />
-                        </Form.Group>
-                        <Form.Group controlId="formSubtitle">
-                            <Form.Label>Subtítulo</Form.Label>
-                            <Form.Control
-                                type="text"
-                                value={editText.subtitle}
-                                onChange={(e) => setEditText({ ...editText, subtitle: e.target.value })}
-                            />
-                        </Form.Group>
-                        <Form.Group controlId="formDescription">
-                            <Form.Label>Descripción</Form.Label>
-                            <Form.Control
-                                type="text"
-                                value={editText.description}
-                                onChange={(e) => setEditText({ ...editText, description: e.target.value })}
-                            />
-                        </Form.Group>
-                        <Form.Group controlId="formButtonText1">
-                            <Form.Label>Texto del Botón 1</Form.Label>
-                            <Form.Control
-                                type="text"
-                                value={editText.buttonText1}
-                                onChange={(e) => setEditText({ ...editText, buttonText1: e.target.value })}
-                            />
-                        </Form.Group>
-                        <Form.Group controlId="formButtonText2">
-                            <Form.Label>Texto del Botón 2</Form.Label>
-                            <Form.Control
-                                type="text"
-                                value={editText.buttonText2}
-                                onChange={(e) => setEditText({ ...editText, buttonText2: e.target.value })}
-                            />
-                        </Form.Group>
-                    </Form>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={() => setShowEditModal(false)}>
-                        Cerrar
-                    </Button>
-                    <Button variant="primary" onClick={handleSaveEdit}>
-                        Guardar Cambios
-                    </Button>
-                </Modal.Footer>
-            </Modal>
+    <Modal.Header closeButton>
+        <Modal.Title>Editar Elemento</Modal.Title>
+    </Modal.Header>
+    <Modal.Body>
+        <Form>
+            {/* Campo oculto para sectionTag */}
+            <Form.Group controlId="formSectionTag">
+                <Form.Control
+                    type="hidden"
+                    value={currentEdit?.sectionTag || ''}
+                />
+            </Form.Group>
+
+            <Form.Group controlId="formTitle">
+                <Form.Label>Título</Form.Label>
+                <Form.Control
+                    type="text"
+                    value={editText.title}
+                    onChange={(e) => setEditText({ ...editText, title: e.target.value })}
+                />
+            </Form.Group>
+            <Form.Group controlId="formSubtitle">
+                <Form.Label>Subtítulo</Form.Label>
+                <Form.Control
+                    type="text"
+                    value={editText.subtitle}
+                    onChange={(e) => setEditText({ ...editText, subtitle: e.target.value })}
+                />
+            </Form.Group>
+            <Form.Group controlId="formDescription">
+                <Form.Label>Descripción</Form.Label>
+                <Form.Control
+                    type="text"
+                    value={editText.description}
+                    onChange={(e) => setEditText({ ...editText, description: e.target.value })}
+                />
+            </Form.Group>
+            <Form.Group controlId="formButtonText1">
+                <Form.Label>Texto del Botón 1</Form.Label>
+                <Form.Control
+                    type="text"
+                    value={editText.buttonText1}
+                    onChange={(e) => setEditText({ ...editText, buttonText1: e.target.value })}
+                />
+            </Form.Group>
+            <Form.Group controlId="formButtonText2">
+                <Form.Label>Texto del Botón 2</Form.Label>
+                <Form.Control
+                    type="text"
+                    value={editText.buttonText2}
+                    onChange={(e) => setEditText({ ...editText, buttonText2: e.target.value })}
+                />
+            </Form.Group>
+        </Form>
+    </Modal.Body>
+    <Modal.Footer>
+        <Button variant="secondary" onClick={() => setShowEditModal(false)}>
+            Cerrar
+        </Button>
+        <Button variant="primary" onClick={handleSaveEdit}>
+            Guardar Cambios
+        </Button>
+    </Modal.Footer>
+</Modal>
+
         </div>
     );
 };

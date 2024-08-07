@@ -60,15 +60,16 @@ const Body = mongoose.model('Body', bodySchema);
 const carouselSchema = new mongoose.Schema({
   sectionCarousel: [
     {
-      title: { type: String, required: true },
-      subtitle: { type: String, required: true },
-      description: { type: String, required: true },
-      imageUrl: { type: String, required: true },
-      buttonText1: { type: String, required: true },
-      buttonAction1: { type: String },
-      buttonText2: { type: String },
-      buttonAction2: { type: String },
-      subSection: { type: String, required: true }
+      title: String,
+      subtitle: String,
+      description: String,
+      imageUrl: String,
+      buttonText1: String,
+      buttonAction1: String,
+      buttonText2: String,
+      buttonAction2: String,
+      subSection: String,
+      sectionTag: String
     }
   ]
 }, { collection: 'body' });
@@ -1839,6 +1840,56 @@ app.get('/api/m6', async (req, res) => {
   }
 });
 
+//endpoint ara actualizar por tag el carousel del home 
+
+app.put('/api/carousel/update-by-section-tag', async (req, res) => {
+  const { sectionTag, ...updateData } = req.body;
+
+  console.log('Valores recibidos:', { sectionTag, updateData });
+
+  // Validar la presencia de sectionTag
+  if (!sectionTag) {
+    return res.status(400).json({ message: 'Tag de la sección es requerido' });
+  }
+
+  try {
+    // Buscar el documento que contiene la sección con el sectionTag especificado
+    const document = await Carousel.findOne({ 'sectionCarousel.sectionTag': sectionTag });
+
+    console.log('Documento encontrado:', document);
+
+    // Verificar si el documento existe
+    if (!document) {
+      return res.status(404).json({ message: 'Documento no encontrado' });
+    }
+
+    // Buscar el índice de la sección a actualizar
+    const sectionIndex = document.sectionCarousel.findIndex(sec => sec.sectionTag === sectionTag);
+
+    console.log('Índice de sección encontrado:', sectionIndex);
+    console.log('Secciones del documento:', document.sectionCarousel);
+
+    // Verificar si la sección existe
+    if (sectionIndex === -1) {
+      return res.status(404).json({ message: 'Sección no encontrada' });
+    }
+
+    // Actualizar la sección
+    document.sectionCarousel[sectionIndex] = {
+      ...document.sectionCarousel[sectionIndex],
+      ...updateData,
+      sectionTag
+    };
+
+    // Guardar el documento
+    await document.save();
+
+    res.status(200).json({ message: 'Actualización exitosa', document });
+  } catch (error) {
+    console.error('Error al actualizar:', error);
+    res.status(500).json({ message: 'Error al actualizar', error });
+  }
+});
 app.put('/api/m6/update-by-tag', async (req, res) => {
   const { tag, sectionTag, ...updateData } = req.body;
 
