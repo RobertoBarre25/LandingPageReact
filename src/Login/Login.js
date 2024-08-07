@@ -10,6 +10,15 @@ const Login = () => {
   const navigate = useNavigate();
   const { login } = useContext(AuthContext); // Obtener la función de login del contexto
 
+
+  // En tu componente donde realizas el login
+const handleLogin = () => {
+  // ... lógica de autenticación
+  login(); // Actualiza el estado de autenticación
+  console.log("Usuario autenticado");
+};
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {

@@ -199,14 +199,14 @@ console.log(isAuthenticated); // Verifica que este valor sea correcto
                         {item.buttonText2}
                     </button>
                     {isAuthenticated && (
+    <button
+        className="bg-green-500 border-2 border-white text-white text-lg md:text-xl py-3 md:py-4 px-6 md:px-10 cursor-pointer m-3 md:m-5 rounded-[3px] hover:bg-green-600"
+        onClick={() => handleModalOpen(item)}
+    >
+        Editar
+    </button>
+)}
 
-                    <button
-                        className="bg-green-500 border-2 border-white text-white text-lg md:text-xl py-3 md:py-4 px-6 md:px-10 cursor-pointer m-3 md:m-5 rounded-[3px] hover:bg-green-600"
-                        onClick={() => handleModalOpen(item)}
-                    >
-                        Editar
-                    </button>
-                          )}
 
                 </div>
             </div>
