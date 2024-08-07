@@ -4,7 +4,6 @@ import { Modal, Button, Form } from 'react-bootstrap';
 import AuthContext from '../AuthContext'; // Asegúrate de que la ruta sea correcta
 import { useNavigate } from 'react-router-dom';
 
-
 const ImageSection = () => {
   const { isAuthenticated } = useContext(AuthContext); // Obtén el estado de autenticación
   const navigate = useNavigate();
@@ -17,7 +16,8 @@ const ImageSection = () => {
   const [editItem, setEditItem] = useState({
     img: '',
     description: '',
-    buttonText: ''
+    buttonText: '',
+    buttonValue: ''
   });
 
   useEffect(() => {
@@ -50,15 +50,26 @@ const ImageSection = () => {
 
   const handleClick = (service) => {
     navigate('/contact', { state: { service } });
-};
+  };
 
   const handleSaveEdit = () => {
-    // Guardar los cambios (puede ser una llamada a la API)
-    const updatedData = imageSectionData.map(data => 
-      data._id === currentEdit._id ? { ...data, ...editItem } : data
-    );
-    setImageSectionData(updatedData);
-    setShowEditModal(false);
+    // Enviar los datos a la API para actualizar la tarjeta
+    axios.put('http://localhost:5000/api/update-card', {
+      section: currentEdit.section,
+      updateFields: editItem
+    })
+    .then(response => {
+      // Actualizar los datos locales
+      const updatedData = imageSectionData.map(data => 
+        data._id === currentEdit._id ? { ...data, ...editItem } : data
+      );
+      setImageSectionData(updatedData);
+      setShowEditModal(false);
+    })
+    .catch(error => {
+      console.error('Error al guardar los cambios:', error);
+      setError('Ocurrió un error al guardar los cambios.');
+    });
   };
 
   if (error) return <p>{error}</p>;
@@ -77,12 +88,12 @@ const ImageSection = () => {
                 <img src={item.img} alt={item.description} className="w-full h-48 object-cover mb-6 mt-2" />
                 <p className="text-gray-700 text-left text-base mt-4 mx-6 flex-grow">{item.description}</p>
                 <div className="text-center mt-4 flex justify-center gap-2">
-                <button 
+                  <button 
                     className="bg-blue-500 border-2 border-white text-white text-lg md:text-xl py-3 md:py-4 px-6 md:px-10 cursor-pointer m-3 md:m-5 rounded-[3px] hover:bg-red-500"
                     onClick={() => handleClick(item.buttonValue)}
-                >
+                  >
                     {item.buttonText}
-                </button>
+                  </button>
                   {isAuthenticated && (
                     <button
                       onClick={() => handleEditClick(item)}
@@ -126,6 +137,14 @@ const ImageSection = () => {
                 type="text"
                 value={editItem.buttonText}
                 onChange={(e) => setEditItem({ ...editItem, buttonText: e.target.value })}
+              />
+            </Form.Group>
+            <Form.Group controlId="formButtonValue">
+              <Form.Label>Valor del Botón</Form.Label>
+              <Form.Control
+                type="text"
+                value={editItem.buttonValue}
+                onChange={(e) => setEditItem({ ...editItem, buttonValue: e.target.value })}
               />
             </Form.Group>
           </Form>

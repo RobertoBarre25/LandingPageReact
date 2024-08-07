@@ -2579,7 +2579,57 @@ app.put('/api/m12/update-by-tag-cards', async (req, res) => {
   }
 });
 
+app.put('/api/update-card', async (req, res) => {
+  const { section, updateFields } = req.body;
 
+  console.log('Valores recibidos:', { section, updateFields });
+
+  // Validar la presencia de section y updateFields
+  if (!section || !updateFields) {
+    return res.status(400).json({ message: 'Sección y campos de actualización son requeridos' });
+  }
+
+  try {
+    // Buscar el documento que contiene la sección con el section especificado
+    const document = await ImageSec.findOne({
+      'sectionCards.section': section,
+      'sectionCards': { $exists: true }
+    });
+
+    console.log('Documento encontrado:', document);
+
+    // Verificar si el documento existe
+    if (!document) {
+      return res.status(404).json({ message: 'Documento o sección no encontrados.' });
+    }
+
+    // Buscar el índice de la tarjeta en la sección especificada
+    const cardIndex = document.sectionCards.findIndex(card => card.section === section);
+
+    console.log('Índice de tarjeta encontrado:', cardIndex);
+    console.log('Tarjetas del documento:', document.sectionCards);
+
+    // Verificar si la tarjeta existe
+    if (cardIndex === -1) {
+      return res.status(404).json({ message: 'Tarjeta en la sección especificada no encontrada.' });
+    }
+
+    // Actualizar la tarjeta con los nuevos campos
+    document.sectionCards[cardIndex] = {
+      ...document.sectionCards[cardIndex],
+      ...updateFields,
+      section
+    };
+
+    // Guardar los cambios en la base de datos
+    await document.save();
+
+    res.status(200).json({ message: 'Tarjeta actualizada correctamente.', document });
+  } catch (error) {
+    console.error('Error al actualizar la tarjeta:', error);
+    res.status(500).json({ message: 'Error al actualizar la tarjeta.', error });
+  }
+});
 
 
 
