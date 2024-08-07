@@ -6,18 +6,18 @@ import { faAngleDoubleDown } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import { Modal, Button, Form } from 'react-bootstrap';
 import AuthContext from '../AuthContext';
+import axios from 'axios';
 
 const HorizontalCard = ({ videoSrc, title, description }) => {
-  const { isAuthenticated } = useContext(AuthContext); // Obtén el estado de autenticación
+  const { isAuthenticated } = useContext(AuthContext);
   const [inView, setInView] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [editedTitle, setEditedTitle] = useState(title);
-  const [editedDescription, setEditedDescription] = useState(description);
   const [buttonText, setButtonText] = useState('Contacta ya!');
-
+  
   const cardRef = useRef();
   const videoRef = useRef();
-
+  
   const navigate = useNavigate();
 
   const handleClick = (service) => {
@@ -29,9 +29,7 @@ const HorizontalCard = ({ videoSrc, title, description }) => {
       ([entry]) => {
         setInView(entry.isIntersecting);
       },
-      {
-        threshold: 0.1
-      }
+      { threshold: 0.1 }
     );
 
     if (cardRef.current) {
@@ -72,9 +70,23 @@ const HorizontalCard = ({ videoSrc, title, description }) => {
     };
   }, []);
 
-  const handleSave = () => {
-    // Aquí puedes añadir la lógica para guardar los cambios si es necesario
-    setShowModal(false);
+  const handleSave = async () => {
+    try {
+      const response = await axios.put('http://localhost:5000/api/update-text', {
+        tag: 'principalText', // Asegúrate de que este tag existe en tu base de datos
+        newPrincipalText: editedTitle
+      });
+
+      if (response.status === 200) {
+        alert('Cambios guardados exitosamente.');
+        setShowModal(false);
+      } else {
+        alert(`Hubo un problema al guardar los cambios. Status: ${response.status}`);
+      }
+    } catch (error) {
+      console.error('Error al guardar los cambios:', error);
+      alert(`Error al guardar los cambios. Detalles: ${error.response ? error.response.data.error : error.message}`);
+    }
   };
 
   return (
