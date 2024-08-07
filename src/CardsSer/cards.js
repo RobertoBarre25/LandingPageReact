@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Modal, Button, Form } from 'react-bootstrap';
+import AuthContext from '../AuthContext'; // Asegúrate de que la ruta sea correcta
 
 const Cards = () => {
     const navigate = useNavigate();
+    const { isAuthenticated } = useContext(AuthContext); // Obtén el estado de autenticación
+
     const [cardsData, setCardsData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -75,12 +78,14 @@ const Cards = () => {
                                     >
                                         {card.buttonText}
                                     </button>
-                                    <button
-                                        onClick={() => handleEditClick(card)}
-                                        className="bg-green-500 text-white py-2.5 px-5 border-none cursor-pointer transition-colors duration-700 ease-in-out uppercase rounded-md hover:bg-green-600 mt-2"
-                                    >
-                                        Editar
-                                    </button>
+                                    {isAuthenticated && (
+                                        <button
+                                            onClick={() => handleEditClick(card)}
+                                            className="bg-green-500 text-white py-2.5 px-5 border-none cursor-pointer transition-colors duration-700 ease-in-out uppercase rounded-md hover:bg-green-600 mt-2"
+                                        >
+                                            Editar
+                                        </button>
+                                    )}
                                 </div>
                             </div>
                         </div>

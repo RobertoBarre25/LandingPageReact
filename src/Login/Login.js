@@ -1,33 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import { useNavigate } from 'react-router-dom'; // Si estás usando react-router-dom
+import { useNavigate } from 'react-router-dom';
+import AuthContext from '../AuthContext';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate(); // Hook para la redirección
+  const navigate = useNavigate();
+  const { login } = useContext(AuthContext); // Obtener la función de login del contexto
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await axios.post('http://localhost:5000/login', { username, password });
 
-      // Mostrar SweetAlert para éxito y limpiar campos del formulario después de que se cierre
       Swal.fire({
         title: 'Ingresando!',
         icon: 'success',
         confirmButtonText: 'OK'
       }).then(() => {
-        // Limpiar campos del formulario
         setUsername('');
         setPassword('');
-        // Redirigir al usuario a la página deseada
-        navigate('/'); // Cambia '/' por la ruta a la que quieras redirigir
+        login(); // Llamar a la función de login del contexto
+        navigate('/');
       });
 
     } catch (error) {
-      // Mostrar SweetAlert para error
       Swal.fire({
         title: 'Error!',
         text: error.response && error.response.data ? error.response.data : 'Error al autenticar usuario',

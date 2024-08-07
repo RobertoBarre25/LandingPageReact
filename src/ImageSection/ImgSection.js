@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { Modal, Button, Form } from 'react-bootstrap';
+import AuthContext from '../AuthContext'; // Asegúrate de que la ruta sea correcta
 
 const ImageSection = () => {
+  const { isAuthenticated } = useContext(AuthContext); // Obtén el estado de autenticación
+
   const [title, setTitle] = useState('');
   const [imageSectionData, setImageSectionData] = useState([]);
   const [error, setError] = useState(null);
@@ -69,12 +72,14 @@ const ImageSection = () => {
                 <p className="text-gray-700 text-left text-base mt-4 mx-6 flex-grow">{item.description}</p>
                 <div className="text-center mt-4 flex justify-center gap-2">
                   <button className="btn btn-primary mb-2">{item.buttonText}</button>
-                  <button
-                    onClick={() => handleEditClick(item)}
-                    className="btn btn-success mb-2 ml-2"
-                  >
-                    Editar
-                  </button>
+                  {isAuthenticated && (
+                    <button
+                      onClick={() => handleEditClick(item)}
+                      className="btn btn-success mb-2 ml-2"
+                    >
+                      Editar
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
@@ -84,7 +89,7 @@ const ImageSection = () => {
 
       <Modal show={showEditModal} onHide={() => setShowEditModal(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>Editar Item</Modal.Title>
+          <Modal.Title>Editar Cards</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>

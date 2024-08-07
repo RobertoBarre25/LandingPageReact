@@ -1,12 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDoubleDown } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import { Modal, Button, Form } from 'react-bootstrap';
+import AuthContext from '../AuthContext';
 
 const HorizontalCard = ({ videoSrc, title, description }) => {
+  const { isAuthenticated } = useContext(AuthContext); // Obtén el estado de autenticación
   const [inView, setInView] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [editedTitle, setEditedTitle] = useState(title);
@@ -97,9 +99,11 @@ const HorizontalCard = ({ videoSrc, title, description }) => {
         >
           {buttonText}
         </button>
-        <Button variant="light" className="mt-4" onClick={() => setShowModal(true)}>
-          Editar
-        </Button>
+        {isAuthenticated && (
+          <Button variant="light" className="mt-4" onClick={() => setShowModal(true)}>
+            Editar
+          </Button>
+        )}
       </div>
       <div className="absolute bottom-4 left-0 right-0 flex justify-center">
         <FontAwesomeIcon icon={faAngleDoubleDown} className="text-white text-2xl sm:text-3xl md:text-4xl animate-bounce" />
