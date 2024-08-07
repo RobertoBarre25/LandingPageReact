@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Modal, Button, Form } from 'react-bootstrap';
 import AuthContext from '../AuthContext'; // Asegúrate de que la ruta sea correcta
+import apiRoutes from '../apiRoutes'; // Ajusta la ruta según tu estructura
 
 const Cards = () => {
     const navigate = useNavigate();
@@ -26,7 +27,7 @@ const Cards = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/api/cards-end');
+                const response = await axios.get(apiRoutes.cardsEndData); // Usar la ruta renombrada
                 const allCards = response.data.flatMap(item => item.sectionCardsEnd);
                 setCardsData(allCards);
             } catch (err) {
