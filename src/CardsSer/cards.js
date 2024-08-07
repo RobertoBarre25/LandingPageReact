@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Modal, Button, Form } from 'react-bootstrap';
+import AuthContext from '../AuthContext'; // Asegúrate de que la ruta sea correcta
 
 const Cards = () => {
     const navigate = useNavigate();
@@ -18,6 +19,8 @@ const Cards = () => {
         buttonText: '',
         service: ''
     });
+
+    const { isAuthenticated } = useContext(AuthContext); // Obtener el estado de autenticación
 
     useEffect(() => {
         const fetchData = async () => {
@@ -38,10 +41,8 @@ const Cards = () => {
 
     const handleClick = (service) => {
         console.log('Button clicked, service:', service); // Debugging
-
         navigate('/contact', { state: { service } });
     };
-
 
     const handleEditClick = (card) => {
         setCurrentEdit(card);
@@ -75,18 +76,20 @@ const Cards = () => {
                                     <button
                                         onClick={() =>{
                                             console.log('Button clicked'); // Debugging
-                                            handleClick(card.buttonValue)
-                                            }}
+                                            handleClick(card.buttonValue);
+                                        }}
                                         className="bg-blue-500 text-white py-2.5 px-5 border-none cursor-pointer transition-colors duration-700 ease-in-out uppercase rounded-md hover:bg-blue-700"
                                     >
                                         {card.buttonText}
                                     </button>
-                                    <button
-                                        onClick={() => handleEditClick(card)}
-                                        className="bg-green-500 text-white py-2.5 px-5 border-none cursor-pointer transition-colors duration-700 ease-in-out uppercase rounded-md hover:bg-green-600 mt-2"
-                                    >
-                                        Editar
-                                    </button>
+                                    {isAuthenticated && ( // Mostrar solo si está autenticado
+                                        <button
+                                            onClick={() => handleEditClick(card)}
+                                            className="bg-green-500 text-white py-2.5 px-5 border-none cursor-pointer transition-colors duration-700 ease-in-out uppercase rounded-md hover:bg-green-600 mt-2"
+                                        >
+                                            Editar
+                                        </button>
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -147,7 +150,7 @@ const Cards = () => {
                         Cerrar
                     </Button>
                     <Button variant="primary" onClick={handleSaveEdit}>
-                        Guardar Cambios
+                        Actualizar
                     </Button>
                 </Modal.Footer>
             </Modal>
