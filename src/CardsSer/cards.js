@@ -13,6 +13,7 @@ const Cards = () => {
     const [showEditModal, setShowEditModal] = useState(false);
     const [currentEdit, setCurrentEdit] = useState(null);
     const [editCard, setEditCard] = useState({
+        sectionTagC: '', // Asegúrate de incluir el campo sectionTagC
         imgSrc: '',
         title: '',
         description: '',
@@ -46,17 +47,32 @@ const Cards = () => {
 
     const handleEditClick = (card) => {
         setCurrentEdit(card);
-        setEditCard(card);
+        setEditCard({
+            sectionTagC: card.sectionTagC, // Asegúrate de incluir el campo sectionTagC
+            imgSrc: card.imgSrc,
+            title: card.title,
+            description: card.description,
+            buttonText: card.buttonText,
+            service: card.service
+        });
         setShowEditModal(true);
     };
 
-    const handleSaveEdit = () => {
-        // Guardar los cambios (puede ser una llamada a la API)
-        const updatedData = cardsData.map(card => 
-            card.imgSrc === currentEdit.imgSrc ? { ...card, ...editCard } : card
-        );
-        setCardsData(updatedData);
-        setShowEditModal(false);
+    const handleSaveEdit = async () => {
+        try {
+            const response = await axios.put('http://localhost:5000/api/update-cards-end', editCard);
+            console.log('Actualización exitosa:', response.data);
+
+            // Actualiza el estado local con los datos actualizados
+            const updatedData = cardsData.map(card => 
+                card.sectionTagC === editCard.sectionTagC ? { ...card, ...editCard } : card
+            );
+            setCardsData(updatedData);
+            setShowEditModal(false);
+        } catch (error) {
+            console.error('Error al actualizar:', error);
+            setError('Ocurrió un error al actualizar el card');
+        }
     };
 
     if (loading) return <p>Cargando...</p>;
@@ -74,10 +90,7 @@ const Cards = () => {
                                     <h3 className="text-xl mb-2.5">{card.title}</h3>
                                     <p className="text-base mb-3.75">{card.description}</p>
                                     <button
-                                        onClick={() =>{
-                                            console.log('Button clicked'); // Debugging
-                                            handleClick(card.buttonValue);
-                                        }}
+                                        onClick={() => handleClick(card.service)}
                                         className="bg-blue-500 text-white py-2.5 px-5 border-none cursor-pointer transition-colors duration-700 ease-in-out uppercase rounded-md hover:bg-blue-700"
                                     >
                                         {card.buttonText}
@@ -103,6 +116,15 @@ const Cards = () => {
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
+                        <Form.Group controlId="formSectionTagC">
+                            <Form.Label>Tag de la Sección</Form.Label>
+                            <Form.Control
+                                type="text"
+                                value={editCard.sectionTagC}
+                                onChange={(e) => setEditCard({ ...editCard, sectionTagC: e.target.value })}
+                                disabled
+                            />
+                        </Form.Group>
                         <Form.Group controlId="formImgSrc">
                             <Form.Label>Imagen URL</Form.Label>
                             <Form.Control

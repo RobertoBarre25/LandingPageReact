@@ -80,11 +80,11 @@ const Carousel = mongoose.model('Carousel', carouselSchema);
 const cardsEndSchema = new mongoose.Schema({
   sectionCardsEnd: [
     {
-      sectionTag: { type: String, required: true },
+      sectionTagC: { type: String, required: true },
       title: { type: String, required: true },
       description: { type: String, required: true },
-      imageUrl: { type: String, required: true },
-      buttonText1: { type: String, required: true },
+      imgSrc: { type: String, required: true },
+      buttonText: { type: String, required: true },
       
     }
   ]
@@ -100,6 +100,52 @@ app.get('/api/cards-end', async (req, res) => {
       res.json(cards);
   } catch (err) {
       res.status(500).send(err.message);
+  }
+});
+
+// Endpoint para actualizar un documento en la colección 'body' basado en sectionTagC
+app .put('/api/update-cards-end', async (req, res) => {
+  const { sectionTagC, ...updateData } = req.body;
+
+  console.log('Valores recibidos:', { sectionTagC, updateData });
+
+  // Validar la presencia de sectionTagC
+  if (!sectionTagC) {
+    return res.status(400).json({ message: 'El tag de la sección es requerido' });
+  }
+
+  try {
+    // Buscar el documento con el sectionTagC
+    const document = await CardsEnd.findOne({ 'sectionCardsEnd.sectionTagC': sectionTagC });
+
+    console.log('Documento encontrado:', document);
+
+    // Verificar si el documento existe
+    if (!document) {
+      return res.status(404).json({ message: 'Documento no encontrado' });
+    }
+
+    // Buscar el índice de la sección a actualizar
+    const sectionIndex = document.sectionCardsEnd.findIndex(card => card.sectionTagC === sectionTagC);
+
+    console.log('Índice de sección encontrado:', sectionIndex);
+    console.log('Secciones del documento:', document.sectionCardsEnd);
+
+    // Verificar si la sección existe
+    if (sectionIndex === -1) {
+      return res.status(404).json({ message: 'Sección no encontrada' });
+    }
+
+    // Actualizar la sección
+    document.sectionCardsEnd[sectionIndex] = { ...document.sectionCardsEnd[sectionIndex], ...updateData, sectionTagC };
+
+    // Guardar el documento
+    await document.save();
+
+    res.status(200).json({ message: 'Actualización exitosa', document });
+  } catch (error) {
+    console.error('Error al actualizar:', error);
+    res.status(500).json({ message: 'Error al actualizar', error });
   }
 });
 
