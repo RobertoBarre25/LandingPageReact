@@ -28,6 +28,24 @@ const apiRoutes = {
   updateCardM10: `${API_BASE_URL}/cardM10/update-card`,
   updateCardM11: `${API_BASE_URL}/cardM11/update-card`,
   updateCardM12: `${API_BASE_URL}/cardM12/update-card`,
+
+  principalTextCarrousel: `${API_BASE_URL}/principalText`,
+  carousel: `${API_BASE_URL}/carousel`,
+  updateCarousel: `${API_BASE_URL}/carousel/update-by-section-tag`, // Ruta para actualizar el carrusel
+
+  imageSection: `${API_BASE_URL}/ImageSection`,
+  imageSectionCards: `${API_BASE_URL}/ImageSectionCards`,
+  updateCard: `${API_BASE_URL}/update-card`,
+
+  imageSectionData: `${API_BASE_URL}/ImageSection`,
+  imageSectionCardsData: `${API_BASE_URL}/ImageSectionCards`,
+  updateCardData: `${API_BASE_URL}/update-card`,
+  cardsEndData: `${API_BASE_URL}/cards-end`, // Renombrado
+
+  m1: `${API_BASE_URL}/m1`, // Ajustado para que coincida con tu backend
+  m1Cards: `${API_BASE_URL}/m1/cards`,
+  m1UpdateByTag: `${API_BASE_URL}/m1/update-by-tag`,
+  m1UpdateByTagCards: `${API_BASE_URL}/m1/update-by-tag-cards`,
 };
 
 export default apiRoutes;

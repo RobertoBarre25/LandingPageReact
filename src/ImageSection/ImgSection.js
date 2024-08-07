@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Modal, Button, Form } from 'react-bootstrap';
 import AuthContext from '../AuthContext'; // Asegúrate de que la ruta sea correcta
 import { useNavigate } from 'react-router-dom';
+import apiRoutes from '../apiRoutes'; // Ajusta la ruta según tu estructura
 
 const ImageSection = () => {
   const { isAuthenticated } = useContext(AuthContext); // Obtén el estado de autenticación
@@ -22,7 +23,7 @@ const ImageSection = () => {
 
   useEffect(() => {
     // Obtener el texto principal
-    axios.get('http://localhost:5000/api/ImageSection')
+    axios.get(apiRoutes.imageSection)
       .then(response => {
         setTitle(response.data.title);
       })
@@ -32,7 +33,7 @@ const ImageSection = () => {
       });
 
     // Obtener los datos de ImageSectionCards
-    axios.get('http://localhost:5000/api/ImageSectionCards')
+    axios.get(apiRoutes.imageSectionCards)
       .then(response => {
         setImageSectionData(response.data);
       })
@@ -54,7 +55,7 @@ const ImageSection = () => {
 
   const handleSaveEdit = () => {
     // Enviar los datos a la API para actualizar la tarjeta
-    axios.put('http://localhost:5000/api/update-card', {
+    axios.put(apiRoutes.updateCard, {
       section: currentEdit.section,
       updateFields: editItem
     })
