@@ -4,9 +4,11 @@ import Carousel from '../Carousel/carousel';
 import Cards from '../CardsSer/cards';
 import ImageSection from '../ImageSection/ImgSection';
 import { useNavigate } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+
 import axios from 'axios';
 import { Modal, Button, Form } from 'react-bootstrap';
+import AuthContext from '../AuthContext';
 
 const scrollToMiddle = () => {
     const targetPosition = window.innerHeight * 1.8;
@@ -22,6 +24,7 @@ const Body = () => {
     const [carouselData, setCarouselData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const { isAuthenticated } = useContext(AuthContext); // Get the isAuthenticated status from AuthContext
 
     const [showEditModal, setShowEditModal] = useState(false);
     const [currentEdit, setCurrentEdit] = useState(null);
@@ -129,12 +132,15 @@ const Body = () => {
                         {item.buttonText2}
                     </button>
                 )}
+                      {isAuthenticated && (
+
                 <button
                     className="bg-green-500 border-2 border-white text-white text-lg md:text-xl py-3 md:py-4 px-6 md:px-10 cursor-pointer m-3 md:m-5 rounded-[3px] hover:bg-green-600"
                     onClick={() => handleEditClick(item)}
                 >
                     Editar
                 </button>
+                 )}
             </div>
         )
     }));

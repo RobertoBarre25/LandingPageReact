@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import Carousel from '../Carousel/carousel';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
+import AuthContext from '../AuthContext';
 
 const M5 = () => {
     const navigate = useNavigate();
     const MySwal = withReactContent(Swal);
+    const { isAuthenticated } = useContext(AuthContext); // Get the isAuthenticated status from AuthContext
     const [carouselData, setCarouselData] = useState({ sections: [], cards: [], TitlePlantilla: [] });
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -153,29 +155,29 @@ const M5 = () => {
         src: item.carouselImageUrl,
         text: (
             <div className="carouselText p-4 bg-opacity-75 text-white" key={index}>
-            <h1 className="firstText text-3xl font-bold mb-4">
-                {item.title.split(' ').map((word, i) => (
-                    <span
-                        className={`cloudText${i === 0 ? '' : 'Two'}`}
-                        key={i}
-                        style={{ marginRight: '0.5rem' }} // Ajusta el margen según sea necesario
-                    >
-                        {word}
-                    </span>
-                ))}
-            </h1>
+                <h1 className="firstText text-3xl font-bold mb-4">
+                    {item.title.split(' ').map((word, i) => (
+                        <span
+                            className={`cloudText${i === 0 ? '' : 'Two'}`}
+                            key={i}
+                            style={{ marginRight: '0.5rem' }} // Ajusta el margen según sea necesario
+                        >
+                            {word}
+                        </span>
+                    ))}
+                </h1>
 
-            <h2 className="secondText text-xl mb-4">
-                {item.subtitle.split(' ').map((word, i) => (
-                    <span
-                        className={`cloudText${i === 0 ? '' : 'Two'}`}
-                        key={i}
-                        style={{ marginRight: '0.5rem' }} // Ajusta el valor del margen según sea necesario
-                    >
-                        {word}
-                    </span>
-                ))}
-            </h2>
+                <h2 className="secondText text-xl mb-4">
+                    {item.subtitle.split(' ').map((word, i) => (
+                        <span
+                            className={`cloudText${i === 0 ? '' : 'Two'}`}
+                            key={i}
+                            style={{ marginRight: '0.5rem' }} // Ajusta el valor del margen según sea necesario
+                        >
+                            {word}
+                        </span>
+                    ))}
+                </h2>
                 <h3 className="thirdText text-lg">
                     {item.description}
                 </h3>
@@ -192,12 +194,15 @@ const M5 = () => {
                     >
                         {item.buttonText2}
                     </button>
-                    <button
-                        className="bg-green-500 border-2 border-white text-white text-lg md:text-xl py-3 md:py-4 px-6 md:px-10 cursor-pointer m-3 md:m-5 rounded-[3px] hover:bg-green-600"
-                        onClick={() => handleModalOpen(item)}
-                    >
-                        Editar
-                    </button>
+                    {isAuthenticated && (
+
+                        <button
+                            className="bg-green-500 border-2 border-white text-white text-lg md:text-xl py-3 md:py-4 px-6 md:px-10 cursor-pointer m-3 md:m-5 rounded-[3px] hover:bg-green-600"
+                            onClick={() => handleModalOpen(item)}
+                        >
+                            Editar
+                        </button>
+                    )}
                 </div>
             </div>
         )
@@ -232,12 +237,15 @@ const M5 = () => {
                                             >
                                                 {card.buttonText}
                                             </button>
-                                            <button
-                                                className="bg-green-500 text-white px-4 py-2 rounded ml-2 hover:bg-green-600"
-                                                onClick={() => handleCardModalOpen(card, index)}
-                                            >
-                                                Editar
-                                            </button>
+                                            {isAuthenticated && (
+
+                                                <button
+                                                    className="bg-green-500 text-white px-4 py-2 rounded ml-2 hover:bg-green-600"
+                                                    onClick={() => handleCardModalOpen(card, index)}
+                                                >
+                                                    Editar
+                                                </button>
+                                            )}
                                         </div>
                                     </div>
                                 </div>

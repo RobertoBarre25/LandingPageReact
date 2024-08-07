@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDoubleDown } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
+import AuthContext from '../AuthContext'; // Asegúrate de que la ruta sea correcta
 
 const scrollToMiddle = () => {
   const targetPosition = window.innerHeight * 0.95;
@@ -13,6 +14,8 @@ const scrollToMiddle = () => {
 };
 
 const Services = () => {
+  const { isAuthenticated } = useContext(AuthContext); // Usa el contexto de autenticación
+
   const [imgText, setImgText] = useState("");
   const [buttonServText, setButtonServText] = useState("");
   const [backgroundImage, setBackgroundImage] = useState("");
@@ -30,6 +33,7 @@ const Services = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+
   const processPrincipalData = (response, index) => {
     const principal = response.data.principalText[0] || {};
     if (index === 0) {
@@ -43,7 +47,7 @@ const Services = () => {
     }
 
     const services = response.data.services || [];
-    
+
     return services.map((service, i) => ({
       id: `${service.tag}-${i}`, // Usa una combinación única del tag y el índice para evitar duplicados
       tag: service.tag,
@@ -71,16 +75,16 @@ const Services = () => {
           axios.get("http://localhost:5000/api/cardM12"),
           axios.get("http://localhost:5000/api/principalText")
         ]);
-  
+
         const allCards = responses.flatMap((response, index) =>
           processPrincipalData(response, index)
         );
-  
+
         const uniqueCards = allCards.filter((card, index, self) =>
           index === self.findIndex((t) => t.id === card.id)
         );
         setCards(uniqueCards);
-  
+
         const principal = responses[12].data.principalText[0] || {};
         setPrincipalData({
           tag: principal.tag || "",
@@ -89,7 +93,7 @@ const Services = () => {
           buttonServText: principal.buttonServText || "",
           backgroundImage: principal.backgroundImage || ""
         });
-  
+
         setImgText(principal.imgText);
         setButtonServText(principal.buttonServText);
         setBackgroundImage(principal.backgroundImage);
@@ -100,10 +104,10 @@ const Services = () => {
         setLoading(false);
       }
     };
-  
+
     fetchCards();
   }, [isEditingPrincipal]); // Añade `isEditingPrincipal` a las dependencias
-  
+
 
   const handleEditClick = (card) => {
     setEditingCard(card);
@@ -124,10 +128,10 @@ const Services = () => {
     setEditingCard(null);
     document.body.style.overflow = 'auto'; // Restaurar el scroll
   };
-  
+
 
   const handleUpdateCard = async (event) => {
-    
+
     event.preventDefault();
 
     const { tag, text, imageUrl } = editForm;
@@ -200,13 +204,13 @@ const Services = () => {
 
   const updatePrincipalData = async (event) => {
     event.preventDefault();
-  
-  
+
+
     try {
       const response = await axios.put("http://localhost:5000/api/principalText/update", principalData);
       Swal.fire("Éxito", "Datos actualizados correctamente", "success");
       setIsEditingPrincipal(false);
-  
+
       // Vuelve a obtener los datos actualizados
       const responses = await Promise.all([
         axios.get("http://localhost:5000/api/cardM1"),
@@ -223,11 +227,11 @@ const Services = () => {
         axios.get("http://localhost:5000/api/cardM12"),
         axios.get("http://localhost:5000/api/principalText")
       ]);
-  
+
       const allCards = responses.flatMap((response, index) =>
         processPrincipalData(response, index)
       );
-  
+
       const uniqueCards = allCards.filter((card, index, self) =>
         index === self.findIndex((t) => t.id === card.id)
       );
@@ -238,7 +242,7 @@ const Services = () => {
     }
     document.body.style.overflow = 'auto'; // Restaurar el scroll
   };
-  
+
 
   if (loading) return <p>Cargando...</p>;
   if (error) return <p>{error}</p>;
@@ -263,13 +267,15 @@ const Services = () => {
             >
               {buttonServText}
             </button>
-            <br/>
-            <button
-              className="mt-8 md:mt-16 px-6 py-4 md:px-10 md:py-6 border border-white text-white text-sm sm:text-xl md:text-2xl lg:text-3xl"
-              onClick={openPrincipalEditForm}
-            >
-              Editar
-            </button>
+            <br />
+            {isAuthenticated && (
+              <button
+                className="mt-8 md:mt-16 px-6 py-4 md:px-10 md:py-6 border border-white text-white text-sm sm:text-xl md:text-2xl lg:text-3xl"
+                onClick={openPrincipalEditForm}
+              >
+                Editar
+              </button>
+            )}
             <div className="mt-4 flex items-center justify-center">
               <FontAwesomeIcon
                 icon={faAngleDoubleDown}
@@ -299,12 +305,16 @@ const Services = () => {
                     </a>
                   </div>
                 </div>
-                <button
-                  className="absolute top-0 right-0 p-2 bg-blue-500 text-white"
-                  onClick={() => handleEditClick(card)}
-                >
-                  Editar
-                </button>
+                {isAuthenticated && (
+
+                  <button
+                    className="absolute top-0 right-0 p-2 bg-blue-500 text-white"
+                    onClick={() => handleEditClick(card)}
+                  >
+                    Editar
+                  </button>
+                )}
+
               </div>
             </div>
           ))}
