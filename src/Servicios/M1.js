@@ -10,9 +10,8 @@ const M1 = () => {
     const navigate = useNavigate();
     const MySwal = withReactContent(Swal);
     const { isAuthenticated } = useContext(AuthContext);
-console.log(isAuthenticated); // Verifica que este valor sea correcto
 
-    
+
     const [carouselData, setCarouselData] = useState({ sections: [], cards: [], TitlePlantilla: [] });
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -199,13 +198,13 @@ console.log(isAuthenticated); // Verifica que este valor sea correcto
                         {item.buttonText2}
                     </button>
                     {isAuthenticated && (
-    <button
-        className="bg-green-500 border-2 border-white text-white text-lg md:text-xl py-3 md:py-4 px-6 md:px-10 cursor-pointer m-3 md:m-5 rounded-[3px] hover:bg-green-600"
-        onClick={() => handleModalOpen(item)}
-    >
-        Editar
-    </button>
-)}
+                        <button
+                            className="bg-green-500 border-2 border-white text-white text-lg md:text-xl py-3 md:py-4 px-6 md:px-10 cursor-pointer m-3 md:m-5 rounded-[3px] hover:bg-green-600"
+                            onClick={() => handleModalOpen(item)}
+                        >
+                            Editar
+                        </button>
+                    )}
 
 
                 </div>
@@ -244,13 +243,13 @@ console.log(isAuthenticated); // Verifica que este valor sea correcto
                                             </button>
                                             {isAuthenticated && (
 
-                                            <button
-                                                className="bg-green-500 text-white px-4 py-2 rounded ml-2 hover:bg-green-600"
-                                                onClick={() => handleCardModalOpen(card, index)}
-                                            >
-                                                Editar
-                                            </button>
-                                                  )}
+                                                <button
+                                                    className="bg-green-500 text-white px-4 py-2 rounded ml-2 hover:bg-green-600"
+                                                    onClick={() => handleCardModalOpen(card, index)}
+                                                >
+                                                    Editar
+                                                </button>
+                                            )}
 
                                         </div>
                                     </div>
