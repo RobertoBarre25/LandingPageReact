@@ -2334,6 +2334,35 @@ app.put('/api/m10/update-by-tag', async (req, res) => {
   }
 });
 
+// Ruta para actualizar el principalText basado en el tag
+app.put('/api/update-text', async (req, res) => {
+  const { tag, newPrincipalText } = req.body;
+
+  // Verificar que el tag y el nuevo texto principal están presentes en el cuerpo de la solicitud
+  if (!tag || !newPrincipalText) {
+    return res.status(400).json({ error: 'Tag y nuevo principalText son requeridos.' });
+  }
+
+  try {
+    // Buscar el documento basado en el tag
+    const bodyDocument = await Body.findOne({ tag });
+
+    // Verificar si el documento existe
+    if (!bodyDocument) {
+      return res.status(404).json({ error: 'Documento no encontrado.' });
+    }
+
+    // Actualizar el principalText
+    bodyDocument.principalText = newPrincipalText;
+    await bodyDocument.save();
+
+    res.status(200).json({ message: 'Documento actualizado exitosamente.', bodyDocument });
+  } catch (error) {
+    console.error('Error al actualizar el documento:', error);
+    res.status(500).json({ error: 'Error interno del servidor.' });
+  }
+});
+
 app.put('/api/m10/update-by-tag-cards', async (req, res) => {
   const { tag, sectionTag, ...updateData } = req.body;
 
