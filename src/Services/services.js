@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDoubleDown } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
 import AuthContext from '../AuthContext'; // Asegúrate de que la ruta sea correcta
+import apiRoutes from '../apiRoutes'; // Ajusta la ruta según tu estructura de carpetas
 
 const scrollToMiddle = () => {
   const targetPosition = window.innerHeight * 0.95;
@@ -12,6 +13,24 @@ const scrollToMiddle = () => {
     behavior: "smooth",
   });
 };
+
+const baseURL = process.env.REACT_APP_BASE_URL;
+
+const fetchCards = async () => {
+  try {
+    const responses = await Promise.all([
+      axios.get(`${baseURL}/cardM1`),
+      axios.get(`${baseURL}/cardM2`),
+      // Continúa para las demás rutas
+    ]);
+
+    // Procesa las respuestas aquí
+
+  } catch (error) {
+    console.error("Error al obtener los datos de servicios:", error);
+  }
+};
+
 
 const Services = () => {
   const { isAuthenticated } = useContext(AuthContext); // Usa el contexto de autenticación
@@ -61,19 +80,19 @@ const Services = () => {
     const fetchCards = async () => {
       try {
         const responses = await Promise.all([
-          axios.get("http://localhost:5000/api/cardM1"),
-          axios.get("http://localhost:5000/api/cardM2"),
-          axios.get("http://localhost:5000/api/cardM3"),
-          axios.get("http://localhost:5000/api/cardM4"),
-          axios.get("http://localhost:5000/api/cardM5"),
-          axios.get("http://localhost:5000/api/cardM6"),
-          axios.get("http://localhost:5000/api/cardM7"),
-          axios.get("http://localhost:5000/api/cardM8"),
-          axios.get("http://localhost:5000/api/cardM9"),
-          axios.get("http://localhost:5000/api/cardM10"),
-          axios.get("http://localhost:5000/api/cardM11"),
-          axios.get("http://localhost:5000/api/cardM12"),
-          axios.get("http://localhost:5000/api/principalText")
+          axios.get(apiRoutes.cardM1),
+          axios.get(apiRoutes.cardM2),
+          axios.get(apiRoutes.cardM3),
+          axios.get(apiRoutes.cardM4),
+          axios.get(apiRoutes.cardM5),
+          axios.get(apiRoutes.cardM6),
+          axios.get(apiRoutes.cardM7),
+          axios.get(apiRoutes.cardM8),
+          axios.get(apiRoutes.cardM9),
+          axios.get(apiRoutes.cardM10),
+          axios.get(apiRoutes.cardM11),
+          axios.get(apiRoutes.cardM12),
+          axios.get(apiRoutes.principalText),
         ]);
 
         const allCards = responses.flatMap((response, index) =>
@@ -143,18 +162,18 @@ const Services = () => {
 
     try {
       const updates = [
-        axios.put("http://localhost:5000/api/cardM1/update-card", { tag, text, imageUrl }),
-        axios.put("http://localhost:5000/api/cardM2/update-card", { tag, text, imageUrl }),
-        axios.put("http://localhost:5000/api/cardM3/update-card", { tag, text, imageUrl }),
-        axios.put("http://localhost:5000/api/cardM4/update-card", { tag, text, imageUrl }),
-        axios.put("http://localhost:5000/api/cardM5/update-card", { tag, text, imageUrl }),
-        axios.put("http://localhost:5000/api/cardM6/update-card", { tag, text, imageUrl }),
-        axios.put("http://localhost:5000/api/cardM7/update-card", { tag, text, imageUrl }),
-        axios.put("http://localhost:5000/api/cardM8/update-card", { tag, text, imageUrl }),
-        axios.put("http://localhost:5000/api/cardM9/update-card", { tag, text, imageUrl }),
-        axios.put("http://localhost:5000/api/cardM10/update-card", { tag, text, imageUrl }),
-        axios.put("http://localhost:5000/api/cardM11/update-card", { tag, text, imageUrl }),
-        axios.put("http://localhost:5000/api/cardM12/update-card", { tag, text, imageUrl }),
+        axios.put(apiRoutes.updateCardM1, { tag, text, imageUrl }),
+        axios.put(apiRoutes.updateCardM2, { tag, text, imageUrl }),
+        axios.put(apiRoutes.updateCardM3, { tag, text, imageUrl }),
+        axios.put(apiRoutes.updateCardM4, { tag, text, imageUrl }),
+        axios.put(apiRoutes.updateCardM5, { tag, text, imageUrl }),
+        axios.put(apiRoutes.updateCardM6, { tag, text, imageUrl }),
+        axios.put(apiRoutes.updateCardM7, { tag, text, imageUrl }),
+        axios.put(apiRoutes.updateCardM8, { tag, text, imageUrl }),
+        axios.put(apiRoutes.updateCardM9, { tag, text, imageUrl }),
+        axios.put(apiRoutes.updateCardM10, { tag, text, imageUrl }),
+        axios.put(apiRoutes.updateCardM11, { tag, text, imageUrl }),
+        axios.put(apiRoutes.updateCardM12, { tag, text, imageUrl }),
       ];
 
       await Promise.all(updates);
@@ -163,19 +182,19 @@ const Services = () => {
       handleModalClose();
 
       const responses = await Promise.all([
-        axios.get("http://localhost:5000/api/cardM1"),
-        axios.get("http://localhost:5000/api/cardM2"),
-        axios.get("http://localhost:5000/api/cardM3"),
-        axios.get("http://localhost:5000/api/cardM4"),
-        axios.get("http://localhost:5000/api/cardM5"),
-        axios.get("http://localhost:5000/api/cardM6"),
-        axios.get("http://localhost:5000/api/cardM7"),
-        axios.get("http://localhost:5000/api/cardM8"),
-        axios.get("http://localhost:5000/api/cardM9"),
-        axios.get("http://localhost:5000/api/cardM10"),
-        axios.get("http://localhost:5000/api/cardM11"),
-        axios.get("http://localhost:5000/api/cardM12"),
-        axios.get("http://localhost:5000/api/principalText")
+        axios.get(apiRoutes.cardM1),
+        axios.get(apiRoutes.cardM2),
+        axios.get(apiRoutes.cardM3),
+        axios.get(apiRoutes.cardM4),
+        axios.get(apiRoutes.cardM5),
+        axios.get(apiRoutes.cardM6),
+        axios.get(apiRoutes.cardM7),
+        axios.get(apiRoutes.cardM8),
+        axios.get(apiRoutes.cardM9),
+        axios.get(apiRoutes.cardM10),
+        axios.get(apiRoutes.cardM11),
+        axios.get(apiRoutes.cardM12),
+        axios.get(apiRoutes.principalText),
       ]);
 
       const allCards = responses.flatMap((response, index) =>
@@ -207,25 +226,25 @@ const Services = () => {
 
 
     try {
-      const response = await axios.put("http://localhost:5000/api/principalText/update", principalData);
+      await axios.put(apiRoutes.principalText + '/update', principalData);
       Swal.fire("Éxito", "Datos actualizados correctamente", "success");
       setIsEditingPrincipal(false);
 
       // Vuelve a obtener los datos actualizados
       const responses = await Promise.all([
-        axios.get("http://localhost:5000/api/cardM1"),
-        axios.get("http://localhost:5000/api/cardM2"),
-        axios.get("http://localhost:5000/api/cardM3"),
-        axios.get("http://localhost:5000/api/cardM4"),
-        axios.get("http://localhost:5000/api/cardM5"),
-        axios.get("http://localhost:5000/api/cardM6"),
-        axios.get("http://localhost:5000/api/cardM7"),
-        axios.get("http://localhost:5000/api/cardM8"),
-        axios.get("http://localhost:5000/api/cardM9"),
-        axios.get("http://localhost:5000/api/cardM10"),
-        axios.get("http://localhost:5000/api/cardM11"),
-        axios.get("http://localhost:5000/api/cardM12"),
-        axios.get("http://localhost:5000/api/principalText")
+        axios.get(apiRoutes.cardM1),
+        axios.get(apiRoutes.cardM2),
+        axios.get(apiRoutes.cardM3),
+        axios.get(apiRoutes.cardM4),
+        axios.get(apiRoutes.cardM5),
+        axios.get(apiRoutes.cardM6),
+        axios.get(apiRoutes.cardM7),
+        axios.get(apiRoutes.cardM8),
+        axios.get(apiRoutes.cardM9),
+        axios.get(apiRoutes.cardM10),
+        axios.get(apiRoutes.cardM11),
+        axios.get(apiRoutes.cardM12),
+        axios.get(apiRoutes.principalText),
       ]);
 
       const allCards = responses.flatMap((response, index) =>
