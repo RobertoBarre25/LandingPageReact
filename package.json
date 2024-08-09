@@ -25,6 +25,7 @@
     "framer-motion": "^11.3.17",
     "gl-matrix": "^3.4.3",
     "jsonwebtoken": "^9.0.2",
+    "landingpage": "file:",
     "mongoose": "^8.5.1",
     "nodemailer": "^6.9.14",
     "path-browserify": "^1.0.1",
